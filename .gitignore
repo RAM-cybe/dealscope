@@ -1,0 +1,49 @@
+# secrets
+.env
+*.env
+.env.*
+*_api_key*
+*apikey*
+
+# python
+__pycache__/
+*.pyc
+
+# os
+.DS_Store
+
+# claude code local settings
+.claude/settings.local.json
+
+# source PDFs and OCR/extraction scratch (kept local only)
+*.pdf
+*.txt
+sources/
+_tmp_ocr/
+extract_tmp/
+
+# superseded / partial data files (kept local only)
+companies_full.csv
+companies_partial_425.csv
+companies_failed.csv
+deals.csv
+deals_full.csv
+deals_partial_*.csv
+sector_notes_partial_*.csv
+_v2_pledge_cache.csv
+_v2_roce_cache.csv
+remaining_symbols.txt
+pull_progress.log
+EQUITY_L.csv
+
+# one-time data-collection scripts (kept local only)
+enrich_v2.py
+merge_build.py
+pull_remaining.py
+reclassify_deals_v2.py
+
+# redundant / unrelated / superseded local-only material
+files.zip
+knowledge-base:/
+RESEARCH_SUMMARY.md
+sector_context.md
