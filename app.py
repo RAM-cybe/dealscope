@@ -23,7 +23,7 @@ from src.logic.valuation import valuation_range
 # Constants
 # ----------------------------------------------------------------------------
 
-COLOR_BG = "#EDEBE6"
+COLOR_BG = "#EDEBE6"  # mockup's design-tool presentation canvas, not part of the real app
 COLOR_CARD = "#FBF7EE"
 COLOR_SIDEBAR = "#F1EADA"
 COLOR_TEXT = "#1C1B19"
@@ -176,7 +176,8 @@ html, body, [class*="css"] {{
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
     color: {COLOR_TEXT};
 }}
-.stApp {{ background: {COLOR_BG}; }}
+.stApp {{ background: {COLOR_CARD}; }}
+[data-testid="stDecoration"] {{ display: none; }}
 [data-testid="stSidebar"] {{
     background: {COLOR_SIDEBAR};
     border-right: 2px solid {COLOR_TEXT};
@@ -200,7 +201,7 @@ html, body, [class*="css"] {{
     font-family: 'Source Serif 4', serif; font-style: italic; font-size: 11.5px;
     color: {COLOR_MUTED}; margin-bottom: 10px;
 }}
-.data-as-of {{ font-size: 11.5px; font-weight: 700; color: {COLOR_TEXT}; }}
+.data-as-of {{ font-size: 11.5px; font-weight: 700; color: {COLOR_TEXT}; margin-top: 12px; }}
 .data-as-of span {{ color: {COLOR_ACCENT}; }}
 
 table.rank-header {{ width: 100%; border-collapse: collapse; }}
@@ -223,6 +224,18 @@ div.stButton > button {{
     text-transform: uppercase; padding: 10px;
 }}
 div.stButton > button:hover {{ background: {COLOR_ACCENT}; color: #fff; }}
+/* "Back to results" reads as a plain nav label in the mockup, not a filled
+   button -- scoped via a marker + adjacent-sibling selector since this
+   Streamlit version has no per-widget CSS hook. */
+div[data-testid="element-container"]:has(.back-btn-marker)
+  + div[data-testid="element-container"] div.stButton > button {{
+    background: transparent; color: {COLOR_TEXT}; padding: 0; width: auto;
+    font-size: 11.5px; letter-spacing: .04em;
+}}
+div[data-testid="element-container"]:has(.back-btn-marker)
+  + div[data-testid="element-container"] div.stButton > button:hover {{
+    background: transparent; color: {COLOR_ACCENT};
+}}
 div.stDownloadButton > button {{
     background: {COLOR_ACCENT}; color: #fff; border: none; border-radius: 2px;
     font-weight: 800; font-size: 11px; letter-spacing: .04em; padding: 10px 18px;
@@ -270,11 +283,11 @@ div.stDownloadButton > button:hover {{ background: {COLOR_TEXT}; color: #fff; }}
 }}
 .no-results-sub {{ color: {COLOR_MUTED}; font-size: 12.5px; margin-bottom: 18px; }}
 .deal-header {{
-    display: flex; padding: 9px 4px; font-size: 10.5px; color: {COLOR_MUTED};
+    display: flex; gap: 12px; padding: 9px 4px; font-size: 10.5px; color: {COLOR_MUTED};
     font-weight: 700; border-bottom: 2px solid {COLOR_TEXT};
 }}
 .deal-row {{
-    display: flex; padding: 12px 4px; border-bottom: 1px solid {COLOR_BORDER};
+    display: flex; gap: 12px; padding: 12px 4px; border-bottom: 1px solid {COLOR_BORDER};
     font-size: 13px; align-items: center;
 }}
 .deal-target {{ font-family: 'Source Serif 4', serif; font-weight: 600; }}
@@ -501,15 +514,6 @@ def render_sidebar(universe):
 # Main ranked table view
 # ----------------------------------------------------------------------------
 
-def render_header(as_of_date):
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        st.markdown(
-            f'<div class="data-as-of">DATA AS OF <span>{as_of_date}</span></div>',
-            unsafe_allow_html=True,
-        )
-
-
 def build_display_table(filtered):
     display = pd.DataFrame({
         "Rank": range(1, len(filtered) + 1),
@@ -528,13 +532,17 @@ def build_display_table(filtered):
 
 def render_table_view(universe, filters, weights):
     as_of = get_data_as_of(universe)
-    render_header(as_of)
 
     scored = score_universe(universe, tuple(sorted(weights.items())))
     scored = scored.sort_values("score", ascending=False, na_position="last").reset_index(drop=True)
     filtered = filter_companies(scored, filters)
 
     col1, col2 = st.columns([4, 1])
+    with col1:
+        st.markdown(
+            f'<div class="data-as-of">DATA AS OF <span>{as_of}</span></div>',
+            unsafe_allow_html=True,
+        )
     with col2:
         st.download_button(
             "Download CSV ↓",
@@ -611,6 +619,7 @@ def render_tearsheet(universe, weights, symbol):
     bucket = row["ey_bucket"]
     as_of = get_data_as_of(universe)
 
+    st.markdown('<span class="back-btn-marker"></span>', unsafe_allow_html=True)
     if st.button("← Back to results", key="back_button"):
         del st.query_params["view"]
         del st.query_params["symbol"]
@@ -696,16 +705,19 @@ def render_tearsheet(universe, weights, symbol):
     if comps.empty:
         st.markdown('<div class="no-comps">No comparable 2025 Indian M&A deals found in this sector.</div>', unsafe_allow_html=True)
     else:
+        def text_or_na(value):
+            return value if pd.notna(value) else "N/A"
+
         deal_rows = ""
         for _, deal in comps.iterrows():
             value = deal["deal_value_usdm_numeric"]
             value_text = f"US${value:,.0f}m" if pd.notna(value) else "N/A"
             deal_rows += f'''<div class="deal-row">
-  <div style="flex:1" class="deal-target">{deal["target"]}</div>
-  <div style="flex:1">{deal["acquirer"]}</div>
+  <div style="flex:1" class="deal-target">{text_or_na(deal["target"])}</div>
+  <div style="flex:1">{text_or_na(deal["acquirer"])}</div>
   <div style="width:110px;text-align:right;font-family:'IBM Plex Mono',monospace">{value_text}</div>
-  <div style="width:180px">{deal["deal_type"]}</div>
-  <div style="width:56px;text-align:right">{deal["report_year"]}</div>
+  <div style="width:180px">{text_or_na(deal["deal_type"])}</div>
+  <div style="width:56px;text-align:right">{text_or_na(deal["report_year"])}</div>
 </div>'''
         st.markdown(f'''
 <div style="border-top:2px solid {COLOR_TEXT}">
