@@ -18,6 +18,7 @@ __pycache__/
 # source PDFs and OCR/extraction scratch (kept local only)
 *.pdf
 *.txt
+!requirements.txt
 sources/
 _tmp_ocr/
 extract_tmp/
@@ -53,3 +54,6 @@ files.zip
 knowledge-base:/
 RESEARCH_SUMMARY.md
 sector_context.md
+
+# design reference (not part of the shipped single-file app)
+MA Screener - Design Options.dc.html
