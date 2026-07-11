@@ -100,7 +100,9 @@ Sourced from a multi-AI research pass, filtered for what's genuinely free, low-r
 - GitHub Actions weekly automated data refresh (verified: public repos get unlimited free Actions minutes in 2026). Directly fulfills the refresh plan already noted above.
 - A short methodology/limitations page — how sector-relative scoring works, data population rates, known gaps. Near-zero cost, high credibility value.
 - "Interview/practice mode" — an optional toggle that hides the company name and asks the user to reason from the metrics first. Cheap, differentiated, ties directly to the project's actual purpose.
-- Rejected/deferred: multi-provider LLM fallback chain (solves a non-problem — Gemini Flash free tier is 1,500 requests/day, not the 50/day some research assumed from stale Pro-tier figures), Parquet migration (unnecessary at 2,046 rows, conflicts with the PRD's "bundled CSVs" wording), streamlit-AgGrid, Hugging Face Spaces mirror deploy, screener.in scraping (source's own ToS restricts this), DCF-lite, deal-comp transaction multiples, embeddings-based "similar companies," news feed.
+- Rejected/deferred: multi-provider LLM fallback chain (see the corrected quota note below — even at the real, much tighter quota, per-company caching already solves the practical problem; adding a second provider is still out of scope per the locked stack), Parquet migration (unnecessary at 2,046 rows, conflicts with the PRD's "bundled CSVs" wording), streamlit-AgGrid, Hugging Face Spaces mirror deploy, screener.in scraping (source's own ToS restricts this), DCF-lite, deal-comp transaction multiples, embeddings-based "similar companies," news feed.
+
+**Correction (Module 5 build session): the "1,500 requests/day" Gemini free-tier figure above was wrong.** Real API testing during Module 5 hit `429 RESOURCE_EXHAUSTED` after ~16-17 calls in one session, across three different models (`gemini-3.5-flash`, `gemini-2.0-flash`, `gemini-2.0-flash-lite`) — the actual free-tier daily quota is on the order of 20 requests/day per model, not 1,500. The earlier figure was apparently stale or mis-scoped research, stated as "verified" when it wasn't actually checked against a live account. This makes per-company disk caching (already built, keyed by symbol + as_of_date) load-bearing, not just a nice-to-have: once the daily quota is hit, every *new* company click correctly falls back to the PRD's exact "AI rationale unavailable" text until quota resets, which is graceful and expected, not a bug.
 
 ## Today's Focus
 
@@ -108,7 +110,7 @@ Module 4 (Streamlit UI) is built: pipeline in the correct composition order (sco
 
 A multi-AI research pass on "how to make this better" was reviewed and mostly rejected as premature (see "v1.1 Backlog" above) — the one verified, genuinely free, zero-risk idea (GitHub Actions weekly data refresh) was already the agreed post-launch plan before the research, just now confirmed technically real.
 
-Module 5 will additionally cache each company's AI rationale after first generation (keyed by symbol + as_of_date) — this alone fully covers Gemini's actual free-tier limit (1,500 requests/day, verified directly against Google's current docs), no multi-provider fallback needed.
+Module 5 caches each company's AI rationale after first generation (keyed by symbol + as_of_date) — this is now known to matter more than originally assumed; see the corrected quota note in the v1.1 Backlog section above (real quota is ~20 requests/day/model, not 1,500).
 
 Final QA (task before deploy) follows the full protocol already defined in this project's build discipline: every PRD acceptance criterion run and marked PASS/FAIL, deliberate edge-case testing (malformed/empty/extreme inputs), a security check that no API key is exposed anywhere in the repo or client-side code, and a "stranger test" — a fresh session explains the codebase back using only CONTEXT.md, to confirm the documentation is actually sufficient.
 

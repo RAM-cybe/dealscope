@@ -5,11 +5,13 @@ load_companies() -> score_companies() + valuation_range() on the FULL
 universe -> filter_companies() last, purely for display.
 """
 
+import json
 import sys
 from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+from google import genai
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -18,6 +20,7 @@ from src.data.schema import EY_BUCKETS, UNCLASSIFIED_BUCKET, ALL_BUCKETS
 from src.logic.filtering import filter_companies
 from src.logic.scoring import score_companies, METRICS
 from src.logic.valuation import valuation_range
+from src.config import get_gemini_api_key
 
 # ----------------------------------------------------------------------------
 # Constants
@@ -131,12 +134,91 @@ def sector_display_name(bucket):
 
 
 # ----------------------------------------------------------------------------
-# AI rationale stub — Module 5 wires in the real Gemini call here.
+# AI rationale (Module 5) — Gemini call, cached by (symbol, as_of_date) on disk
+# so repeat clicks and app restarts (Streamlit Cloud sleep/wake) don't re-burn
+# API quota. Any failure returns None so the PRD fallback text renders instead
+# of crashing the tear sheet.
 # ----------------------------------------------------------------------------
 
+RATIONALE_CACHE_PATH = Path(__file__).resolve().parent / ".rationale_cache.json"
+GEMINI_MODEL = "gemini-flash-latest"
+
+
+def _load_rationale_cache():
+    if not RATIONALE_CACHE_PATH.exists():
+        return {}
+    try:
+        return json.loads(RATIONALE_CACHE_PATH.read_text())
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def _save_rationale_cache(cache):
+    try:
+        RATIONALE_CACHE_PATH.write_text(json.dumps(cache))
+    except OSError:
+        pass
+
+
+def _build_rationale_prompt(company_row):
+    def val(field, formatter):
+        v = company_row.get(field)
+        return formatter(v) if pd.notna(v) else "N/A"
+
+    factor_lines = "\n".join(
+        f"- {FACTOR_LABELS[m]}: "
+        + (f"{company_row[f'pctl_{m}']:.0f}th percentile" if pd.notna(company_row.get(f"pctl_{m}")) else "N/A (excluded from score, reweighted)")
+        for m in METRICS
+    )
+
+    return f'''You are drafting a factual, mechanical deal-screening note for a corporate development analyst. Write exactly one paragraph (3-5 sentences). Tone: neutral, analytical, factual -- not marketing copy, not speculation. Only reference figures explicitly given below. If a figure says N/A, do not guess, estimate, or invent a value for it -- either omit it or explicitly note it is undisclosed.
+
+Company: {company_row['name']} ({company_row['symbol']})
+Sector (peer group for all percentiles below): {sector_display_name(company_row['ey_bucket'])}
+Composite score: {company_row['score']:.0f}/100 (out of 100, sector-relative)
+
+Factor percentiles vs. sector peers:
+{factor_lines}
+
+Key financials:
+- Revenue: {val('revenue', format_cr)}
+- EBITDA: {val('ebitda', format_cr)}
+- EBITDA Margin: {val('ebitda_margin_pct', format_pct)}
+- ROCE: {val('return_on_capital_employed_pct', format_pct)}
+- Total Debt: {val('total_debt', format_cr)}
+- Market Cap: {val('market_cap', format_cr)}
+- Promoter Pledge: {val('promoter_pledge_pct', format_pct)}
+
+Indicative valuation range:
+- EV/EBITDA implied: {val('ev_ebitda_low', format_cr)} - {val('ev_ebitda_high', format_cr)}
+- P/E implied: {val('pe_implied_low', format_cr)} - {val('pe_implied_high', format_cr)}'''
+
+
 def get_ai_rationale(company_row):
-    """Always returns None in Module 4. TODO(Module 5): call Gemini here."""
-    return None
+    api_key = get_gemini_api_key()
+    if not api_key:
+        return None
+
+    cache_key = f"{company_row['symbol']}|{company_row['as_of_date']}"
+    cache = _load_rationale_cache()
+    if cache_key in cache:
+        return cache[cache_key]
+
+    try:
+        client = genai.Client(api_key=api_key)
+        response = client.models.generate_content(
+            model=GEMINI_MODEL,
+            contents=_build_rationale_prompt(company_row),
+        )
+        text = (response.text or "").strip()
+        if not text:
+            return None
+    except Exception:
+        return None
+
+    cache[cache_key] = text
+    _save_rationale_cache(cache)
+    return text
 
 
 # ----------------------------------------------------------------------------
