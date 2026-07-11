@@ -32,8 +32,10 @@ deals_partial_*.csv
 sector_notes_partial_*.csv
 _v2_pledge_cache.csv
 _v2_roce_cache.csv
+_v2_net_income_cache.csv
 remaining_symbols.txt
 pull_progress.log
+pull_net_income_progress.log
 EQUITY_L.csv
 
 # one-time data-collection scripts (kept local only)
@@ -41,6 +43,7 @@ enrich_v2.py
 merge_build.py
 pull_remaining.py
 reclassify_deals_v2.py
+pull_net_income.py
 
 # redundant / unrelated / superseded local-only material
 files.zip

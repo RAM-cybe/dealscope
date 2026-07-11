@@ -17,6 +17,7 @@ REQUIRED_COMPANY_COLUMNS = [
     "return_on_capital_employed_pct",
     "promoter_pledge_pct",
     "as_of_date",
+    "net_income",
 ]
 
 COMPANY_NUMERIC_COLUMNS = [
@@ -30,6 +31,7 @@ COMPANY_NUMERIC_COLUMNS = [
     "return_on_equity_pct",
     "return_on_capital_employed_pct",
     "promoter_pledge_pct",
+    "net_income",
 ]
 
 REQUIRED_DEAL_COLUMNS = [
