@@ -1,9 +1,39 @@
-# NSE M&A Target Screener — v2 Roadmap (research phase, nothing built yet)
+# DealScope — v2 Roadmap (research phase, nothing built yet)
 
 Status: **Planning only.** No code, data, or CSV changes have been made. This document
 captures everything agreed across this session's research + clarifying-question rounds,
 so it can be reviewed, revised, and then executed module-by-module, one command at a time —
 same discipline as v1 (CONTEXT.md).
+
+---
+
+## 0. Hosting migration — Streamlit Community Cloud → Render.com (locked)
+
+**Decision:** stop hosting on Streamlit Community Cloud entirely. Move to **Render.com's
+free Web Service tier.** This replaces every mention of "deploy to Streamlit Community
+Cloud" elsewhere in this project's docs.
+
+Why (confirmed against official docs, not assumed):
+
+- **Vercel is ruled out for good** — Streamlit is a persistent process holding a live
+  WebSocket per user session; Vercel's whole model is short-lived serverless functions.
+  Architecturally incompatible, not a config problem. Don't revisit this.
+- **Streamlit Community Cloud's look is the platform's, not fixable from inside the app.**
+  The Share/star/edit/GitHub icons and the floating "Manage app" badge are Streamlit
+  Cloud's own product chrome wrapped around every app it hosts — no amount of CSS inside
+  `app.py` removes them.
+- **Render's free Web Service, confirmed via their docs:** runs the exact same `app.py`
+  unchanged (`pip install -r requirements.txt` → `streamlit run app.py`), supports
+  WebSockets (required for live sliders), and — critically — supports **custom domains
+  and managed TLS certificates on the free tier**, serving nothing but your app with zero
+  injected UI. Real trade-off: spins down after 15 minutes idle, ~1 minute cold-start on
+  the next visit — the same class of trade-off Streamlit Cloud already makes (that's what
+  caused the "Oh no" reboot incident), so this is a wash, not a new downside.
+
+What changes technically: a Render Web Service config (start command + env vars for the
+Gemini key, set in Render's dashboard instead of Streamlit Secrets). No changes to
+`app.py`'s logic, no changes to the locked tech stack (still Python/Streamlit/pandas/CSV).
+Purely an infrastructure swap, reversible at any time.
 
 ---
 
@@ -119,6 +149,34 @@ real trend (from snapshot history), or a real filing category — never an inven
 Not yet fixed. Natural dependency chain: data fields + history snapshots unlock everything
 downstream (trend flags, Piotroski, provenance panel), so they're the logical foundation —
 but final sequencing is a separate command, not decided in this document.
+
+## 9. UI/UX — heavy, complete frontend redesign (locked)
+
+**Decision:** the current UI (default Streamlit widgets — sliders, dataframe grid, plain
+sidebar) gets a heavy, comprehensive redesign, not a light touch-up. This is on top of the
+hosting move in §0, not a substitute for it — moving host removes the platform's chrome;
+this is what fills the canvas underneath it with something that actually looks designed.
+
+Target: the already-approved locked visual design (warm ivory/gold "deal advisory" look,
+serif headlines, monospace figures — `MA Screener - Design Options.dc.html`) was matched
+once already at the CSS/color/font level. "Heavy modification" means going materially
+further than that first pass — real layout redesign, custom card-style components,
+custom-styled tables/filters/tear sheet, not just palette-and-font matching.
+
+**Honest ceiling, stated up front so it's not a surprise mid-build:** Streamlit's native
+widgets (sliders, buttons, the built-in dataframe grid) have a real styling limit — a lot
+is achievable with custom CSS injection and embedded HTML/JS components
+(`st.components.v1.html`), including hiding native chrome, custom card layouts, and fully
+custom typography/spacing. But pixel-perfect, fully custom design — matching a from-scratch
+mockup exactly, including bespoke slider/table widgets — has a real ceiling inside
+Streamlit's architecture without replacing native components with hand-built ones, which is
+materially more work. Scope the "heavy modification" target concretely against the
+mockup before starting, and flag anything that hits this ceiling rather than faking a
+close-enough result.
+
+Sequencing: do this **after** the hosting migration (§0) — iterate on the real target host
+(Render), not on Streamlit Cloud, so time isn't spent polishing a look on a platform about
+to be abandoned.
 
 ---
 

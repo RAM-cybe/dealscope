@@ -1,4 +1,4 @@
-# NSE M&A Target Screening & Valuation Tool — Project Context Anchor
+# DealScope — Project Context Anchor
 
 **One-sentence purpose:** A free, public web tool that lets recruiters and hiring managers at corp dev / corporate finance / Big 4 deal advisory teams filter, weight-score, and value ~2,046 real NSE-listed Indian companies as M&A targets — built by Ram (B.Com + ACCA student, graduating 2027) to demonstrate deal-screening and valuation skills for job applications.
 
@@ -118,7 +118,7 @@ Final QA (task before deploy) follows the full protocol already defined in this 
 
 ## Full PRD (locked scope — paste this in full at the start of every future session)
 
-# PRD — M&A Target Screening & Valuation Tool
+# PRD — DealScope
 
 ## LOCKED SCOPE
 

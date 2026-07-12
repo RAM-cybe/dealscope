@@ -1,5 +1,4 @@
-# PRD — M&A Target Screening & Valuation Tool
-*(working name — rename as you like)*
+# PRD — DealScope
 
 ---
 

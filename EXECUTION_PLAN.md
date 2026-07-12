@@ -1,4 +1,4 @@
-# NSE M&A Target Screener — Execution Plan (read this first, in a fresh session)
+# DealScope — Execution Plan (read this first, in a fresh session)
 
 **Who this is for:** a new Claude Code session with no memory of prior conversations,
 picking this project up to keep building it. This document tells you where the project
@@ -12,6 +12,14 @@ Repo: https://github.com/RAM-cybe/nse-ma-target-screener (public)
 
 ## 0. Where the project actually stands right now
 
+**Update — v1 shipped since this document was first written.** The AI rationale is wired
+in (real Google Gemini calls, cached per company so the free-tier quota isn't a
+constraint), a full QA pass ran with all 11 PRD acceptance criteria passing (including a
+real manual click-test closing out the one previously-open item), and the app has been
+live on Streamlit Community Cloud. **That hosting choice is now being reversed — see §0B
+below — and a heavy UI/UX redesign has been added as new locked scope before the next
+deploy.** Nothing else about the built modules changes.
+
 Built and committed (one commit per module, independently gate-verified — see
 `CONTEXT.md` "Build Status" table for exact commit hashes and PASS/FAIL detail):
 
@@ -21,26 +29,42 @@ Built and committed (one commit per module, independently gate-verified — see
 3. Two real data bugs found and fixed (currency mismatch, missing net income). **Done.**
 4. Valuation module — EV/EBITDA and P/E sector-multiple ranges. **Done.**
 5. Streamlit UI (`app.py`, ~734 lines) — sidebar, ranked table, 6-section tear sheet,
-   CSV export, shareable URL state. **Done, independently verified against the PRD's
-   acceptance criteria** (10 of 11 passed outright; row-click mechanism diagnosed
-   correct but not automation-confirmed end-to-end — needs one manual click to close out).
+   CSV export, shareable URL state. **Done**, all 11 PRD acceptance criteria independently
+   verified, including the row-click mechanism.
+6. AI rationale — real Gemini calls wired in, cached per company. **Done.**
 
 Not started:
 
-- Module 5 (original numbering) — wiring the real Gemini API call into the AI rationale
-  (currently a stub, `# TODO: Module 5` marker in `app.py`). API key is ready and tested.
-- Full QA pass against every PRD acceptance criterion + edge cases + security check.
-- Deploy to Streamlit Community Cloud.
-- Launch (resume, LinkedIn, outreach).
+- Heavy UI/UX redesign (new locked scope, §0B / Phase 1 Module U below).
+- Migrating hosting off Streamlit Community Cloud onto Render.com (§0B below).
+- Everything in `V2_ROADMAP.md` (data expansion, refresh/history, news, distress scores,
+  term sheet, bonus features).
+- Launch (resume, LinkedIn, outreach) — comes after the above.
 
 Data collected: 2,046 NSE-listed companies (16 fields, 91–99% population by field),
 727 real Indian M&A deals 2006–2025 from EY/GT/KPMG/PwC/Deloitte/Bain. See
 `RESEARCH_SUMMARY.md` for full provenance and confidence ratings per source.
 
-**A separate research pass (this session) produced `V2_ROADMAP.md`** — a large set of
-new, verified-feasible additions (expanded financial fields, quarterly refresh +
-history, news/filings integration, distress-score models, a term-sheet generator,
-and four bonus features). Nothing in `V2_ROADMAP.md` has been built yet either.
+**A separate research pass produced `V2_ROADMAP.md`** — a large set of new,
+verified-feasible additions (expanded financial fields, quarterly refresh + history,
+news/filings integration, distress-score models, a term-sheet generator, four bonus
+features, the Render.com hosting migration, and the UI/UX redesign). Nothing in
+`V2_ROADMAP.md` has been built yet.
+
+## 0B. Two new locked decisions (this update)
+
+1. **Hosting migration, Streamlit Community Cloud → Render.com.** Vercel is confirmed
+   architecturally incompatible with Streamlit (persistent WebSocket process vs. Vercel's
+   short-lived serverless functions) — ruled out for good. Streamlit Community Cloud's
+   own viewer chrome (Share/star/GitHub icons, floating "Manage app" badge) is platform
+   branding that can't be removed from inside the app — that's the real reason the current
+   live site "looks" unfinished despite the underlying design work being done. Render's
+   free Web Service tier runs the same `app.py` unchanged, supports WebSockets, and
+   supports free custom domains + TLS with zero injected UI. Trade-off (15-min idle
+   spin-down, ~1 min cold start) is the same class of trade-off Streamlit Cloud already
+   made — not a new downside. Full detail: `V2_ROADMAP.md` §0.
+2. **Heavy UI/UX redesign**, materially beyond the first design-matching pass already
+   done. Full detail and the honest styling-ceiling note: `V2_ROADMAP.md` §9.
 
 ---
 
@@ -48,9 +72,9 @@ and four bonus features). Nothing in `V2_ROADMAP.md` has been built yet either.
 
 **Ship the locked v1 scope first. Deploy it. Then build v2 on top as live updates.**
 
-Reasoning: v2 scope (§3 onward below) is large — larger than v1 itself. Streamlit
-Community Cloud auto-redeploys on every push to the connected branch, so there is zero
-cost to shipping v1 now and continuing to build afterward; the alternative — holding the
+Reasoning: v2 scope (§3 onward below) is large — larger than v1 itself. Render (like
+Streamlit Cloud before it) auto-redeploys on every push to the connected branch, so there
+is zero cost to shipping v1 now and continuing to build afterward; the alternative — holding the
 public link until the entire expanded scope is done — risks the project never actually
 shipping, which is the single most common failure mode of scope growth like this. Do not
 let Phase 2+ delay Phase 1. This is a direct instruction, not a suggestion to reconsider.
@@ -59,24 +83,30 @@ let Phase 2+ delay Phase 1. This is a direct instruction, not a suggestion to re
 
 ## Phase 1 — Ship v1 (do this before anything in `V2_ROADMAP.md`)
 
-**Module A — Wire the real AI rationale.** Replace the stub in `app.py` with the actual
-Gemini call (free tier, key already provisioned). Cache each rationale by
-`symbol + as_of_date` so the free-tier daily limit (1,500 req/day, verified) is never a
-real constraint. Gate: rationale generates successfully across 10+ companies spanning
-different sectors; failure path still shows the exact PRD fallback message and doesn't
-block the rest of the tear sheet.
+**Module A — Wire the real AI rationale.** ✅ **DONE.** Real Gemini calls, cached per
+company. Verified across 10+ companies, failure path confirmed non-blocking.
 
-**Module B — Full QA pass.** Run every PRD section-8 acceptance criterion fresh (not
-re-trusting prior session's partial results), close out the one unresolved item (row-click
-end-to-end confirmation), deliberate edge-case testing (zero-result filters, extreme
-bounds, a currency-fix-blanked company), a security check that no API key is exposed
-anywhere in the repo or client-side.
+**Module B — Full QA pass.** ✅ **DONE.** All 11 PRD acceptance criteria passed,
+including a real manual click-test confirming the row-click-to-tear-sheet mechanism.
 
-**Module C — Deploy.** Push to Streamlit Community Cloud from the public repo. Confirm
-publicly reachable, no login required, loads within ~3s. This closes out the original PRD.
+**Module U (NEW) — Heavy UI/UX redesign.** Not started. Full frontend overhaul, going
+materially beyond the earlier design-matching pass — see `V2_ROADMAP.md` §9 for scope and
+the honest note on Streamlit's native-widget styling ceiling. Do this **before** the
+redeploy below, so the redeploy ships the real target look, not an interim one. Gate:
+redesigned UI checked against the locked mockup (`MA Screener - Design Options.dc.html`)
+section by section; any place the mockup can't be matched inside Streamlit's architecture
+is explicitly flagged, not silently approximated.
 
-**Gate to leave Phase 1:** app is live at a public URL, all 11 PRD acceptance criteria
-pass, no known bugs. Only then start Phase 2.
+**Module C — Deploy/redeploy.** ~~Streamlit Community Cloud~~ → **Render.com free Web
+Service**, per the locked decision in §0B / `V2_ROADMAP.md` §0. Set up the Render service
+(start command, Gemini key as an env var), confirm WebSocket-driven interactivity works,
+confirm custom-domain-ready (even if a domain isn't purchased yet), confirm publicly
+reachable with zero injected platform UI. This supersedes the app's current Streamlit
+Cloud deployment — plan to retire that URL once Render is confirmed stable.
+
+**Gate to leave Phase 1:** app is live on Render at a public URL, redesigned UI matches
+the locked mockup (with any ceiling cases explicitly documented), all 11 PRD acceptance
+criteria re-confirmed on the new host, no known bugs. Only then start Phase 2.
 
 ---
 
