@@ -12,6 +12,8 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 from google import genai
+from groq import Groq
+from cerebras.cloud.sdk import Cerebras
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -20,7 +22,7 @@ from src.data.schema import EY_BUCKETS, UNCLASSIFIED_BUCKET, ALL_BUCKETS
 from src.logic.filtering import filter_companies
 from src.logic.scoring import score_companies, METRICS
 from src.logic.valuation import valuation_range
-from src.config import get_gemini_api_key
+from src.config import get_gemini_api_key, get_groq_api_key, get_cerebras_api_key
 
 # ----------------------------------------------------------------------------
 # Constants
@@ -134,14 +136,17 @@ def sector_display_name(bucket):
 
 
 # ----------------------------------------------------------------------------
-# AI rationale (Module 5) — Gemini call, cached by (symbol, as_of_date) on disk
-# so repeat clicks and app restarts (Streamlit Cloud sleep/wake) don't re-burn
-# API quota. Any failure returns None so the PRD fallback text renders instead
-# of crashing the tear sheet.
+# AI rationale — tries Gemini, then Groq, then Cerebras (in that order), cached
+# by (symbol, as_of_date) on disk so repeat clicks and app restarts (free-tier
+# sleep/wake) don't re-burn API quota on any provider. Any provider's failure
+# (or empty response) falls through to the next; if all three fail, returns
+# None so the PRD fallback text renders instead of crashing the tear sheet.
 # ----------------------------------------------------------------------------
 
 RATIONALE_CACHE_PATH = Path(__file__).resolve().parent / ".rationale_cache.json"
 GEMINI_MODEL = "gemini-flash-latest"
+GROQ_MODEL = "llama-3.3-70b-versatile"
+CEREBRAS_MODEL = "gpt-oss-120b"
 
 
 def _load_rationale_cache():
@@ -194,31 +199,60 @@ Indicative valuation range:
 - P/E implied: {val('pe_implied_low', format_cr)} - {val('pe_implied_high', format_cr)}'''
 
 
-def get_ai_rationale(company_row):
-    api_key = get_gemini_api_key()
-    if not api_key:
-        return None
+def _call_gemini(api_key, prompt):
+    client = genai.Client(api_key=api_key)
+    response = client.models.generate_content(model=GEMINI_MODEL, contents=prompt)
+    return (response.text or "").strip()
 
+
+def _call_groq(api_key, prompt):
+    client = Groq(api_key=api_key)
+    response = client.chat.completions.create(
+        model=GROQ_MODEL,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return (response.choices[0].message.content or "").strip()
+
+
+def _call_cerebras(api_key, prompt):
+    client = Cerebras(api_key=api_key)
+    response = client.chat.completions.create(
+        model=CEREBRAS_MODEL,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return (response.choices[0].message.content or "").strip()
+
+
+RATIONALE_PROVIDERS = [
+    ("Gemini", get_gemini_api_key, _call_gemini),
+    ("Groq", get_groq_api_key, _call_groq),
+    ("Cerebras", get_cerebras_api_key, _call_cerebras),
+]
+
+
+def get_ai_rationale(company_row):
     cache_key = f"{company_row['symbol']}|{company_row['as_of_date']}"
     cache = _load_rationale_cache()
     if cache_key in cache:
         return cache[cache_key]
 
-    try:
-        client = genai.Client(api_key=api_key)
-        response = client.models.generate_content(
-            model=GEMINI_MODEL,
-            contents=_build_rationale_prompt(company_row),
-        )
-        text = (response.text or "").strip()
-        if not text:
-            return None
-    except Exception:
-        return None
+    prompt = _build_rationale_prompt(company_row)
+    for _name, key_getter, call_fn in RATIONALE_PROVIDERS:
+        api_key = key_getter()
+        if not api_key:
+            continue
+        try:
+            text = call_fn(api_key, prompt)
+            if not text:
+                continue
+        except Exception:
+            continue
 
-    cache[cache_key] = text
-    _save_rationale_cache(cache)
-    return text
+        cache[cache_key] = text
+        _save_rationale_cache(cache)
+        return text
+
+    return None
 
 
 # ----------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-"""Gemini API key resolution: Streamlit Cloud secrets locally falls back to .env."""
+"""AI provider API key resolution: Streamlit Cloud secrets locally falls back to .env."""
 
 import os
 from pathlib import Path
@@ -13,11 +13,11 @@ _SECRETS_PATHS = (
 )
 
 
-def get_gemini_api_key():
-    """Return the Gemini API key, or None if it isn't configured anywhere.
+def _get_api_key(secret_name):
+    """Return the named API key, or None if it isn't configured anywhere.
 
-    Tries st.secrets first (how the key is supplied on Streamlit Community
-    Cloud), then falls back to the GEMINI_API_KEY environment variable
+    Tries st.secrets first (how keys are supplied on Streamlit Community
+    Cloud), then falls back to the same-named environment variable
     (populated locally via a gitignored .env file). Never raises and never
     logs the key value.
 
@@ -30,9 +30,24 @@ def get_gemini_api_key():
         try:
             import streamlit as st
 
-            if "GEMINI_API_KEY" in st.secrets:
-                return st.secrets["GEMINI_API_KEY"]
+            if secret_name in st.secrets:
+                return st.secrets[secret_name]
         except Exception:
             pass
 
-    return os.environ.get("GEMINI_API_KEY") or None
+    return os.environ.get(secret_name) or None
+
+
+def get_gemini_api_key():
+    """Return the Gemini API key, or None if it isn't configured anywhere."""
+    return _get_api_key("GEMINI_API_KEY")
+
+
+def get_groq_api_key():
+    """Return the Groq API key, or None if it isn't configured anywhere."""
+    return _get_api_key("GROQ_API_KEY")
+
+
+def get_cerebras_api_key():
+    """Return the Cerebras API key, or None if it isn't configured anywhere."""
+    return _get_api_key("CEREBRAS_API_KEY")
