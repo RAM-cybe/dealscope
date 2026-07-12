@@ -1,4 +1,4 @@
-"""NSE M&A Target Screener — Streamlit app.
+"""DealScope — Streamlit app.
 
 Pipeline (composition-order contract from scoring.py / valuation.py):
 load_companies() -> score_companies() + valuation_range() on the FULL
@@ -68,7 +68,7 @@ FILTER_QP_KEYS = [
 WEIGHT_WIDGET_KEYS = ["w_revenue_growth_pct", "w_ebitda_margin_pct",
                       "w_return_on_capital_employed_pct", "w_total_debt"]
 
-st.set_page_config(page_title="NSE M&A Target Screener", layout="wide")
+st.set_page_config(page_title="DealScope", layout="wide")
 
 
 # ----------------------------------------------------------------------------
@@ -512,7 +512,7 @@ def sync_query_params(filters_state, weights_state):
 
 def render_sidebar(universe):
     with st.sidebar:
-        st.markdown('<div class="app-title-eyebrow">NSE M&A</div>', unsafe_allow_html=True)
+        st.markdown('<div class="app-title-eyebrow">DEALSCOPE</div>', unsafe_allow_html=True)
         st.markdown('<div class="app-title">Target Screener</div>', unsafe_allow_html=True)
 
         st.markdown('<div class="sidebar-section-label">SECTOR</div>', unsafe_allow_html=True)
