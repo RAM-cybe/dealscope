@@ -24,6 +24,13 @@ METRICS = [
 INVERTED_METRICS = {"total_debt"}  # lower debt -> higher percentile
 PERCENTILE_COLUMNS = {m: f"pctl_{m}" for m in METRICS}
 
+# A score built from too few populated metrics is misleadingly precise -- a
+# single metric that happens to rank #1 in a small sector peer group can
+# produce a "perfect" 100 even though the other 3 factors are unknown. Below
+# this many populated metrics, the score itself becomes a genuine gap (NaN),
+# same "never fabricate" rule applied everywhere else in this project.
+MIN_POPULATED_METRICS = 2
+
 
 def score_companies(df, weights):
     """Compute a sector-relative 0-100 score for every company in df.
@@ -42,9 +49,13 @@ def score_companies(df, weights):
     has that metric dropped from its own score only -- the remaining metrics
     are reweighted for that company; other companies are unaffected.
 
+    A company with fewer than MIN_POPULATED_METRICS (2) populated metrics
+    gets score = NaN rather than a reweighted blend of just 1 (or 0) real
+    inputs -- see MIN_POPULATED_METRICS's module-level docstring for why.
+
     Returns a copy of df with 5 new columns: pctl_<metric> for each of the 4
     metrics (0-100, debt already inverted) and score (0-100). A company
-    missing all 4 metrics gets score = NaN.
+    missing all 4 metrics, or all but one, gets score = NaN.
     """
     df = df.copy()
 
@@ -67,6 +78,9 @@ def score_companies(df, weights):
         weight_total += resolved_weights[metric] * present
 
     df["score"] = weighted_sum / weight_total.mask(weight_total == 0)
+
+    populated_count = sum(df[PERCENTILE_COLUMNS[m]].notna() for m in METRICS)
+    df.loc[populated_count < MIN_POPULATED_METRICS, "score"] = float("nan")
 
     return df
 
