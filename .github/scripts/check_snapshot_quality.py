@@ -50,10 +50,14 @@ def main():
     critical_count = len(critical)
     total_count = len(report)
 
-    # Same report convention as a manual quality_checks.py run.
+    # Named after the snapshot itself, not just today's date -- a manual
+    # quality_checks.py run and this workflow can both produce a report on
+    # the same calendar date (e.g. someone spot-checks the live data the
+    # same day a scheduled refresh runs), and a shared date-only filename
+    # would silently overwrite one with the other.
     out_dir = REPO_ROOT / "data" / "quality_reports"
     out_dir.mkdir(parents=True, exist_ok=True)
-    report_path = out_dir / f"flagged_rows_{datetime.now().strftime('%Y-%m-%d')}.csv"
+    report_path = out_dir / f"flagged_rows_for_{snapshot_path.stem}.csv"
     report.to_csv(report_path, index=False)
 
     # PR description fragment.
