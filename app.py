@@ -47,26 +47,44 @@ FACTOR_LABELS = {
 }
 
 RANGE_FIELD_CONFIG = [
-    # (filters.py key, label, unit divisor for crore conversion, is_pct)
-    ("revenue", "REVENUE (₹ CR)", 1e7, False),
-    ("ebitda_margin_pct", "EBITDA MARGIN %", 1, True),
-    ("return_on_capital_employed_pct", "ROCE %", 1, True),
-    ("total_debt", "TOTAL DEBT (₹ CR)", 1e7, False),
-    ("market_cap", "MARKET CAP (₹ CR)", 1e7, False),
+    # (filters.py key, label, unit divisor for crore conversion)
+    ("revenue", "REVENUE (₹ CR)", 1e7),
+    ("ebitda_margin_pct", "EBITDA MARGIN %", 1),
+    ("return_on_capital_employed_pct", "ROCE %", 1),
+    ("total_debt", "TOTAL DEBT (₹ CR)", 1e7),
+    ("market_cap", "MARKET CAP (₹ CR)", 1e7),
+    # Phase 2 fields (data/enriched/dealscope_base_2026-07-12.csv) -- filters
+    # only, per the locked decision not to fold these into the 4-factor score.
+    ("total_assets", "TOTAL ASSETS (₹ CR)", 1e7),
+    ("retained_earnings", "RETAINED EARNINGS (₹ CR)", 1e7),
+    ("working_capital", "WORKING CAPITAL (₹ CR)", 1e7),
+    ("enterprise_value", "ENTERPRISE VALUE (₹ CR)", 1e7),
+    ("total_cash", "TOTAL CASH (₹ CR)", 1e7),
+    ("operating_cash_flow", "OPERATING CASH FLOW (₹ CR)", 1e7),
+    ("free_cash_flow", "FREE CASH FLOW (₹ CR)", 1e7),
+    ("current_ratio", "CURRENT RATIO", 1),
+    ("quick_ratio", "QUICK RATIO", 1),
+    ("debt_to_equity", "DEBT/EQUITY %", 1),
+    # return_on_assets is stored as a raw fraction (e.g. 0.09), not a
+    # whole-number percentage like the other _pct fields -- divide by 0.01
+    # (i.e. multiply by 100) for display only, same crore-style unit
+    # conversion the currency fields already use, real value untouched.
+    ("return_on_assets", "RETURN ON ASSETS %", 0.01),
+    ("beta", "BETA", 1),
+    ("peg_ratio", "PEG RATIO", 1),
+    ("price_to_book", "PRICE/BOOK", 1),
+    ("trailing_pe", "TRAILING P/E", 1),
 ]
 
-FILTER_WIDGET_KEYS = [
-    "f_sectors", "f_revenue", "f_ebitda_margin_pct",
-    "f_return_on_capital_employed_pct", "f_total_debt", "f_market_cap",
-    "f_pledge_max",
-]
-# Must match the keys sync_query_params() actually writes -- kept as one
-# constant so the two can't silently drift apart again.
-FILTER_QP_KEYS = [
-    "sectors", "revenue", "ebitda_margin_pct",
-    "return_on_capital_employed_pct", "total_debt", "market_cap",
-    "pledge_max",
-]
+# Derived from RANGE_FIELD_CONFIG so adding/removing a range filter can never
+# silently desync these from render_sidebar()/sync_query_params() again --
+# exactly this kind of drift (stale hardcoded field lists) caused a real
+# "Reset all filters" bug earlier in this project's history.
+RANGE_FIELD_NAMES = [field for field, _, _ in RANGE_FIELD_CONFIG]
+FILTER_WIDGET_KEYS = (
+    ["f_sectors"] + [f"f_{field}" for field in RANGE_FIELD_NAMES] + ["f_pledge_max"]
+)
+FILTER_QP_KEYS = ["sectors"] + RANGE_FIELD_NAMES + ["pledge_max"]
 WEIGHT_WIDGET_KEYS = ["w_revenue_growth_pct", "w_ebitda_margin_pct",
                       "w_return_on_capital_employed_pct", "w_total_debt"]
 
@@ -532,7 +550,7 @@ def qp_list(key, default):
 
 def sync_query_params(filters_state, weights_state):
     st.query_params["sectors"] = ",".join(filters_state["sectors"])
-    for field in ["revenue", "ebitda_margin_pct", "return_on_capital_employed_pct", "total_debt", "market_cap"]:
+    for field in RANGE_FIELD_NAMES:
         lo, hi = filters_state[field]
         st.query_params[field] = f"{lo},{hi}"
     st.query_params["pledge_max"] = str(filters_state["promoter_pledge_pct_max"])
@@ -560,7 +578,7 @@ def render_sidebar(universe):
         )
 
         range_values = {}
-        for field, label, divisor, is_pct in RANGE_FIELD_CONFIG:
+        for field, label, divisor in RANGE_FIELD_CONFIG:
             series = universe[field] / divisor
             data_min = float(series.min(skipna=True))
             data_max = float(series.max(skipna=True))
@@ -579,20 +597,47 @@ def render_sidebar(universe):
             if pd.isna(clip_lo) or pd.isna(clip_hi) or clip_hi <= clip_lo:
                 clip_lo, clip_hi = data_min, data_max
 
+            # Step (and rounding precision) scales to the clipped range itself
+            # rather than a fixed whole-number floor -- large-range currency
+            # fields (revenue, market cap) still get whole-crore steps, but
+            # small-range ratio fields (beta, current ratio, price/book) get
+            # fractional steps instead of collapsing to a near-useless 2-3
+            # tick slider.
+            span = clip_hi - clip_lo
+            raw_step = span / 200 if span > 0 else 1.0
+            if raw_step >= 1:
+                decimals = 0
+                step = float(max(1.0, round(raw_step)))
+            elif raw_step >= 0.01:
+                decimals = 2
+                step = round(raw_step, 2) or 0.01
+            else:
+                decimals = 4
+                step = round(raw_step, 4) or 0.0001
+
+            def r(x, _decimals=decimals):
+                return round(x, _decimals) if _decimals else float(round(x))
+
             lo_default, hi_default = qp_float_pair(field, (clip_lo, clip_hi))
             lo_default = max(clip_lo, min(lo_default, clip_hi))
             hi_default = max(clip_lo, min(hi_default, clip_hi))
 
             st.markdown(f'<div class="sidebar-section-label">{label}</div>', unsafe_allow_html=True)
-            step = 1.0 if is_pct else float(max(1.0, round((clip_hi - clip_lo) / 200)))
-            slider_min = float(round(clip_lo))
-            slider_max = float(round(clip_hi)) or 1.0
+            slider_min = r(clip_lo)
+            slider_max = r(clip_hi) or 1.0
             chosen = st.slider(
                 label, min_value=slider_min, max_value=slider_max,
-                value=(float(round(lo_default)), float(round(hi_default))),
+                value=(r(lo_default), r(hi_default)),
                 step=step, key=f"f_{field}", label_visibility="collapsed",
             )
-            value_line = f"{indian_number(chosen[0])} – {indian_number(chosen[1])}"
+            # indian_number() rounds to whole numbers -- fine for the
+            # crore-scale currency fields, but a small-range ratio field
+            # (beta, quick ratio, PEG) at decimals=0 would show a misleading
+            # "0 - 0" for a real, non-empty (0.00, 0.50) selection.
+            if decimals:
+                value_line = f"{chosen[0]:.{decimals}f} – {chosen[1]:.{decimals}f}"
+            else:
+                value_line = f"{indian_number(chosen[0])} – {indian_number(chosen[1])}"
             st.markdown(
                 f'<div style="font-family:\'IBM Plex Mono\',monospace;font-weight:600;'
                 f'font-size:12.5px;color:{COLOR_ACCENT};margin:-4px 0 7px">{value_line}</div>',
@@ -636,11 +681,7 @@ def render_sidebar(universe):
 
     filters = {
         "sectors": sectors,
-        "revenue": range_values["revenue"],
-        "ebitda_margin_pct": range_values["ebitda_margin_pct"],
-        "return_on_capital_employed_pct": range_values["return_on_capital_employed_pct"],
-        "total_debt": range_values["total_debt"],
-        "market_cap": range_values["market_cap"],
+        **range_values,
         "promoter_pledge_pct_max": pledge_max,
     }
     return filters, weights
