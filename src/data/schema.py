@@ -18,6 +18,25 @@ REQUIRED_COMPANY_COLUMNS = [
     "promoter_pledge_pct",
     "as_of_date",
     "net_income",
+    # Phase 2 data-foundation fields (data/enriched/dealscope_base_2026-07-12.csv)
+    "financial_currency",
+    "currency_flag",
+    "total_assets",
+    "retained_earnings",
+    "working_capital",
+    "current_ratio",
+    "quick_ratio",
+    "debt_to_equity",
+    "return_on_assets",
+    "beta",
+    "peg_ratio",
+    "enterprise_value",
+    "total_cash",
+    "operating_cash_flow",
+    "free_cash_flow",
+    "price_to_book",
+    "trailing_pe",
+    "data_pull_date",
 ]
 
 COMPANY_NUMERIC_COLUMNS = [
@@ -32,6 +51,24 @@ COMPANY_NUMERIC_COLUMNS = [
     "return_on_capital_employed_pct",
     "promoter_pledge_pct",
     "net_income",
+    # Phase 2 fields -- financial_currency, currency_flag, and data_pull_date
+    # are categorical/date text, not numeric, so they're deliberately excluded
+    # from this list (see REQUIRED_COMPANY_COLUMNS above for those three).
+    "total_assets",
+    "retained_earnings",
+    "working_capital",
+    "current_ratio",
+    "quick_ratio",
+    "debt_to_equity",
+    "return_on_assets",
+    "beta",
+    "peg_ratio",
+    "enterprise_value",
+    "total_cash",
+    "operating_cash_flow",
+    "free_cash_flow",
+    "price_to_book",
+    "trailing_pe",
 ]
 
 REQUIRED_DEAL_COLUMNS = [

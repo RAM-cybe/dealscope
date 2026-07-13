@@ -15,17 +15,27 @@ from .schema import (
 from .sector_mapping import classify_sector
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_COMPANIES_PATH = _PROJECT_ROOT / "companies_full_v2.csv"
+# Phase 2 data-foundation file: same 2,046 companies/symbols as the original
+# companies_full_v2.csv (kept in place, unused by the app now) plus 18 new
+# fields. Its currency-guard gap (Infosys and HCL Tech's balance-sheet/
+# cash-flow fields silently USD-denominated) was fixed before this switch --
+# see git history for the exact blanked fields.
+DEFAULT_COMPANIES_PATH = _PROJECT_ROOT / "data" / "enriched" / "dealscope_base_2026-07-12.csv"
 DEFAULT_DEALS_PATH = _PROJECT_ROOT / "deals_full_v2.csv"
 
 
 def load_companies(path=DEFAULT_COMPANIES_PATH):
-    """Load companies_full_v2.csv into a validated, typed DataFrame with an ey_bucket column."""
+    """Load the company dataset into a validated, typed DataFrame with an ey_bucket column."""
     df = pd.read_csv(path)
-    validate_required_columns(df, REQUIRED_COMPANY_COLUMNS, "companies_full_v2.csv")
+    validate_required_columns(df, REQUIRED_COMPANY_COLUMNS, Path(path).name)
 
     for col in COMPANY_NUMERIC_COLUMNS:
         df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    # +/-inf (seen in trailing_pe, from a near-zero-earnings division) isn't a
+    # real, displayable, or filterable value -- treat it the same as any other
+    # genuine gap (NaN), never show "inf" in the UI.
+    df[COMPANY_NUMERIC_COLUMNS] = df[COMPANY_NUMERIC_COLUMNS].replace([float("inf"), float("-inf")], float("nan"))
 
     # A blank company name would otherwise render an unreadable row; the ticker
     # symbol is always present and keeps the row visible per BLUEPRINT's

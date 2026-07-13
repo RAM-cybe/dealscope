@@ -22,6 +22,23 @@ RANGE_FIELDS = [
     "return_on_capital_employed_pct",
     "total_debt",
     "market_cap",
+    # Phase 2 fields (data/enriched/dealscope_base_2026-07-12.csv) -- filters
+    # only, per the locked decision not to fold these into the scored 4.
+    "total_assets",
+    "retained_earnings",
+    "working_capital",
+    "enterprise_value",
+    "total_cash",
+    "operating_cash_flow",
+    "free_cash_flow",
+    "current_ratio",
+    "quick_ratio",
+    "debt_to_equity",
+    "return_on_assets",
+    "beta",
+    "peg_ratio",
+    "price_to_book",
+    "trailing_pe",
 ]
 
 
