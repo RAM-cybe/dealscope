@@ -1,0 +1,102 @@
+name: Quarterly data refresh
+
+# Quarterly cadence matches the roadmap's stated refresh cycle (fundamentals
+# don't move week to week). Runs 1st of Jan/Apr/Jul/Oct at 03:00 UTC, plus
+# workflow_dispatch for on-demand/manual runs and testing.
+#
+# KNOWN GOTCHA (not fixable in workflow code): GitHub auto-disables
+# scheduled workflows on a repo after 60 days with zero commits. If this
+# silently stops firing, that's the most likely cause -- either commit
+# something periodically (even a changelog line) or manually re-enable it
+# under the repo's Actions tab. See CONTEXT.md for the same note.
+on:
+  schedule:
+    - cron: '0 3 1 1,4,7,10 *'
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: >-
+          Test-only: limit the pull to the first N companies (e.g. 20) for a
+          fast smoke-test run. Leave blank for a real full run -- never set
+          this for a scheduled/production refresh.
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # A full ~2,046-company pull at ~1.2s/company plus real API latency can
+    # run well past an hour; this is a generous ceiling, not an expectation.
+    timeout-minutes: 180
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        # yfinance/pyarrow are only needed for this one-time-per-quarter
+        # pull -- deliberately not added to the app's own requirements.txt.
+        run: pip install pandas==2.2.2 pyarrow yfinance
+
+      - name: Resolve current live dataset path
+        id: resolve
+        run: |
+          echo "path=$(python -c "
+          import sys; sys.path.insert(0, '.')
+          from src.data.loaders import DEFAULT_COMPANIES_PATH
+          print(DEFAULT_COMPANIES_PATH)
+          ")" >> "$GITHUB_OUTPUT"
+
+      - name: Run enrichment pull
+        env:
+          DEALSCOPE_INPUT_FILE: ${{ steps.resolve.outputs.path }}
+          DEALSCOPE_OUTPUT_DIR: data/snapshots
+          DEALSCOPE_LIMIT: ${{ github.event.inputs.limit }}
+        run: python archive/data_pipeline_scripts/enrich_dataset.py
+
+      - name: Identify the snapshot file just written
+        id: snapshot
+        run: |
+          FILE=$(ls -t data/snapshots/dealscope_*.csv | head -1)
+          echo "Found: $FILE"
+          echo "path=$FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Run automated data-quality checker against the new snapshot
+        id: quality
+        run: python .github/scripts/check_snapshot_quality.py "${{ steps.snapshot.outputs.path }}"
+
+      - name: Open pull request proposing this snapshot
+        id: pr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Quarterly data refresh: add ${{ steps.snapshot.outputs.path }}"
+          title: >-
+            Quarterly data refresh (${{ github.run_id }})${{ steps.quality.outputs.needs_review == 'true' && ' -- NEEDS MANUAL REVIEW' || '' }}
+          body-path: .github/scripts/pr_body_fragment.md
+          branch: "data-refresh/${{ github.run_id }}"
+          add-paths: |
+            data/snapshots/*
+            data/quality_reports/*
+          draft: false
+          # Never auto-merge, ever -- a human always approves before new
+          # data goes live. This action only opens the PR; nothing merges it.
+
+      - name: Report PR
+        if: steps.pr.outputs.pull-request-number
+        run: echo "Opened PR #${{ steps.pr.outputs.pull-request-number }}: ${{ steps.pr.outputs.pull-request-url }}"
+
+      - name: Heartbeat ping
+        # Last step, only on a fully successful run -- lets a free service
+        # like healthchecks.io/cron-job.org alert if this workflow silently
+        # stops completing. Placeholder URL -- replace with a real
+        # healthchecks.io check URL before relying on this.
+        if: success()
+        run: curl -fsS -m 10 --retry 3 https://hc-ping.com/REPLACE-WITH-REAL-CHECK-UUID || true
