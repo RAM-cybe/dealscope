@@ -129,3 +129,46 @@ mismatch in this audit's own search terms (found, and in SYMPHONY's case fully r
 — see Methodology) or a named, understood revenue-definition difference, not dataset errors. One
 company (FIVESTAR) shows a real, unresolved gap even after correcting for the period issue, and
 is flagged for your own follow-up rather than silently accepted.
+
+## Follow-up: FIVESTAR investigated, 2026-07-13 (closes the item above)
+
+Root cause found. **Not** a standalone-vs-consolidated mismatch (Five-Star Business Finance has no
+material subsidiaries) and **not** a wrong-ticker match — market cap (₹16,129cr dataset vs
+₹16,348cr public, ~1.3% apart) and company name both confirm the correct entity. `revenue` and
+`net_income` are carried forward unchanged from the original v1 pull (`companies_full_v2.csv`),
+sourced from yfinance's `info["totalRevenue"]`; the 2026-07-13 enrichment pass
+(`archive/data_pipeline_scripts/enrich_dataset.py`) does not re-pull revenue at all, so this is a
+v1-era field, not something introduced by this week's changes.
+
+Tested the hypothesis that this is a **systemic revenue-definition gap for NBFC lenders**, not a
+FIVESTAR-specific error, by comparing three more Financial Services companies already in this
+dataset against public "Total Income" figures (same methodology as the rest of this audit,
+non-screener.in sources):
+
+| Symbol | Business | Dataset revenue | Public Total Income (FY26) | Gap | Borrows to fund a loan book? |
+|---|---|---|---|---|---|
+| CARERATING | Ratings agency | ₹473.0cr | ₹473.07cr | **~0%** | No |
+| NIVABUPA | Health insurer | ₹8,443.5cr | ₹8,585.9cr (GWP basis) | ~1.7% | No |
+| FIVESTAR | NBFC (secured MSME lending) | ₹2,265.4cr | ₹3,218cr | ~30% | Yes |
+| MUTHOOTFIN | NBFC (gold loans) | ₹19,183.5cr | ₹31,209–31,263cr | ~38.5% | Yes (large book) |
+| CHOLAFIN | NBFC (diversified lending) | ₹13,172.5cr | ₹31,538.7cr (CIFCL consol.) | ~58% | Yes (largest book/leverage) |
+
+The gap is ~0% for companies with no borrowing-funded lending book, and scales up with how much of
+a company's income statement is "cost of funds" — worse for CHOLAFIN (highest leverage) than
+MUTHOOTFIN, worse for MUTHOOTFIN than FIVESTAR (smallest book of the three). That is the signature
+of a **definitional difference, not a data error**: yfinance's `totalRevenue` for NBFC lenders
+returns a figure much closer to *Net Total Income* (interest income + fee income, net of interest/
+finance expense paid on borrowings) than the *Total Income* (gross, before finance cost) that
+Indian financial press and investor presentations headline. Same mechanism the rest of this audit
+already found for banks (row 7/8, "revenue ambiguous by nature for a bank") and insurers (row 10)
+— NBFC lenders were simply the sub-case not yet checked.
+
+**Verdict: legitimate difference, not blanked.** Per this project's rule ("blank it if it's a real
+error, document if it's a legitimate difference"), FIVESTAR's revenue is left as-is — the number
+itself is real, sourced consistently the same way for every company, and correct within its own
+(narrower) definition. Blanking FIVESTAR alone would also be arbitrary: MUTHOOTFIN and CHOLAFIN
+show the *same* pattern, worse in magnitude, and nobody has flagged them. Practical impact on the
+app is bounded: `score_companies()` is sector-relative (percentiles within Financial Services), and
+every NBFC lender in the dataset understates revenue by this same yfinance convention, so relative
+ranking among them is not distorted — only an absolute, cross-checked-against-a-press-release
+comparison is affected. Documented as a new dataset limitation in `CONTEXT.md`, not left silent.

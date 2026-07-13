@@ -44,6 +44,21 @@ MARGIN_RECOMPUTE_TOLERANCE = 5.0
 # "worth checking whether a re-pull is warranted," not "known wrong."
 STALE_DATA_MAX_AGE_DAYS = 100
 
+# ebitda_margin_pct stored at ~0 while ebitda is a real, materially non-zero
+# value is mathematically impossible for any finite revenue -- confirmed
+# 14/14 times a real error (2026-07-13, commit 38103f8), never a legitimate
+# edge case. Uses an epsilon rather than exact equality to 0.0 because a bug
+# can just as easily produce a near-zero-but-not-exactly-0.0 stored value
+# (float rounding, a bad intermediate computation) that's equally
+# inconsistent with a materially non-zero ebitda -- exact-equality would
+# miss those the same way it missed nothing here but would elsewhere.
+ZERO_MARGIN_EPSILON = 0.005  # percentage points -- rounds to "0.00%" at 2dp
+# Floor below which ebitda is treated as noise-level rather than a genuine
+# non-zero figure, so a company with real near-zero ebitda (legitimately
+# producing a near-zero margin) isn't false-flagged. INR units, so this is
+# Rs 1 lakh -- far below any populated ebitda value seen in this dataset.
+EBITDA_MATERIALITY_FLOOR = 100_000
+
 
 def _flag(flags, row, check, detail):
     flags.append({
@@ -105,6 +120,25 @@ def check_cross_field_consistency(df):
                     f"{recomputed_margin:,.2f}% (ebitda={ebitda:,.0f}, revenue={revenue:,.0f}, "
                     f"diff={diff:,.2f} points > tolerance {MARGIN_RECOMPUTE_TOLERANCE:.0f})",
                 )
+
+        # Independent of the margin_mismatch check above: that one requires
+        # revenue to also be present to recompute a comparison margin, which
+        # is exactly what missed 3 of 14 real cases on 2026-07-13 (NEXTMEDIA,
+        # TARAPUR, TNTELE all had revenue missing too). A margin near 0 paired
+        # with materially non-zero ebitda is impossible regardless of whether
+        # revenue happens to be populated, so check it unconditionally.
+        if (
+            pd.notna(stored_margin)
+            and pd.notna(ebitda)
+            and abs(stored_margin) < ZERO_MARGIN_EPSILON
+            and abs(ebitda) > EBITDA_MATERIALITY_FLOOR
+        ):
+            _flag(
+                flags, row, "zero_margin_nonzero_ebitda",
+                f"ebitda_margin_pct={stored_margin:,.4f}% (~0) but ebitda={ebitda:,.0f} "
+                f"is materially non-zero -- mathematically impossible for any finite revenue "
+                f"(revenue={'missing' if pd.isna(revenue) else f'{revenue:,.0f}'})",
+            )
 
         total_debt = row.get("total_debt")
         market_cap = row.get("market_cap")

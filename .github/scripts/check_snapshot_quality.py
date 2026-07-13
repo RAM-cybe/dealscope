@@ -28,12 +28,18 @@ from src.data.quality_checks import run_all_checks  # noqa: E402
 # deliberately excluded -- they can be mathematically real (see
 # quality_checks.py's own docstring), so they don't block a snapshot on
 # their own; a human still sees them in the full report either way.
+# zero_margin_nonzero_ebitda is included here (added 2026-07-13) because,
+# unlike the extreme_* checks, it has no known legitimate case -- every one
+# of the 14 real instances found so far was a confirmed error, never a real
+# near-zero margin (a genuinely near-zero margin requires ebitda itself to
+# be near-zero, which the check's own materiality floor already excludes).
 CRITICAL_CHECKS = {
     "negative_revenue",
     "negative_total_debt",
     "negative_market_cap",
     "negative_current_ratio",
     "negative_quick_ratio",
+    "zero_margin_nonzero_ebitda",
 }
 
 
