@@ -1,11 +1,21 @@
+import os
 import pandas as pd
 import yfinance as yf
 import time
 from datetime import datetime
+from pathlib import Path
 
-INPUT_FILE = "companies_full_v2.csv"
-OUTPUT_PARQUET = f"dealscope_base_{datetime.now().strftime('%Y-%m-%d')}.parquet"
-OUTPUT_CSV = f"dealscope_base_{datetime.now().strftime('%Y-%m-%d')}.csv"
+# Both overridable via env var so the quarterly refresh workflow can point
+# this at whatever the app's actual current live dataset is (see
+# src/data/loaders.py's DEFAULT_COMPANIES_PATH) and write into
+# data/snapshots/ instead of the CWD, without changing default local-run
+# behavior when run standalone.
+INPUT_FILE = os.environ.get("DEALSCOPE_INPUT_FILE", "companies_full_v2.csv")
+OUTPUT_DIR = Path(os.environ.get("DEALSCOPE_OUTPUT_DIR", "."))
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+_STAMP = datetime.now().strftime('%Y-%m-%d')
+OUTPUT_PARQUET = OUTPUT_DIR / f"dealscope_{_STAMP}.parquet"
+OUTPUT_CSV = OUTPUT_DIR / f"dealscope_{_STAMP}.csv"
 BATCH_SIZE = 100
 SLEEP_BETWEEN = 1.2
 
@@ -32,6 +42,17 @@ CURRENCY_SENSITIVE_NEW_FIELDS = [
 print("Loading existing dataset...")
 df = pd.read_csv(INPUT_FILE)
 print(f"Loaded {len(df)} companies")
+
+# Test-only: DEALSCOPE_LIMIT truncates the pull to the first N companies, so
+# a workflow_dispatch smoke-test can confirm the whole pipeline (pull ->
+# snapshot -> quality check -> PR) in under a minute instead of the ~45+
+# minutes a full 2,046-company quarterly run takes. Unset (the default) for
+# every real scheduled run -- never used to silently skip companies in
+# production.
+_limit = os.environ.get("DEALSCOPE_LIMIT")
+if _limit:
+    df = df.head(int(_limit))
+    print(f"DEALSCOPE_LIMIT set -- truncated to first {len(df)} companies (test run only)")
 
 results = []
 
