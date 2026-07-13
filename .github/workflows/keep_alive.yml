@@ -1,0 +1,31 @@
+name: Keep Render instance warm
+
+# Render's free tier spins the web service down after ~15 minutes with no
+# inbound traffic, so the next real visitor eats a 30-50s cold-start while
+# it wakes back up. Pinging Streamlit's own lightweight health endpoint
+# every 10 minutes -- comfortably inside that 15-minute idle window -- keeps
+# the instance warm. Deliberately uses GitHub Actions (already running the
+# quarterly refresh in this repo) rather than a new third-party uptime
+# service/account. Public repo, so these runs are free and unlimited.
+#
+# /_stcore/health is Streamlit's own built-in health-check route -- a plain
+# 200, no app rendering, no data load, no static assets. Cheapest possible
+# way to keep the process alive without exercising (or skewing usage stats
+# on) the real app.
+#
+# Same gotcha as quarterly_refresh.yml: GitHub auto-disables scheduled
+# workflows after 60 days of zero repo commits. If pings silently stop,
+# that's the most likely cause -- check the repo's Actions tab first.
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Ping Streamlit health endpoint
+        run: curl -fsS -m 20 --retry 2 https://dealscope-zei8.onrender.com/_stcore/health
