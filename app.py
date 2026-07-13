@@ -180,7 +180,7 @@ def _build_rationale_prompt(company_row):
 
 Company: {company_row['name']} ({company_row['symbol']})
 Sector (peer group for all percentiles below): {sector_display_name(company_row['ey_bucket'])}
-Composite score: {company_row['score']:.0f}/100 (out of 100, sector-relative)
+Composite score: {f"{company_row['score']:.0f}/100 (out of 100, sector-relative)" if pd.notna(company_row['score']) else "N/A (fewer than 2 of the 4 scoring metrics are available for this company)"}
 
 Factor percentiles vs. sector peers:
 {factor_lines}
