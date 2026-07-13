@@ -566,14 +566,29 @@ def render_sidebar(universe):
             data_max = float(series.max(skipna=True))
             data_min = 0.0 if pd.isna(data_min) else data_min
             data_max = 100.0 if pd.isna(data_max) else data_max
-            lo_default, hi_default = qp_float_pair(field, (data_min, data_max))
-            lo_default = max(data_min, min(lo_default, data_max))
-            hi_default = max(data_min, min(hi_default, data_max))
+
+            # Slider min/max are percentile-clipped (1st-99th) so one extreme
+            # value (e.g. a company whose revenue is near zero, producing a
+            # legitimate but huge EBITDA-margin ratio) can't stretch the
+            # control out of a usable shape for everyone else. The real data
+            # is untouched -- an outlier past the visible ticks is still
+            # included by the "slider left at its edge" handling below, so it
+            # never silently disappears from the ranked table.
+            clip_lo = float(series.quantile(0.01)) if series.notna().any() else data_min
+            clip_hi = float(series.quantile(0.99)) if series.notna().any() else data_max
+            if pd.isna(clip_lo) or pd.isna(clip_hi) or clip_hi <= clip_lo:
+                clip_lo, clip_hi = data_min, data_max
+
+            lo_default, hi_default = qp_float_pair(field, (clip_lo, clip_hi))
+            lo_default = max(clip_lo, min(lo_default, clip_hi))
+            hi_default = max(clip_lo, min(hi_default, clip_hi))
 
             st.markdown(f'<div class="sidebar-section-label">{label}</div>', unsafe_allow_html=True)
-            step = 1.0 if is_pct else float(max(1.0, round((data_max - data_min) / 200)))
+            step = 1.0 if is_pct else float(max(1.0, round((clip_hi - clip_lo) / 200)))
+            slider_min = float(round(clip_lo))
+            slider_max = float(round(clip_hi)) or 1.0
             chosen = st.slider(
-                label, min_value=float(round(data_min)), max_value=float(round(data_max)) or 1.0,
+                label, min_value=slider_min, max_value=slider_max,
                 value=(float(round(lo_default)), float(round(hi_default))),
                 step=step, key=f"f_{field}", label_visibility="collapsed",
             )
@@ -583,7 +598,12 @@ def render_sidebar(universe):
                 f'font-size:12.5px;color:{COLOR_ACCENT};margin:-4px 0 7px">{value_line}</div>',
                 unsafe_allow_html=True,
             )
-            range_values[field] = (chosen[0] * divisor, chosen[1] * divisor)
+            # A slider left (or dragged back out) at its clipped edge means
+            # "no limit" on that side -- otherwise the clip above would
+            # exclude the very outlier it's meant to keep filterable, not hide.
+            eff_lo = data_min if chosen[0] <= slider_min else chosen[0]
+            eff_hi = data_max if chosen[1] >= slider_max else chosen[1]
+            range_values[field] = (eff_lo * divisor, eff_hi * divisor)
 
         st.markdown('<div class="sidebar-section-label">MAX PROMOTER PLEDGE</div>', unsafe_allow_html=True)
         pledge_default = qp_float("pledge_max", 100.0)
