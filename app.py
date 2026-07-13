@@ -5,6 +5,7 @@ load_companies() -> score_companies() + valuation_range() on the FULL
 universe -> filter_companies() last, purely for display.
 """
 
+import html
 import json
 import sys
 from pathlib import Path
@@ -214,14 +215,25 @@ Indicative valuation range:
 - P/E implied: {val('pe_implied_low', format_cr)} - {val('pe_implied_high', format_cr)}'''
 
 
+# Every provider call gets an explicit, bounded timeout (Phase 4 goal: no
+# external HTTP call left to whatever a given SDK defaults to -- some of
+# which run to several minutes). A slow/unresponsive provider should fail
+# fast into the next one in RATIONALE_PROVIDERS, not tie up the request.
+AI_CALL_TIMEOUT_SECONDS = 30
+
+
 def _call_gemini(api_key, prompt):
     # Imported here, not at module load, so a cold start only pays the
     # memory/import cost of whichever SDK is actually used. Mitigates (does
     # not provably fix) a recurring Render status-139 crash observed after
     # two separate deploys, when all three AI SDKs loaded unconditionally.
     from google import genai
+    from google.genai import types
 
-    client = genai.Client(api_key=api_key)
+    client = genai.Client(
+        api_key=api_key,
+        http_options=types.HttpOptions(timeout=AI_CALL_TIMEOUT_SECONDS * 1000),
+    )
     response = client.models.generate_content(model=GEMINI_MODEL, contents=prompt)
     return (response.text or "").strip()
 
@@ -229,7 +241,7 @@ def _call_gemini(api_key, prompt):
 def _call_groq(api_key, prompt):
     from groq import Groq
 
-    client = Groq(api_key=api_key)
+    client = Groq(api_key=api_key, timeout=AI_CALL_TIMEOUT_SECONDS)
     response = client.chat.completions.create(
         model=GROQ_MODEL,
         messages=[{"role": "user", "content": prompt}],
@@ -240,7 +252,7 @@ def _call_groq(api_key, prompt):
 def _call_cerebras(api_key, prompt):
     from cerebras.cloud.sdk import Cerebras
 
-    client = Cerebras(api_key=api_key)
+    client = Cerebras(api_key=api_key, timeout=AI_CALL_TIMEOUT_SECONDS)
     response = client.chat.completions.create(
         model=CEREBRAS_MODEL,
         messages=[{"role": "user", "content": prompt}],
@@ -872,12 +884,18 @@ def render_tearsheet(universe, weights, symbol):
 
     rationale = get_ai_rationale(row)
     rationale_text = rationale or "AI rationale unavailable right now — the rest of this tear sheet is unaffected."
+    # Escaped, unlike the rest of this file's static/from-CSV markdown blocks --
+    # this is the one string on the page generated at request time by an LLM
+    # rather than sourced from the bundled data files, so it's treated as
+    # untrusted before going into an unsafe_allow_html block (defense in depth
+    # against the model ever echoing back HTML/script-like content).
+    rationale_html = html.escape(rationale_text)
     st.markdown(f'''
 <div style="margin-bottom:34px">
   <div class="section-label">AI RATIONALE</div>
   <div class="rationale-quote">
     <div class="rationale-mark">"</div>
-    <div class="rationale-text">{rationale_text}</div>
+    <div class="rationale-text">{rationale_html}</div>
   </div>
 </div>''', unsafe_allow_html=True)
 
