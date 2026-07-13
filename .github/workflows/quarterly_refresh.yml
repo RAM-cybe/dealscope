@@ -89,10 +89,6 @@ jobs:
           # Never auto-merge, ever -- a human always approves before new
           # data goes live. This action only opens the PR; nothing merges it.
 
-      - name: Report PR
-        if: steps.pr.outputs.pull-request-number
-        run: echo "Opened PR #${{ steps.pr.outputs.pull-request-number }}: ${{ steps.pr.outputs.pull-request-url }}"
-
       - name: Heartbeat ping
         # Last step, only on a fully successful run -- lets a free service
         # like healthchecks.io/cron-job.org alert if this workflow silently
