@@ -11,9 +11,6 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
-from google import genai
-from groq import Groq
-from cerebras.cloud.sdk import Cerebras
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -218,12 +215,20 @@ Indicative valuation range:
 
 
 def _call_gemini(api_key, prompt):
+    # Imported here, not at module load, so a cold start only pays the
+    # memory/import cost of whichever SDK is actually used. Mitigates (does
+    # not provably fix) a recurring Render status-139 crash observed after
+    # two separate deploys, when all three AI SDKs loaded unconditionally.
+    from google import genai
+
     client = genai.Client(api_key=api_key)
     response = client.models.generate_content(model=GEMINI_MODEL, contents=prompt)
     return (response.text or "").strip()
 
 
 def _call_groq(api_key, prompt):
+    from groq import Groq
+
     client = Groq(api_key=api_key)
     response = client.chat.completions.create(
         model=GROQ_MODEL,
@@ -233,6 +238,8 @@ def _call_groq(api_key, prompt):
 
 
 def _call_cerebras(api_key, prompt):
+    from cerebras.cloud.sdk import Cerebras
+
     client = Cerebras(api_key=api_key)
     response = client.chat.completions.create(
         model=CEREBRAS_MODEL,
