@@ -1,9 +1,9 @@
 [theme]
-base = "light"
-backgroundColor = "#FBF7EE"
-secondaryBackgroundColor = "#F1EADA"
-textColor = "#1C1B19"
-primaryColor = "#9C7A3C"
+base = "dark"
+backgroundColor = "#05070a"
+secondaryBackgroundColor = "#0c0f14"
+textColor = "#eef1f4"
+primaryColor = "#1fb8a3"
 font = "sans serif"
 
 [server]
@@ -12,3 +12,6 @@ runOnSave = true
 [client]
 toolbarMode = "minimal"
 showSidebarNavigation = false
+# Public app: never render Python tracebacks/internals into the browser on an
+# error -- users see a generic message; real detail stays in the server logs.
+showErrorDetails = "none"

@@ -3,6 +3,11 @@
 Pipeline (composition-order contract from scoring.py / valuation.py):
 load_companies() -> score_companies() + valuation_range() on the FULL
 universe -> filter_companies() last, purely for display.
+
+UI: the "DealScope - Final Design" direction — a dark, teal-accented,
+five-view flow: landing/search -> results (score-ring table) -> tear sheet,
+with an advanced-filters slide-over reachable from a top-bar button. The
+data/logic layer under src/ is unchanged; this file is presentation only.
 """
 
 import html
@@ -23,19 +28,28 @@ from src.logic.valuation import valuation_range
 from src.config import get_gemini_api_key, get_groq_api_key, get_cerebras_api_key
 
 # ----------------------------------------------------------------------------
-# Constants
+# Palette — "DealScope Final Design" dark/teal system
 # ----------------------------------------------------------------------------
 
-COLOR_BG = "#EDEBE6"  # mockup's design-tool presentation canvas, not part of the real app
-COLOR_CARD = "#FBF7EE"
-COLOR_SIDEBAR = "#F1EADA"
-COLOR_TEXT = "#1C1B19"
-COLOR_ACCENT = "#9C7A3C"
-COLOR_MUTED = "#8A7F63"
-COLOR_BORDER = "#E7DCC1"
-COLOR_NEGATIVE = "#7A3B33"
-COLOR_TAN = "#D9CDAA"
-COLOR_TAN_DARK = "#B9AC85"
+C_BG = "#05070a"          # page background
+C_CARD = "#0c0f14"        # primary card / results table body
+C_CARD2 = "#12161c"       # inner panels, stat cards, inputs
+C_PANEL = "#101319"       # drawer, dashed "insufficient data" cards
+C_ROW_ALT = "rgba(255,255,255,.025)"
+C_TEAL = "#1fb8a3"        # primary accent
+C_TEAL_LT = "#5dcaa5"     # lighter teal (links, mono figures)
+C_TEAL_DK = "#123834"     # de-emphasised teal chip bg / valuation gradient start
+C_TEAL_DK2 = "#0f2b28"    # valuation gradient end
+C_INK = "#04110e"         # text on a teal fill
+C_T1 = "#eef1f4"          # primary text
+C_T2 = "#c7ced6"          # secondary text
+C_T3 = "#8b96a5"          # muted text
+C_T4 = "#69727d"          # dim text
+C_T5 = "#546070"          # dimmer (labels, ranks)
+C_T6 = "#3d454e"          # very dim (sparse / disabled)
+C_BORDER = "rgba(255,255,255,.08)"
+C_BORDER2 = "rgba(255,255,255,.14)"
+C_TRACK = "rgba(255,255,255,.1)"
 
 FACTOR_LABELS = {
     "revenue_growth_pct": "Revenue Growth",
@@ -44,6 +58,11 @@ FACTOR_LABELS = {
     "total_debt": "Debt Level",
 }
 
+# The design's slide-over carries exactly the original locked-PRD filter set
+# (5 range filters + a promoter-pledge ceiling; sector is chips, not a slider).
+# The interim 20-slider sidebar's extra enriched-field controls are not part
+# of this design and are intentionally not surfaced here — filtering.py still
+# supports them at the logic layer, they're simply not exposed as UI controls.
 RANGE_FIELD_CONFIG = [
     # (filters.py key, label, unit divisor for crore conversion)
     ("revenue", "REVENUE (₹ CR)", 1e7),
@@ -51,42 +70,25 @@ RANGE_FIELD_CONFIG = [
     ("return_on_capital_employed_pct", "ROCE %", 1),
     ("total_debt", "TOTAL DEBT (₹ CR)", 1e7),
     ("market_cap", "MARKET CAP (₹ CR)", 1e7),
-    # Phase 2 fields (data/enriched/dealscope_base_2026-07-12.csv) -- filters
-    # only, per the locked decision not to fold these into the 4-factor score.
-    ("total_assets", "TOTAL ASSETS (₹ CR)", 1e7),
-    ("retained_earnings", "RETAINED EARNINGS (₹ CR)", 1e7),
-    ("working_capital", "WORKING CAPITAL (₹ CR)", 1e7),
-    ("enterprise_value", "ENTERPRISE VALUE (₹ CR)", 1e7),
-    ("total_cash", "TOTAL CASH (₹ CR)", 1e7),
-    ("operating_cash_flow", "OPERATING CASH FLOW (₹ CR)", 1e7),
-    ("free_cash_flow", "FREE CASH FLOW (₹ CR)", 1e7),
-    ("current_ratio", "CURRENT RATIO", 1),
-    ("quick_ratio", "QUICK RATIO", 1),
-    ("debt_to_equity", "DEBT/EQUITY %", 1),
-    # return_on_assets is stored as a raw fraction (e.g. 0.09), not a
-    # whole-number percentage like the other _pct fields -- divide by 0.01
-    # (i.e. multiply by 100) for display only, same crore-style unit
-    # conversion the currency fields already use, real value untouched.
-    ("return_on_assets", "RETURN ON ASSETS %", 0.01),
-    ("beta", "BETA", 1),
-    ("peg_ratio", "PEG RATIO", 1),
-    ("price_to_book", "PRICE/BOOK", 1),
-    ("trailing_pe", "TRAILING P/E", 1),
 ]
 
-# Derived from RANGE_FIELD_CONFIG so adding/removing a range filter can never
-# silently desync these from render_sidebar()/sync_query_params() again --
-# exactly this kind of drift (stale hardcoded field lists) caused a real
-# "Reset all filters" bug earlier in this project's history.
 RANGE_FIELD_NAMES = [field for field, _, _ in RANGE_FIELD_CONFIG]
 FILTER_WIDGET_KEYS = (
-    ["f_sectors"] + [f"f_{field}" for field in RANGE_FIELD_NAMES] + ["f_pledge_max"]
+    [f"f_{field}" for field in RANGE_FIELD_NAMES] + ["f_pledge_max"]
 )
 FILTER_QP_KEYS = ["sectors"] + RANGE_FIELD_NAMES + ["pledge_max"]
-WEIGHT_WIDGET_KEYS = ["w_revenue_growth_pct", "w_ebitda_margin_pct",
-                      "w_return_on_capital_employed_pct", "w_total_debt"]
 
-st.set_page_config(page_title="DealScope", layout="wide")
+# How many company rows the custom-HTML results table renders at once. The
+# full filtered set always drives the "N matched" count and the CSV export;
+# rendering every one of up to 2,046 conic-gradient score rings as live DOM
+# would lag, so the ranked table shows the top slice and a "show more" step
+# extends it. Nothing is hidden from filtering or export — only from the
+# initial paint.
+ROWS_PER_PAGE = 60
+
+st.set_page_config(
+    page_title="DealScope", layout="wide", initial_sidebar_state="collapsed"
+)
 
 
 # ----------------------------------------------------------------------------
@@ -134,21 +136,17 @@ def format_pct(value, decimals=1):
     return f"{value:.{decimals}f}%"
 
 
-def ordinal(n):
-    n = int(round(n))
-    if 10 <= n % 100 <= 20:
-        suffix = "th"
-    else:
-        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
-    return f"{n}{suffix}"
-
-
 def sector_display_name(bucket):
     return {
         "Consumer Products and Retail": "Consumer Products",
         "Industrials and Auto": "Industrials & Auto",
         "Financial Services": "Financial Services",
     }.get(bucket, bucket)
+
+
+def esc(value):
+    """HTML-escape any value that reaches an unsafe_allow_html block."""
+    return html.escape(str(value))
 
 
 # ----------------------------------------------------------------------------
@@ -215,18 +213,16 @@ Indicative valuation range:
 - P/E implied: {val('pe_implied_low', format_cr)} - {val('pe_implied_high', format_cr)}'''
 
 
-# Every provider call gets an explicit, bounded timeout (Phase 4 goal: no
-# external HTTP call left to whatever a given SDK defaults to -- some of
-# which run to several minutes). A slow/unresponsive provider should fail
-# fast into the next one in RATIONALE_PROVIDERS, not tie up the request.
+# Every provider call gets an explicit, bounded timeout (no external HTTP call
+# left to whatever a given SDK defaults to). A slow/unresponsive provider
+# should fail fast into the next one in RATIONALE_PROVIDERS, not tie up the
+# request.
 AI_CALL_TIMEOUT_SECONDS = 30
 
 
 def _call_gemini(api_key, prompt):
     # Imported here, not at module load, so a cold start only pays the
-    # memory/import cost of whichever SDK is actually used. Mitigates (does
-    # not provably fix) a recurring Render status-139 crash observed after
-    # two separate deploys, when all three AI SDKs loaded unconditionally.
+    # memory/import cost of whichever SDK is actually used.
     from google import genai
     from google.genai import types
 
@@ -315,190 +311,168 @@ def load_all_deals():
     return load_deals()
 
 
+@st.cache_data(show_spinner=False)
+def sector_avg_scores(scored):
+    """Mean composite score within each ey_bucket, for the ring's sector tick."""
+    return scored.groupby("ey_bucket")["score"].mean().to_dict()
+
+
 # ----------------------------------------------------------------------------
 # CSS
 # ----------------------------------------------------------------------------
 
 def inject_css():
+    panel_open = st.query_params.get("panel") == "1"
+    drawer_x = "0" if panel_open else "112%"
+    scrim_display = "block" if panel_open else "none"
     css = f"""
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-html, body, [class*="css"] {{
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    color: {COLOR_TEXT};
+html, body, [class*="css"], .stApp {{
+    font-family: 'Inter', system-ui, sans-serif;
+    color: {C_T1};
 }}
-.stApp {{ background: {COLOR_CARD}; }}
-[data-testid="stDecoration"] {{ display: none; }}
-[data-testid="stSidebar"] {{
-    background: {COLOR_SIDEBAR};
-    border-right: 2px solid {COLOR_TEXT};
-}}
-[data-testid="stSidebar"] > div:first-child {{ padding-top: 1.2rem; }}
-.block-container {{ padding-top: 2rem; max-width: 1400px; }}
+.stApp {{ background: {C_BG}; }}
+#MainMenu, header[data-testid="stHeader"], footer, [data-testid="stToolbar"],
+[data-testid="stDecoration"], [data-testid="stStatusWidget"] {{ display: none !important; }}
+[data-testid="collapsedControl"] {{ display: none !important; }}
+section[data-testid="stSidebar"] {{ display: none !important; }}
+.block-container {{ padding: 2.2rem 3rem 4rem; max-width: 1180px; }}
+a {{ color: {C_TEAL_LT}; text-decoration: none; }}
+hr {{ border-color: {C_BORDER}; }}
 
-.app-title-eyebrow {{
-    font-size: 10px; letter-spacing: .14em; color: {COLOR_MUTED};
-    font-weight: 700; margin-bottom: 2px;
+/* Generic buttons -> pill/rounded dark */
+div.stButton > button, div.stFormSubmitButton > button {{
+    background: rgba(255,255,255,.06); color: {C_T2}; border: 1px solid {C_BORDER2};
+    border-radius: 10px; font-weight: 600; font-size: 11.5px; padding: 7px 10px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }}
-.app-title {{
-    font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 24px;
-    letter-spacing: -.01em; color: {COLOR_TEXT}; margin-bottom: 18px;
+div.stButton > button:hover, div.stFormSubmitButton > button:hover {{
+    border-color: {C_TEAL}; color: {C_T1};
 }}
-.sidebar-section-label {{
-    font-size: 10.5px; letter-spacing: .08em; color: {COLOR_TEXT};
-    font-weight: 700; margin-bottom: 9px; margin-top: 4px;
+/* Selected sector chip = primary button */
+div.stButton > button[kind="primary"], div.stButton > button[data-testid="baseButton-primary"] {{
+    background: {C_TEAL}; color: {C_INK}; border: none; font-weight: 700;
 }}
-.sidebar-subtitle {{
-    font-family: 'Source Serif 4', serif; font-style: italic; font-size: 11.5px;
-    color: {COLOR_MUTED}; margin-bottom: 10px;
-}}
-.data-as-of {{ font-size: 11.5px; font-weight: 700; color: {COLOR_TEXT}; margin-top: 12px; }}
-.data-as-of span {{ color: {COLOR_ACCENT}; }}
+div.stButton > button[kind="primary"]:hover {{ background: {C_TEAL_LT}; color: {C_INK}; }}
 
-table.rank-header {{ width: 100%; border-collapse: collapse; }}
-
-/* Streamlit widget restyling toward the mockup's flat, high-contrast look */
-[data-testid="stSidebar"] .stMultiSelect [data-baseweb="tag"] {{
-    background-color: {COLOR_TEXT} !important;
-    border-radius: 2px !important;
-}}
-[data-testid="stSidebar"] .stSlider [data-baseweb="slider"] > div > div {{
-    background: {COLOR_ACCENT} !important;
-}}
-[data-testid="stSidebar"] .stSlider [role="slider"] {{
-    background-color: {COLOR_TEXT} !important;
-    border-color: {COLOR_TEXT} !important;
-}}
-div.stButton > button {{
-    background: {COLOR_TEXT}; color: #fff; border: none; border-radius: 2px;
-    font-weight: 800; font-size: 11px; letter-spacing: .06em; width: 100%;
-    text-transform: uppercase; padding: 10px;
-}}
-div.stButton > button:hover {{ background: {COLOR_ACCENT}; color: #fff; }}
-/* "Back to results" reads as a plain nav label in the mockup, not a filled
-   button -- scoped via a marker + adjacent-sibling selector since this
-   Streamlit version has no per-widget CSS hook. */
-div[data-testid="element-container"]:has(.back-btn-marker)
-  + div[data-testid="element-container"] div.stButton > button {{
-    background: transparent; color: {COLOR_TEXT}; padding: 0; width: auto;
-    font-size: 11.5px; letter-spacing: .04em;
-}}
-div[data-testid="element-container"]:has(.back-btn-marker)
-  + div[data-testid="element-container"] div.stButton > button:hover {{
-    background: transparent; color: {COLOR_ACCENT};
-}}
 div.stDownloadButton > button {{
-    background: {COLOR_ACCENT}; color: #fff; border: none; border-radius: 2px;
-    font-weight: 800; font-size: 11px; letter-spacing: .04em; padding: 10px 18px;
-    text-transform: uppercase;
+    background: rgba(255,255,255,.06); color: {C_TEAL_LT}; border: 1px solid rgba(31,184,163,.4);
+    border-radius: 10px; font-weight: 700; font-size: 12px; padding: 8px 14px;
 }}
-div.stDownloadButton > button:hover {{ background: {COLOR_TEXT}; color: #fff; }}
+div.stDownloadButton > button:hover {{ background: {C_TEAL}; color: {C_INK}; border-color: {C_TEAL}; }}
 
-.sector-badge {{
-    font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 2px;
-    background: {COLOR_TEXT}; color: {COLOR_SIDEBAR}; letter-spacing: .02em;
+/* Text input -> pill */
+div[data-testid="stTextInput"] input {{
+    background: {C_CARD2}; border: 1px solid {C_BORDER2}; border-radius: 999px;
+    color: {C_T1}; font-size: 14px; padding: 12px 20px;
 }}
-.tearsheet-name {{
-    font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 38px;
-    letter-spacing: -.01em; color: {COLOR_TEXT};
+div[data-testid="stTextInput"] input::placeholder {{ color: {C_T4}; }}
+div[data-testid="stTextInput"] input:focus {{ border-color: {C_TEAL}; box-shadow: none; }}
+
+/* Sliders -> teal */
+div[data-testid="stSlider"] [data-baseweb="slider"] > div > div {{ background: {C_TEAL} !important; }}
+div[data-testid="stSlider"] [role="slider"] {{ background: {C_TEAL} !important; border-color: {C_TEAL} !important; }}
+div[data-testid="stSlider"] [data-testid="stTickBarMin"],
+div[data-testid="stSlider"] [data-testid="stTickBarMax"] {{ color: {C_T5}; }}
+
+/* Multiselect (sectors, when used) -> dark teal chips */
+div[data-testid="stMultiSelect"] [data-baseweb="tag"] {{ background: {C_TEAL_DK}; }}
+
+/* ---- Advanced-filters slide-over ---- */
+#dwr-scrim {{
+    position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 998;
+    display: {scrim_display};
 }}
-.tearsheet-meta {{ font-size: 12.5px; color: {COLOR_MUTED}; font-weight: 600; }}
-.back-link {{
-    font-size: 11.5px; font-weight: 800; color: {COLOR_TEXT}; letter-spacing: .04em;
-    margin-bottom: 6px;
+.st-key-filterdrawer {{
+    position: fixed; top: 0; right: 0; height: 100vh; width: 380px; z-index: 999;
+    background: {C_PANEL}; border-left: 1px solid {C_BORDER2};
+    box-shadow: -30px 0 60px -20px rgba(0,0,0,.6);
+    padding: 22px 26px; overflow-y: auto;
+    transform: translateX({drawer_x}); transition: transform .18s ease;
 }}
-.section-label {{
-    font-size: 10.5px; letter-spacing: .06em; color: {COLOR_MUTED};
-    font-weight: 700; margin-bottom: 10px; margin-top: 6px;
-}}
-.card {{ border: 2px solid {COLOR_TEXT}; background: {COLOR_CARD}; }}
-.card-header {{
-    padding: 10px 16px; font-size: 10.5px; font-weight: 800; letter-spacing: .06em;
-    background: {COLOR_TEXT}; color: {COLOR_SIDEBAR};
-}}
-.card-row {{
-    display: flex; justify-content: space-between; padding: 11px 16px;
-    border-bottom: 1px solid {COLOR_BORDER}; font-size: 13px;
-}}
-.card-row:last-child {{ border-bottom: none; }}
-.card-row-label {{ color: {COLOR_MUTED}; font-weight: 600; }}
-.card-row-value {{ font-family: 'IBM Plex Mono', monospace; font-weight: 700; }}
-.card-row-na {{ color: {COLOR_MUTED}; font-style: italic; }}
-.no-results-card {{
-    text-align: center; padding: 36px; border: 2px solid {COLOR_TEXT};
-    background: {COLOR_CARD}; max-width: 640px; margin: 40px auto;
-}}
-.no-results-title {{
-    font-family: 'Source Serif 4', serif; font-weight: 700; font-style: italic;
-    font-size: 20px; color: {COLOR_TEXT}; margin-bottom: 8px;
-}}
-.no-results-sub {{ color: {COLOR_MUTED}; font-size: 12.5px; margin-bottom: 18px; }}
-.deal-header {{
-    display: flex; gap: 12px; padding: 9px 4px; font-size: 10.5px; color: {COLOR_MUTED};
-    font-weight: 700; border-bottom: 2px solid {COLOR_TEXT};
-}}
-.deal-row {{
-    display: flex; gap: 12px; padding: 12px 4px; border-bottom: 1px solid {COLOR_BORDER};
-    font-size: 13px; align-items: center;
-}}
-.deal-target {{ font-family: 'Source Serif 4', serif; font-weight: 600; }}
-.no-comps {{ color: {COLOR_MUTED}; font-size: 13px; font-style: italic; padding: 16px 4px; }}
-.rationale-quote {{ display: flex; gap: 16px; align-items: flex-start; }}
-.rationale-mark {{
-    font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 48px;
-    color: {COLOR_ACCENT}; line-height: .6;
-}}
-.rationale-text {{
-    font-family: 'Source Serif 4', serif; font-size: 15px; line-height: 1.7;
-    color: {COLOR_MUTED}; font-weight: 500; font-style: italic; padding-top: 8px;
-}}
+.st-key-filterdrawer .stSlider {{ margin-bottom: -6px; }}
+
+.dwr-title {{ font-size: 14px; font-weight: 700; color: {C_T1}; }}
+.dwr-grouplabel {{ font-size: 10.5px; letter-spacing: .06em; color: {C_T3}; font-weight: 600;
+    margin: 18px 0 6px; }}
+.dwr-fieldlabel {{ display: flex; justify-content: space-between; align-items: center;
+    font-size: 10.5px; letter-spacing: .05em; color: {C_T3}; font-weight: 600; margin-bottom: -6px; }}
+.dwr-fieldval {{ font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: {C_TEAL_LT}; font-weight: 500; }}
+
+/* Wordmark */
+.brand {{ display: flex; align-items: center; gap: 8px; }}
+.brand-dot {{ width: 8px; height: 8px; border-radius: 2px; background: {C_TEAL}; }}
+.brand-name {{ font-weight: 800; font-size: 12px; letter-spacing: .2em; color: {C_T1}; }}
 </style>
 """
-    # react-markdown treats a blank line inside a raw-HTML block as a paragraph
-    # break, splitting the <style> tag and leaking the tail as visible text.
     css = "\n".join(line for line in css.splitlines() if line.strip())
     st.markdown(css, unsafe_allow_html=True)
+    st.markdown('<div id="dwr-scrim"></div>', unsafe_allow_html=True)
 
 
 # ----------------------------------------------------------------------------
 # HTML component renderers
 # ----------------------------------------------------------------------------
 
-def donut_html(score, outer=150, inner=114, font_size=42, show_denominator=True):
+def ring_html(score, sector_avg, size=34, inner_bg=C_CARD, font_size=10.5,
+              show_label=False, glow=False):
+    """Score ring: teal arc = score, white tick = sector-average score."""
+    thickness = max(3, round(size * 0.09))
     if pd.isna(score):
-        deg, score_text = 0, "N/A"
+        # Unscored: flat faint ring, em-dash.
+        num = "–"
+        arc = f"background:rgba(255,255,255,.06)"
+        tick = ""
+        num_color = C_T6
     else:
         deg = max(0, min(360, score / 100 * 360))
-        score_text = f"{score:.0f}"
-    sub = (f'<div style="font-size:9px;color:{COLOR_MUTED};font-weight:700">/ 100</div>'
-           if show_denominator else "")
-    return f'''<div style="position:relative;width:{outer}px;height:{outer}px;border-radius:50%;
-background:conic-gradient({COLOR_ACCENT} {deg}deg,{COLOR_BORDER} 0);display:flex;
-align-items:center;justify-content:center">
-  <div style="width:{inner}px;height:{inner}px;border-radius:50%;background:{COLOR_CARD};
-  display:flex;flex-direction:column;align-items:center;justify-content:center">
-    <div style="font-family:'Source Serif 4',serif;font-weight:700;font-size:{font_size}px;
-    color:{COLOR_TEXT};line-height:1">{score_text}</div>
-    {sub}
-  </div>
-</div>'''
+        arc = f"background:conic-gradient({C_TEAL} 0deg {deg}deg,rgba(255,255,255,.1) {deg}deg 360deg)"
+        num = f"{score:.0f}"
+        num_color = C_T1
+        tick = ""
+        if pd.notna(sector_avg):
+            tick_deg = max(0, min(360, sector_avg / 100 * 360))
+            tick = (f'<div style="position:absolute;inset:0;transform:rotate({tick_deg:.1f}deg)">'
+                    f'<div style="position:absolute;top:0;left:50%;width:2px;height:{max(5, round(size*0.18))}px;'
+                    f'background:{C_T1};border-radius:1px;transform:translateX(-50%)"></div></div>')
+    glow_css = f"box-shadow:0 0 40px -8px rgba(31,184,163,.5);" if glow and pd.notna(score) else ""
+    label = (f'<div style="font:700 8px Inter,sans-serif;letter-spacing:.1em;color:{C_T5}">SCORE</div>'
+             if show_label else "")
+    return (f'<div style="position:relative;width:{size}px;height:{size}px;border-radius:50%;{glow_css}">'
+            f'<div style="position:absolute;inset:0;border-radius:50%;{arc}"></div>'
+            f'{tick}'
+            f'<div style="position:absolute;inset:{thickness}px;border-radius:50%;background:{inner_bg};'
+            f'display:flex;flex-direction:column;align-items:center;justify-content:center">'
+            f'<div style="font:700 {font_size}px \'IBM Plex Mono\',monospace;color:{num_color};line-height:1">{num}</div>'
+            f'{label}</div></div>')
 
 
-def factor_bar_html(label, percentile):
+def stat_card(label, value, value_color=C_T1, small=False):
+    pad = "14px 16px" if small else "18px 20px"
+    lbl_size = "9.5px" if small else "10px"
+    val_size = "14px" if small else "18px"
+    return (f'<div style="padding:{pad};background:{C_CARD2};border-radius:{"10px" if small else "12px"};'
+            f'border:1px solid {C_BORDER}">'
+            f'<div style="font:700 {lbl_size} Inter,sans-serif;letter-spacing:.05em;color:{C_T5};margin-bottom:{"5px" if small else "7px"}">{esc(label)}</div>'
+            f'<div style="font:700 {val_size} \'IBM Plex Mono\',monospace;color:{value_color}">{esc(value)}</div></div>')
+
+
+def breakdown_bar_html(label, weight, percentile):
+    wt = f'<span style="color:{C_T5};font-weight:400">wt {weight}</span>'
     if pd.isna(percentile):
-        return f'''<div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
-  <div style="width:132px;font-size:12px;font-weight:700;color:{COLOR_MUTED}">{label}</div>
-  <div style="flex:1;height:10px;background:repeating-linear-gradient(90deg,{COLOR_BORDER} 0 8px,transparent 8px 13px)"></div>
-  <div style="width:220px;text-align:right;font-size:11px;color:{COLOR_MUTED};font-style:italic">N/A — excluded, reweighted</div>
-</div>'''
+        return (f'<div><div style="display:flex;justify-content:space-between;margin-bottom:6px">'
+                f'<span style="font:600 12.5px Inter,sans-serif;color:{C_T5}">{label} {wt}</span>'
+                f'<span style="font:600 11.5px Inter,sans-serif;color:{C_T5}">reweighted — no data</span></div>'
+                f'<div style="height:7px;border-radius:4px;background:rgba(255,255,255,.04)"></div></div>')
     pct = max(0, min(100, percentile))
-    return f'''<div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
-  <div style="width:132px;font-size:12px;font-weight:700;color:{COLOR_TEXT}">{label}</div>
-  <div style="flex:1;height:10px;background:{COLOR_BORDER}"><div style="height:10px;width:{pct}%;background:{COLOR_ACCENT}"></div></div>
-  <div style="width:50px;text-align:right;font-weight:900;color:{COLOR_TEXT}">{ordinal(pct)}</div>
-</div>'''
+    return (f'<div><div style="display:flex;justify-content:space-between;margin-bottom:6px">'
+            f'<span style="font:600 12.5px Inter,sans-serif;color:{C_T2}">{label} {wt}</span>'
+            f'<span style="font:700 12.5px \'IBM Plex Mono\',monospace;color:{C_TEAL_LT}">{pct:.0f}</span></div>'
+            f'<div style="height:7px;border-radius:4px;background:rgba(255,255,255,.08)">'
+            f'<div style="width:{pct}%;height:100%;border-radius:4px;background:{C_TEAL}"></div></div></div>')
 
 
 def extract_note_segment(full_note, prefix):
@@ -510,19 +484,6 @@ def extract_note_segment(full_note, prefix):
         if other_prefix != prefix and other_prefix in rest:
             rest = rest.split(other_prefix)[0].strip()
     return rest if rest.endswith(".") else rest + "."
-
-
-def valuation_block_html(low, high, label, note_segment):
-    if pd.isna(low) or pd.isna(high):
-        return f'''<div style="font-size:11px;font-weight:700;color:{COLOR_MUTED};margin-bottom:9px">{label}</div>
-<div style="font-size:12px;color:{COLOR_MUTED};font-style:italic">{note_segment}</div>'''
-    return f'''<div style="font-size:11px;font-weight:700;color:{COLOR_MUTED};margin-bottom:9px">{label}</div>
-<div style="height:8px;background:{COLOR_BORDER};position:relative;margin-bottom:8px">
-  <div style="position:absolute;left:8%;right:8%;top:0;bottom:0;background:{COLOR_ACCENT}"></div>
-</div>
-<div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700">
-  <span>{format_cr(low)}</span><span>{format_cr(high)}</span>
-</div>'''
 
 
 # ----------------------------------------------------------------------------
@@ -567,36 +528,65 @@ def qp_list(key, default):
     return [s for s in raw.split(",") if s]
 
 
-def sync_query_params(filters_state, weights_state):
-    st.query_params["sectors"] = ",".join(filters_state["sectors"])
-    for field in RANGE_FIELD_NAMES:
-        lo, hi = filters_state[field]
-        st.query_params[field] = f"{lo},{hi}"
-    st.query_params["pledge_max"] = str(filters_state["promoter_pledge_pct_max"])
-    for metric in METRICS:
-        st.query_params[f"w_{metric}"] = str(weights_state[metric])
+def current_sectors():
+    """Selected sectors from the URL; empty list means 'all sectors'."""
+    sel = [s for s in qp_list("sectors", []) if s in ALL_BUCKETS]
+    return sel
+
+
+def current_weights():
+    return {m: qp_int(f"w_{m}", 5) for m in METRICS}
 
 
 # ----------------------------------------------------------------------------
-# Sidebar
+# Shared UI pieces
 # ----------------------------------------------------------------------------
 
-def render_sidebar(universe):
-    with st.sidebar:
-        st.markdown('<div class="app-title-eyebrow">DEALSCOPE</div>', unsafe_allow_html=True)
-        st.markdown('<div class="app-title">Target Screener</div>', unsafe_allow_html=True)
+def brand_markup():
+    return (f'<div class="brand"><div class="brand-dot"></div>'
+            f'<div class="brand-name">DEALSCOPE</div></div>')
 
-        st.markdown('<div class="sidebar-section-label">SECTOR</div>', unsafe_allow_html=True)
-        default_sectors = qp_list("sectors", list(ALL_BUCKETS))
-        default_sectors = [s for s in default_sectors if s in ALL_BUCKETS] or list(ALL_BUCKETS)
-        sectors = st.multiselect(
-            "Sector", options=list(ALL_BUCKETS),
-            default=default_sectors,
-            format_func=sector_display_name,
-            key="f_sectors", label_visibility="collapsed",
-        )
 
-        range_values = {}
+def go(view=None, **params):
+    """Mutate query params then rerun (used by buttons)."""
+    if view is not None:
+        st.query_params["view"] = view
+    for k, v in params.items():
+        if v is None:
+            st.query_params.pop(k, None)
+        else:
+            st.query_params[k] = v
+    st.rerun()
+
+
+def render_sector_chips(target_view):
+    """Sector chips as toggle buttons. Clicking one navigates to target_view
+    with that sector toggled in the URL."""
+    selected = set(current_sectors())
+    labels = [(b, sector_display_name(b)) for b in ALL_BUCKETS]
+    cols = st.columns(len(labels))
+    for (bucket, label), col in zip(labels, cols):
+        is_on = bucket in selected
+        if col.button(label, key=f"chip_{bucket}",
+                      type="primary" if is_on else "secondary",
+                      use_container_width=True):
+            if is_on:
+                selected.discard(bucket)
+            else:
+                selected.add(bucket)
+            new = ",".join(b for b in ALL_BUCKETS if b in selected)
+            go(target_view, sectors=new or None, page=None)
+
+
+def render_filter_drawer(universe):
+    """Right slide-over: real range sliders + factor-weight sliders + Reset/Apply.
+    Always rendered on results view so its values are readable every run; CSS
+    keeps it off-screen unless ?panel=1."""
+    range_values = {}
+    with st.container(key="filterdrawer"):
+        st.markdown('<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'
+                    f'<span class="dwr-title">Advanced filters</span></div>', unsafe_allow_html=True)
+
         for field, label, divisor in RANGE_FIELD_CONFIG:
             series = universe[field] / divisor
             data_min = float(series.min(skipna=True))
@@ -604,24 +594,11 @@ def render_sidebar(universe):
             data_min = 0.0 if pd.isna(data_min) else data_min
             data_max = 100.0 if pd.isna(data_max) else data_max
 
-            # Slider min/max are percentile-clipped (1st-99th) so one extreme
-            # value (e.g. a company whose revenue is near zero, producing a
-            # legitimate but huge EBITDA-margin ratio) can't stretch the
-            # control out of a usable shape for everyone else. The real data
-            # is untouched -- an outlier past the visible ticks is still
-            # included by the "slider left at its edge" handling below, so it
-            # never silently disappears from the ranked table.
             clip_lo = float(series.quantile(0.01)) if series.notna().any() else data_min
             clip_hi = float(series.quantile(0.99)) if series.notna().any() else data_max
             if pd.isna(clip_lo) or pd.isna(clip_hi) or clip_hi <= clip_lo:
                 clip_lo, clip_hi = data_min, data_max
 
-            # Step (and rounding precision) scales to the clipped range itself
-            # rather than a fixed whole-number floor -- large-range currency
-            # fields (revenue, market cap) still get whole-crore steps, but
-            # small-range ratio fields (beta, current ratio, price/book) get
-            # fractional steps instead of collapsing to a near-useless 2-3
-            # tick slider.
             span = clip_hi - clip_lo
             raw_step = span / 200 if span > 0 else 1.0
             if raw_step >= 1:
@@ -641,292 +618,439 @@ def render_sidebar(universe):
             lo_default = max(clip_lo, min(lo_default, clip_hi))
             hi_default = max(clip_lo, min(hi_default, clip_hi))
 
-            st.markdown(f'<div class="sidebar-section-label">{label}</div>', unsafe_allow_html=True)
             slider_min = r(clip_lo)
             slider_max = r(clip_hi) or 1.0
             chosen = st.slider(
                 label, min_value=slider_min, max_value=slider_max,
                 value=(r(lo_default), r(hi_default)),
-                step=step, key=f"f_{field}", label_visibility="collapsed",
+                step=step, key=f"f_{field}", label_visibility="visible",
             )
-            # indian_number() rounds to whole numbers -- fine for the
-            # crore-scale currency fields, but a small-range ratio field
-            # (beta, quick ratio, PEG) at decimals=0 would show a misleading
-            # "0 - 0" for a real, non-empty (0.00, 0.50) selection.
-            if decimals:
-                value_line = f"{chosen[0]:.{decimals}f} – {chosen[1]:.{decimals}f}"
-            else:
-                value_line = f"{indian_number(chosen[0])} – {indian_number(chosen[1])}"
-            st.markdown(
-                f'<div style="font-family:\'IBM Plex Mono\',monospace;font-weight:600;'
-                f'font-size:12.5px;color:{COLOR_ACCENT};margin:-4px 0 7px">{value_line}</div>',
-                unsafe_allow_html=True,
-            )
-            # A slider left (or dragged back out) at its clipped edge means
-            # "no limit" on that side -- otherwise the clip above would
-            # exclude the very outlier it's meant to keep filterable, not hide.
             eff_lo = data_min if chosen[0] <= slider_min else chosen[0]
             eff_hi = data_max if chosen[1] >= slider_max else chosen[1]
             range_values[field] = (eff_lo * divisor, eff_hi * divisor)
 
-        st.markdown('<div class="sidebar-section-label">MAX PROMOTER PLEDGE</div>', unsafe_allow_html=True)
         pledge_default = qp_float("pledge_max", 100.0)
         pledge_max = st.slider(
-            "Max promoter pledge", min_value=0.0, max_value=100.0,
-            value=float(pledge_default), step=1.0,
-            key="f_pledge_max", label_visibility="collapsed",
+            "MAX PROMOTER PLEDGE %", min_value=0.0, max_value=100.0,
+            value=float(pledge_default), step=1.0, key="f_pledge_max",
         )
 
-        if st.button("Reset all filters"):
-            for key in FILTER_WIDGET_KEYS:
-                st.session_state.pop(key, None)
-            for qp_key in FILTER_QP_KEYS:
-                if qp_key in st.query_params:
-                    del st.query_params[qp_key]
-            st.rerun()
-
-        st.markdown('<div style="height:2px;background:#1C1B19;margin:18px 0"></div>', unsafe_allow_html=True)
-        st.markdown('<div class="sidebar-section-label" style="margin-bottom:2px">FACTOR WEIGHTS</div>', unsafe_allow_html=True)
-        st.markdown('<div class="sidebar-subtitle">re-rank live by what you value</div>', unsafe_allow_html=True)
-
+        st.markdown('<div class="dwr-grouplabel">FACTOR WEIGHTS</div>', unsafe_allow_html=True)
         weights = {}
         for metric in METRICS:
-            label = FACTOR_LABELS[metric]
-            default_w = qp_int(f"w_{metric}", 5)
             weights[metric] = st.slider(
-                label, min_value=0, max_value=10, value=default_w, step=1,
-                key=f"w_{metric}",
+                FACTOR_LABELS[metric], min_value=0, max_value=10,
+                value=qp_int(f"w_{metric}", 5), step=1, key=f"w_{metric}",
             )
 
-    filters = {
-        "sectors": sectors,
-        **range_values,
-        "promoter_pledge_pct_max": pledge_max,
-    }
+        c1, c2 = st.columns(2)
+        if c1.button("Reset", key="dwr_reset", use_container_width=True):
+            for k in FILTER_QP_KEYS + [f"w_{m}" for m in METRICS]:
+                st.query_params.pop(k, None)
+            for k in FILTER_WIDGET_KEYS + [f"w_{m}" for m in METRICS]:
+                st.session_state.pop(k, None)
+            st.query_params.pop("panel", None)
+            st.rerun()
+        if c2.button("Apply", key="dwr_apply", type="primary", use_container_width=True):
+            _persist_filters(range_values, pledge_max, weights)
+            st.query_params.pop("panel", None)
+            st.rerun()
+
+    # Persist current slider state to the URL every run so it survives reloads
+    # and is shareable, exactly like the pre-redesign behaviour.
+    _persist_filters(range_values, pledge_max, weights)
+
+    filters = {"sectors": current_sectors(), **range_values,
+               "promoter_pledge_pct_max": pledge_max}
     return filters, weights
 
 
+def _persist_filters(range_values, pledge_max, weights):
+    for field in RANGE_FIELD_NAMES:
+        lo, hi = range_values[field]
+        st.query_params[field] = f"{lo},{hi}"
+    st.query_params["pledge_max"] = str(pledge_max)
+    for metric in METRICS:
+        st.query_params[f"w_{metric}"] = str(weights[metric])
+
+
 # ----------------------------------------------------------------------------
-# Main ranked table view
+# 1 · Landing / search
 # ----------------------------------------------------------------------------
 
-def build_display_table(filtered):
-    display = pd.DataFrame({
-        "Rank": range(1, len(filtered) + 1),
-        "Company": filtered["name"] + "  ·  " + filtered["symbol"],
-        "Sector": filtered["ey_bucket"].map(sector_display_name),
-        "Score": filtered["score"].round(0),
-        "Revenue": filtered["revenue"].apply(format_cr_plain),
-        "Margin": filtered["ebitda_margin_pct"].apply(lambda v: format_pct(v)),
-        "ROCE": filtered["return_on_capital_employed_pct"].apply(lambda v: format_pct(v)),
-        "Debt": filtered["total_debt"].apply(format_cr_plain),
-        "Mcap": filtered["market_cap"].apply(format_cr_plain),
-        "Pledge": filtered["promoter_pledge_pct"].apply(lambda v: format_pct(v)),
-    })
-    return display
-
-
-def render_table_view(universe, filters, weights):
+def render_landing(universe):
     as_of = get_data_as_of(universe)
+    n = len(universe)
+
+    top = st.columns([2, 1])
+    with top[1]:
+        if st.button("⚙ Advanced filters", key="land_adv", use_container_width=True):
+            go("results", panel="1")
+
+    st.markdown(f'''
+<div style="text-align:center;padding:40px 0 8px">
+  <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:28px">
+    <div class="brand-dot"></div>
+    <div class="brand-name">DEALSCOPE</div>
+  </div>
+  <div style="font:700 42px/1.18 Inter,sans-serif;color:{C_T1};max-width:760px;margin:0 auto 16px;letter-spacing:-.01em">
+    Screen NSE-listed companies<br>like a deal team.</div>
+  <div style="font:400 15px/1.6 Inter,sans-serif;color:{C_T3};max-width:540px;margin:0 auto 30px">
+    Filter, weight-score, and get an indicative M&amp;A valuation across {n:,} real Indian companies — no login, no setup.</div>
+</div>''', unsafe_allow_html=True)
+
+    mid = st.columns([1, 4, 1])
+    with mid[1]:
+        q = st.text_input("Search", key="land_search", label_visibility="collapsed",
+                          placeholder="Search company or ticker…")
+        if q and q.strip():
+            go("results", q=q.strip())
+
+    st.markdown('<div style="height:6px"></div>', unsafe_allow_html=True)
+    render_sector_chips("results")
+    browse = st.columns([2, 3, 2])
+    if browse[1].button("Browse all companies →", key="land_browse", use_container_width=True):
+        go("results")
+
+    st.markdown(f'''
+<div style="text-align:center;margin-top:34px;font:400 11px 'IBM Plex Mono',monospace;
+letter-spacing:.04em;color:{C_T6}">DATA AS OF {esc(as_of)} · {n:,} COMPANIES</div>''',
+                unsafe_allow_html=True)
+
+
+# ----------------------------------------------------------------------------
+# 2 · Results / browsing
+# ----------------------------------------------------------------------------
+
+def results_table_html(view, sector_avgs):
+    header = (f'<div style="display:flex;padding:9px 14px;font:700 10px Inter,sans-serif;'
+              f'letter-spacing:.07em;color:{C_T5}">'
+              f'<div style="width:40px">RANK</div><div style="flex:1">COMPANY</div>'
+              f'<div style="width:150px">SECTOR</div><div style="width:70px">SCORE</div>'
+              f'<div style="width:104px;text-align:right">REVENUE</div>'
+              f'<div style="width:78px;text-align:right">MARGIN</div>'
+              f'<div style="width:64px;text-align:right">ROCE</div>'
+              f'<div style="width:110px;text-align:right">DEBT</div></div>')
+    rows = []
+    for i, (_, r) in enumerate(view.iterrows()):
+        alt = C_ROW_ALT if i % 2 == 0 else "transparent"
+        rank = f'{r["_rank"]:.0f}' if pd.notna(r["_rank"]) else "—"
+        rank_color = C_T5 if pd.notna(r["_rank"]) else C_T6
+        avg = sector_avgs.get(r["ey_bucket"])
+        ring = ring_html(r["score"], avg, size=34, inner_bg=(C_CARD if i % 2 else "#0e1217"))
+        name_color = C_T1 if pd.notna(r["score"]) else C_T3
+        rev = format_cr_plain(r["revenue"]); mar = format_pct(r["ebitda_margin_pct"])
+        roce = format_pct(r["return_on_capital_employed_pct"]); debt = format_cr_plain(r["total_debt"])
+
+        def cell(width, value):
+            color = C_T2 if value != "N/A" else C_T5
+            return (f'<div style="width:{width};text-align:right;'
+                    f'font:500 12.5px \'IBM Plex Mono\',monospace;color:{color}">{esc(value)}</div>')
+
+        rows.append(
+            f'<a href="?view=tearsheet&symbol={esc(r["symbol"])}" target="_self" '
+            f'style="display:flex;align-items:center;padding:11px 14px;background:{alt};'
+            f'border-radius:8px;text-decoration:none">'
+            f'<div style="width:40px;font:700 12px \'IBM Plex Mono\',monospace;color:{rank_color}">{rank}</div>'
+            f'<div style="flex:1"><span style="font:600 13.5px Inter,sans-serif;color:{name_color}">{esc(r["name"])}</span> '
+            f'<span style="font:400 11px \'IBM Plex Mono\',monospace;color:{C_T5}">{esc(r["symbol"])}</span></div>'
+            f'<div style="width:150px;font:500 12.5px Inter,sans-serif;color:{C_T3}">{esc(sector_display_name(r["ey_bucket"]))}</div>'
+            f'<div style="width:70px">{ring}</div>'
+            + cell("104px", rev) + cell("78px", mar) + cell("64px", roce) + cell("110px", debt)
+            + '</a>'
+        )
+    return header + '<div style="display:flex;flex-direction:column;gap:2px">' + "".join(rows) + '</div>'
+
+
+def render_results(universe):
+    filters, weights = render_filter_drawer(universe)
 
     scored = score_universe(universe, tuple(sorted(weights.items())))
     scored = scored.sort_values("score", ascending=False, na_position="last").reset_index(drop=True)
     filtered = filter_companies(scored, filters)
 
-    col1, col2 = st.columns([4, 1])
-    with col1:
-        st.markdown(
-            f'<div class="data-as-of">DATA AS OF <span>{as_of}</span></div>',
-            unsafe_allow_html=True,
-        )
-    with col2:
+    q = st.query_params.get("q", "")
+    if q:
+        mask = (filtered["name"].str.contains(q, case=False, na=False)
+                | filtered["symbol"].str.contains(q, case=False, na=False))
+        filtered = filtered[mask].reset_index(drop=True)
+
+    filtered["_rank"] = filtered["score"].rank(ascending=False, method="min", na_option="keep")
+    sector_avgs = sector_avg_scores(scored)
+    as_of = get_data_as_of(universe)
+
+    # ---- top bar ----
+    bar = st.columns([2.2, 5, 2, 1, 1])
+    with bar[0]:
+        if st.button("◆ DEALSCOPE", key="home", use_container_width=True):
+            go("landing", q=None, page=None)
+    with bar[1]:
+        newq = st.text_input("Search", value=q, key="results_search",
+                             label_visibility="collapsed",
+                             placeholder="Search company or ticker…")
+        if newq != q:
+            go("results", q=(newq.strip() or None), page=None)
+    with bar[2]:
+        if st.button("⚙ Advanced filters", key="open_adv", use_container_width=True):
+            go("results", panel="1")
+    with bar[3]:
         st.download_button(
-            "Download CSV ↓",
-            data=filtered.drop(columns=["ey_bucket"], errors="ignore").to_csv(index=False).encode("utf-8"),
-            file_name="nse_ma_screener_results.csv",
-            mime="text/csv",
+            "CSV ↓",
+            data=filtered.drop(columns=["ey_bucket", "_rank"], errors="ignore").to_csv(index=False).encode("utf-8"),
+            file_name="nse_ma_screener_results.csv", mime="text/csv",
             use_container_width=True,
         )
+    with bar[4]:
+        st.link_button("Share", url="?" + "&".join(f"{k}={v}" for k, v in st.query_params.to_dict().items()),
+                       use_container_width=True)
 
-    if filtered.empty:
+    # ---- sector chips ----
+    render_sector_chips("results")
+
+    total = len(filtered)
+    st.markdown(f'''<div style="display:flex;justify-content:space-between;align-items:baseline;
+margin:14px 0 8px"><span style="font:600 12px Inter,sans-serif;color:{C_T4}">{total:,} companies matched{(" · '" + esc(q) + "'") if q else ""}</span>
+<a href="?view=scoring" target="_self" style="font:600 11.5px Inter,sans-serif">How scoring works ⓘ</a></div>''',
+                unsafe_allow_html=True)
+
+    if total == 0:
         st.markdown(f'''
-<div class="no-results-card">
-  <div class="no-results-title">No companies match these filters.</div>
-  <div class="no-results-sub">Try widening your ranges.</div>
+<div style="text-align:center;padding:44px;border:1px solid {C_BORDER2};border-radius:14px;background:{C_CARD};max-width:620px;margin:24px auto">
+  <div style="font:700 20px Inter,sans-serif;color:{C_T1};margin-bottom:8px">No companies match these filters.</div>
+  <div style="color:{C_T3};font-size:13px;margin-bottom:18px">Try widening your ranges.</div>
 </div>''', unsafe_allow_html=True)
-        if st.button("Reset Filters", key="reset_zero_results"):
-            for key in FILTER_WIDGET_KEYS:
-                st.session_state.pop(key, None)
-            for qp_key in FILTER_QP_KEYS:
-                if qp_key in st.query_params:
-                    del st.query_params[qp_key]
+        cc = st.columns([2, 1, 2])
+        if cc[1].button("Reset filters", key="reset_zero", type="primary", use_container_width=True):
+            for k in FILTER_QP_KEYS + [f"w_{m}" for m in METRICS] + ["q"]:
+                st.query_params.pop(k, None)
+            for k in FILTER_WIDGET_KEYS + [f"w_{m}" for m in METRICS]:
+                st.session_state.pop(k, None)
             st.rerun()
         return
 
-    display = build_display_table(filtered)
+    page = qp_int("page", 1)
+    show = min(total, page * ROWS_PER_PAGE)
+    view = filtered.head(show)
 
-    event = st.dataframe(
-        display,
-        use_container_width=True,
-        hide_index=True,
-        height=min(36 * (len(display) + 1) + 3, 720),
-        column_config={
-            "Rank": st.column_config.NumberColumn(width="small"),
-            "Company": st.column_config.TextColumn(width="large"),
-            "Sector": st.column_config.TextColumn(width="medium"),
-            "Score": st.column_config.ProgressColumn(
-                format="%.0f", min_value=0, max_value=100, width="medium",
-            ),
-            "Revenue": st.column_config.TextColumn(width="small"),
-            "Margin": st.column_config.TextColumn(width="small"),
-            "ROCE": st.column_config.TextColumn(width="small"),
-            "Debt": st.column_config.TextColumn(width="small"),
-            "Mcap": st.column_config.TextColumn(width="small"),
-            "Pledge": st.column_config.TextColumn(width="small"),
-        },
-        on_select="rerun",
-        selection_mode="single-row",
-        key="results_table",
+    st.markdown(
+        f'<div style="background:{C_CARD};border:1px solid {C_BORDER};border-radius:14px;padding:10px 14px 16px">'
+        + results_table_html(view, sector_avgs) + '</div>',
+        unsafe_allow_html=True,
     )
+    st.markdown(f'<div style="margin-top:12px;font:400 11px Inter,sans-serif;color:{C_T6}">'
+                f'White tick on each ring = sector-average score, for an instant above/below-peer read. '
+                f'Showing top {show:,} of {total:,}.</div>', unsafe_allow_html=True)
 
-    if event.selection and event.selection.get("rows"):
-        selected_idx = event.selection["rows"][0]
-        symbol = filtered.iloc[selected_idx]["symbol"]
-        st.query_params["view"] = "tearsheet"
-        st.query_params["symbol"] = symbol
-        st.rerun()
+    if show < total:
+        mc = st.columns([2, 1, 2])
+        if mc[1].button(f"Show more ({total - show:,} left)", key="show_more", use_container_width=True):
+            go("results", page=str(page + 1))
 
 
 # ----------------------------------------------------------------------------
-# Tear sheet view
+# 4 & 5 · Tear sheet
 # ----------------------------------------------------------------------------
 
-def render_tearsheet(universe, weights, symbol):
+def render_tearsheet(universe, symbol):
+    weights = current_weights()
     scored = score_universe(universe, tuple(sorted(weights.items())))
     match = scored[scored["symbol"] == symbol]
     if match.empty:
+        if st.button("← Back to results", key="back_missing"):
+            go("results", symbol=None)
         st.warning("Company not found.")
-        if st.button("← Back to results"):
-            del st.query_params["view"]
-            del st.query_params["symbol"]
-            st.rerun()
         return
     row = match.iloc[0]
     bucket = row["ey_bucket"]
     as_of = get_data_as_of(universe)
+    avg = sector_avg_scores(scored).get(bucket)
+    scored_flag = pd.notna(row["score"])
 
-    st.markdown('<span class="back-btn-marker"></span>', unsafe_allow_html=True)
     if st.button("← Back to results", key="back_button"):
-        del st.query_params["view"]
-        del st.query_params["symbol"]
-        st.rerun()
+        go("results", symbol=None, view="results")
 
+    # ---- header + ring ----
+    ticker_bg = C_TEAL_LT if scored_flag else "rgba(255,255,255,.08)"
+    ticker_col = C_INK if scored_flag else C_T3
+    industry = row.get("industry")
+    subtitle = sector_display_name(bucket) + (f" · {esc(industry)}" if pd.notna(industry) else " · sector could not be determined")
+    ring = ring_html(row["score"], avg, size=104, inner_bg=C_CARD, font_size=26,
+                     show_label=True, glow=True)
+    avg_caption = (f"| sector avg {avg:.0f}" if (scored_flag and pd.notna(avg)) else
+                   ("no sector peers to compare" if not scored_flag else ""))
     st.markdown(f'''
-<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:30px">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;margin:16px 0 22px">
   <div>
-    <div class="tearsheet-name">{row["name"]}</div>
-    <div style="display:flex;align-items:center;gap:10px;margin-top:10px">
-      <span class="sector-badge">{sector_display_name(bucket).upper()}</span>
-      <span class="tearsheet-meta">{row["symbol"]} · MKT CAP {format_cr(row["market_cap"])} · AS OF {as_of}</span>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+      <div style="font:700 30px/1.1 Inter,sans-serif;color:{C_T1};letter-spacing:-.01em">{esc(row["name"])}</div>
+      <div style="font:700 12px 'IBM Plex Mono',monospace;color:{ticker_col};background:{ticker_bg};border-radius:6px;padding:3px 9px">{esc(row["symbol"])}</div>
     </div>
+    <div style="font:500 13.5px Inter,sans-serif;color:{C_T3}">{subtitle}</div>
+  </div>
+  <div style="text-align:center">
+    {ring}
+    <div style="margin-top:9px;font:500 10.5px Inter,sans-serif;color:{C_T4}">{avg_caption}</div>
   </div>
 </div>''', unsafe_allow_html=True)
 
-    donut = donut_html(row["score"])
-    factor_bars = "".join(
-        factor_bar_html(FACTOR_LABELS[m], row[f"pctl_{m}"]) for m in METRICS
-    )
+    # ---- headline stat cards ----
+    debt_val = format_cr(row["total_debt"])
+    st.markdown(
+        '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px">'
+        + stat_card("MARKET CAP", format_cr(row["market_cap"]),
+                    C_T1 if pd.notna(row["market_cap"]) else C_T5)
+        + stat_card("REVENUE", format_cr(row["revenue"]),
+                    C_T1 if pd.notna(row["revenue"]) else C_T5)
+        + stat_card("ROCE", format_pct(row["return_on_capital_employed_pct"]),
+                    C_TEAL_LT if pd.notna(row["return_on_capital_employed_pct"]) else C_T5)
+        + stat_card("TOTAL DEBT", debt_val, C_T1 if debt_val != "N/A" else C_T5)
+        + '</div>', unsafe_allow_html=True)
+
+    # ---- score breakdown ----
+    bars = "".join(breakdown_bar_html(FACTOR_LABELS[m], weights[m], row[f"pctl_{m}"]) for m in METRICS)
+    sparse_note = ("" if scored_flag else
+                   f'<div style="margin-top:16px;font:400 12px Inter,sans-serif;color:{C_T6}">All 4 factors unavailable — this company cannot currently be scored.</div>')
     st.markdown(f'''
-<div style="display:flex;gap:44px;margin-bottom:34px;align-items:center">
-  <div style="flex:0 0 170px;display:flex;align-items:center;justify-content:center">{donut}</div>
-  <div style="flex:1;display:flex;flex-direction:column;gap:4px">
-    <div class="section-label">SCORE — VS. {sector_display_name(bucket).upper()} SECTOR PEERS</div>
-    {factor_bars}
-  </div>
+<div style="padding:22px 26px;background:{C_CARD2};border-radius:14px;border:1px solid {C_BORDER};margin-bottom:22px">
+  <div style="font:700 10.5px Inter,sans-serif;letter-spacing:.06em;color:{C_T3};margin-bottom:16px">SCORE BREAKDOWN</div>
+  <div style="display:flex;flex-direction:column;gap:14px">{bars}</div>
+  {sparse_note}
 </div>''', unsafe_allow_html=True)
 
-    financial_rows = [
-        ("Revenue", format_cr(row["revenue"])),
-        ("EBITDA", format_cr(row["ebitda"])),
-        ("EBITDA Margin", format_pct(row["ebitda_margin_pct"])),
-        ("ROCE", format_pct(row["return_on_capital_employed_pct"])),
-        ("Total Debt", format_cr(row["total_debt"])),
-        ("Market Cap", format_cr(row["market_cap"])),
-        ("Promoter Pledge", format_pct(row["promoter_pledge_pct"])),
-    ]
-    rows_html = "".join(
-        f'<div class="card-row"><span class="card-row-label">{label}</span>'
-        f'<span class="{"card-row-na" if value == "N/A" else "card-row-value"}">{value}</span></div>'
-        for label, value in financial_rows
-    )
+    # ---- secondary stat cards ----
+    st.markdown(
+        '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px">'
+        + stat_card("EBITDA", format_cr(row["ebitda"]), small=True)
+        + stat_card("EBITDA MARGIN", format_pct(row["ebitda_margin_pct"]), small=True)
+        + stat_card("NET INCOME", format_cr(row["net_income"]), small=True)
+        + stat_card("PROMOTER PLEDGE", format_pct(row["promoter_pledge_pct"]), small=True)
+        + '</div>', unsafe_allow_html=True)
+
+    # ---- valuation ----
+    render_valuation_card(row)
+
+    # ---- AI rationale ----
+    render_rationale_card(row, scored_flag)
+
+    # ---- comparable deals ----
+    render_deals_section(bucket)
+
+    st.markdown(f'<div style="margin-top:24px;padding-top:16px;border-top:1px solid {C_BORDER};'
+                f'font:500 12px Inter,sans-serif;color:{C_T6}">Filings &amp; news module — reserved for a future release</div>',
+                unsafe_allow_html=True)
+
+
+def render_valuation_card(row):
+    have_ev = pd.notna(row["ev_ebitda_low"]) and pd.notna(row["ev_ebitda_high"])
+    have_pe = pd.notna(row["pe_implied_low"]) and pd.notna(row["pe_implied_high"])
+    if not have_ev and not have_pe:
+        note = row["valuation_note"] or "Insufficient sector peer data."
+        st.markdown(f'''
+<div style="padding:22px 26px;background:{C_PANEL};border-radius:14px;border:1px dashed {C_BORDER2};margin-bottom:22px">
+  <div style="font:700 10.5px Inter,sans-serif;letter-spacing:.06em;color:{C_T5};margin-bottom:10px">INDICATIVE VALUATION RANGE</div>
+  <div style="font:600 15px Inter,sans-serif;color:{C_T3}">Insufficient data to estimate a valuation range.</div>
+  <div style="font:400 12.5px Inter,sans-serif;color:{C_T5};margin-top:6px">{esc(note)}</div>
+</div>''', unsafe_allow_html=True)
+        return
+
+    def block(label, low, high, seg):
+        if pd.isna(low) or pd.isna(high):
+            return (f'<div><div style="font:500 11px Inter,sans-serif;color:#8fd6c4;margin-bottom:5px">{label}</div>'
+                    f'<div style="font:400 12px Inter,sans-serif;color:{C_T3}">{esc(seg)}</div></div>')
+        return (f'<div><div style="font:500 11px Inter,sans-serif;color:#8fd6c4;margin-bottom:5px">{label}</div>'
+                f'<div style="font:700 22px \'IBM Plex Mono\',monospace;color:{C_T1}">{esc(format_cr(low))} – {esc(format_cr(high))}</div></div>')
+
     note = row["valuation_note"]
-    ev_ebitda_html = valuation_block_html(
-        row["ev_ebitda_low"], row["ev_ebitda_high"], "EV / EBITDA IMPLIED",
-        extract_note_segment(note, "EV/EBITDA:"),
-    )
-    pe_html = valuation_block_html(
-        row["pe_implied_low"], row["pe_implied_high"], "P/E-IMPLIED",
-        extract_note_segment(note, "P/E:"),
-    )
-
+    ev = block("EV/EBITDA-implied", row["ev_ebitda_low"], row["ev_ebitda_high"],
+               extract_note_segment(note, "EV/EBITDA:"))
+    pe = block("P/E-implied", row["pe_implied_low"], row["pe_implied_high"],
+               extract_note_segment(note, "P/E:"))
     st.markdown(f'''
-<div style="display:flex;gap:24px;margin-bottom:34px">
-  <div class="card" style="flex:1">
-    <div class="card-header">KEY FINANCIALS</div>
-    {rows_html}
-  </div>
-  <div class="card" style="flex:1">
-    <div class="card-header">INDICATIVE VALUATION</div>
-    <div style="padding:16px">{ev_ebitda_html}</div>
-    <div style="padding:0 16px 16px">{pe_html}</div>
-  </div>
+<div style="padding:22px 26px;background:linear-gradient(135deg,{C_TEAL_DK},{C_TEAL_DK2});
+border-radius:14px;border:1px solid rgba(31,184,163,.3);margin-bottom:22px">
+  <div style="font:700 10.5px Inter,sans-serif;letter-spacing:.06em;color:{C_TEAL_LT};margin-bottom:14px">INDICATIVE VALUATION RANGE</div>
+  <div style="display:flex;gap:44px;flex-wrap:wrap">{ev}{pe}</div>
 </div>''', unsafe_allow_html=True)
 
+
+def render_rationale_card(row, scored_flag):
+    if not scored_flag:
+        st.markdown(f'''
+<div style="margin-bottom:22px;padding:20px 24px;background:{C_CARD2};border-radius:14px;border:1px solid {C_BORDER}">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+    <span style="font:700 9.5px Inter,sans-serif;letter-spacing:.08em;color:{C_T3};background:rgba(255,255,255,.08);padding:3px 8px;border-radius:5px">UNAVAILABLE</span>
+    <span style="font:700 11px Inter,sans-serif;letter-spacing:.05em;color:{C_T5}">AI RATIONALE</span></div>
+  <div style="font:400 13.5px/1.65 Inter,sans-serif;color:{C_T4}">Not enough reported financial data to generate an AI-drafted rationale for this company.</div>
+</div>''', unsafe_allow_html=True)
+        return
     rationale = get_ai_rationale(row)
-    rationale_text = rationale or "AI rationale unavailable right now — the rest of this tear sheet is unaffected."
-    # Escaped, unlike the rest of this file's static/from-CSV markdown blocks --
-    # this is the one string on the page generated at request time by an LLM
-    # rather than sourced from the bundled data files, so it's treated as
-    # untrusted before going into an unsafe_allow_html block (defense in depth
-    # against the model ever echoing back HTML/script-like content).
-    rationale_html = html.escape(rationale_text)
+    if rationale:
+        badge = (f'<span style="font:700 9.5px Inter,sans-serif;letter-spacing:.08em;color:{C_INK};'
+                 f'background:{C_TEAL_LT};padding:3px 8px;border-radius:5px">AI-DRAFTED</span>')
+        body_color = C_T2
+        text = esc(rationale)
+    else:
+        badge = (f'<span style="font:700 9.5px Inter,sans-serif;letter-spacing:.08em;color:{C_T3};'
+                 f'background:rgba(255,255,255,.08);padding:3px 8px;border-radius:5px">UNAVAILABLE</span>')
+        body_color = C_T4
+        text = "AI rationale unavailable right now — the rest of this tear sheet is unaffected."
     st.markdown(f'''
-<div style="margin-bottom:34px">
-  <div class="section-label">AI RATIONALE</div>
-  <div class="rationale-quote">
-    <div class="rationale-mark">"</div>
-    <div class="rationale-text">{rationale_html}</div>
-  </div>
+<div style="margin-bottom:22px;padding:20px 24px;background:{C_CARD2};border-radius:14px;border:1px solid {C_BORDER}">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+    {badge}<span style="font:700 11px Inter,sans-serif;letter-spacing:.05em;color:{C_T5}">RATIONALE</span></div>
+  <div style="font:400 13.5px/1.65 Inter,sans-serif;color:{body_color}">{text}</div>
 </div>''', unsafe_allow_html=True)
 
+
+def render_deals_section(bucket):
     deals = load_all_deals()
     comps = deals[deals["ey_bucket"] == bucket].copy()
     comps = comps.sort_values("report_year", ascending=False).head(5)
-
-    st.markdown(f'<div class="section-label">COMPARABLE DEALS — {sector_display_name(bucket).upper()}</div>', unsafe_allow_html=True)
+    label = f'<div style="font:700 10.5px Inter,sans-serif;letter-spacing:.06em;color:{C_T3};margin-bottom:10px">COMPARABLE DEALS — {esc(sector_display_name(bucket).upper())}</div>'
     if comps.empty:
-        st.markdown('<div class="no-comps">No comparable 2025 Indian M&A deals found in this sector.</div>', unsafe_allow_html=True)
-    else:
-        def text_or_na(value):
-            return value if pd.notna(value) else "N/A"
+        st.markdown(label + f'<div style="padding:16px 18px;background:{C_CARD2};border-radius:12px;'
+                    f'font:500 13px Inter,sans-serif;color:{C_T4}">No comparable 2025 Indian M&amp;A deals found in this sector.</div>',
+                    unsafe_allow_html=True)
+        return
+    head = (f'<div style="display:flex;padding:11px 18px;font:700 10px Inter,sans-serif;letter-spacing:.06em;color:{C_T5}">'
+            f'<div style="flex:1">TARGET</div><div style="flex:1">ACQUIRER</div>'
+            f'<div style="width:120px;text-align:right">VALUE</div>'
+            f'<div style="width:170px">TYPE</div><div style="width:60px;text-align:right">YEAR</div></div>')
+    body = ""
+    for i, (_, d) in enumerate(comps.iterrows()):
+        alt = C_ROW_ALT if i % 2 == 0 else "transparent"
+        val = d["deal_value_usdm_numeric"]
+        val_txt = f"US${val:,.0f}m" if pd.notna(val) else "—"
+        def t(v):
+            return esc(v) if pd.notna(v) else "N/A"
+        body += (f'<div style="display:flex;padding:13px 18px;font:500 13px Inter,sans-serif;color:{C_T2};background:{alt}">'
+                 f'<div style="flex:1">{t(d["target"])}</div><div style="flex:1">{t(d["acquirer"])}</div>'
+                 f'<div style="width:120px;text-align:right;font:600 13px \'IBM Plex Mono\',monospace;color:{C_TEAL_LT}">{val_txt}</div>'
+                 f'<div style="width:170px;color:{C_T3}">{t(d["deal_type"])}</div>'
+                 f'<div style="width:60px;text-align:right;font-family:\'IBM Plex Mono\',monospace">{t(d["report_year"])}</div></div>')
+    st.markdown(label + f'<div style="border-radius:12px;overflow:hidden;background:{C_CARD2}">{head}{body}</div>',
+                unsafe_allow_html=True)
 
-        deal_rows = ""
-        for _, deal in comps.iterrows():
-            value = deal["deal_value_usdm_numeric"]
-            value_text = f"US${value:,.0f}m" if pd.notna(value) else "N/A"
-            deal_rows += f'''<div class="deal-row">
-  <div style="flex:1" class="deal-target">{text_or_na(deal["target"])}</div>
-  <div style="flex:1">{text_or_na(deal["acquirer"])}</div>
-  <div style="width:110px;text-align:right;font-family:'IBM Plex Mono',monospace">{value_text}</div>
-  <div style="width:180px">{text_or_na(deal["deal_type"])}</div>
-  <div style="width:56px;text-align:right">{text_or_na(deal["report_year"])}</div>
-</div>'''
-        st.markdown(f'''
-<div style="border-top:2px solid {COLOR_TEXT}">
-  <div class="deal-header"><div style="flex:1">TARGET</div><div style="flex:1">ACQUIRER</div>
-    <div style="width:110px;text-align:right">VALUE</div><div style="width:180px">TYPE</div>
-    <div style="width:56px;text-align:right">YEAR</div></div>
-  {deal_rows}
+
+# ----------------------------------------------------------------------------
+# Scoring-help view (reachable from "How scoring works")
+# ----------------------------------------------------------------------------
+
+def render_scoring_help():
+    if st.button("← Back to results", key="back_help"):
+        go("results", view="results")
+    st.markdown(f'''
+<div style="max-width:720px">
+  <div style="font:700 26px Inter,sans-serif;color:{C_T1};margin:10px 0 18px">How scoring works</div>
+  <div style="font:400 14px/1.7 Inter,sans-serif;color:{C_T2}">
+  Each company gets a 0–100 <b>composite score</b>, computed <b>relative to its own sector peers</b> (not the whole market).
+  Four factors are scored — Revenue Growth, EBITDA Margin, ROCE, and Debt Level (inverted: less debt ranks higher) —
+  each as a percentile within the company's EY sector bucket. Your factor-weight sliders blend those four percentiles
+  live; raise a weight to rank by what you care about. A company missing a factor has it dropped and the rest reweighted;
+  a company with fewer than two of the four factors is left unscored (shown as “—”) rather than given a misleading number.
+  Market cap and promoter pledge are filters only — never part of the score. The white tick on each score ring marks
+  the sector-average score, so you can read above/below-peer at a glance.
+  </div>
 </div>''', unsafe_allow_html=True)
 
 
@@ -938,17 +1062,22 @@ def main():
     inject_css()
     universe = load_universe()
 
-    view = st.query_params.get("view", "table")
+    view = st.query_params.get("view")
+    if view is None:
+        # Bare visit -> landing. But an inbound share/deep link that carries a
+        # sector or search selection (from before this redesign, or shared by a
+        # user) should open straight into results rather than the empty landing.
+        view = "results" if (st.query_params.get("sectors") or st.query_params.get("q")) else "landing"
     symbol = st.query_params.get("symbol")
 
     if view == "tearsheet" and symbol:
-        filters, weights = render_sidebar(universe)
-        sync_query_params(filters, weights)
-        render_tearsheet(universe, weights, symbol)
+        render_tearsheet(universe, symbol)
+    elif view == "scoring":
+        render_scoring_help()
+    elif view == "results":
+        render_results(universe)
     else:
-        filters, weights = render_sidebar(universe)
-        sync_query_params(filters, weights)
-        render_table_view(universe, filters, weights)
+        render_landing(universe)
 
 
 if __name__ == "__main__":
