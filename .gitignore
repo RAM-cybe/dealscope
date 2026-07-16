@@ -12,8 +12,12 @@ __pycache__/
 # os
 .DS_Store
 
-# claude code local settings
-.claude/settings.local.json
+# claude code local settings + launch config (machine-specific paths)
+.claude/
+
+# streamlit / local runtime logs
+*.log
+streamlit.log
 
 # source PDFs and OCR/extraction scratch (kept local only)
 *.pdf
@@ -49,14 +53,20 @@ reclassify_deals_v2.py
 pull_net_income.py
 fix_net_income_currency.py
 
-# redundant / unrelated / superseded local-only material
+# redundant / unrelated / superseded local-only material (root copies only --
+# the historical copy under archive/old_planning_docs/ is intentionally kept)
 files.zip
 knowledge-base:/
-RESEARCH_SUMMARY.md
-sector_context.md
+/RESEARCH_SUMMARY.md
+/sector_context.md
 
-# design reference (not part of the shipped single-file app)
+# design reference mockups (not part of the shipped single-file app)
 MA Screener - Design Options.dc.html
+DealScope - Final Design.dc.html
+
+# leftover local scratch (test CSV export, stray checklist)
+nse_ma_screener_results.csv
+SHIP_LIKE_A_PRO_CHECKLIST.md
 
 # runtime-generated AI rationale cache (regenerates on first request per company)
 .rationale_cache.json
