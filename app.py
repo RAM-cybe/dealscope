@@ -771,8 +771,10 @@ def render_results(universe):
 
     q = st.query_params.get("q", "")
     if q:
-        mask = (filtered["name"].str.contains(q, case=False, na=False)
-                | filtered["symbol"].str.contains(q, case=False, na=False))
+        # regex=False: treat the query as a literal substring, so a search like
+        # "L&T" or "(" can't raise a regex error (or be used as a regex-DoS vector).
+        mask = (filtered["name"].str.contains(q, case=False, na=False, regex=False)
+                | filtered["symbol"].str.contains(q, case=False, na=False, regex=False))
         filtered = filtered[mask].reset_index(drop=True)
 
     filtered["_rank"] = filtered["score"].rank(ascending=False, method="min", na_option="keep")
