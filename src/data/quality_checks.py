@@ -140,6 +140,25 @@ def check_cross_field_consistency(df):
                 f"(revenue={'missing' if pd.isna(revenue) else f'{revenue:,.0f}'})",
             )
 
+        # quick_ratio can never exceed current_ratio: quick = (current assets
+        # - inventory) / current liabilities, current = current assets /
+        # current liabilities, so quick <= current always for real data. A
+        # violation means one of the two ratios is wrong at the source. Added
+        # 2026-07-16 after a fresh-eyes audit confirmed the live dataset
+        # respects this for all 1,894 rows with both present -- kept as a cheap
+        # guard so a future refresh that breaks it gets caught automatically.
+        current_ratio = row.get("current_ratio")
+        quick_ratio = row.get("quick_ratio")
+        if (
+            pd.notna(current_ratio) and pd.notna(quick_ratio)
+            and quick_ratio > current_ratio + 1e-6
+        ):
+            _flag(
+                flags, row, "quick_exceeds_current",
+                f"quick_ratio={quick_ratio:.4g} > current_ratio={current_ratio:.4g} "
+                f"-- impossible (quick excludes inventory, so quick <= current always)",
+            )
+
         total_debt = row.get("total_debt")
         market_cap = row.get("market_cap")
         if pd.notna(total_debt) and pd.isna(market_cap):
