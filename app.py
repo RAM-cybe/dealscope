@@ -854,22 +854,47 @@ margin:14px 0 8px"><span style="font:600 12px Inter,sans-serif;color:{C_T4}">{to
 # ----------------------------------------------------------------------------
 
 def render_tearsheet(universe, symbol):
+    # Primary back navigation, rendered first and kept OUTSIDE the try/except
+    # below: go() calls st.rerun(), whose control-flow signal must never be
+    # swallowed by the error handler.
+    if st.button("← Back to results", key="back_button"):
+        go("results", symbol=None)
+
+    try:
+        _render_tearsheet_body(universe, symbol)
+    except Exception:
+        # Never show a raw Streamlit traceback to a visitor. A malformed symbol,
+        # an unexpected data shape, or a transient failure lands here with a
+        # clean, on-theme message + a recovery button instead of the red screen.
+        st.markdown(f'''
+<div style="max-width:620px;margin:24px auto;padding:28px;border:1px solid {C_BORDER2};
+border-radius:14px;background:{C_CARD};text-align:center">
+  <div style="font:700 18px Inter,sans-serif;color:{C_T1};margin-bottom:8px">Couldn't load this company.</div>
+  <div style="font:400 13px Inter,sans-serif;color:{C_T3}">Something went wrong building this tear sheet — the rest of the app is unaffected.</div>
+</div>''', unsafe_allow_html=True)
+        rec = st.columns([2, 1, 2])
+        if rec[1].button("← Back to results", key="back_error", use_container_width=True):
+            go("results", symbol=None)
+
+
+def _render_tearsheet_body(universe, symbol):
     weights = current_weights()
     scored = score_universe(universe, tuple(sorted(weights.items())))
     match = scored[scored["symbol"] == symbol]
     if match.empty:
-        if st.button("← Back to results", key="back_missing"):
-            go("results", symbol=None)
-        st.warning("Company not found.")
+        # Not an error -- a clean empty state (symbol is URL-supplied, so esc it).
+        st.markdown(f'''
+<div style="max-width:620px;margin:24px auto;padding:28px;border:1px solid {C_BORDER2};
+border-radius:14px;background:{C_CARD};text-align:center">
+  <div style="font:700 18px Inter,sans-serif;color:{C_T1};margin-bottom:8px">Company not found.</div>
+  <div style="font:400 13px Inter,sans-serif;color:{C_T3}">No company matches "{esc(symbol)}". Use "← Back to results" above.</div>
+</div>''', unsafe_allow_html=True)
         return
     row = match.iloc[0]
     bucket = row["ey_bucket"]
     as_of = get_data_as_of(universe)
     avg = sector_avg_scores(scored).get(bucket)
     scored_flag = pd.notna(row["score"])
-
-    if st.button("← Back to results", key="back_button"):
-        go("results", symbol=None, view="results")
 
     # ---- header + ring ----
     ticker_bg = C_TEAL_LT if scored_flag else "rgba(255,255,255,.08)"
@@ -1040,7 +1065,7 @@ def render_deals_section(bucket):
 
 def render_scoring_help():
     if st.button("← Back to results", key="back_help"):
-        go("results", view="results")
+        go("results")
     st.markdown(f'''
 <div style="max-width:720px">
   <div style="font:700 26px Inter,sans-serif;color:{C_T1};margin:10px 0 18px">How scoring works</div>
