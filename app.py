@@ -13,6 +13,7 @@ data/logic layer under src/ is unchanged; this file is presentation only.
 import html
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
@@ -28,6 +29,8 @@ from src.logic.valuation import valuation_range
 from src.logic.zscore import compute_zscore
 from src.logic.piotroski import compute_piotroski
 from src.config import get_gemini_api_key, get_groq_api_key, get_cerebras_api_key
+from src.data.filings import fetch_all_nse_filings, fetch_bse_notices, match_filings_to_company, parse_pub_date, NSE_FEEDS
+from src.data.news import fetch_company_news
 
 # ----------------------------------------------------------------------------
 # Palette — "DealScope Final Design" dark/teal system
@@ -320,6 +323,27 @@ def score_universe(df, weights_tuple):
 @st.cache_data(show_spinner=False)
 def load_all_deals():
     return load_deals()
+
+
+# Part 2: filings/news caching. NSE's archive host silently throttles bursts
+# of requests (confirmed empirically -- see src/data/filings.py's module
+# docstring), so these are fetched at most once per cache window across ALL
+# visitors, never per tear-sheet page view. 30 min for filings (these change
+# slowly -- a company files a handful of times a month), 15 min for news
+# (moves faster, but still far from per-request).
+@st.cache_data(show_spinner=False, ttl=1800)
+def load_nse_filings():
+    return fetch_all_nse_filings()
+
+
+@st.cache_data(show_spinner=False, ttl=1800)
+def load_bse_notices():
+    return fetch_bse_notices()
+
+
+@st.cache_data(show_spinner=False, ttl=900)
+def load_company_news(company_name):
+    return fetch_company_news(company_name)
 
 
 @st.cache_data(show_spinner=False)
@@ -976,9 +1000,8 @@ border-radius:14px;background:{C_CARD};text-align:center">
     # ---- comparable deals ----
     render_deals_section(bucket)
 
-    st.markdown(f'<div style="margin-top:24px;padding-top:16px;border-top:1px solid {C_BORDER};'
-                f'font:500 12px Inter,sans-serif;color:{C_T6}">Filings &amp; news module — reserved for a future release</div>',
-                unsafe_allow_html=True)
+    # ---- filings & news (Part 2) ----
+    render_filings_news_section(row)
 
 
 def render_financial_health_card(row):
@@ -1109,6 +1132,96 @@ def render_deals_section(bucket):
                  f'<div style="width:60px;text-align:right;font-family:\'IBM Plex Mono\',monospace">{t(d["report_year"])}</div></div>')
     st.markdown(label + f'<div style="border-radius:12px;overflow:hidden;background:{C_CARD2}">{head}{body}</div>',
                 unsafe_allow_html=True)
+
+
+_HIGH_STAKES_CATEGORIES = {"Fraud", "Insolvency", "Litigation / regulatory action"}
+_MEDIUM_CATEGORIES = {"Credit rating action", "Auditor resignation"}
+
+
+def _filing_category_badge(category):
+    if category in _HIGH_STAKES_CATEGORIES:
+        bg, col = "rgba(209,109,101,.16)", C_DANGER
+    elif category in _MEDIUM_CATEGORIES:
+        bg, col = "rgba(212,164,65,.16)", C_WARN
+    else:
+        bg, col = "rgba(255,255,255,.08)", C_T3
+    return (f'<span style="font:700 9px Inter,sans-serif;letter-spacing:.04em;color:{col};'
+            f'background:{bg};padding:3px 7px;border-radius:5px;white-space:nowrap">{esc(category.upper())}</span>')
+
+
+def render_filings_news_section(row):
+    """Part 2: official NSE/BSE filings (Reg 30-tagged where the category
+    is genuinely determinable) + Google News RSS. Every item shown carries
+    its real source and a working link back to the original -- see
+    src/data/filings.py and src/data/news.py module docstrings for the full
+    sourcing/tagging discipline. Both external calls are cached (never
+    re-fetched per page view) and every failure shows its real reason,
+    never a silent empty state."""
+    company_name = row["name"]
+
+    st.markdown(f'<div style="font:700 10.5px Inter,sans-serif;letter-spacing:.06em;color:{C_T3};'
+                f'margin:24px 0 10px">OFFICIAL FILINGS — NSE</div>', unsafe_allow_html=True)
+    all_filings, feed_errors = load_nse_filings()
+    matched = match_filings_to_company(all_filings, company_name)
+    matched = sorted(matched, key=lambda f: parse_pub_date(f["pub_date"]) or datetime.min, reverse=True)[:8]
+
+    if not all_filings and feed_errors:
+        st.markdown(f'<div style="padding:16px 18px;background:{C_CARD2};border-radius:12px;'
+                    f'font:500 13px Inter,sans-serif;color:{C_T4}">NSE filings feed unavailable right now — '
+                    f'the rest of this tear sheet is unaffected.</div>', unsafe_allow_html=True)
+    elif not matched:
+        st.markdown(f'<div style="padding:16px 18px;background:{C_CARD2};border-radius:12px;'
+                    f'font:500 13px Inter,sans-serif;color:{C_T4}">No recent official filings found for this company '
+                    f'in NSE\'s currently available feeds.</div>', unsafe_allow_html=True)
+    else:
+        rows_html = ""
+        for i, f in enumerate(matched):
+            alt = C_ROW_ALT if i % 2 == 0 else "transparent"
+            badge = _filing_category_badge(f["category"])
+            link = f["link"] or ""
+            title_html = (f'<a href="{esc(link)}" target="_blank" rel="noopener" '
+                          f'style="color:{C_T1};text-decoration:none">{esc(f["title"])}</a>' if link
+                          else f'<span style="color:{C_T1}">{esc(f["title"])}</span>')
+            rows_html += (f'<div style="padding:12px 18px;background:{alt}">'
+                          f'<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:4px">'
+                          f'<div style="font:600 13px Inter,sans-serif">{title_html}</div>{badge}</div>'
+                          f'<div style="font:400 11px Inter,sans-serif;color:{C_T4}">{esc(f["pub_date"])} · NSE</div></div>')
+        st.markdown(f'<div style="border-radius:12px;overflow:hidden;background:{C_CARD2}">{rows_html}</div>',
+                    unsafe_allow_html=True)
+    if feed_errors:
+        st.markdown(f'<div style="margin-top:6px;font:400 10.5px Inter,sans-serif;color:{C_T6}">'
+                    f'{len(feed_errors)} of {len(NSE_FEEDS)} NSE filing categories '
+                    f'temporarily unavailable.</div>', unsafe_allow_html=True)
+
+    st.markdown(f'<div style="font:700 10.5px Inter,sans-serif;letter-spacing:.06em;color:{C_T3};'
+                f'margin:22px 0 10px">NEWS</div>', unsafe_allow_html=True)
+    news_items, news_error = load_company_news(company_name)
+    if news_error:
+        st.markdown(f'<div style="padding:16px 18px;background:{C_CARD2};border-radius:12px;'
+                    f'font:500 13px Inter,sans-serif;color:{C_T4}">News unavailable right now ({esc(news_error)}) — '
+                    f'the rest of this tear sheet is unaffected.</div>', unsafe_allow_html=True)
+    elif not news_items:
+        st.markdown(f'<div style="padding:16px 18px;background:{C_CARD2};border-radius:12px;'
+                    f'font:500 13px Inter,sans-serif;color:{C_T4}">No recent news found for this company.</div>',
+                    unsafe_allow_html=True)
+    else:
+        rows_html = ""
+        for i, n in enumerate(news_items):
+            alt = C_ROW_ALT if i % 2 == 0 else "transparent"
+            rows_html += (f'<div style="padding:12px 18px;background:{alt}">'
+                          f'<div style="font:600 13px Inter,sans-serif;margin-bottom:4px">'
+                          f'<a href="{esc(n["link"])}" target="_blank" rel="noopener" '
+                          f'style="color:{C_T1};text-decoration:none">{esc(n["title"])}</a></div>'
+                          f'<div style="font:400 11px Inter,sans-serif;color:{C_T4}">{esc(n["source"])}'
+                          f'{" · " + esc(n["pub_date"]) if n["pub_date"] else ""}</div></div>')
+        st.markdown(f'<div style="border-radius:12px;overflow:hidden;background:{C_CARD2}">{rows_html}</div>',
+                    unsafe_allow_html=True)
+
+    st.markdown(f'<div style="margin-top:16px;font:400 10.5px Inter,sans-serif;color:{C_T6}">'
+                f'Filings: NSE\'s official RSS feeds only, never scraped. BSE\'s official RSS coverage is '
+                f'narrower (exchange-wide notices, not per-company disclosures) and is not shown here for '
+                f'individual companies as a result. News: Google News RSS, shown verbatim with source and link — '
+                f'not AI-summarized.</div>', unsafe_allow_html=True)
 
 
 # ----------------------------------------------------------------------------
