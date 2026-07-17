@@ -20,7 +20,10 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 # fields. Its currency-guard gap (Infosys and HCL Tech's balance-sheet/
 # cash-flow fields silently USD-denominated) was fixed before this switch --
 # see git history for the exact blanked fields.
-DEFAULT_COMPANIES_PATH = _PROJECT_ROOT / "data" / "enriched" / "dealscope_base_2026-07-12.csv"
+# 2026-07-17: superseded by dealscope_base_2026-07-17.csv, same 2,046 rows
+# plus 20 more fields (ebit, total_liabilities, and 18 two-period Piotroski
+# F-Score inputs) -- see archive/data_pipeline_scripts/merge_financial_health.py.
+DEFAULT_COMPANIES_PATH = _PROJECT_ROOT / "data" / "enriched" / "dealscope_base_2026-07-17.csv"
 DEFAULT_DEALS_PATH = _PROJECT_ROOT / "deals_full_v2.csv"
 
 
