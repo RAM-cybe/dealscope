@@ -39,6 +39,11 @@ RANGE_FIELDS = [
     "peg_ratio",
     "price_to_book",
     "trailing_pe",
+    # Part 1 fields (2026-07-17 financial-health-scores round).
+    "ebit",
+    "total_liabilities",
+    "z_score",
+    "f_score",
 ]
 
 

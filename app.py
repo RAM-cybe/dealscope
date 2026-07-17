@@ -25,6 +25,8 @@ from src.data.schema import EY_BUCKETS, UNCLASSIFIED_BUCKET, ALL_BUCKETS
 from src.logic.filtering import filter_companies
 from src.logic.scoring import score_companies, METRICS
 from src.logic.valuation import valuation_range
+from src.logic.zscore import compute_zscore
+from src.logic.piotroski import compute_piotroski
 from src.config import get_gemini_api_key, get_groq_api_key, get_cerebras_api_key
 
 # ----------------------------------------------------------------------------
@@ -50,6 +52,8 @@ C_T6 = "#3d454e"          # very dim (sparse / disabled)
 C_BORDER = "rgba(255,255,255,.08)"
 C_BORDER2 = "rgba(255,255,255,.14)"
 C_TRACK = "rgba(255,255,255,.1)"
+C_WARN = "#d4a441"        # muted amber -- Z''-Score "Grey" zone
+C_DANGER = "#d16d65"      # muted coral/red -- Z''-Score "Distress" zone
 
 FACTOR_LABELS = {
     "revenue_growth_pct": "Revenue Growth",
@@ -63,6 +67,7 @@ FACTOR_LABELS = {
 # The interim 20-slider sidebar's extra enriched-field controls are not part
 # of this design and are intentionally not surfaced here — filtering.py still
 # supports them at the logic layer, they're simply not exposed as UI controls.
+# (Part 3 of the 2026-07-17 round exposes these -- see that round's commits.)
 RANGE_FIELD_CONFIG = [
     # (filters.py key, label, unit divisor for crore conversion)
     ("revenue", "REVENUE (₹ CR)", 1e7),
@@ -294,9 +299,15 @@ def get_ai_rationale(company_row):
 
 @st.cache_data(show_spinner=False)
 def load_universe():
-    """load_companies() + valuation_range() on the full universe. Weight-independent."""
+    """load_companies() + valuation_range() + the Part 1 financial-health
+    scores (z_score/z_score_zone, f_score) on the full universe.
+    Weight-independent -- same composition-order contract as scoring.py's
+    module docstring: computed once here on the full unfiltered universe,
+    never recomputed on a filtered subset."""
     df = load_companies()
     df = valuation_range(df)
+    df = compute_zscore(df)
+    df = compute_piotroski(df)
     return df
 
 
@@ -953,6 +964,9 @@ border-radius:14px;background:{C_CARD};text-align:center">
         + stat_card("PROMOTER PLEDGE", format_pct(row["promoter_pledge_pct"]), small=True)
         + '</div>', unsafe_allow_html=True)
 
+    # ---- financial health (Part 1: Altman Z''-Score, Piotroski F-Score) ----
+    render_financial_health_card(row)
+
     # ---- valuation ----
     render_valuation_card(row)
 
@@ -965,6 +979,44 @@ border-radius:14px;background:{C_CARD};text-align:center">
     st.markdown(f'<div style="margin-top:24px;padding-top:16px;border-top:1px solid {C_BORDER};'
                 f'font:500 12px Inter,sans-serif;color:{C_T6}">Filings &amp; news module — reserved for a future release</div>',
                 unsafe_allow_html=True)
+
+
+def render_financial_health_card(row):
+    """Part 1: Altman Z''-Score + Piotroski F-Score. Every N/A state carries
+    its real reason (never a silent blank) -- see src/logic/zscore.py and
+    src/logic/piotroski.py module docstrings for exactly why each can be
+    unpopulated for a given company."""
+    z = row.get("z_score")
+    zone = row.get("z_score_zone")
+    f = row.get("f_score")
+
+    if pd.notna(z):
+        zone_color = {"Safe": C_TEAL_LT, "Grey": C_WARN, "Distress": C_DANGER}.get(zone, C_T3)
+        z_html = (f'<div style="font:700 22px \'IBM Plex Mono\',monospace;color:{C_T1}">{z:.2f}</div>'
+                  f'<div style="font:700 10px Inter,sans-serif;letter-spacing:.05em;color:{zone_color};margin-top:3px">{esc((zone or "").upper())} ZONE</div>')
+    else:
+        if row.get("ey_bucket") == "Financial Services":
+            z_reason = "not scored for Financial Services — Altman's model assumes a manufacturing/non-lender capital structure"
+        else:
+            z_reason = "insufficient data (needs working capital, retained earnings, EBIT, market cap and total liabilities all reported)"
+        z_html = (f'<div style="font:600 14px Inter,sans-serif;color:{C_T4}">N/A</div>'
+                  f'<div style="font:400 11px Inter,sans-serif;color:{C_T5};margin-top:3px;line-height:1.4">{esc(z_reason)}</div>')
+
+    if pd.notna(f):
+        f_html = f'<div style="font:700 22px \'IBM Plex Mono\',monospace;color:{C_T1}">{int(f)}/9</div>'
+    else:
+        f_html = (f'<div style="font:600 14px Inter,sans-serif;color:{C_T4}">N/A</div>'
+                  f'<div style="font:400 11px Inter,sans-serif;color:{C_T5};margin-top:3px;line-height:1.4">'
+                  f'insufficient two-year financial history to evaluate all 9 signals</div>')
+
+    st.markdown(f'''
+<div style="padding:22px 26px;background:{C_CARD2};border-radius:14px;border:1px solid {C_BORDER};margin-bottom:22px">
+  <div style="font:700 10.5px Inter,sans-serif;letter-spacing:.06em;color:{C_T3};margin-bottom:16px">FINANCIAL HEALTH</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+    <div><div style="font:500 11px Inter,sans-serif;color:{C_T4};margin-bottom:6px">ALTMAN Z&apos;&apos;-SCORE</div>{z_html}</div>
+    <div><div style="font:500 11px Inter,sans-serif;color:{C_T4};margin-bottom:6px">PIOTROSKI F-SCORE</div>{f_html}</div>
+  </div>
+</div>''', unsafe_allow_html=True)
 
 
 def render_valuation_card(row):
