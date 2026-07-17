@@ -4,3 +4,4 @@ python-dotenv==1.2.2
 google-genai==1.47.0
 groq==1.0.0
 cerebras-cloud-sdk==1.67.0
+requests==2.34.2
