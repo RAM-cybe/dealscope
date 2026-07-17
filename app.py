@@ -65,21 +65,50 @@ FACTOR_LABELS = {
     "total_debt": "Debt Level",
 }
 
-# The design's slide-over carries exactly the original locked-PRD filter set
-# (5 range filters + a promoter-pledge ceiling; sector is chips, not a slider).
-# The interim 20-slider sidebar's extra enriched-field controls are not part
-# of this design and are intentionally not surfaced here — filtering.py still
-# supports them at the logic layer, they're simply not exposed as UI controls.
-# (Part 3 of the 2026-07-17 round exposes these -- see that round's commits.)
-RANGE_FIELD_CONFIG = [
-    # (filters.py key, label, unit divisor for crore conversion)
-    ("revenue", "REVENUE (₹ CR)", 1e7),
-    ("ebitda_margin_pct", "EBITDA MARGIN %", 1),
-    ("return_on_capital_employed_pct", "ROCE %", 1),
-    ("total_debt", "TOTAL DEBT (₹ CR)", 1e7),
-    ("market_cap", "MARKET CAP (₹ CR)", 1e7),
+# Part 3 (2026-07-17): the design's slide-over originally carried only the
+# locked-PRD filter set (5 range filters + a promoter-pledge ceiling; sector
+# is chips, not a slider). This exposes the 13 enriched-dataset fields
+# filtering.py already supported at the logic layer but had no UI control
+# for, plus the 4 new Part 1 fields (ebit, total_liabilities, z_score,
+# f_score). Grouped into named, collapsible sections (CORE / BALANCE SHEET &
+# LIQUIDITY / VALUATION & RISK / FINANCIAL HEALTH) -- 22 range sliders in one
+# flat list measured at ~2,000px of scroll, clearly too long for a
+# slide-over; grouping was proposed to Ram (not silently decided) and he
+# chose collapsible sections over the flat alternatives.
+RANGE_FIELD_GROUPS = [
+    ("CORE", [
+        ("revenue", "REVENUE (₹ CR)", 1e7),
+        ("ebitda_margin_pct", "EBITDA MARGIN %", 1),
+        ("return_on_capital_employed_pct", "ROCE %", 1),
+        ("total_debt", "TOTAL DEBT (₹ CR)", 1e7),
+        ("market_cap", "MARKET CAP (₹ CR)", 1e7),
+    ]),
+    ("BALANCE SHEET & LIQUIDITY", [
+        ("total_assets", "TOTAL ASSETS (₹ CR)", 1e7),
+        ("total_liabilities", "TOTAL LIABILITIES (₹ CR)", 1e7),
+        ("current_ratio", "CURRENT RATIO", 1),
+        ("quick_ratio", "QUICK RATIO", 1),
+        ("debt_to_equity", "DEBT/EQUITY", 1),
+        ("total_cash", "TOTAL CASH (₹ CR)", 1e7),
+        ("operating_cash_flow", "OPERATING CASH FLOW (₹ CR)", 1e7),
+        ("free_cash_flow", "FREE CASH FLOW (₹ CR)", 1e7),
+        ("ebit", "EBIT (₹ CR)", 1e7),
+    ]),
+    ("VALUATION & RISK", [
+        ("enterprise_value", "ENTERPRISE VALUE (₹ CR)", 1e7),
+        ("price_to_book", "PRICE / BOOK", 1),
+        ("trailing_pe", "TRAILING P/E", 1),
+        ("peg_ratio", "PEG RATIO", 1),
+        ("beta", "BETA", 1),
+        ("return_on_assets", "RETURN ON ASSETS %", 0.01),
+    ]),
+    ("FINANCIAL HEALTH", [
+        ("z_score", "ALTMAN Z''-SCORE", 1),
+        ("f_score", "PIOTROSKI F-SCORE (0-9)", 1),
+    ]),
 ]
 
+RANGE_FIELD_CONFIG = [entry for _, entries in RANGE_FIELD_GROUPS for entry in entries]
 RANGE_FIELD_NAMES = [field for field, _, _ in RANGE_FIELD_CONFIG]
 FILTER_WIDGET_KEYS = (
     [f"f_{field}" for field in RANGE_FIELD_NAMES] + ["f_pledge_max"]
@@ -430,6 +459,20 @@ div[data-testid="stMultiSelect"] [data-baseweb="tag"] {{ background: {C_TEAL_DK}
 }}
 .st-key-filterdrawer .stSlider {{ margin-bottom: -6px; }}
 
+/* Collapsible field-group sections (Part 3, 2026-07-17) -- restyle
+   Streamlit's default expander to match the drawer's dark/teal system
+   instead of its own default card chrome. */
+.st-key-filterdrawer [data-testid="stExpander"] {{
+    background: transparent; border: none; border-top: 1px solid {C_BORDER};
+    border-radius: 0; margin: 4px 0 0;
+}}
+.st-key-filterdrawer [data-testid="stExpander"] summary {{
+    padding: 12px 0 4px; font-size: 10.5px; letter-spacing: .06em;
+    color: {C_T3}; font-weight: 600; text-transform: uppercase;
+}}
+.st-key-filterdrawer [data-testid="stExpander"] summary:hover {{ color: {C_TEAL_LT}; }}
+.st-key-filterdrawer [data-testid="stExpanderDetails"] {{ padding: 4px 0 0; }}
+
 .dwr-title {{ font-size: 14px; font-weight: 700; color: {C_T1}; }}
 .dwr-grouplabel {{ font-size: 10.5px; letter-spacing: .06em; color: {C_T3}; font-weight: 600;
     margin: 18px 0 6px; }}
@@ -613,56 +656,73 @@ def render_sector_chips(target_view):
             go(target_view, sectors=new or None, page=None)
 
 
+def _render_range_slider(universe, field, label, divisor, range_values):
+    """Render one range-filter slider (percentile-clipped, URL-persisted) and
+    write its resolved (lo, hi) bounds into range_values[field]. Factored out
+    of render_filter_drawer so it can be called once per field regardless of
+    whether that field's group is expanded or collapsed."""
+    series = universe[field] / divisor
+    data_min = float(series.min(skipna=True))
+    data_max = float(series.max(skipna=True))
+    data_min = 0.0 if pd.isna(data_min) else data_min
+    data_max = 100.0 if pd.isna(data_max) else data_max
+
+    clip_lo = float(series.quantile(0.01)) if series.notna().any() else data_min
+    clip_hi = float(series.quantile(0.99)) if series.notna().any() else data_max
+    if pd.isna(clip_lo) or pd.isna(clip_hi) or clip_hi <= clip_lo:
+        clip_lo, clip_hi = data_min, data_max
+
+    span = clip_hi - clip_lo
+    raw_step = span / 200 if span > 0 else 1.0
+    if raw_step >= 1:
+        decimals = 0
+        step = float(max(1.0, round(raw_step)))
+    elif raw_step >= 0.01:
+        decimals = 2
+        step = round(raw_step, 2) or 0.01
+    else:
+        decimals = 4
+        step = round(raw_step, 4) or 0.0001
+
+    def r(x, _decimals=decimals):
+        return round(x, _decimals) if _decimals else float(round(x))
+
+    lo_default, hi_default = qp_float_pair(field, (clip_lo, clip_hi))
+    lo_default = max(clip_lo, min(lo_default, clip_hi))
+    hi_default = max(clip_lo, min(hi_default, clip_hi))
+
+    slider_min = r(clip_lo)
+    slider_max = r(clip_hi) or 1.0
+    chosen = st.slider(
+        label, min_value=slider_min, max_value=slider_max,
+        value=(r(lo_default), r(hi_default)),
+        step=step, key=f"f_{field}", label_visibility="visible",
+    )
+    eff_lo = data_min if chosen[0] <= slider_min else chosen[0]
+    eff_hi = data_max if chosen[1] >= slider_max else chosen[1]
+    range_values[field] = (eff_lo * divisor, eff_hi * divisor)
+
+
 def render_filter_drawer(universe):
     """Right slide-over: real range sliders + factor-weight sliders + Reset/Apply.
     Always rendered on results view so its values are readable every run; CSS
-    keeps it off-screen unless ?panel=1."""
+    keeps it off-screen unless ?panel=1.
+
+    Range sliders are grouped into collapsible sections (Part 3, 2026-07-17)
+    -- 22 range fields in one flat list was measured at ~2,000px of scroll,
+    clearly cluttered for a slide-over; grouping into named expanders (CORE
+    open by default, matching the original locked-PRD filter set; the 3
+    newly-exposed groups collapsed by default) was proposed to and chosen by
+    Ram rather than decided here silently. See RANGE_FIELD_GROUPS above."""
     range_values = {}
     with st.container(key="filterdrawer"):
         st.markdown('<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'
                     f'<span class="dwr-title">Advanced filters</span></div>', unsafe_allow_html=True)
 
-        for field, label, divisor in RANGE_FIELD_CONFIG:
-            series = universe[field] / divisor
-            data_min = float(series.min(skipna=True))
-            data_max = float(series.max(skipna=True))
-            data_min = 0.0 if pd.isna(data_min) else data_min
-            data_max = 100.0 if pd.isna(data_max) else data_max
-
-            clip_lo = float(series.quantile(0.01)) if series.notna().any() else data_min
-            clip_hi = float(series.quantile(0.99)) if series.notna().any() else data_max
-            if pd.isna(clip_lo) or pd.isna(clip_hi) or clip_hi <= clip_lo:
-                clip_lo, clip_hi = data_min, data_max
-
-            span = clip_hi - clip_lo
-            raw_step = span / 200 if span > 0 else 1.0
-            if raw_step >= 1:
-                decimals = 0
-                step = float(max(1.0, round(raw_step)))
-            elif raw_step >= 0.01:
-                decimals = 2
-                step = round(raw_step, 2) or 0.01
-            else:
-                decimals = 4
-                step = round(raw_step, 4) or 0.0001
-
-            def r(x, _decimals=decimals):
-                return round(x, _decimals) if _decimals else float(round(x))
-
-            lo_default, hi_default = qp_float_pair(field, (clip_lo, clip_hi))
-            lo_default = max(clip_lo, min(lo_default, clip_hi))
-            hi_default = max(clip_lo, min(hi_default, clip_hi))
-
-            slider_min = r(clip_lo)
-            slider_max = r(clip_hi) or 1.0
-            chosen = st.slider(
-                label, min_value=slider_min, max_value=slider_max,
-                value=(r(lo_default), r(hi_default)),
-                step=step, key=f"f_{field}", label_visibility="visible",
-            )
-            eff_lo = data_min if chosen[0] <= slider_min else chosen[0]
-            eff_hi = data_max if chosen[1] >= slider_max else chosen[1]
-            range_values[field] = (eff_lo * divisor, eff_hi * divisor)
+        for i, (group_label, entries) in enumerate(RANGE_FIELD_GROUPS):
+            with st.expander(group_label, expanded=(i == 0)):
+                for field, label, divisor in entries:
+                    _render_range_slider(universe, field, label, divisor, range_values)
 
         pledge_default = qp_float("pledge_max", 100.0)
         pledge_max = st.slider(
