@@ -8,6 +8,8 @@
 # python
 __pycache__/
 *.pyc
+venv/
+.venv/
 
 # os
 .DS_Store
@@ -70,3 +72,4 @@ SHIP_LIKE_A_PRO_CHECKLIST.md
 
 # runtime-generated AI rationale cache (regenerates on first request per company)
 .rationale_cache.json
+.gstack/
