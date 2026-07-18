@@ -17,13 +17,16 @@ import pandas as pd
 MIN_PEERS = 3
 
 
-def valuation_range(df):
+def valuation_range(df, bucket_col="ey_bucket"):
     """Compute an indicative EV/EBITDA- and P/E-implied valuation range.
 
     See the module docstring for the composition-order contract: call this
     on the full unfiltered universe, then filter the result for display.
 
-    EV/EBITDA method: within each ey_bucket, the peer set is every company
+    bucket_col: the column defining the peer group. Defaults to the legacy
+    6-bucket ey_bucket; the app passes "sector_v2" (13-sector taxonomy).
+
+    EV/EBITDA method: within each sector bucket, the peer set is every company
     (including the subject company itself, if it qualifies) with ebitda > 0.
     Requires at least MIN_PEERS such peers. The peer set's 25th/75th
     percentile EV/EBITDA multiple (EV = market_cap + total_debt, missing
@@ -55,7 +58,7 @@ def valuation_range(df):
     pe_high = pd.Series(float("nan"), index=df.index, dtype="float64")
     notes = pd.Series("", index=df.index, dtype="object")
 
-    for bucket, group in df.groupby("ey_bucket"):
+    for bucket, group in df.groupby(bucket_col):
         ebitda_peers = group[group["ebitda"] > 0]
         ebitda_multiples = ebitda_peers["ev"] / ebitda_peers["ebitda"]
         ebitda_peer_count = len(ebitda_multiples)

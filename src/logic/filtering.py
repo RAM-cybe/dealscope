@@ -39,11 +39,6 @@ RANGE_FIELDS = [
     "peg_ratio",
     "price_to_book",
     "trailing_pe",
-    # Part 1 fields (2026-07-17 financial-health-scores round).
-    "ebit",
-    "total_liabilities",
-    "z_score",
-    "f_score",
 ]
 
 
@@ -56,7 +51,9 @@ def filter_companies(df, filters):
 
     filters is a dict; every key is optional (omit or set to None to skip
     that filter):
-      - "sectors": list[str], matched against the ey_bucket column
+      - "sectors": list[str], matched against the bucket column named by
+        filters["sector_col"] (defaults to the legacy ey_bucket; the app
+        passes "sector_v2")
       - "revenue", "ebitda_margin_pct", "return_on_capital_employed_pct",
         "total_debt", "market_cap": (min, max) tuples
       - "promoter_pledge_pct_max": ceiling value; keeps rows with
@@ -70,7 +67,7 @@ def filter_companies(df, filters):
 
     sectors = filters.get("sectors")
     if sectors:
-        mask &= df["ey_bucket"].isin(sectors)
+        mask &= df[filters.get("sector_col", "ey_bucket")].isin(sectors)
 
     for field in RANGE_FIELDS:
         bounds = filters.get(field)
