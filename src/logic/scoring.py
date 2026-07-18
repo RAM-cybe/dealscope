@@ -32,7 +32,7 @@ PERCENTILE_COLUMNS = {m: f"pctl_{m}" for m in METRICS}
 MIN_POPULATED_METRICS = 2
 
 
-def score_companies(df, weights):
+def score_companies(df, weights, bucket_col="ey_bucket"):
     """Compute a sector-relative 0-100 score for every company in df.
 
     See the module docstring for the composition-order contract: call this
@@ -43,11 +43,15 @@ def score_companies(df, weights):
     falls back to equal weighting across the 4 metrics instead of dividing
     by zero.
 
+    bucket_col: the column defining the peer group. Defaults to the legacy
+    6-bucket ey_bucket; the app passes "sector_v2" (13-sector taxonomy).
+
     For each metric, a company's percentile is computed within its own
-    ey_bucket only (sector-relative, per PRD) via a groupby rank. total_debt
-    is inverted: lower debt ranks higher. A company missing a given metric
-    has that metric dropped from its own score only -- the remaining metrics
-    are reweighted for that company; other companies are unaffected.
+    sector bucket only (sector-relative, per PRD) via a groupby rank.
+    total_debt is inverted: lower debt ranks higher. A company missing a
+    given metric has that metric dropped from its own score only -- the
+    remaining metrics are reweighted for that company; other companies are
+    unaffected.
 
     A company with fewer than MIN_POPULATED_METRICS (2) populated metrics
     gets score = NaN rather than a reweighted blend of just 1 (or 0) real
@@ -66,7 +70,7 @@ def score_companies(df, weights):
     for metric in METRICS:
         ascending = metric not in INVERTED_METRICS
         df[PERCENTILE_COLUMNS[metric]] = (
-            df.groupby("ey_bucket")[metric].rank(pct=True, ascending=ascending) * 100
+            df.groupby(bucket_col)[metric].rank(pct=True, ascending=ascending) * 100
         )
 
     weighted_sum = pd.Series(0.0, index=df.index)

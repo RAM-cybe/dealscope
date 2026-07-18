@@ -13,6 +13,8 @@ from .schema import (
     validate_required_columns,
 )
 from .sector_mapping import classify_sector
+from .sector_taxonomy_v2 import classify_sector_v2
+from .deals_sector_v2 import classify_deal_sector_v2
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 # Phase 2 data-foundation file: same 2,046 companies/symbols as the original
@@ -20,9 +22,6 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 # fields. Its currency-guard gap (Infosys and HCL Tech's balance-sheet/
 # cash-flow fields silently USD-denominated) was fixed before this switch --
 # see git history for the exact blanked fields.
-# 2026-07-17: superseded by dealscope_base_2026-07-17.csv, same 2,046 rows
-# plus 20 more fields (ebit, total_liabilities, and 18 two-period Piotroski
-# F-Score inputs) -- see archive/data_pipeline_scripts/merge_financial_health.py.
 DEFAULT_COMPANIES_PATH = _PROJECT_ROOT / "data" / "enriched" / "dealscope_base_2026-07-17.csv"
 DEFAULT_DEALS_PATH = _PROJECT_ROOT / "deals_full_v2.csv"
 
@@ -50,9 +49,25 @@ def load_companies(path=DEFAULT_COMPANIES_PATH):
     # (e.g. delisted) can't silently corrupt the universe.
     df = df[df["status"] == "ok"].copy()
 
+    # An EBITDA margin above 100% is arithmetically impossible for an operating
+    # business -- it means the source's ebitda field is corrupt (e.g. SPARC:
+    # ebitda 40x its revenue, which also polluted the margin filter's slider
+    # ceiling at 4083%). Same "genuine gap beats fabricated value" rule as the
+    # +/-inf guard above: blank both fields, never display them.
+    impossible_margin = df["ebitda_margin_pct"] > 100
+    df.loc[impossible_margin, ["ebitda", "ebitda_margin_pct"]] = float("nan")
+
+    # Legacy 6-bucket label (kept during the v2 migration for rollback and
+    # for any stale deep links) ...
     df["ey_bucket"] = [
         classify_sector(sector, industry)
         for sector, industry in zip(df["sector"], df["industry"])
+    ]
+    # ... and the live 13-sector classification: explicit Yahoo-industry
+    # lookup + per-symbol manual overrides (see sector_taxonomy_v2.py).
+    df["sector_v2"] = [
+        classify_sector_v2(symbol, industry)
+        for symbol, industry in zip(df["symbol"], df["industry"])
     ]
 
     return df.reset_index(drop=True)
@@ -87,6 +102,10 @@ def load_deals(path=DEFAULT_DEALS_PATH):
     # or "Unclassified" -- never invent a new bucket at load time.
     df["ey_bucket"] = df["ey_bucket"].where(df["ey_bucket"].isin(ALL_BUCKETS), UNCLASSIFIED_BUCKET)
 
+    # v2 sector for comps matching against companies' sector_v2 (explicit
+    # mapping of the report labels in sector_raw -- see deals_sector_v2.py).
+    df["sector_v2"] = df["sector_raw"].map(classify_deal_sector_v2)
+
     return df.reset_index(drop=True)
 
 
@@ -102,12 +121,14 @@ if __name__ == "__main__":
 
     print(f"companies: {len(companies)} rows loaded")
     print(f"  null name after fill: {companies['name'].isna().sum()}")
-    print("  ey_bucket distribution:")
-    print(companies["ey_bucket"].value_counts().to_string())
-    unclassified_pct = (companies["ey_bucket"] == UNCLASSIFIED_BUCKET).mean() * 100
+    print("  sector_v2 distribution (live 13-sector taxonomy):")
+    print(companies["sector_v2"].value_counts().to_string())
+    unclassified_pct = (companies["sector_v2"] == UNCLASSIFIED_BUCKET).mean() * 100
     classified_pct = 100 - unclassified_pct
     print(f"  classified (non-Unclassified): {classified_pct:.1f}% "
           f"({'meets' if classified_pct >= 90 else 'BELOW'} 90% PRD acceptance bar)")
+    print("  legacy ey_bucket distribution (rollback only):")
+    print(companies["ey_bucket"].value_counts().to_string())
 
     print()
     print(f"deals: {len(deals)} rows loaded")
