@@ -1,0 +1,90 @@
+name: Daily price refresh
+
+# Market cap and share price are the only figures that genuinely move day to
+# day. Everything else (revenue, EBITDA, margins, ROCE, debt, promoter
+# pledge, etc.) only changes when a company reports -- that's what the
+# separate quarterly_refresh.yml handles. Running a full 55-field pull daily
+# would just re-fetch identical numbers 89 days out of every quarter and
+# risk yfinance rate-limiting the pipeline entirely (breaking this job AND
+# the quarterly one). This job is intentionally narrow.
+#
+# Unlike quarterly_refresh.yml, this is safe to auto-merge: market cap is a
+# single, low-risk, easily-reversible number with no scoring/ranking logic
+# riding on it being reviewed first. Still opens a PR (not a direct push) so
+# there's always a paper trail and an easy revert if a bad snapshot ever
+# lands.
+#
+# Same 60-day GitHub Actions auto-disable gotcha as quarterly_refresh.yml --
+# but this job commits daily by design, so it should never trip that limit
+# on its own.
+on:
+  schedule:
+    - cron: '0 4 * * *'  # 04:00 UTC daily, after NSE market close (IST close 15:30 = 10:00 UTC, well past)
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: >-
+          Test-only: limit the pull to the first N companies (e.g. 20) for a
+          fast smoke-test run. Leave blank for a real full run.
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # ~2,046 companies at a conservative pace (0.6s delay + real API
+    # latency) comfortably fits inside an hour; generous ceiling below.
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install pandas==2.2.2 yfinance
+
+      - name: Run daily price refresh
+        # Writes in place to DEFAULT_COMPANIES_PATH -- see refresh_daily_prices.py's
+        # module docstring for why this isn't a new dated data/enriched/ file. A
+        # limited (smoke-test) run intentionally makes no changes at all, so the
+        # create-pull-request step below finds nothing to diff and skips opening
+        # a PR -- exactly the "prove it runs, touch nothing real" behavior a
+        # manual smoke test should have.
+        run: python refresh_daily_prices.py ${{ github.event.inputs.limit }}
+
+      - name: Regenerate frontend data from this refresh
+        run: python export_for_frontend.py
+
+      - name: Open pull request with updated market caps
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Daily price refresh (${{ github.run_id }})"
+          title: "Daily price refresh (${{ github.run_id }})"
+          body: >-
+            Automated daily market cap / price refresh. Fundamentals
+            (revenue, EBITDA, ROCE, debt, etc.) are unchanged -- those only
+            update via the quarterly refresh. Safe to auto-merge.
+          branch: "price-refresh/${{ github.run_id }}"
+          add-paths: |
+            data/enriched/*
+            deal-scope-interface/data/*
+          draft: false
+
+      - name: Auto-merge (low risk, price data only)
+        if: success()
+        run: |
+          gh pr merge --auto --squash "price-refresh/${{ github.run_id }}" || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Heartbeat ping
+        if: success()
+        run: curl -fsS -m 10 --retry 3 https://hc-ping.com/REPLACE-WITH-REAL-CHECK-UUID-DAILY || true
