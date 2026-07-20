@@ -59,6 +59,34 @@ ZERO_MARGIN_EPSILON = 0.005  # percentage points -- rounds to "0.00%" at 2dp
 # Rs 1 lakh -- far below any populated ebitda value seen in this dataset.
 EBITDA_MATERIALITY_FLOOR = 100_000
 
+# A trailing P/E is earnings-per-share in the denominator -- economically it
+# only means "years to earn back the price" when there's real, positive
+# earnings to divide by. Negative earnings make the ratio's sign meaningless
+# (a "negative P/E" is a data-pull artifact, not a valuation signal), and
+# near-zero earnings blow the ratio up arbitrarily (a company earning Rs 1
+# would show the same P/E as one earning Rs 1,000, for an identical price).
+# INR units, same reasoning/order-of-magnitude as EBITDA_MATERIALITY_FLOOR --
+# Rs 10 lakh is far below the median populated net_income in this dataset
+# (~Rs 8.8 Cr per the 2026-07-20 audit) and catches genuine near-breakeven
+# cases without false-flagging small-but-real profits.
+NET_INCOME_MATERIALITY_FLOOR = 1_000_000
+
+# market_cap / revenue: neither bound is "impossible" (a pre-revenue growth
+# story or holding company can legitimately clear 500x; a low-margin
+# commodity trader with revenue far exceeding its float can legitimately sit
+# under 0.01x), so both are wide, deliberately-permissive thresholds meant to
+# flag a SECOND human look, same spirit as EBITDA_MARGIN_ABS_LIMIT/ROCE_ABS_
+# LIMIT above. Grounded in the live dataset's own distribution (2026-07-20
+# audit, 1,937 companies with both fields and revenue > 0): median ratio is
+# ~2.4x and the 75th percentile is ~5.4x, so 500x sits roughly 90x past P75 --
+# comfortably past "unusual" into "warrants a second look," while still only
+# catching the most extreme 9 of 1,937 rows rather than a routine range. The
+# low bound mirrors it on the other side; the live dataset's observed minimum
+# ratio (~0.043x) doesn't currently clear it, so 0.01x is intentionally
+# generous headroom rather than a threshold tuned to catch what's already there.
+MARKET_CAP_REVENUE_RATIO_HIGH = 500.0
+MARKET_CAP_REVENUE_RATIO_LOW = 0.01
+
 
 def _flag(flags, row, check, detail):
     flags.append({
@@ -194,6 +222,67 @@ def check_stale_date(df, as_of=None):
     return flags
 
 
+def check_pe_sanity(df):
+    """trailing_pe populated alongside negative or near-zero net_income.
+
+    Added 2026-07-20 data-quality audit. A P/E ratio is only economically
+    meaningful when earnings are real and positive -- negative or near-zero
+    earnings in the denominator make the stored ratio a data-pull artifact
+    rather than a valuation signal (see NET_INCOME_MATERIALITY_FLOOR above)."""
+    flags = []
+    for _, row in df.iterrows():
+        pe = row.get("trailing_pe")
+        net_income = row.get("net_income")
+        if pd.isna(pe) or pd.isna(net_income):
+            continue
+        if net_income < 0:
+            _flag(
+                flags, row, "pe_on_negative_earnings",
+                f"trailing_pe={pe:,.2f} but net_income={net_income:,.0f} is negative -- "
+                f"a P/E is not economically meaningful on negative earnings, needs a human look",
+            )
+        elif abs(net_income) < NET_INCOME_MATERIALITY_FLOOR:
+            _flag(
+                flags, row, "pe_on_near_zero_earnings",
+                f"trailing_pe={pe:,.2f} but net_income={net_income:,.0f} is near zero "
+                f"(< Rs {NET_INCOME_MATERIALITY_FLOOR:,.0f}) -- the ratio is arbitrarily "
+                f"inflated by a near-zero denominator, needs a human look",
+            )
+
+    return flags
+
+
+def check_market_cap_revenue_ratio(df):
+    """market_cap far out of proportion to revenue, either direction.
+
+    Added 2026-07-20 data-quality audit. See MARKET_CAP_REVENUE_RATIO_HIGH/LOW
+    above for the threshold reasoning -- both bounds are deliberately wide and
+    do not claim the value is wrong, only that it warrants a second look."""
+    flags = []
+    for _, row in df.iterrows():
+        market_cap = row.get("market_cap")
+        revenue = row.get("revenue")
+        if pd.isna(market_cap) or pd.isna(revenue) or revenue <= 0:
+            continue
+        ratio = market_cap / revenue
+        if ratio > MARKET_CAP_REVENUE_RATIO_HIGH:
+            _flag(
+                flags, row, "market_cap_revenue_ratio_high",
+                f"market_cap={market_cap:,.0f} is {ratio:,.1f}x revenue={revenue:,.0f} "
+                f"(> {MARKET_CAP_REVENUE_RATIO_HIGH:,.0f}x, needs a human look -- may be a "
+                f"real pre-revenue/holding-company case)",
+            )
+        elif ratio < MARKET_CAP_REVENUE_RATIO_LOW:
+            _flag(
+                flags, row, "market_cap_revenue_ratio_low",
+                f"market_cap={market_cap:,.0f} is only {ratio:,.4f}x revenue={revenue:,.0f} "
+                f"(< {MARKET_CAP_REVENUE_RATIO_LOW:.2f}x, needs a human look -- may be a "
+                f"real low-margin high-revenue case)",
+            )
+
+    return flags
+
+
 def run_all_checks(df, as_of=None):
     """Run every check and return one combined flagged-rows DataFrame.
 
@@ -204,6 +293,8 @@ def run_all_checks(df, as_of=None):
         check_range_violations(df)
         + check_cross_field_consistency(df)
         + check_stale_date(df, as_of=as_of)
+        + check_pe_sanity(df)
+        + check_market_cap_revenue_ratio(df)
     )
     if not all_flags:
         return pd.DataFrame(columns=["symbol", "name", "check", "detail"])
