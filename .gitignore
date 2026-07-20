@@ -72,5 +72,18 @@ DealScope - Final Design.dc.html
 nse_ma_screener_results.csv
 SHIP_LIKE_A_PRO_CHECKLIST.md
 
-# runtime-generated AI rationale cache (regenerates on first request per company)
-.rationale_cache.json
+# .rationale_cache.json is deliberately NOT ignored (changed 2026-07-20).
+#
+# It was ignored as "runtime-generated, regenerates on first request per
+# company" -- true for the original click-through-the-Streamlit-app flow, but
+# it silently broke the frontend: export_for_frontend.py reads this cache to
+# populate each company's rationale in companies.json, and CI checkouts never
+# had the file. So every daily_price_refresh.yml run regenerated companies.json
+# with rationale=null for all 2,046 companies and pushed that to the live site,
+# wiping every rationale that had been generated. Confirmed by diffing the
+# workflow-pushed companies.json against a local export: 32 rationales present
+# locally, all null in the deployed copy.
+#
+# It is also not cheaply "regenerable": at ~2,000 companies across three
+# rate-limited free tiers it costs hours of API calls, so it's expensive derived
+# data that belongs in version control, not a disposable cache.
