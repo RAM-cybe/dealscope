@@ -89,6 +89,51 @@ jobs:
           # Never auto-merge, ever -- a human always approves before new
           # data goes live. This action only opens the PR; nothing merges it.
 
+      # The live site (dealscope-screener.vercel.app) deploys from the
+      # separate RAM-cybe/dealscope-frontend repo, not this one, so the PR
+      # above alone never reaches production. Unlike daily_price_refresh.yml
+      # (which pushes straight to dealscope-frontend's main -- low-risk price
+      # data, safe to auto-deploy), quarterly fundamentals get the same "a
+      # human always approves before anything goes live" discipline as the
+      # backend PR just above: this proposes the corresponding
+      # companies.json/deals.json update as its OWN PR against
+      # dealscope-frontend, from the same not-yet-approved candidate
+      # snapshot -- RAM reviews and merges each PR by hand, on whatever
+      # timeline he chooses; nothing here auto-merges either one.
+      - name: Regenerate frontend data from the candidate snapshot
+        env:
+          DEALSCOPE_INPUT_FILE: ${{ steps.snapshot.outputs.path }}
+        run: python export_for_frontend.py
+
+      - name: Checkout dealscope-frontend
+        uses: actions/checkout@v4
+        with:
+          repository: RAM-cybe/dealscope-frontend
+          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
+          path: dealscope-frontend-pr
+
+      - name: Copy candidate data into the dealscope-frontend checkout
+        run: |
+          cp deal-scope-interface/data/companies.json dealscope-frontend-pr/data/companies.json
+          cp deal-scope-interface/data/deals.json dealscope-frontend-pr/data/deals.json
+
+      - name: Propose this data on dealscope-frontend (PR, never auto-merge)
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
+          path: dealscope-frontend-pr
+          commit-message: "Quarterly data refresh: sync from dealscope backend (${{ github.run_id }})"
+          title: >-
+            Quarterly data refresh (${{ github.run_id }})${{ steps.quality.outputs.needs_review == 'true' && ' -- NEEDS MANUAL REVIEW' || '' }}
+          body-path: .github/scripts/pr_body_fragment.md
+          branch: "data-refresh/${{ github.run_id }}"
+          add-paths: |
+            data/companies.json
+            data/deals.json
+          draft: false
+          # Same "never auto-merge, ever" discipline as the backend-repo PR
+          # above -- RAM approves this PR by hand before Vercel deploys it.
+
       - name: Heartbeat ping
         # Last step, only on a fully successful run -- lets a free service
         # like healthchecks.io/cron-job.org alert if this workflow silently

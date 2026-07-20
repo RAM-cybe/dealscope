@@ -17,6 +17,7 @@ Writes:
 
 import json
 import math
+import os
 import sys
 from pathlib import Path
 
@@ -67,7 +68,14 @@ def clean(value):
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    companies = load_companies()
+    # Optional override, same DEALSCOPE_INPUT_FILE convention enrich_dataset.py
+    # already uses -- lets quarterly_refresh.yml regenerate the frontend export
+    # from a NEW candidate snapshot (still awaiting human review) rather than
+    # the currently-committed live file, without changing default behavior for
+    # every other caller (daily_price_refresh.yml, local runs) that leaves it
+    # unset and gets DEFAULT_COMPANIES_PATH as before.
+    input_override = os.environ.get("DEALSCOPE_INPUT_FILE")
+    companies = load_companies(input_override) if input_override else load_companies()
     equal_weights = {m: 5 for m in METRICS}
     scored = score_companies(companies, equal_weights)
     valued = valuation_range(scored)

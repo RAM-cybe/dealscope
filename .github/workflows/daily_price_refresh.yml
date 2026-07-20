@@ -63,6 +63,39 @@ jobs:
       - name: Regenerate frontend data from this refresh
         run: python export_for_frontend.py
 
+      - name: Sync fresh data to dealscope-frontend (direct push, no PR)
+        # The live site (dealscope-screener.vercel.app) deploys from the
+        # separate RAM-cybe/dealscope-frontend repo, not from this one --
+        # everything above this step only ever committed inside THIS repo,
+        # so none of it has ever reached production. This step is what
+        # actually closes that gap. Direct push to dealscope-frontend's main
+        # (no PR) matches this workflow's own existing "safe to auto-merge,
+        # price data only" reasoning for the backend-repo side -- market cap
+        # is low-risk and easily reversible, and pushing straight to main is
+        # what triggers Vercel's auto-deploy, which is the whole point of
+        # this job existing. set -euo pipefail (and no `|| true` anywhere in
+        # this step) so a broken push fails the run loudly instead of being
+        # silently swallowed like the heartbeat-ping step below.
+        env:
+          FRONTEND_REPO_TOKEN: ${{ secrets.FRONTEND_REPO_TOKEN }}
+        run: |
+          set -euo pipefail
+          git clone --depth 1 \
+            "https://x-access-token:${FRONTEND_REPO_TOKEN}@github.com/RAM-cybe/dealscope-frontend.git" \
+            /tmp/dealscope-frontend
+          cp deal-scope-interface/data/companies.json /tmp/dealscope-frontend/data/companies.json
+          cp deal-scope-interface/data/deals.json /tmp/dealscope-frontend/data/deals.json
+          cd /tmp/dealscope-frontend
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/companies.json data/deals.json; then
+            echo "No change vs dealscope-frontend's current data -- nothing to push."
+            exit 0
+          fi
+          git add data/companies.json data/deals.json
+          git commit -m "Daily price refresh: sync from dealscope backend (${{ github.run_id }})"
+          git push origin main
+
       - name: Open pull request with updated market caps
         uses: peter-evans/create-pull-request@v6
         with:
