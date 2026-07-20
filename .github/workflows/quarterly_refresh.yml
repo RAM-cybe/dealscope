@@ -73,33 +73,31 @@ jobs:
         id: quality
         run: python .github/scripts/check_snapshot_quality.py "${{ steps.snapshot.outputs.path }}"
 
-      - name: Open pull request proposing this snapshot
-        id: pr
-        uses: peter-evans/create-pull-request@v6
-        with:
-          commit-message: "Quarterly data refresh: add ${{ steps.snapshot.outputs.path }}"
-          title: >-
-            Quarterly data refresh (${{ github.run_id }})${{ steps.quality.outputs.needs_review == 'true' && ' -- NEEDS MANUAL REVIEW' || '' }}
-          body-path: .github/scripts/pr_body_fragment.md
-          branch: "data-refresh/${{ github.run_id }}"
-          add-paths: |
-            data/snapshots/*
-            data/quality_reports/*
-          draft: false
-          # Never auto-merge, ever -- a human always approves before new
-          # data goes live. This action only opens the PR; nothing merges it.
-
       # The live site (dealscope-screener.vercel.app) deploys from the
-      # separate RAM-cybe/dealscope-frontend repo, not this one, so the PR
-      # above alone never reaches production. Unlike daily_price_refresh.yml
-      # (which pushes straight to dealscope-frontend's main -- low-risk price
-      # data, safe to auto-deploy), quarterly fundamentals get the same "a
-      # human always approves before anything goes live" discipline as the
-      # backend PR just above: this proposes the corresponding
-      # companies.json/deals.json update as its OWN PR against
+      # separate RAM-cybe/dealscope-frontend repo, not this one, so a PR
+      # against this repo alone never reaches production. Unlike
+      # daily_price_refresh.yml (which pushes straight to dealscope-frontend's
+      # main -- low-risk price data, safe to auto-deploy), quarterly
+      # fundamentals get the same "a human always approves before anything
+      # goes live" discipline as the backend PR below: this proposes the
+      # corresponding companies.json/deals.json update as its OWN PR against
       # dealscope-frontend, from the same not-yet-approved candidate
       # snapshot -- RAM reviews and merges each PR by hand, on whatever
       # timeline he chooses; nothing here auto-merges either one.
+      #
+      # These 3 steps run BEFORE the backend-repo PR below deliberately, not
+      # just cosmetically: peter-evans/create-pull-request commits the new
+      # snapshot onto its own side branch, pushes it, then resets this job's
+      # LOCAL checkout back to the base ref -- which deletes
+      # data/snapshots/dealscope_<date>.csv from disk here, since that file
+      # never existed on the base ref to begin with (confirmed by a real
+      # failed run: 2026-07-20, run 29723963496, "FileNotFoundError" on this
+      # exact file when the frontend-export step ran AFTER the backend PR
+      # step). Reading the snapshot and copying its export into the
+      # completely separate dealscope-frontend-pr/ checkout BEFORE that
+      # reset happens sidesteps the problem entirely -- once the file is
+      # copied into that other repo's working directory, nothing that
+      # happens to THIS repo's checkout afterward can touch it.
       - name: Regenerate frontend data from the candidate snapshot
         env:
           DEALSCOPE_INPUT_FILE: ${{ steps.snapshot.outputs.path }}
@@ -116,6 +114,22 @@ jobs:
         run: |
           cp deal-scope-interface/data/companies.json dealscope-frontend-pr/data/companies.json
           cp deal-scope-interface/data/deals.json dealscope-frontend-pr/data/deals.json
+
+      - name: Open pull request proposing this snapshot
+        id: pr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Quarterly data refresh: add ${{ steps.snapshot.outputs.path }}"
+          title: >-
+            Quarterly data refresh (${{ github.run_id }})${{ steps.quality.outputs.needs_review == 'true' && ' -- NEEDS MANUAL REVIEW' || '' }}
+          body-path: .github/scripts/pr_body_fragment.md
+          branch: "data-refresh/${{ github.run_id }}"
+          add-paths: |
+            data/snapshots/*
+            data/quality_reports/*
+          draft: false
+          # Never auto-merge, ever -- a human always approves before new
+          # data goes live. This action only opens the PR; nothing merges it.
 
       - name: Propose this data on dealscope-frontend (PR, never auto-merge)
         uses: peter-evans/create-pull-request@v6
