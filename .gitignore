@@ -8,8 +8,6 @@
 # python
 __pycache__/
 *.pyc
-venv/
-.venv/
 
 # os
 .DS_Store
@@ -48,7 +46,11 @@ fix_currency_progress.log
 EQUITY_L.csv
 
 # one-time data-collection scripts (kept local only)
-enrich_v2.py
+# enrich_v2.py removed from this list 2026-07-20: no longer a one-time script --
+# archive/data_pipeline_scripts/backfill_core_fields_2026-07.py now imports
+# fetch_roce()/fetch_pledge() from it as an ongoing dependency, so it needs to
+# be in version control for that script to be runnable by anyone but the
+# machine that happened to have it on local disk already.
 merge_build.py
 pull_remaining.py
 reclassify_deals_v2.py
@@ -72,4 +74,3 @@ SHIP_LIKE_A_PRO_CHECKLIST.md
 
 # runtime-generated AI rationale cache (regenerates on first request per company)
 .rationale_cache.json
-.gstack/

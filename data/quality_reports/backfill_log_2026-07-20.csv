@@ -1,0 +1,948 @@
+symbol,field,source,before,after,note,timestamp
+21STCENMGM,revenue,yfinance.info,,-168779008,backfilled,2026-07-20T12:15:16
+21STCENMGM,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+21STCENMGM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+3BBLACKBIO,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+3BBLACKBIO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+3PLAND,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+3PLAND,ebitda_margin_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+3PLAND,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+3PLAND,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+3PLAND,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+3PLAND,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+5PAISA,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+63MOONS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+A2ZINFRA,return_on_equity_pct,yfinance.info,,17.871,backfilled,2026-07-20T12:15:16
+AADHARHFC,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+AARNAV,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AARNAV,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AAVAS,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+ABB,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ABCAPITAL,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+ABFRL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ABMINTLLTD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ABMKNO,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ABMKNO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ABREL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ACCELYA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ACEINTEG,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ACL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ACSTECH,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ACSTECH,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ADOR,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AEQUS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AHLEAST,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AHLEAST,return_on_equity_pct,yfinance.info,,-27.479,backfilled,2026-07-20T12:15:16
+AIIL,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+AKCAPIT,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AKCAPIT,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AKSHAR,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ALBERTDAVD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ALKYLAMINE,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ALKYLAMINE,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ALMONDZ,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+ALOKINDS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ALOKINDS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ALPHAGEO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AMDIND,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AMIRCHAND,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ANANDRATHI,total_debt,yfinance.info,,834769984,backfilled,2026-07-20T12:15:16
+ANANDRATHI,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ANGELONE,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+ANTGRAPHIC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ANTGRAPHIC,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+APCL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+APEX,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+APTUS,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+AQYLON,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ARCHIES,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ARENTERP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ARIHANTCAP,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+ARMANFIN,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+AROGRANITE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ARSSBL,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+ARTEMISMED,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ASHIKA,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+ASHIKA,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ASHIKA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ASHIMASYN,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ASIANHOTNR,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ASTAR,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ASTAR,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ASTEC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ATHERENERG,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ATLANTAA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ATLASCYCLE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ATULAUTO,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AUBANK,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+AUBANK,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AVONMORE,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+AXISBANK,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+AXITA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+AYE,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+BAIDFIN,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+BAIDFIN,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BAJAJELEC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BAJAJELEC,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BAJAJHFL,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+BAJAJST,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BAJAJST,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BAJFINANCE,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+BALAJITELE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BALKRISHNA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BALKRISHNA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BALKRISIND,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BANDHANBNK,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+BANG,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BANKBARODA,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+BANKINDIA,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+BANSWRAS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BEEKAY,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BEEKAY,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BEEKAY,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BENGALASM,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BENGALASM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BFUTILITIE,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BHARATCOAL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BI,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BI,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BIGBLOC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BIRLAMONEY,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+BIRLANU,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BIRLAPREC,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BIRLAPREC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BLBLIMITED,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+BLIL,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+BLIL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BLIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BLIL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BLUEDART,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BLUSPRING,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BNALTD,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BNALTD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BOHRAIND,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BOSCH-HCIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BPL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+BRNL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CAMLINFINE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CANBK,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CANFINHOME,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CAPITALSFB,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CASTROLIND,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CCHHL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CELEBRITY,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CENTRALBK,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CENTRUM,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CENTRUM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CGCL,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CHEMPLASTS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CHOICEIN,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CHOLAFIN,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CHOLAHLDNG,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CIEINDIA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CMPDI,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CMRGREEN,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+COCKERILL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+COCKERILL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+COMFINTE,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+COMFINTE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CORONA,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CPEDU,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CPEDU,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CPEDU,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CREATIVEYE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CREDITACC,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CRISIL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CROMPTON,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+CSBBANK,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CUB,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+CURAA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DANGEE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DCXINDIA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DECNGOLD,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+DECNGOLD,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DECNGOLD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DELTAMAGNT,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DEVYANI,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DIACABS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DIAMINESQ,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DICIND,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DIGITIDE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DISAQ,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DISAQ,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DNAMEDIA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DNAMEDIA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DRAGARWQ,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DRAGARWQ,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+DTIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+E2E,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+EASEMYTRIP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELANTAS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELCIDIN,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELCIDIN,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELECTHERM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELECTHERM,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELGIRUBCO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELITECON,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELITECON,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELITECON,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELPROINTL,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELPROINTL,ebitda_margin_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELPROINTL,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ELPROINTL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+EMBDL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ENERGYDEV,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ENERGYDEV,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ENIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ENRIN,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ESAFSFB,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ESSARSHPNG,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+ESSARSHPNG,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ESSARSHPNG,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ESTER,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+EXICOM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FACT,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FACT,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FEDDERSHOL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FEDDERSHOL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FERMENTA,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FERMENTA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FILATEX,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FIRSTCRY,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FOSECOIND,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FOSECOIND,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FRONTSP,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+FRONTSP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GALLANTT,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GALLANTT,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GANGESSECU,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GAYAHWS,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+GAYAHWS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GAYAHWS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GENUSPAPER,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GIPCL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GKWLIMITED,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GLOBALVECT,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GMRAIRPORT,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GNA,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GNRL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GNRL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GOACARBON,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GRANDOAK,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GRANDOAK,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GRAVISSHO,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GRAVISSHO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GREAVESCOT,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GREENPANEL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GSLSU,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GTL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GTLINFRA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GUJALKALI,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GUJALKALI,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GUJRAFFIA,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+GVPTECH,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HALDER,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HAVISHA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HBESD,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HBESD,ebitda_margin_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HBESD,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HBESD,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HBESD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HBESD,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HCL-INSYS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HCL-INSYS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HCLTECH,revenue,skipped,,,"currency_flag=USD_REPORTED, would silently reintroduce the USD-scale bug this field was originally blanked to avoid",2026-07-20T12:15:16
+HCLTECH,total_debt,skipped,,,"currency_flag=USD_REPORTED, would silently reintroduce the USD-scale bug this field was originally blanked to avoid",2026-07-20T12:15:16
+HEADSUP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HEMIPROP,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+HEMIPROP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HERANBA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HEXAGON,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HEXATRADEX,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HGM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HGS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HIKAL,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HIKAL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HIKAL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HINDWAREAP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+HUHTAMAKI,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ICDSLTD,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ICDSLTD,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ICDSLTD,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IDEA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IDFCFIRSTB,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IDFCFIRSTB,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IFCI,revenue,yfinance.info,,-5927199744,backfilled,2026-07-20T12:15:16
+IFCI,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IFCI,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IGIL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IITL,revenue,yfinance.info,,-153720992,backfilled,2026-07-20T12:15:16
+IITL,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+IITL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IMPAL,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IMPAL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INDBANK,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INDIACEM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INDIGO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INDIGO,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INDIQUBE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INDNIPPON,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INDOCO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INDOSTAR,revenue,yfinance.info,,-3712600064,backfilled,2026-07-20T12:15:16
+INDPRUD,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INDPRUD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INDTERRAIN,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INFOMEDIA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INFOMEDIA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INFY,revenue,skipped,,,"currency_flag=USD_REPORTED, would silently reintroduce the USD-scale bug this field was originally blanked to avoid",2026-07-20T12:15:16
+INFY,total_debt,skipped,,,"currency_flag=USD_REPORTED, would silently reintroduce the USD-scale bug this field was originally blanked to avoid",2026-07-20T12:15:16
+INTENTECH,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INVPRECQ,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+INVPRECQ,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IREDA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ISHANCH,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IWP,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+IWP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+J&KBANK,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JAYKAY,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JAYSREETEA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JHS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JINDALPHOT,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+JINDALPHOT,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JINDALPHOT,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JINDALPHOT,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JINDALPOLY,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JINDALPOLY,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JISLDVREQS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JISLJALEQS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JITFINFRA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JITFINFRA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JMA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JSWCEMENT,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JSWDULUX,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JSWDULUX,ebitda_margin_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JSWDULUX,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JSWDULUX,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JSWHL,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+JSWHL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KABRAEXTRU,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KABRAEXTRU,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KAMAHOLD,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KAMAHOLD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KAYA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KAYA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KEEPLEARN,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KENNAMET,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KHANDSE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KIRANVYPAR,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KIRANVYPAR,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KKCL,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KLBRENG-B,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KLBRENG-B,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KNACK,revenue,yfinance.info,,8234339840,backfilled,2026-07-20T12:15:16
+KNACK,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KOHINOOR,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KOKUYOCMLN,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KOTARISUG,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KOTIC,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KOTIC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KPL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KPL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KREBSBIO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KREBSBIO,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KSB,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KSL,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KSL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KSR,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+KWIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+LAHOTIOV,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+LAHOTIOV,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+LASA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+LCCINFOTEC,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+LCCINFOTEC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+LEMERITE,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+LFIC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+LGHL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+LINDEINDIA,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+LOYALTEX,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MADHAVIPL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MADHAVIPL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MAFATIND,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MAFATIND,ebitda_margin_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MAFATIND,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MAFATIND,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MAGNUM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MAHAPEXLTD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MAHASTEEL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MALUPAPER,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MALUPAPER,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MANGALAM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MAXIND,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MCCHRLS-B,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MCCHRLS-B,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MEESHO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MENNPIS,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MENNPIS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MERCANTILE,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MERCANTILE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MFML,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MIRZAINT,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MMTC,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+MOBIKWIK,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MODTHREAD,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MODTHREAD,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MODTHREAD,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MOHITIND,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MTNL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+MTNL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NAHARPOLY,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NATCAPSUQ,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NATIONSTD,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NATIONSTD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NDGL,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NDGL,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NDGL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NDGL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NDTV,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NEAGI,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NEAGI,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NELCAST,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NELCAST,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NEULANDLAB,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NEXTMEDIA,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NEXTMEDIA,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+NEXTMEDIA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NEXTMEDIA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NIBL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NIBL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NILE,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NILE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NIPPOBATRY,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NIPPOBATRY,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NIRAJISPAT,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NIRAJISPAT,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NIRAJISPAT,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NKIND,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NKIND,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+NORBTEAEXP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+OBCL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+OLAELEC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+OLECTRA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+OMAXE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+OMAXE,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+OMPOWER,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ONESOURCE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ORCHPHARMA,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ORCHPHARMA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ORIENTLTD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ORIENTPPR,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ORISSAMINE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ORISSAMINE,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+OSWALGREEN,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PAKKA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PANACEABIO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PANACEABIO,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PARACABLES,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PARASPETRO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PFS,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PFS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PIONEEREMB,trailing_pe,yfinance.info,,108.4762,backfilled,2026-07-20T12:15:16
+PIONRINV,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PIONRINV,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PKTEA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PLATIND,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PML,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PML,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PNC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PPLPHARMA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PRAENG,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PRAVEG,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PRAVEG,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PREMCO,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PREMCO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PRSMJOHNSN,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PSPPROJECT,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PVP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PVSL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+PWL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+QUADFUTURE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+QUINT,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+QUINT,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RADAAN,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RADAAN,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RADICO,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RADIOCITY,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RAIN,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RAJMET,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RAJPALAYAM,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RAJPALAYAM,ebitda_margin_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RAJPALAYAM,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RAJPALAYAM,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RAJPALAYAM,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RAMANEWS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RAMANEWS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RBA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RBLBANK,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+REGENCERAM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+REGENCERAM,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RENUKA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RENUKA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+REPCOHOME,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+REPRO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RETAIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RHIM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ROML,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ROSSELLIND,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RPOWER,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RPSGVENT,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RRIL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RRIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RSDFIN,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RSDFIN,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RSYSTEMS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RTNINDIA,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+RTNINDIA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+RTNINDIA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SADBHAV,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SAGCEM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SAKHTISUG,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SAMMAANCAP,revenue,yfinance.info,,-10801399808,backfilled,2026-07-20T12:15:16
+SAMMAANCAP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SANDESH,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SANOFI,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SANOFICONR,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SAPPHIRE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SAPPL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SAPPL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SARLAPOLY,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SAYAJIHOTL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SCANSTL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SCANSTL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SCHAEFFLER,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SCI,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SDBL,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SECURKLOUD,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SECURKLOUD,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SEIL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SEIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SELMC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SELMC,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SGL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHALPAINTS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHANTI,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHARDUL,market_cap,yfinance.info,,4714078208,backfilled,2026-07-20T12:15:16
+SHARDUL,trailing_pe,yfinance.info,,20.332075,backfilled,2026-07-20T12:15:16
+SHBAJRG,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHBAJRG,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHINDL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHINDL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHOPERSTOP,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHREECEM,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHRIKRISH,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHRIKRISH,ebitda_margin_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHRIKRISH,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHRIKRISH,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHRIKRISH,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHRIKRISH,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHRIPISTON,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SHRIPISTON,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SIEMENS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SIKA,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SIKA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SILLYMONKS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SINGERIND,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SINGERIND,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SMARTWORKS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SOLARA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SONAL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SONAL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SONAMLTD,return_on_equity_pct,yfinance.info,,9.843,backfilled,2026-07-20T12:15:16
+SPANDANA,revenue,yfinance.info,,-1627600000,backfilled,2026-07-20T12:15:16
+SPANDANA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SPECIALITY,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SPENCERS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SPENCERS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+STARHEALTH,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+STARHEALTH,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+STCINDIA,revenue,yfinance.info,,-231600992,backfilled,2026-07-20T12:15:16
+STCINDIA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SUPREMEINF,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SURYALA,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SURYALA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SUVEN,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+SUVEN,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SUVIDHAA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SWIGGY,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SWSOLAR,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+SYMPHONY,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TAALTECH,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TAALTECH,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TARAPUR,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TARAPUR,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+TARAPUR,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TARAPUR,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TATACHEM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TCC,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TCC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TCS,total_debt,yfinance.info,,113090002944,backfilled,2026-07-20T12:15:16
+TCS,return_on_equity_pct,yfinance.info,,47.743,backfilled,2026-07-20T12:15:16
+TECHNVISN,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TECHNVISN,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TECILCHEM,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TECILCHEM,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TECILCHEM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TECILCHEM,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TEJASNET,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TENNIND,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TEXMOPIPES,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TFL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+THAKDEV,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+THAKDEV,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TIINDIA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TIJARIA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TIJARIA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TIPSFILMS,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TIRUMALCHM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TMPV,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TNTELE,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TNTELE,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+TNTELE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TNTELE,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TPHQ,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TRACXN,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TRANSPEK,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TRANSPEK,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TREEHOUSE,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TRF,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TRU,revenue,yfinance.info,,-713164032,backfilled,2026-07-20T12:15:16
+TRU,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TTKPRESTIG,total_debt,yfinance.info,,1735299968,backfilled,2026-07-20T12:15:16
+TTKPRESTIG,return_on_equity_pct,yfinance.info,,8.147,backfilled,2026-07-20T12:15:16
+TTML,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TTML,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TURTLEMINT,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TURTLEMINT,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TURTLEMINT,return_on_equity_pct,yfinance.info,,-51.498,backfilled,2026-07-20T12:15:16
+TVVISION,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+TVVISION,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+UCAL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+UEL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+UFBL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+UNIONBANK,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+UNITECH,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+UNITECH,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+UNITEDTEA,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+URBANCO,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+UTKARSHBNK,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VAML,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VAML,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VAML,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VARDMNPOLY,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VBL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VEDPOWER,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VESUVIUS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VHL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VIPIND,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VIRINCHI,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VISHWARAJ,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VISL,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VISL,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VISL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VISL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VIVIDHA,ebitda_margin_pct,yfinance.info,,0.0,backfilled,2026-07-20T12:15:16
+VIVIDHA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VOEPL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VOGL,revenue,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VOGL,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+VOGL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WAAREERTL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WALCHANNAG,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WANBURY,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WANBURY,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WELSPLSOL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WELSPLSOL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WHEELS,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WHEELS,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WILLAMAGOR,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WILLAMAGOR,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WPIL,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+WPIL,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+XELPMOC,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+YESBANK,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ZENITHSTL,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ZENSARTECH,return_on_equity_pct,yfinance.info,,17.627,backfilled,2026-07-20T12:15:16
+ZFCVINDIA,total_debt,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ZODIACLOTH,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ZOTA,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ZSARACOM,market_cap,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ZSARACOM,trailing_pe,yfinance.info,,,no value returned,2026-07-20T12:15:16
+ZUARI,return_on_equity_pct,yfinance.info,,,no value returned,2026-07-20T12:15:16
+3BBLACKBIO,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+AARNAV,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+ABCAPITAL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+ABMKNO,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+ACSTECH,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+AKCAPIT,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+APTUS,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+AQYLON,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+ARTEMISMED,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+ASHIKA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+ASTAR,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+AUBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+AXISBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+BAJAJFINSV,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+BAJAJHLDNG,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+BAJAJST,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+BAJFINANCE,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+BALKRISHNA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+BANDHANBNK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+BANKBARODA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+BANKINDIA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+BEEKAY,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+BENGALASM,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+BI,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+BIRLAPREC,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+BLIL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+BNALTD,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+CANBK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+CANFINHOME,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+CANHLIFE,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+CAPITALSFB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+CENTRALBK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+CHOLAFIN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+COMFINTE,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+CSBBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+CUB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+DCBBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+DECNGOLD,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+DHANBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+DISAQ,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+DRAGARWQ,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+EDELWEISS,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+ELCIDIN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+ELECTHERM,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+ELITECON,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+EQUITASBNK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+ESAFSFB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+ESSARSHPNG,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+FEDDERSHOL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+FEDERALBNK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+FERMENTA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+FINOPB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+FRONTSP,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+GICRE,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+GNRL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+GODIGIT,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+GRANDOAK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+GRAVISSHO,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+GTL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+GTLINFRA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+GUJRAFFIA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+HBESD,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+HCL-INSYS,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+HDFCBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+HDFCLIFE,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+HUDCO,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+ICICIBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+ICICIGI,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+ICICIPRULI,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+IDBI,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+IDFCFIRSTB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+IFCI,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+IIFL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+INDIANB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+INDPRUD,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+INDUSINDBK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+INVPRECQ,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+IOB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+IWP,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+J&KBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+JMFINANCIL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+JSFB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+KAMAHOLD,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+KARURVYSYA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+KIRANVYPAR,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+KLBRENG-B,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+KOTAKBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+KOTIC,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+KPL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+KTKBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+KWIL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing EBIT,2026-07-20T12:15:16
+LAHOTIOV,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+LICHSGFIN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+LICI,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+LTF,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+M&MFIN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+MADHAVIPL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+MAHABANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+MALUPAPER,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+MANAPPURAM,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+MCCHRLS-B,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+MENNPIS,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+MERCANTILE,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+MFSL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+MTNL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+MUTHOOTFIN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+NATIONSTD,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+NEAGI,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+NIACL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+NILE,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+NIVABUPA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+PFC,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+PIONRINV,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+PLATIND,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+PML,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+PNB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+PNBHOUSING,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+PRAVEG,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+PREMCO,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+PSB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+QUINT,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+RADAAN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+RBLBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+RECLTD,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+RRIL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+RSDFIN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SAPPL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SBICARD,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+SBILIFE,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+SBIN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+SCANSTL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SECURKLOUD,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+SEIL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SHBAJRG,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SHINDL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SHRIKRISH,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SHRIRAMFIN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+SIKA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SINGERIND,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SONAL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SOUTHBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+STARHEALTH,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo statement missing CurrentLiabilities,2026-07-20T12:15:16
+STCINDIA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+SUNDARMFIN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+SURYALA,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+SURYODAY,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+TAALTECH,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+TARAPUR,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+TATAINVEST,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+TCC,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+TECHNVISN,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+TECILCHEM,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+THAKDEV,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+TMB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+TNTELE,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+TTML,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+TVVISION,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+UCOBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+UJJIVANSFB,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+UNIONBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+UNITECH,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+UTKARSHBNK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+VAML,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+VISL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+WELSPLSOL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+WPIL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+YESBANK,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,"Yahoo statement missing CurrentLiabilities, EBIT",2026-07-20T12:15:16
+ZENITHSTL,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,non-positive capital employed in latest complete Yahoo period,2026-07-20T12:15:16
+ZSARACOM,return_on_capital_employed_pct,yfinance (Yahoo annual stmt),,,Yahoo annual statements unavailable after 3 attempts: Yahoo annual statement unavailable,2026-07-20T12:15:16
+3BBLACKBIO,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ABBOTINDIA,promoter_pledge_pct,NSE XBRL,,,NSE XBRL 31-DEC-2018: pledge flag/value not reported,2026-07-20T12:15:16
+ABMKNO,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ACSTECH,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+AKCAPIT,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+AMBALALSA,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ARIHANT,promoter_pledge_pct,NSE XBRL,,,NSE XBRL 31-DEC-2021: pledge flag/value not reported,2026-07-20T12:15:16
+ASHIKA,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ASTAR,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+BAJAJST,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+BATLIBOI,promoter_pledge_pct,NSE XBRL,,,NSE filing unavailable after 3 attempts: Invalid URL '-': No scheme supplied. Perhaps you meant https://-?,2026-07-20T12:15:16
+BAYERCROP,promoter_pledge_pct,NSE XBRL,,,NSE XBRL 31-DEC-2018: pledge flag/value not reported,2026-07-20T12:15:16
+BEEKAY,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+BENGALASM,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+BI,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+BIMETAL,promoter_pledge_pct,NSE XBRL,,,NSE filing unavailable after 3 attempts: Invalid URL '-': No scheme supplied. Perhaps you meant https://-?,2026-07-20T12:15:16
+BIRLAPREC,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+BLIL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+BNALTD,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+COCKERILL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+COMFINTE,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+DECNGOLD,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+DISAQ,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+DRAGARWQ,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ELANTAS,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ELCIDIN,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ELITECON,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ELPROINTL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+FEDDERSHOL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+FERMENTA,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+FIVESTAR,promoter_pledge_pct,NSE XBRL,,0.0,backfilled,2026-07-20T12:15:16
+FRONTSP,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+GNRL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+GOODYEAR,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+GRANDOAK,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+GRAUWEIL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+GRAVISSHO,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+HAWKINCOOK,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+HBESD,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+INDPRUD,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+INVPRECQ,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+IWP,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+KAMAHOLD,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+KENNAMET,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+KIRANVYPAR,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+KIRLFER,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+KLBRENG-B,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+KNACK,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+KOTIC,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+KOVAI,promoter_pledge_pct,NSE XBRL,,,NSE filing unavailable after 3 attempts: Invalid URL '-': No scheme supplied. Perhaps you meant https://-?,2026-07-20T12:15:16
+KPL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+LAHOTIOV,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+MADHAVIPL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+MAFATIND,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+MAJESAUT,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+MCCHRLS-B,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+MCX,promoter_pledge_pct,NSE XBRL,,,NSE XBRL 31-DEC-2018: pledge flag/value not reported,2026-07-20T12:15:16
+MENNPIS,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+MERCANTILE,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+METROGLOBL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+MODIS,promoter_pledge_pct,NSE XBRL,,0.0,backfilled,2026-07-20T12:15:16
+NATIONSTD,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+NEAGI,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+NILE,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+NIRLON,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+NITTAGELA,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+NOVARTIND,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+OMPOWER,promoter_pledge_pct,NSE XBRL,,0.0,backfilled,2026-07-20T12:15:16
+PIONRINV,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+PML,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+PRAVEG,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+PREMCO,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+QUINT,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+RAJPALAYAM,promoter_pledge_pct,NSE XBRL,,,NSE filing unavailable after 3 attempts: Invalid URL '-': No scheme supplied. Perhaps you meant https://-?,2026-07-20T12:15:16
+RRIL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+RSDFIN,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+SAPPL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+SAYAJIHOTL,promoter_pledge_pct,NSE XBRL,,,NSE filing unavailable after 3 attempts: Invalid URL '-': No scheme supplied. Perhaps you meant https://-?,2026-07-20T12:15:16
+SCANSTL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+SEIL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+SHARDUL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+SHBAJRG,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+SHINDL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+SHRIKRISH,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+SICAGEN,promoter_pledge_pct,NSE XBRL,,,NSE XBRL 30-JUN-2021: pledge flag/value not reported,2026-07-20T12:15:16
+SIKA,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+SONAL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+SURYALA,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+TAALTECH,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+TECHNVISN,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+THAKDEV,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+TIMEX,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+TRANSPEK,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ULTRAMAR,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+WELSPLSOL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+WPIL,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ZFSTEERING,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
+ZSARACOM,promoter_pledge_pct,NSE XBRL,,,NSE has no current shareholding XBRL,2026-07-20T12:15:16
