@@ -1,0 +1,2015 @@
+timestamp,symbol,name,outcome,detail
+2026-07-20T13:39:44,21STCENMGM,Twentyfirst Century Management Services Limited,generated,
+2026-07-20T13:39:51,5PAISA,5paisa Capital Limited,generated,
+2026-07-20T13:39:57,AAATECH,AAA Technologies Limited,generated,
+2026-07-20T13:41:04,AADHARHFC,AADHAR HOUSING FINANCE L,generated,
+2026-07-20T13:41:11,AARNAV,Aarnav Fashions Limited,generated,
+2026-07-20T13:41:19,AARON,Aaron Industries Limited,generated,
+2026-07-20T13:41:31,AARTIIND,Aarti Industries Limited,generated,
+2026-07-20T13:41:40,AARTISURF,Aarti Surfactants Limited,generated,
+2026-07-20T13:41:47,AARVI,Aarvi Encon Limited,generated,
+2026-07-20T13:41:57,AAVAS,Aavas Financiers Limited,generated,
+2026-07-20T13:42:02,ABB,ABB India Limited,generated,
+2026-07-20T13:42:10,ABBOTINDIA,Abbott India Limited,generated,
+2026-07-20T13:42:20,ABCAPITAL,Aditya Birla Capital Limited,generated,
+2026-07-20T13:42:28,ABCOTS,A B COTSPIN INDIA LIMITED,generated,
+2026-07-20T13:42:36,ABINFRA,A B INFRABUILD LIMITED,generated,
+2026-07-20T13:42:44,ABLBL,ADITYA BIRLA LIFES BRAN L,generated,
+2026-07-20T13:43:00,ABMINTLLTD,ABM International Limited,generated,
+2026-07-20T13:43:10,ABMKNO,ABM Knowledgeware Limited,generated,
+2026-07-20T13:43:18,ABSLAMC,Aditya Birla Sun Life AMC Limited,generated,
+2026-07-20T13:43:28,ACC,ACC Limited,generated,
+2026-07-20T13:44:00,ACCELYA,Accelya Solutions India Limited,generated,
+2026-07-20T13:44:08,ACE,Action Construction Equipment Limited,generated,
+2026-07-20T13:44:11,ACEINTEG,Ace Integrated Solutions Limited,generated,
+2026-07-20T13:44:13,ACI,Archean Chemical Industries Limited,generated,
+2026-07-20T13:44:15,ACL,Andhra Cements Limited,generated,
+2026-07-20T13:44:18,ACMESOLAR,ACME SOLAR HOLDINGS LTD,generated,
+2026-07-20T13:44:20,ACSTECH,ACS Technologies Limited,generated,
+2026-07-20T13:44:23,ACUTAAS,Acutaas Chemicals Limited,generated,
+2026-07-20T13:44:25,ADANIENSOL,Adani Energy Solutions Limited,generated,
+2026-07-20T13:44:28,ADANIENT,Adani Enterprises Limited,generated,
+2026-07-20T13:44:30,ADANIGREEN,Adani Green Energy Limited,generated,
+2026-07-20T13:44:33,ADANIPORTS,Adani Ports and Special Economic Zone Limited,generated,
+2026-07-20T13:44:35,ADANIPOWER,Adani Power Limited,generated,
+2026-07-20T13:44:37,ADFFOODS,ADF Foods Limited,generated,
+2026-07-20T13:44:40,ADL,Archidply Decor Limited,generated,
+2026-07-20T13:44:42,ADOR,Ador Welding Limited,generated,
+2026-07-20T13:44:44,ADROITINFO,Adroit Infotech Limited,generated,
+2026-07-20T13:44:46,ADSL,Allied Digital Services Limited,generated,
+2026-07-20T13:44:49,ADVAIT,Advait Energy Transitions Limited,generated,
+2026-07-20T13:44:51,ADVANCE,ADVANCE AGROLIFE LIMITED,generated,
+2026-07-20T13:44:53,ADVANIHOTR,Advani Hotels & Resorts (India) Limited,generated,
+2026-07-20T13:44:56,ADVENTHTL,Advent Hotels International Limited,generated,
+2026-07-20T13:44:58,ADVENZYMES,Advanced Enzyme Technologies Limited,generated,
+2026-07-20T13:45:01,AEGISLOG,AEGIS LOGISTICS LIMITED,generated,
+2026-07-20T13:45:03,AEGISVOPAK,AEGIS VOPAK TERMINALS LTD,generated,
+2026-07-20T13:45:05,AEPL,Artemis Electricals and Projects Limited,generated,
+2026-07-20T13:45:08,AEQUS,AEQUS LIMITED,generated,
+2026-07-20T13:45:10,AEROENTER,Aeroflex Enterprises Limited,generated,
+2026-07-20T13:45:12,AEROFLEX,Aeroflex Industries Limited,generated,
+2026-07-20T13:45:15,AERONEU,Aeroflex Neu Limited,generated,
+2026-07-20T13:45:17,AETHER,Aether Industries Limited,generated,
+2026-07-20T13:45:20,AFCONS,AFCONS INFRASTRUCTURE LTD,generated,
+2026-07-20T13:45:22,AFFLE,Affle 3i Limited,generated,
+2026-07-20T13:45:25,AFSL,Abans Financial Services Limited,generated,
+2026-07-20T13:45:27,AGARIND,Agarwal Industrial Corporation Limited,generated,
+2026-07-20T13:45:30,AGARWALEYE,DR AGARWALS HEALTH CARE L,generated,
+2026-07-20T13:45:32,AGI,AGI Greenpac Limited,generated,
+2026-07-20T13:45:34,AGIIL,AGI Infra Limited,generated,
+2026-07-20T13:45:37,AGROPHOS,Agro Phos (India) Limited,generated,
+2026-07-20T13:45:39,AHCL,ANLON HEALTHCARE LIMITED,generated,
+2026-07-20T13:45:41,AHLADA,Ahlada Engineers Limited,generated,
+2026-07-20T13:45:44,AHLEAST,Asian Hotels (East) Limited,generated,
+2026-07-20T13:45:46,AHLUCONT,Ahluwalia Contracts (India) Limited,generated,
+2026-07-20T13:45:48,AIAENG,AIA Engineering Limited,generated,
+2026-07-20T13:45:51,AIIL,Authum Investment & Infrastructure Limited,generated,
+2026-07-20T13:45:53,AIRAN,Airan Limited,generated,
+2026-07-20T13:45:56,AIROLAM,Airo Lam Limited,generated,
+2026-07-20T13:45:58,AJANTPHARM,Ajanta Pharma Limited,generated,
+2026-07-20T13:46:00,AJAXENGG,AJAX ENGINEERING LIMITED,generated,
+2026-07-20T13:46:03,AJMERA,Ajmera Realty & Infra India Limited,generated,
+2026-07-20T13:46:05,AJOONI,Ajooni Biotech Limited,generated,
+2026-07-20T13:46:08,AKASH,Akash Infra-Projects Limited,generated,
+2026-07-20T13:46:10,AKCAPIT,A. K. Capital Services Limited,generated,
+2026-07-20T13:46:12,AKG,AKG Exim Limited,generated,
+2026-07-20T13:46:15,AKI,AKI India Limited,generated,
+2026-07-20T13:46:17,AKSHAR,Akshar Spintex Limited,generated,
+2026-07-20T13:46:20,AKUMS,AKUMS DRUGS AND PHARMA L,generated,
+2026-07-20T13:46:22,ALANKIT,Alankit Limited,generated,
+2026-07-20T13:46:24,ALBERTDAVD,Albert David Limited,generated,
+2026-07-20T13:46:27,ALEMBICLTD,Alembic Limited,generated,
+2026-07-20T13:46:29,ALGOQUANT,Algoquant Fintech Limited,generated,
+2026-07-20T13:46:31,ALICON,Alicon Castalloy Limited,generated,
+2026-07-20T13:46:34,ALIVUS,Alivus Life Sciences Limited,generated,
+2026-07-20T13:46:36,ALKEM,Alkem Laboratories Limited,generated,
+2026-07-20T13:46:39,ALKYLAMINE,Alkyl Amines Chemicals Limited,generated,
+2026-07-20T13:46:41,ALLCARGO,Allcargo Logistics Limited,generated,
+2026-07-20T13:46:43,ALLDIGI,Alldigi Tech Limited,generated,
+2026-07-20T13:46:46,ALLTIME,ALL TIME PLASTICS LIMITED,generated,
+2026-07-20T13:46:48,ALMONDZ,Almondz Global Securities Limited,generated,
+2026-07-20T13:46:50,ALOKINDS,Alok Industries Limited,generated,
+2026-07-20T13:46:53,ALPA,Alpa Laboratories Limited,generated,
+2026-07-20T13:46:55,ALPHAGEO,Alphageo (India) Limited,generated,
+2026-07-20T13:46:57,AMAGI,AMAGI MEDIA LABS LIMITED,generated,
+2026-07-20T13:47:00,AMBALALSA,Ambalal Sarabhai Enterprises Limited,generated,
+2026-07-20T13:47:02,AMBER,Amber Enterprises India Limited,generated,
+2026-07-20T13:47:04,AMBICAAGAR,Ambica Agarbathies Aroma & Industries Limited,generated,
+2026-07-20T13:47:07,AMBIKCO,Ambika Cotton Mills Limited,generated,
+2026-07-20T13:47:09,AMBUJACEM,Ambuja Cements Limited,generated,
+2026-07-20T13:47:11,AMDIND,AMD Industries Limited,generated,
+2026-07-20T13:47:14,AMIRCHAND,AMIR CHAND JAG KUM (E) L,generated,
+2026-07-20T13:47:16,AMJLAND,AMJ Land Holdings Limited,generated,
+2026-07-20T13:47:19,AMNPLST,Amines & Plasticizers Limited,generated,
+2026-07-20T13:47:21,AMRUTANJAN,Amrutanjan Health Care Limited,generated,
+2026-07-20T13:47:24,ANANDRATHI,Anand Rathi Wealth Limited,generated,
+2026-07-20T13:47:26,ANANTRAJ,Anant Raj Limited,generated,
+2026-07-20T13:47:28,ANDHRAPAP,Andhra Paper Limited,generated,
+2026-07-20T13:47:30,ANDHRSUGAR,The Andhra Sugars Limited,generated,
+2026-07-20T13:47:33,ANGELONE,Angel One Limited,generated,
+2026-07-20T13:47:35,ANMOL,Anmol India Limited,generated,
+2026-07-20T13:47:38,ANTELOPUS,ANTELOPUS SELAN ENRGY LTD,generated,
+2026-07-20T13:47:40,ANTGRAPHIC,Antarctica Limited,generated,
+2026-07-20T13:47:42,ANTHEM,ANTHEM BIOSCIENCES LTD,generated,
+2026-07-20T13:47:45,ANUHPHR,Anuh Pharma Limited,generated,
+2026-07-20T13:47:47,ANUP,The Anup Engineering Limited,generated,
+2026-07-20T13:47:49,ANURAS,Anupam Rasayan India Ltd,generated,
+2026-07-20T13:47:52,APARINDS,APAR Industries Limited,generated,
+2026-07-20T13:47:54,APCL,Anjani Portland Cement Limited,generated,
+2026-07-20T13:47:56,APCOTEXIND,Apcotex Industries Limited,generated,
+2026-07-20T13:47:59,APEX,Apex Frozen Foods Limited,generated,
+2026-07-20T13:48:01,APLAPOLLO,APL Apollo Tubes Limited,generated,
+2026-07-20T13:48:03,APLLTD,Alembic Pharmaceuticals Limited,generated,
+2026-07-20T13:48:06,APOLLO,Apollo Micro Systems Limited,generated,
+2026-07-20T13:48:08,APOLLOHOSP,Apollo Hospitals Enterprise Limited,generated,
+2026-07-20T13:48:10,APOLLOPIPE,Apollo Pipes Limited,generated,
+2026-07-20T13:48:13,APOLLOTYRE,Apollo Tyres Limited,generated,
+2026-07-20T13:48:15,APOLSINHOT,Apollo Sindoori Hotels Limited,generated,
+2026-07-20T13:48:17,APTUS,Aptus Value Housing Finance India Limited,generated,
+2026-07-20T13:48:20,AQYLON,Aqylon Nexus Limited,generated,
+2026-07-20T13:48:22,ARCHIDPLY,Archidply Industries Limited,generated,
+2026-07-20T13:48:25,ARCHIES,Archies Limited,generated,
+2026-07-20T13:48:27,ARE&M,Amara Raja Energy & Mobility Limited,generated,
+2026-07-20T13:48:30,ARENTERP,Rajdarshan Industries Limited,generated,
+2026-07-20T13:48:32,ARFIN,Arfin India Limited,generated,
+2026-07-20T13:48:34,ARIES,Aries Agro Limited,generated,
+2026-07-20T13:48:37,ARIHANT,Arihant Foundations & Housing Limited,generated,
+2026-07-20T13:48:39,ARIHANTCAP,Arihant Capital Markets Limited,generated,
+2026-07-20T13:48:42,ARIHANTSUP,Arihant Superstructures Limited,generated,
+2026-07-20T13:48:44,ARIS,Arisinfra Solutions Limited,generated,
+2026-07-20T13:48:46,ARKADE,ARKADE DEVELOPERS LIMITED,generated,
+2026-07-20T13:48:49,ARMANFIN,Arman Financial Services Limited,generated,
+2026-07-20T13:48:51,AROGRANITE,Aro Granite Industries Limited,generated,
+2026-07-20T13:48:54,ARSSBL,ANAND RATHI SH N STK BR L,generated,
+2026-07-20T13:48:56,ARTEMISMED,Artemis Medicare Services Limited,generated,
+2026-07-20T13:48:58,ARTNIRMAN,Art Nirman Limited,generated,
+2026-07-20T13:49:01,ARVEE,Arvee Laboratories (India) Ltd.,generated,
+2026-07-20T13:49:03,ARVIND,Arvind Limited,generated,
+2026-07-20T13:49:05,ARVINDFASN,Arvind Fashions Limited,generated,
+2026-07-20T13:49:08,ARVSMART,Arvind SmartSpaces Limited,generated,
+2026-07-20T13:49:10,ASAHIINDIA,Asahi India Glass Limited,generated,
+2026-07-20T13:49:12,ASAHISONG,Asahi Songwon Colors Limited,generated,
+2026-07-20T13:49:14,ASAL,Automotive Stampings and Assemblies Limited,generated,
+2026-07-20T13:49:17,ASALCBR,Associated Alcohols & Breweries Limited,generated,
+2026-07-20T13:49:19,ASHAPURMIN,Ashapura Minechem Limited,generated,
+2026-07-20T13:49:21,ASHIANA,Ashiana Housing Limited,generated,
+2026-07-20T13:49:24,ASHIKA,Ashika Global Securities Limited,generated,
+2026-07-20T13:49:27,ASHIMASYN,Ashima Limited,generated,
+2026-07-20T13:49:29,ASHOKA,Ashoka Buildcon Limited,generated,
+2026-07-20T13:49:31,ASHOKAMET,Ashoka Metcast Limited,generated,
+2026-07-20T13:49:34,ASHOKLEY,Ashok Leyland Limited,generated,
+2026-07-20T13:49:36,ASIANENE,Asian Energy Services Limited,generated,
+2026-07-20T13:49:39,ASIANHOTNR,Asian Hotels (North) Limited,generated,
+2026-07-20T13:49:41,ASIANTILES,Asian Granito India Limited,generated,
+2026-07-20T13:49:43,ASKAUTOLTD,ASK AUTOMOTIVE LIMITED,generated,
+2026-07-20T13:49:46,ASPINWALL,Aspinwall and Company Limited,generated,
+2026-07-20T13:49:48,ASTAR,Asian Star Company Limited,generated,
+2026-07-20T13:49:50,ASTEC,Astec LifeSciences Limited,generated,
+2026-07-20T13:49:53,ASTERDM,Aster DM Quality Care Limited,generated,
+2026-07-20T13:49:55,ASTRAL,Astral Limited,generated,
+2026-07-20T13:49:58,ASTRAMICRO,Astra Microwave Products Limited,generated,
+2026-07-20T13:50:00,ASTRAZEN,AstraZeneca Pharma India Limited,generated,
+2026-07-20T13:50:02,ATALREAL,Atal Realtech Limited,generated,
+2026-07-20T13:50:05,ATAM,Atam Valves Limited,generated,
+2026-07-20T13:50:07,ATGL,Adani Total Gas Limited,generated,
+2026-07-20T13:50:09,ATHERENERG,Ather Energy Limited,generated,
+2026-07-20T13:50:12,ATL,Allcargo Terminals Limited,generated,
+2026-07-20T13:50:14,ATLANTAA,Atlantaa Limited,generated,
+2026-07-20T13:50:17,ATLANTAELE,ATLANTA ELECTRICALS LTD,generated,
+2026-07-20T13:50:19,ATLASCYCLE,Atlas Cycles (Haryana) Limited,generated,
+2026-07-20T13:50:22,ATUL,Atul Ltd,generated,
+2026-07-20T13:50:24,ATULAUTO,Atul Auto Limited,generated,
+2026-07-20T13:50:26,AUBANK,AU Small Finance Bank Limited,generated,
+2026-07-20T13:50:29,AURIONPRO,Aurionpro Solutions Limited,generated,
+2026-07-20T13:50:31,AUROPHARMA,Aurobindo Pharma Limited,generated,
+2026-07-20T13:50:34,AURUM,Aurum PropTech Limited,generated,
+2026-07-20T13:50:36,AUTOAXLES,Automotive Axles Limited,generated,
+2026-07-20T13:50:38,AVALON,Avalon Technologies Limited,generated,
+2026-07-20T13:50:41,AVANTEL,Avantel Limited,generated,
+2026-07-20T13:50:43,AVANTIFEED,Avanti Feeds Limited,generated,
+2026-07-20T13:50:45,AVL,Aditya Vision Limited,generated,
+2026-07-20T13:50:48,AVONMORE,Avonmore Capital & Management Services Limited,generated,
+2026-07-20T13:50:50,AVROIND,Avro India Limited,generated,
+2026-07-20T13:50:53,AVTNPL,AVT Natural Products Limited,generated,
+2026-07-20T13:50:55,AWFIS,AWFIS SPACE SOLUTIONS LTD,generated,
+2026-07-20T13:50:57,AWHCL,Antony Waste Handling Cell Limited,generated,
+2026-07-20T13:51:00,AWL,AWL Agri Business Limited,generated,
+2026-07-20T13:51:02,AXISBANK,Axis Bank Limited,generated,
+2026-07-20T13:51:05,AXISCADES,AXISCADES Technologies Limited,generated,
+2026-07-20T13:51:07,AXITA,Axita Cotton Limited,generated,
+2026-07-20T13:51:09,AYE,AYE FINANCE LIMITED,generated,
+2026-07-20T13:51:12,AYMSYNTEX,AYM Syntex Limited,generated,
+2026-07-20T13:51:14,AZAD,AZAD ENGINEERING LIMITED,generated,
+2026-07-20T13:51:17,BAGFILMS,B.A.G. Films and Media Limited,generated,
+2026-07-20T13:51:19,BAIDFIN,Baid Finserv Limited,generated,
+2026-07-20T13:51:21,BAJAJ-AUTO,Bajaj Auto Limited,generated,
+2026-07-20T13:51:24,BAJAJCON,Bajaj Consumer Care Limited,generated,
+2026-07-20T13:51:26,BAJAJELEC,Bajaj Electricals Limited,generated,
+2026-07-20T13:51:29,BAJAJFINSV,Bajaj Finserv Ltd.,generated,
+2026-07-20T13:51:31,BAJAJHCARE,Bajaj HealthCare Limited,generated,
+2026-07-20T13:51:34,BAJAJHFL,BAJAJ HOUSING FINANCE LTD,generated,
+2026-07-20T13:51:36,BAJAJHIND,Bajaj Hindusthan Sugar Limited,generated,
+2026-07-20T13:51:38,BAJAJHLDNG,Bajaj Holdings & Investment Limited,generated,
+2026-07-20T13:51:41,BAJAJINDEF,INDEF MANUFACTURING LTD,generated,
+2026-07-20T13:51:43,BAJAJST,Bajaj Steel Industries Limited,generated,
+2026-07-20T13:51:45,BAJEL,Bajel Projects Limited,generated,
+2026-07-20T13:51:48,BAJFINANCE,Bajaj Finance Limited,generated,
+2026-07-20T13:51:50,BALAJEE,SHREE TIRUPATI BALAJEE L,generated,
+2026-07-20T13:51:53,BALAJITELE,Balaji Telefilms Limited,generated,
+2026-07-20T13:51:55,BALAMINES,Balaji Amines Limited,generated,
+2026-07-20T13:51:58,BALKRISHNA,Balkrishna Paper Mills Limited,generated,
+2026-07-20T13:52:00,BALKRISIND,Balkrishna Industries Limited,generated,
+2026-07-20T13:52:02,BALMLAWRIE,Balmer Lawrie & Co. Ltd.,generated,
+2026-07-20T13:52:05,BALPHARMA,Bal Pharma Limited,generated,
+2026-07-20T13:52:57,BALRAMCHIN,Balrampur Chini Mills Limited,generated,
+2026-07-20T13:53:00,BALUFORGE,Balu Forge Industries Limited,generated,
+2026-07-20T13:53:03,BANARBEADS,Banaras Beads Limited,generated,
+2026-07-20T13:53:06,BANARISUG,Bannari Amman Sugars Limited,generated,
+2026-07-20T13:53:09,BANCOINDIA,Banco Products (India) Limited,generated,
+2026-07-20T13:53:14,BANDHANBNK,Bandhan Bank Limited,generated,
+2026-07-20T13:53:17,BANG,Bang Overseas Limited,generated,
+2026-07-20T13:54:18,BANKBARODA,Bank of Baroda Limited,generated,
+2026-07-20T13:54:21,BANKINDIA,Bank of India Limited,generated,
+2026-07-20T13:54:24,BANSALWIRE,BANSAL WIRE INDUSTRIES L,generated,
+2026-07-20T13:54:26,BANSWRAS,Banswara Syntex Limited,generated,
+2026-07-20T13:54:29,BASF,BASF India Limited,generated,
+2026-07-20T13:54:32,BATAINDIA,Bata India Limited,generated,
+2026-07-20T13:55:32,BATLIBOI,Batliboi Limited,generated,
+2026-07-20T13:55:36,BAYERCROP,Bayer CropScience Limited,generated,
+2026-07-20T13:55:39,BBL,Bharat Bijlee Limited,generated,
+2026-07-20T13:55:41,BBOX,Black Box Limited,generated,
+2026-07-20T13:55:44,BBTC,The Bombay Burmah Trading Corporation Limited,generated,
+2026-07-20T13:55:47,BBTCL,B&B Triplewall Containers Limited,generated,
+2026-07-20T13:56:45,BCG,Brightcom Group Limited,generated,
+2026-07-20T13:56:48,BCLIND,BCL Industries Limited,generated,
+2026-07-20T13:56:51,BCONCEPTS,Brand Concepts Limited,generated,
+2026-07-20T13:56:53,BCPL,BCPL Railway Infrastructure Limited,generated,
+2026-07-20T13:56:56,BDL,Bharat Dynamics Limited,generated,
+2026-07-20T13:56:59,BEARDSELL,Beardsell Limited,generated,
+2026-07-20T13:57:57,BECTORFOOD,Mrs. Bectors Food Specialities Limited,generated,
+2026-07-20T13:58:00,BEDMUTHA,Bedmutha Industries Limited,generated,
+2026-07-20T13:58:03,BEEKAY,Beekay Steel Industries Limited,generated,
+2026-07-20T13:58:06,BEL,Bharat Electronics Limited,generated,
+2026-07-20T13:58:09,BELLACASA,Bella Casa Fashion & Retail Limited,generated,
+2026-07-20T13:58:11,BELRISE,BELRISE INDUSTRIES LTD,generated,
+2026-07-20T13:58:14,BEML,BEML Limited,generated,
+2026-07-20T13:59:12,BENGALASM,Bengal & Assam Company Limited,generated,
+2026-07-20T13:59:15,BEPL,Bhansali Engineering Polymers Limited,generated,
+2026-07-20T13:59:18,BERGEPAINT,Berger Paints India Limited,generated,
+2026-07-20T13:59:21,BESTAGRO,Best Agrolife Limited,generated,
+2026-07-20T13:59:24,BETA,BETA DRUGS LIMITED,generated,
+2026-07-20T14:00:27,BFINVEST,BF Investment Limited,generated,
+2026-07-20T14:00:30,BFUTILITIE,BF Utilities Limited,generated,
+2026-07-20T14:00:33,BHAGCHEM,Bhagiradha Chemicals & Industries Limited,generated,
+2026-07-20T14:00:36,BHARATCOAL,BHARAT COKING COAL LTD,generated,
+2026-07-20T14:00:39,BHARATFORG,Bharat Forge Limited,generated,
+2026-07-20T14:00:41,BHARATRAS,Bharat Rasayan Limited,generated,
+2026-07-20T14:01:41,BHARATSE,Bharat Seats Limited,generated,
+2026-07-20T14:02:40,BHARATWIRE,Bharat Wire Ropes Limited,generated,
+2026-07-20T14:02:43,BHARTIARTL,Bharti Airtel Limited,generated,
+2026-07-20T14:02:46,BHARTIHEXA,BHARTI HEXACOM LIMITED,generated,
+2026-07-20T14:02:48,BHEL,Bharat Heavy Electricals Limited,generated,
+2026-07-20T14:02:51,BI,Bilcare Limited,generated,
+2026-07-20T14:02:54,BIGBLOC,Bigbloc Construction Limited,generated,
+2026-07-20T14:02:57,BIKAJI,Bikaji Foods International Limited,generated,
+2026-07-20T14:03:57,BIL,Bhartiya International Ltd.,generated,
+2026-07-20T14:04:00,BIMETAL,Bimetal Bearings Limited,generated,
+2026-07-20T14:04:03,BIOCON,Biocon Limited,generated,
+2026-07-20T14:04:06,BIOFILCHEM,Biofil Chemicals and Pharmaceuticals Limited,generated,
+2026-07-20T14:04:09,BIRLACORPN,Birla Corporation Limited,generated,
+2026-07-20T14:04:17,BIRLAMONEY,Aditya Birla Money Limited,generated,
+2026-07-20T14:05:09,BIRLANU,BirlaNu Limited,generated,
+2026-07-20T14:05:12,BIRLAPREC,Birla Precision Technologies Limited,generated,
+2026-07-20T14:05:15,BLACKBUCK,BlackBuck Limited,generated,
+2026-07-20T14:05:17,BLAL,BEML Land Assets Limited,generated,
+2026-07-20T14:05:20,BLBLIMITED,BLB Limited,generated,
+2026-07-20T14:05:23,BLIL,Balmer Lawrie Investments Limited,generated,
+2026-07-20T14:06:23,BLKASHYAP,B.L. Kashyap and Sons Limited,generated,
+2026-07-20T14:07:16,BLS,BLS International Services Limited,generated,
+2026-07-20T14:07:20,BLSE,BLS E-SERVICES LIMITED,generated,
+2026-07-20T14:07:22,BLUEDART,Blue Dart Express Limited,generated,
+2026-07-20T14:07:25,BLUEJET,Blue Jet Healthcare Limited,generated,
+2026-07-20T14:07:28,BLUESTARCO,Blue Star Limited,generated,
+2026-07-20T14:07:31,BLUESTONE,BLUESTONE JEWEL LFSTL LTD,generated,
+2026-07-20T14:07:34,BLUSPRING,Bluspring Enterprises Limited,generated,
+2026-07-20T14:08:32,BMWVENTLTD,BMW VENTURES LIMITED,generated,
+2026-07-20T14:08:35,BNALTD,B & A Limited,generated,
+2026-07-20T14:08:37,BOHRAIND,Bohra Industries Limited,generated,
+2026-07-20T14:08:40,BOMDYEING,The Bombay Dyeing and Manufacturing Company Limited,generated,
+2026-07-20T14:08:43,BONLON,Bonlon Industries Limited,generated,
+2026-07-20T14:08:46,BORANA,BORANA WEAVES LIMITED,generated,
+2026-07-20T14:09:44,BOROLTD,Borosil Limited,generated,
+2026-07-20T14:09:47,BORORENEW,Borosil Renewables Limited,generated,
+2026-07-20T14:09:50,BOROSCI,Borosil Scientific Limited,generated,
+2026-07-20T14:10:53,BOSCH-HCIL,Bosch Home Comfort India Limited,generated,
+2026-07-20T14:10:56,BOSCHLTD,Bosch Limited,generated,
+2026-07-20T14:10:59,BPCL,Bharat Petroleum Corporation Limited,generated,
+2026-07-20T14:11:37,BPL,BPL Limited,generated,
+2026-07-20T14:11:51,BRIGADE,Brigade Enterprises Limited,generated,
+2026-07-20T14:11:53,BRIGHOTEL,BRIGADE HOTEL VENTURE LTD,generated,
+2026-07-20T14:11:58,BRITANNIA,Britannia Industries Limited,generated,
+2026-07-20T14:12:01,BRNL,Bharat Road Network Limited,generated,
+2026-07-20T14:12:04,BSE,BSE Limited,generated,
+2026-07-20T14:12:07,BSL,BSL Limited,generated,
+2026-07-20T14:12:10,BSOFT,Birlasoft Limited,generated,
+2026-07-20T14:13:04,BTML,Bodhi Tree Multimedia Limited,generated,
+2026-07-20T14:13:07,BUILDPRO,Shankara Buildpro Limited,generated,
+2026-07-20T14:13:10,BUTTERFLY,Butterfly Gandhimathi Appliances Limited,generated,
+2026-07-20T14:13:13,BVCL,Barak Valley Cements Limited,generated,
+2026-07-20T14:13:16,CAMLINFINE,Camlin Fine Sciences Limited,generated,
+2026-07-20T14:13:18,CAMPUS,Campus Activewear Limited,generated,
+2026-07-20T14:14:19,CAMS,Computer Age Management Services Limited,generated,
+2026-07-20T14:14:22,CANBK,Canara Bank,generated,
+2026-07-20T14:14:24,CANFINHOME,Can Fin Homes Limited,generated,
+2026-07-20T14:14:27,CANHLIFE,CANARA HSBC LIFE INS CO L,generated,
+2026-07-20T14:14:30,CANTABIL,Cantabil Retail India Limited,generated,
+2026-07-20T14:14:33,CAPACITE,Capacit'e Infraprojects Limited,generated,
+2026-07-20T14:15:30,CAPILLARY,CAPILLARY TECHNO INDIA L,generated,
+2026-07-20T14:16:31,CAPITALSFB,Capital Small Finance Bank Limited,generated,
+2026-07-20T14:16:34,CAPLIPOINT,Caplin Point Laboratories Limited,generated,
+2026-07-20T14:16:37,CARBORUNIV,Carborundum Universal Limited,generated,
+2026-07-20T14:16:40,CARERATING,CARE Ratings Limited,generated,
+2026-07-20T14:16:43,CARRARO,CARRARO INDIA LIMITED,generated,
+2026-07-20T14:16:45,CARTRADE,CarTrade Tech Limited,generated,
+2026-07-20T14:16:48,CARYSIL,Carysil Limited,generated,
+2026-07-20T14:17:49,CASTROLIND,Castrol India Limited,generated,
+2026-07-20T14:17:52,CCAVENUE,AvenuesAI Limited,generated,
+2026-07-20T14:17:55,CCCL,Consolidated Construction Consortium Limited,generated,
+2026-07-20T14:17:58,CCHHL,Country Club Hospitality & Holidays Limited,generated,
+2026-07-20T14:18:00,CCL,CCL Products (India) Limited,generated,
+2026-07-20T14:18:03,CDSL,Central Depository Services (India) Limited,generated,
+2026-07-20T14:19:03,CEATLTD,CEAT Limited,generated,
+2026-07-20T14:19:06,CEIGALL,CEIGALL INDIA LIMITED,generated,
+2026-07-20T14:19:10,CEINSYS,Ceinsys Tech Limited,generated,
+2026-07-20T14:19:13,CELEBRITY,Celebrity Fashions Limited,generated,
+2026-07-20T14:19:15,CELLO,Cello World Limited,generated,
+2026-07-20T14:19:18,CEMPRO,Cemindia Projects Limited,generated,
+2026-07-20T14:20:15,CENTENKA,Century Enka Limited,generated,
+2026-07-20T14:20:56,CENTEXT,Century Extrusions Limited,generated,
+2026-07-20T14:21:05,CENTRALBK,Central Bank of India,generated,
+2026-07-20T14:21:08,CENTRUM,Centrum Capital Limited,generated,
+2026-07-20T14:21:11,CENTUM,Centum Electronics Limited,generated,
+2026-07-20T14:21:14,CENTURYPLY,Century Plyboards (India) Limited,generated,
+2026-07-20T14:21:17,CERA,Cera Sanitaryware Limited,generated,
+2026-07-20T14:21:19,CESC,CESC Limited,generated,
+2026-07-20T14:21:22,CEWATER,CONCORD ENVIRO SYSTEMS L,generated,
+2026-07-20T14:22:22,CGCL,Capri Global Capital Limited,generated,
+2026-07-20T14:22:25,CGPOWER,CG Power and Industrial Solutions Limited,generated,
+2026-07-20T14:22:28,CHALET,Chalet Hotels Limited,generated,
+2026-07-20T14:22:31,CHAMBLFERT,Chambal Fertilisers and Chemicals Limited,generated,
+2026-07-20T14:22:34,CHEMPLASTS,Chemplast Sanmar Limited,generated,
+2026-07-20T14:22:38,CHENNPETRO,Chennai Petroleum Corporation Limited,generated,
+2026-07-20T14:23:35,CHEVIOT,Cheviot Company Limited,generated,
+2026-07-20T14:23:38,CHOICEIN,Choice International Limited,generated,
+2026-07-20T14:23:41,CHOLAFIN,Cholamandalam Investment and Finance Company Limited,generated,
+2026-07-20T14:23:44,CHOLAHLDNG,Cholamandalam Financial Holdings Limited,generated,
+2026-07-20T14:23:47,CIEINDIA,CIE Automotive India Limited,generated,
+2026-07-20T14:23:49,CIFL,Capital India Finance Limited,generated,
+2026-07-20T14:24:49,CINELINE,Cineline India Limited,generated,
+2026-07-20T14:25:29,CINEVISTA,Cinevista Limited,generated,
+2026-07-20T14:25:32,CIPLA,Cipla Limited,generated,
+2026-07-20T14:25:35,CLEAN,Clean Science and Technology Limited,generated,
+2026-07-20T14:25:38,CLEANMAX,CLEAN MAX ENVIRO EN SOL L,generated,
+2026-07-20T14:25:41,CLSEL,Chaman Lal Setia Exports Ltd.,generated,
+2026-07-20T14:25:43,CMPDI,CENTRAL MINE P N D INST L,generated,
+2026-07-20T14:25:46,CMRGREEN,CMR GREEN TECHNOLOGIES L,generated,
+2026-07-20T14:26:44,CMSINFO,CMS Info Systems Limited,generated,
+2026-07-20T14:26:47,CNL,Creative Newtech Limited,generated,
+2026-07-20T14:26:49,COALINDIA,Coal India Limited,generated,
+2026-07-20T14:26:52,COASTCORP,Coastal Corporation Limited,generated,
+2026-07-20T14:26:55,COCHINSHIP,Cochin Shipyard Limited,generated,
+2026-07-20T14:26:58,COCKERILL,John Cockerill India Limited,generated,
+2026-07-20T14:27:58,COFORGE,Coforge Limited,generated,
+2026-07-20T14:28:01,COHANCE,COHANCE LIFESCIENCES LTD,generated,
+2026-07-20T14:29:04,COLPAL,Colgate-Palmolive (India) Limited,generated,
+2026-07-20T14:29:07,COMFINTE,Comfort Intech Limited,generated,
+2026-07-20T14:29:10,COMPUSOFT,Compucom Software Limited,generated,
+2026-07-20T14:29:12,COMSYN,Commercial Syn Bags Limited,generated,
+2026-07-20T14:29:15,CONCOR,Container Corporation of India Limited,generated,
+2026-07-20T14:29:18,CONCORDBIO,Concord Biotech Limited,generated,
+2026-07-20T14:30:01,CONFIPET,Confidence Petroleum India Limited,generated,
+2026-07-20T14:30:04,CONSOFINVT,Consolidated Finvest & Holdings Limited,generated,
+2026-07-20T14:30:08,CONTROLPR,Control Print Limited,generated,
+2026-07-20T14:30:11,CORALFINAC,Coral India Finance and Housing Limited,generated,
+2026-07-20T14:30:14,CORDELIA,WATERWAYS LEISURE TOUR L,generated,
+2026-07-20T14:31:17,COROMANDEL,Coromandel International Limited,generated,
+2026-07-20T14:31:20,CORONA,CORONA REMEDIES LIMITED,generated,
+2026-07-20T14:31:23,COSMOFIRST,Cosmo First Limited,generated,
+2026-07-20T14:31:26,COUNCODOS,Country Condo's Limited,generated,
+2026-07-20T14:31:29,CPEDU,Career Point Edutech Ltd.,generated,
+2026-07-20T14:31:32,CPPLUS,ADITYA INFOTECH LIMITED,generated,
+2026-07-20T14:32:29,CRAFTSMAN,Craftsman Automation Limited,generated,
+2026-07-20T14:32:32,CRAMC,CANARA ROBECO AMC LIMITED,generated,
+2026-07-20T14:32:35,CREATIVEYE,Creative Eye Limited,generated,
+2026-07-20T14:32:39,CREDITACC,CreditAccess Grameen Limited,generated,
+2026-07-20T14:32:42,CREST,Crest Ventures Limited,generated,
+2026-07-20T14:32:44,CRISIL,CRISIL Limited,generated,
+2026-07-20T14:33:41,CRIZAC,CRIZAC LIMITED,generated,
+2026-07-20T14:34:35,CROMPTON,Crompton Greaves Consumer Electricals Limited,generated,
+2026-07-20T14:34:38,CROWN,Crown Lifters Limited,generated,
+2026-07-20T14:35:41,CSBBANK,CSB Bank Limited,generated,
+2026-07-20T14:35:44,CSLFINANCE,CSL Finance Limited,generated,
+2026-07-20T14:35:47,CTE,Cambridge Technology Enterprises Limited,generated,
+2026-07-20T14:35:50,CUB,City Union Bank Limited,generated,
+2026-07-20T14:36:53,CUBEXTUB,Cubex Tubings Limited,generated,
+2026-07-20T14:36:56,CUMMINSIND,Cummins India Limited,generated,
+2026-07-20T14:36:58,CUPID,Cupid Limited,generated,
+2026-07-20T14:37:01,CURAA,CURA TECHNOLOGIES LIMITED,generated,
+2026-07-20T14:37:04,CYIENT,Cyient Limited,generated,
+2026-07-20T14:37:07,CYIENTDLM,Cyient DLM Limited,generated,
+2026-07-20T14:38:07,DABUR,Dabur India Limited,generated,
+2026-07-20T14:38:10,DALBHARAT,Dalmia Bharat Limited,generated,
+2026-07-20T14:39:13,DALMIASUG,Dalmia Bharat Sugar and Industries Limited,generated,
+2026-07-20T14:39:15,DAMCAPITAL,DAM CAPITAL ADVISORS LTD,generated,
+2026-07-20T14:39:18,DANGEE,Dangee Dums Limited,generated,
+2026-07-20T14:39:21,DATAMATICS,Datamatics Global Services Limited,generated,
+2026-07-20T14:39:24,DATAPATTNS,Data Patterns (India) Limited,generated,
+2026-07-20T14:39:27,DAVANGERE,Davangere Sugar Company Limited,generated,
+2026-07-20T14:40:30,DBCORP,D. B. Corp Limited,generated,
+2026-07-20T14:40:33,DBL,Dilip Buildcon Limited,generated,
+2026-07-20T14:40:36,DCAL,Dishman Carbogen Amcis Limited,generated,
+2026-07-20T14:41:41,DCBBANK,DCB Bank Limited,generated,
+2026-07-20T14:41:44,DCMSHRIRAM,DCM Shriram Limited,generated,
+2026-07-20T14:41:47,DCMSRIND,DCM Shriram Industries Limited,generated,
+2026-07-20T14:41:50,DCW,DCW Limited,generated,
+2026-07-20T14:41:53,DCXINDIA,DCX Systems Limited,generated,
+2026-07-20T14:41:56,DDEVPLSTIK,Ddev Plastiks Industries Limited,generated,
+2026-07-20T14:42:54,DECCANCE,Deccan Cements Limited,generated,
+2026-07-20T14:42:57,DEEPAKFERT,Deepak Fertilisers And Petrochemicals Corporation Limited,generated,
+2026-07-20T14:43:56,DEEPAKNTR,Deepak Nitrite Limited,generated,
+2026-07-20T14:43:59,DEEPINDS,Deep Industries Limited,generated,
+2026-07-20T14:44:01,DELHIVERY,Delhivery Limited,generated,
+2026-07-20T14:44:04,DELTACORP,Delta Corp Limited,generated,
+2026-07-20T14:44:07,DELTAMAGNT,Delta Manufacturing Limited,generated,
+2026-07-20T14:44:09,DEN,DEN Networks Limited,generated,
+2026-07-20T14:44:12,DENORA,De Nora India Limited,generated,
+2026-07-20T14:45:09,DENTA,DENTA WATER N INFRA SOL L,generated,
+2026-07-20T14:45:12,DEVIT,Dev Information Technology Limited,generated,
+2026-07-20T14:45:15,DEVX,Dev Accelerator Limited,generated,
+2026-07-20T14:45:18,DEVYANI,Devyani International Limited,generated,
+2026-07-20T14:45:21,DGCONTENT,Digicontent Limited,generated,
+2026-07-20T14:46:24,DHAMPURSUG,Dhampur Sugar Mills Limited,generated,
+2026-07-20T14:46:29,DHANBANK,Dhanlaxmi Bank Limited,generated,
+2026-07-20T14:46:32,DHANUKA,Dhanuka Agritech Limited,generated,
+2026-07-20T14:47:35,DHARMAJ,Dharmaj Crop Guard Limited,generated,
+2026-07-20T14:47:38,DHUNINV,Dhunseri Investments Limited,generated,
+2026-07-20T14:48:37,DIACABS,Diamond Power Infrastructure Limited,generated,
+2026-07-20T14:48:41,DIAMINESQ,Diamines and Chemicals Limited,generated,
+2026-07-20T14:48:43,DIAMONDYD,Prataap Snacks Limited,generated,
+2026-07-20T14:48:46,DICIND,DIC India Limited,generated,
+2026-07-20T14:48:49,DIFFNKG,DIFFUSION ENGINEERS LTD,generated,
+2026-07-20T14:48:52,DIGIDRIVE,Digidrive Distributors Limited,generated,
+2026-07-20T14:48:55,DIGITIDE,Digitide Solutions Limited,generated,
+2026-07-20T14:49:53,DIGJAMLMTD,Digjam Limited,generated,
+2026-07-20T14:49:56,DISAQ,DISA India Limited,generated,
+2026-07-20T14:49:59,DIVGIITTS,Divgi TorqTransfer Systems Limited,generated,
+2026-07-20T14:50:02,DIVISLAB,Divi's Laboratories Limited,generated,
+2026-07-20T14:50:05,DIXON,Dixon Technologies (India) Limited,generated,
+2026-07-20T14:50:07,DJML,DJ Mediaprint & Logistics Limited,generated,
+2026-07-20T14:51:08,DLF,DLF Limited,generated,
+2026-07-20T14:51:11,DLINKINDIA,D-Link (India) Limited,generated,
+2026-07-20T14:52:14,DMART,Avenue Supermarts Limited,generated,
+2026-07-20T14:52:17,DMCC,DMCC Speciality Chemicals Limited,generated,
+2026-07-20T14:52:59,DNAMEDIA,Diligent Media Corporation Limited,generated,
+2026-07-20T14:53:10,DODLA,Dodla Dairy Limited,generated,
+2026-07-20T14:53:13,DOLATALGO,Dolat Algotech Limited,generated,
+2026-07-20T14:53:16,DOLLAR,Dollar Industries Limited,generated,
+2026-07-20T14:53:18,DOLPHIN,Dolphin Offshore Enterprises (India) Limited,generated,
+2026-07-20T14:53:21,DOMS,DOMS Industries Limited,generated,
+2026-07-20T14:53:24,DONEAR,Donear Industries Limited,generated,
+2026-07-20T14:53:27,DPABHUSHAN,D. P. Abhushan Limited,generated,
+2026-07-20T14:54:27,DRAGARWQ,Dr. Agarwal's Eye Hospital Limited,generated,
+2026-07-20T14:54:31,DRCSYSTEMS,DRC Systems India Limited,generated,
+2026-07-20T14:54:33,DREAMFOLKS,Dreamfolks Services Limited,generated,
+2026-07-20T14:54:36,DREDGECORP,Dredging Corporation of India Limited,generated,
+2026-07-20T14:54:39,DRREDDY,Dr. Reddy's Laboratories Limited,generated,
+2026-07-20T14:54:42,DSSL,Dynacons Systems & Solutions Limited,generated,
+2026-07-20T14:55:41,DTIL,Dhunseri Tea & Industries Limited,generated,
+2026-07-20T14:55:44,DVL,Dhunseri Ventures Limited,generated,
+2026-07-20T14:55:48,DWARKESH,Dwarikesh Sugar Industries Limited,generated,
+2026-07-20T14:55:50,DYCL,Dynamic Cables Limited,generated,
+2026-07-20T14:56:54,DYNAMATECH,Dynamatic Technologies Limited,generated,
+2026-07-20T14:57:37,DYNPRO,Dynemic Products Limited,generated,
+2026-07-20T14:57:40,E2E,E2E Networks Limited,generated,
+2026-07-20T14:57:43,EASEMYTRIP,Easy Trip Planners Limited,generated,
+2026-07-20T14:57:45,EBGNG,GNG ELECTRONICS LIMITED,generated,
+2026-07-20T14:57:48,ECLERX,eClerx Services Limited,generated,
+2026-07-20T14:57:51,EDELWEISS,Edelweiss Financial Services Limited,generated,
+2026-07-20T14:57:54,EFCIL,EFC (I) Limited,generated,
+2026-07-20T14:58:53,EICHERMOT,Eicher Motors Limited,generated,
+2026-07-20T14:58:56,EIDPARRY,E.I.D.- Parry (India) Limited,generated,
+2026-07-20T14:58:59,EIEL,ENVIRO INFRA ENGINEERS L,generated,
+2026-07-20T14:59:01,EIHAHOTELS,EIH Associated Hotels Limited,generated,
+2026-07-20T14:59:04,EIHOTEL,EIH Limited,generated,
+2026-07-20T14:59:07,EIMCOELECO,Eimco Elecon (India) Limited,generated,
+2026-07-20T15:00:04,EKC,Everest Kanto Cylinder Limited,generated,
+2026-07-20T15:00:07,ELANTAS,ELANTAS Beck India Limited,generated,
+2026-07-20T15:01:10,ELCIDIN,Elcid Investments Limited,generated,
+2026-07-20T15:02:04,ELDEHSG,Eldeco Housing and Industries Limited,generated,
+2026-07-20T15:02:07,ELECON,Elecon Engineering Company Limited,generated,
+2026-07-20T15:02:10,ELECTCAST,Electrosteel Castings Limited,generated,
+2026-07-20T15:02:13,ELECTHERM,Electrotherm (India) Limited,generated,
+2026-07-20T15:02:15,ELGIEQUIP,Elgi Equipments Limited,generated,
+2026-07-20T15:03:18,ELGIRUBCO,Elgi Rubber Company Limited,generated,
+2026-07-20T15:03:21,ELIN,Elin Electronics Limited,generated,
+2026-07-20T15:03:24,ELITECON,Elitecon International Limited,generated,
+2026-07-20T15:03:27,ELLEN,ELLENBARRIE INDUS GASES L,generated,
+2026-07-20T15:03:29,ELPROINTL,Elpro International Limited,generated,
+2026-07-20T15:03:32,EMAMILTD,Emami Limited,generated,
+2026-07-20T15:04:33,EMAMIPAP,Emami Paper Mills Limited,generated,
+2026-07-20T15:04:36,EMBDL,Embassy Developments Limited,generated,
+2026-07-20T15:04:39,EMCURE,EMCURE PHARMACEUTICALS L,generated,
+2026-07-20T15:05:42,EMIL,Electronics Mart India Limited,generated,
+2026-07-20T15:05:45,EMKAY,Emkay Global Financial Services Limited,generated,
+2026-07-20T15:06:46,EMMVEE,EMMVEE PHOTOVOLTAIC PWR L,generated,
+2026-07-20T15:06:49,EMSLIMITED,EMS Limited,generated,
+2026-07-20T15:06:52,EMUDHRA,eMudhra Limited,generated,
+2026-07-20T15:06:55,ENDURANCE,Endurance Technologies Limited,generated,
+2026-07-20T15:06:58,ENERGYDEV,Energy Development Company Limited,generated,
+2026-07-20T15:08:01,ENGINERSIN,Engineers India Limited,generated,
+2026-07-20T15:08:04,ENIL,Entertainment Network (India) Limited,generated,
+2026-07-20T15:08:07,ENRIN,Siemens Energy India Limited,generated,
+2026-07-20T15:08:10,ENTERO,Entero Healthcare Solutions Limited,generated,
+2026-07-20T15:08:13,EPACK,EPACK Durable Limited,generated,
+2026-07-20T15:08:17,EPACKPEB,EPACK PREFAB TECHN LTD,generated,
+2026-07-20T15:09:16,EPIGRAL,Epigral Limited,generated,
+2026-07-20T15:09:19,EPL,EPL Limited,generated,
+2026-07-20T15:09:22,EQUITASBNK,Equitas Small Finance Bank Limited,generated,
+2026-07-20T15:09:25,ERIS,Eris Lifesciences Limited,generated,
+2026-07-20T15:09:28,ESABINDIA,ESAB India Limited,generated,
+2026-07-20T15:09:31,ESAFSFB,ESAF Small Finance Bank,generated,
+2026-07-20T15:10:28,ESCORTS,Escorts Kubota Limited,generated,
+2026-07-20T15:11:20,ESSARSHPNG,Essar Shipping Limited,generated,
+2026-07-20T15:11:23,ESTER,Ester Industries Limited,generated,
+2026-07-20T15:11:26,ETERNAL,Eternal Limited,generated,
+2026-07-20T15:11:29,ETHOSLTD,Ethos Limited,generated,
+2026-07-20T15:11:32,EUREKAFORB,Eureka Forbes Limited,generated,
+2026-07-20T15:11:34,EUROBOND,EURO PANEL PRODUCTS LTD,generated,
+2026-07-20T15:11:37,EUROPRATIK,EURO PRATIK SALES LIMITED,generated,
+2026-07-20T15:12:37,EVEREADY,Eveready Industries India Limited,generated,
+2026-07-20T15:12:41,EXCELINDUS,Excel Industries Limited,generated,
+2026-07-20T15:12:44,EXCELSOFT,EXCELSOFT TECHNOLOGIES L,generated,
+2026-07-20T15:12:47,EXICOM,Exicom Tele-Systems Limited,generated,
+2026-07-20T15:12:50,EXIDEIND,Exide Industries Limited,generated,
+2026-07-20T15:12:52,EXPLEOSOL,Expleo Solutions Limited,generated,
+2026-07-20T15:13:49,EXXARO,Exxaro Tiles Limited,generated,
+2026-07-20T15:13:52,FABTECH,FABTECH TECHNOLOGIES LTD,generated,
+2026-07-20T15:13:55,FACT,The Fertilisers and Chemicals Travancore Limited,generated,
+2026-07-20T15:13:58,FAZE3Q,Faze Three Limited,generated,
+2026-07-20T15:14:00,FCL,Fineotex Chemical Limited,generated,
+2026-07-20T15:14:03,FDC,FDC Limited,generated,
+2026-07-20T15:15:04,FEDDERSHOL,Fedders Holding Limited,generated,
+2026-07-20T15:15:56,FEDERALBNK,The Federal Bank Limited,generated,
+2026-07-20T15:15:59,FEDFINA,Fedbank Financial Services Limited,generated,
+2026-07-20T15:16:02,FERMENTA,Fermenta Biotech Limited,generated,
+2026-07-20T15:16:05,FIBERWEB,Fiberweb (India) Limited,generated,
+2026-07-20T15:16:07,FIEMIND,Fiem Industries Limited,generated,
+2026-07-20T15:16:10,FILATEX,Filatex India Limited,generated,
+2026-07-20T15:16:13,FINCABLES,Finolex Cables Limited,generated,
+2026-07-20T15:17:11,FINEORG,Fine Organic Industries Limited,generated,
+2026-07-20T15:17:15,FINKURVE,Finkurve Financial Services Limited,generated,
+2026-07-20T15:17:18,FINOPB,Fino Payments Bank Limited,generated,
+2026-07-20T15:17:21,FINPIPE,Finolex Industries Limited,generated,
+2026-07-20T15:17:23,FIRSTCRY,BRAINBEES SOLUTIONS LTD,generated,
+2026-07-20T15:17:26,FISCHER,Fischer Medical Ventures Limited,generated,
+2026-07-20T15:18:24,FIVESTAR,Five-Star Business Finance Limited,generated,
+2026-07-20T15:18:27,FLAIR,FLAIR WRITING INDUST LTD,generated,
+2026-07-20T15:18:29,FLUOROCHEM,Gujarat Fluorochemicals Limited,generated,
+2026-07-20T15:19:33,FMGOETZE,Federal-Mogul Goetze (India) Limited,generated,
+2026-07-20T15:20:23,FOODSIN,Foods and Inns Limited,generated,
+2026-07-20T15:20:32,FORCEMOT,Force Motors Limited,generated,
+2026-07-20T15:20:35,FORTIS,Fortis Healthcare Limited,generated,
+2026-07-20T15:20:37,FOSECOIND,Foseco India Limited,generated,
+2026-07-20T15:20:40,FRACTAL,FRACTAL ANALYTICS LIMITED,generated,
+2026-07-20T15:20:43,FRONTSP,Frontier Springs Limited,generated,
+2026-07-20T15:20:45,FSL,Firstsource Solutions Limited,generated,
+2026-07-20T15:21:38,FUSION,Fusion Finance Limited,generated,
+2026-07-20T15:21:41,GABRIEL,Gabriel India Limited,generated,
+2026-07-20T15:21:43,GAEL,Gujarat Ambuja Exports Limited,generated,
+2026-07-20T15:21:46,GAIL,GAIL (India) Limited,generated,
+2026-07-20T15:21:49,GALAPREC,GALA PRECISION ENG LTD,generated,
+2026-07-20T15:21:51,GALAXYSURF,Galaxy Surfactants Limited,generated,
+2026-07-20T15:22:51,GALLANTT,Gallantt Ispat Limited,generated,
+2026-07-20T15:22:54,GANDHAR,Gandhar Oil Refinery (India) Limited,generated,
+2026-07-20T15:22:58,GANDHITUBE,Gandhi Special Tubes Limited,generated,
+2026-07-20T15:23:02,GANECOS,Ganesha Ecosphere Limited,failed,all providers returned nothing
+2026-07-20T15:23:07,GANESHBE,Ganesh Benzoplast Limited,failed,all providers returned nothing
+2026-07-20T15:23:11,GANESHCP,GANESH CONSUMER PRODUCT L,failed,all providers returned nothing
+2026-07-20T15:23:43,GANESHHOU,Ganesh Housing Limited,generated,
+2026-07-20T15:23:46,GANGESSECU,Ganges Securities Limited,generated,
+2026-07-20T15:23:50,GARFIBRES,Garware Technical Fibres Limited,failed,all providers returned nothing
+2026-07-20T15:23:54,GARUDA,GARUDA CONSTRUCT N ENG L,failed,all providers returned nothing
+2026-07-20T15:24:53,GATECH,GACM Technologies Limited,generated,
+2026-07-20T15:24:56,GATECHDVR,GACM Technologies Limited,generated,
+2026-07-20T15:24:58,GATEWAY,Gateway Distriparks Limited,generated,
+2026-07-20T15:25:03,GAYAHWS,Gayatri Highways Limited,failed,all providers returned nothing
+2026-07-20T15:25:07,GCSL,Gretex Corporate Services Limited,failed,all providers returned nothing
+2026-07-20T15:25:12,GEEKAYWIRE,Geekay Wires Limited,failed,all providers returned nothing
+2026-07-20T15:25:43,GEMAROMA,GEM AROMATICS LIMITED,generated,
+2026-07-20T15:25:46,GENCON,Generic Engineering Construction and Projects Limited,generated,
+2026-07-20T15:25:50,GENESYS,Genesys International Corporation Limited,failed,all providers returned nothing
+2026-07-20T15:25:54,GENUSPAPER,Genus Paper & Boards Limited,failed,all providers returned nothing
+2026-07-20T15:25:59,GENUSPOWER,Genus Power Infrastructures Limited,failed,all providers returned nothing
+2026-07-20T15:26:30,GEOJITFSL,Geojit Financial Services Limited,generated,
+2026-07-20T15:26:35,GESHIP,The Great Eastern Shipping Company Limited,failed,all providers returned nothing
+2026-07-20T15:26:39,GFLLIMITED,GFL Limited,failed,all providers returned nothing
+2026-07-20T15:26:44,GHCL,GHCL Limited,failed,all providers returned nothing
+2026-07-20T15:27:15,GHCLTEXTIL,GHCL Textiles Limited,generated,
+2026-07-20T15:27:19,GICHSGFIN,GIC Housing Finance Limited,failed,all providers returned nothing
+2026-07-20T15:27:24,GICL,GLOBE INTL CARRIERS LTD,failed,all providers returned nothing
+2026-07-20T15:27:28,GICRE,General Insurance Corporation of India,failed,all providers returned nothing
+2026-07-20T15:27:59,GILLANDERS,Gillanders Arbuthnot and Company Limited,generated,
+2026-07-20T15:28:04,GILLETTE,Gillette India Limited,failed,all providers returned nothing
+2026-07-20T15:28:08,GIPCL,Gujarat Industries Power Company Limited,failed,all providers returned nothing
+2026-07-20T15:28:13,GKENERGY,GK ENERGY LIMITED,failed,all providers returned nothing
+2026-07-20T15:29:27,GKSL,GUJARAT KIDNEY N SUP SP L,generated,
+2026-07-20T15:29:30,GKWLIMITED,GKW Limited,generated,
+2026-07-20T15:29:33,GLAND,Gland Pharma Limited,generated,
+2026-07-20T15:29:35,GLAXO,GlaxoSmithKline Pharmaceuticals Limited,generated,
+2026-07-20T15:29:40,GLENMARK,Glenmark Pharmaceuticals Limited,failed,all providers returned nothing
+2026-07-20T15:29:44,GLOBAL,Global Education Limited,failed,all providers returned nothing
+2026-07-20T15:29:49,GLOBALVECT,Global Vectra Helicorp Limited,failed,all providers returned nothing
+2026-07-20T15:30:20,GLOBE,Globe Enterprises (India) Limited,generated,
+2026-07-20T15:30:23,GLOBUSSPR,Globus Spirits Limited,generated,
+2026-07-20T15:30:27,GLOSTERLTD,Gloster Limited,failed,all providers returned nothing
+2026-07-20T15:30:32,GMBREW,G.M. Breweries Limited,failed,all providers returned nothing
+2026-07-20T15:30:36,GMDCLTD,Gujarat Mineral Development Corporation Limited,failed,all providers returned nothing
+2026-07-20T15:31:07,GMMPFAUDLR,GMM Pfaudler Limited,generated,
+2026-07-20T15:31:10,GMRAIRPORT,GMR Airports Limited,generated,
+2026-07-20T15:31:14,GMRP&UI,GMR Power And Urban Infra Limited,failed,all providers returned nothing
+2026-07-20T15:31:19,GNA,G N A Axles Limited,failed,all providers returned nothing
+2026-07-20T15:31:23,GNFC,Gujarat Narmada Valley Fertilizers & Chemicals Limited,failed,all providers returned nothing
+2026-07-20T15:31:55,GOACARBON,Goa Carbon Limited,generated,
+2026-07-20T15:31:59,GOCLCORP,GOCL Corporation Limited,failed,all providers returned nothing
+2026-07-20T15:32:03,GOCOLORS,Go Fashion (India) Limited,failed,all providers returned nothing
+2026-07-20T15:32:08,GODAVARIB,GODAVARI BIOREFINERIES L,failed,all providers returned nothing
+2026-07-20T15:32:39,GODFRYPHLP,Godfrey Phillips India Limited,generated,
+2026-07-20T15:32:44,GODIGIT,GO DIGIT GENERAL INS LTD,failed,all providers returned nothing
+2026-07-20T15:32:48,GODREJAGRO,Godrej Agrovet Limited,failed,all providers returned nothing
+2026-07-20T15:32:53,GODREJCP,Godrej Consumer Products Limited,failed,all providers returned nothing
+2026-07-20T15:34:09,GODREJIND,Godrej Industries Limited,generated,
+2026-07-20T15:34:12,GODREJPROP,Godrej Properties Limited,generated,
+2026-07-20T15:34:15,GOKEX,Gokaldas Exports Limited,generated,
+2026-07-20T15:34:18,GOKUL,Gokul Refoils & Solvent Limited,generated,
+2026-07-20T15:34:22,GOKULAGRO,Gokul Agro Resources Limited,failed,all providers returned nothing
+2026-07-20T15:34:26,GOLDIAM,Goldiam International Limited,failed,all providers returned nothing
+2026-07-20T15:34:31,GOODLUCK,Goodluck India Limited,failed,all providers returned nothing
+2026-07-20T15:35:02,GOODYEAR,Goodyear India Limited,generated,
+2026-07-20T15:35:05,GOPAL,Gopal Snacks Limited,generated,
+2026-07-20T15:35:09,GOYALALUM,Goyal Aluminiums Limited,failed,all providers returned nothing
+2026-07-20T15:35:13,GPIL,Godawari Power & Ispat Limited,failed,all providers returned nothing
+2026-07-20T15:35:18,GPPL,Gujarat Pipavav Port Limited,failed,all providers returned nothing
+2026-07-20T15:35:49,GPTHEALTH,GPT Healthcare Limited,generated,
+2026-07-20T15:35:53,GPTINFRA,GPT Infraprojects Limited,failed,all providers returned nothing
+2026-07-20T15:35:57,GRANDOAK,Grand Oak Canyons Distillery Limited,failed,all providers returned nothing
+2026-07-20T15:36:02,GRANULES,Granules India Limited,failed,all providers returned nothing
+2026-07-20T15:36:33,GRAPHITE,Graphite India Limited,generated,
+2026-07-20T15:36:38,GRASIM,Grasim Industries Limited,failed,all providers returned nothing
+2026-07-20T15:36:42,GRAUWEIL,Grauer & Weil (India) Limited,failed,all providers returned nothing
+2026-07-20T15:36:46,GRAVISSHO,Graviss Hospitality Limited,failed,all providers returned nothing
+2026-07-20T15:37:17,GRAVITA,Gravita India Limited,generated,
+2026-07-20T15:37:22,GREAVESCOT,Greaves Cotton Limited,failed,all providers returned nothing
+2026-07-20T15:37:27,GREENLAM,Greenlam Industries Limited,failed,all providers returned nothing
+2026-07-20T15:37:31,GREENPANEL,Greenpanel Industries Limited,failed,all providers returned nothing
+2026-07-20T15:38:44,GREENPLY,Greenply Industries Limited,generated,
+2026-07-20T15:38:46,GREENPOWER,Orient Green Power Company Limited,generated,
+2026-07-20T15:38:49,GRINDWELL,Grindwell Norton Limited,generated,
+2026-07-20T15:38:52,GRINFRA,G R Infraprojects Limited,generated,
+2026-07-20T15:38:57,GRMOVER,GRM Overseas Limited,failed,all providers returned nothing
+2026-07-20T15:39:01,GROBTEA,The Grob Tea Company Limited,failed,all providers returned nothing
+2026-07-20T15:39:05,GROWW,BILLIONBRAINS GARAGE VN L,failed,all providers returned nothing
+2026-07-20T15:39:37,GRPLTD,GRP Limited,generated,
+2026-07-20T15:39:39,GRSE,Garden Reach Shipbuilders & Engineers Limited,generated,
+2026-07-20T15:39:44,GRWRHITECH,Garware Hi-Tech Films Limited,failed,all providers returned nothing
+2026-07-20T15:39:48,GSFC,Gujarat State Fertilizers & Chemicals Limited,failed,all providers returned nothing
+2026-07-20T15:39:52,GSLSU,Global Surfaces Limited,failed,all providers returned nothing
+2026-07-20T15:40:24,GSPCROP,GSP CROP SCIENCE LIMITED,generated,
+2026-07-20T15:40:28,GTL,GTL Limited,failed,all providers returned nothing
+2026-07-20T15:40:33,GTLINFRA,GTL Infrastructure Limited,failed,all providers returned nothing
+2026-07-20T15:40:37,GTPL,GTPL Hathway Limited,failed,all providers returned nothing
+2026-07-20T15:41:08,GUFICBIO,Gufic Biosciences Limited,generated,
+2026-07-20T15:41:13,GUJALKALI,Gujarat Alkalies and Chemicals Limited,failed,all providers returned nothing
+2026-07-20T15:41:17,GUJAPOLLO,Gujarat Apollo Industries Limited,failed,all providers returned nothing
+2026-07-20T15:41:21,GUJRAFFIA,Gujarat Raffia Industries Limited,failed,all providers returned nothing
+2026-07-20T15:41:53,GUJTHEM,Gujarat Themis Biosyn Limited,generated,
+2026-07-20T15:41:57,GULFOILLUB,Gulf Oil Lubricants India Limited,failed,all providers returned nothing
+2026-07-20T15:42:01,GULPOLY,Gulshan Polyols Limited,failed,all providers returned nothing
+2026-07-20T15:42:06,GVPIL,GE Power India Limited,failed,all providers returned nothing
+2026-07-20T15:43:08,GVPTECH,GVP Infotech Limited,generated,
+2026-07-20T15:43:10,GVT&D,GE Vernova T&D India Ltd,generated,
+2026-07-20T15:43:13,HAL,Hindustan Aeronautics Limited,generated,
+2026-07-20T15:43:16,HALDER,Halder Venture Limited,generated,
+2026-07-20T15:43:21,HALEOSLABS,Haleos Labs Limited,failed,all providers returned nothing
+2026-07-20T15:43:25,HAPPSTMNDS,Happiest Minds Technologies Limited,failed,all providers returned nothing
+2026-07-20T15:43:30,HAPPYFORGE,HAPPY FORGINGS LIMITED,failed,all providers returned nothing
+2026-07-20T15:44:01,HARDWYN,Hardwyn India Limited,generated,
+2026-07-20T15:44:04,HARIOMPIPE,Hariom Pipe Industries Limited,generated,
+2026-07-20T15:44:08,HARRMALAYA,Harrisons Malayalam Limited,failed,all providers returned nothing
+2026-07-20T15:44:13,HARSHA,Harsha Engineers International Limited,failed,all providers returned nothing
+2026-07-20T15:44:17,HATHWAY,Hathway Cable and Datacom Limited,failed,all providers returned nothing
+2026-07-20T15:44:48,HATSUN,Hatsun Agro Product Limited,generated,
+2026-07-20T15:44:51,HAVELLS,Havells India Limited,generated,
+2026-07-20T15:44:55,HAVISHA,Sri Havisha Hospitality and Infrastructure Limited,failed,all providers returned nothing
+2026-07-20T15:45:00,HAWKINCOOK,Hawkins Cookers Limited,failed,all providers returned nothing
+2026-07-20T15:45:04,HBLENGINE,HBL ENGINEERING LTD,failed,all providers returned nothing
+2026-07-20T15:45:35,HCC,Hindustan Construction Company Limited,generated,
+2026-07-20T15:45:40,HCG,HealthCare Global Enterprises Limited,failed,all providers returned nothing
+2026-07-20T15:45:44,HCL-INSYS,HCL Infosystems Limited,failed,all providers returned nothing
+2026-07-20T15:45:48,HCLTECH,HCL Technologies Limited,failed,all providers returned nothing
+2026-07-20T15:46:20,HDBFS,HDB FINANCIAL SERVICES L,generated,
+2026-07-20T15:46:24,HDFCAMC,HDFC Asset Management Company Limited,failed,all providers returned nothing
+2026-07-20T15:46:28,HDFCLIFE,HDFC Life Insurance Company Limited,failed,all providers returned nothing
+2026-07-20T15:47:27,HEADSUP,Heads UP Ventures Limited,generated,
+2026-07-20T15:47:31,HEALTHX,Health X Platform Limited,generated,
+2026-07-20T15:47:37,HECPROJECT,HEC Infra Projects Limited,failed,all providers returned nothing
+2026-07-20T15:47:42,HEG,HEG Limited,failed,all providers returned nothing
+2026-07-20T15:47:46,HEIDELBERG,HeidelbergCement India Limited,generated,
+2026-07-20T15:47:51,HEMIPROP,Hemisphere Properties India Limited,failed,all providers returned nothing
+2026-07-20T15:47:53,HERANBA,Heranba Industries Limited,generated,
+2026-07-20T15:47:58,HERITGFOOD,Heritage Foods Limited,failed,all providers returned nothing
+2026-07-20T15:48:02,HEROMOTOCO,Hero MotoCorp Limited,failed,all providers returned nothing
+2026-07-20T15:48:06,HESTERBIO,Hester Biosciences Limited,failed,all providers returned nothing
+2026-07-20T15:48:38,HEXAGON,HEXAGON NUTRITION LIMITED,generated,
+2026-07-20T15:48:42,HEXATRADEX,Hexa Tradex Limited,failed,all providers returned nothing
+2026-07-20T15:48:47,HEXT,Hexaware Technologies Limited,failed,all providers returned nothing
+2026-07-20T15:48:51,HFCL,HFCL Limited,failed,all providers returned nothing
+2026-07-20T15:49:22,HGINFRA,H.G. Infra Engineering Limited,generated,
+2026-07-20T15:49:27,HGM,Handson Global Management (HGM) Limited,failed,all providers returned nothing
+2026-07-20T15:49:31,HGS,Hinduja Global Solutions Limited,failed,all providers returned nothing
+2026-07-20T15:49:35,HIKAL,Hikal Limited,failed,all providers returned nothing
+2026-07-20T15:50:06,HIMATSEIDE,Himatsingka Seide Limited,generated,
+2026-07-20T15:50:11,HINDALCO,Hindalco Industries Limited,failed,all providers returned nothing
+2026-07-20T15:50:15,HINDCOMPOS,Hindustan Composites Limited,failed,all providers returned nothing
+2026-07-20T15:50:20,HINDCOPPER,Hindustan Copper Limited,failed,all providers returned nothing
+2026-07-20T15:50:51,HINDOILEXP,Hindustan Oil Exploration Company Limited,generated,
+2026-07-20T15:50:55,HINDPETRO,Hindustan Petroleum Corporation Limited,failed,all providers returned nothing
+2026-07-20T15:51:00,HINDUNILVR,Hindustan Unilever Limited,failed,all providers returned nothing
+2026-07-20T15:51:04,HINDWAREAP,Hindware Home Innovation Limited,failed,all providers returned nothing
+2026-07-20T15:51:35,HINDZINC,Hindustan Zinc Limited,generated,
+2026-07-20T15:51:40,HIRECT,Hind Rectifiers Limited,failed,all providers returned nothing
+2026-07-20T15:51:44,HISARMETAL,Hisar Metal Industries Limited,failed,all providers returned nothing
+2026-07-20T15:52:21,HITECH,Hi-Tech Pipes Limited,generated,
+2026-07-20T15:52:24,HLEGLAS,HLE Glascoat Limited,generated,
+2026-07-20T15:52:27,HLVLTD,HLV Limited,generated,
+2026-07-20T15:52:31,HMAAGRO,HMA Agro Industries Limited,failed,all providers returned nothing
+2026-07-20T15:52:36,HMVL,Hindustan Media Ventures Limited,failed,all providers returned nothing
+2026-07-20T15:52:40,HNDFDS,Hindustan Foods Limited,failed,all providers returned nothing
+2026-07-20T15:53:12,HOMEFIRST,Home First Finance Company India Limited,generated,
+2026-07-20T15:53:15,HONASA,Honasa Consumer Limited,generated,
+2026-07-20T15:53:19,HONAUT,Honeywell Automation India Limited,failed,all providers returned nothing
+2026-07-20T15:53:24,HONDAPOWER,Honda India Power Products Limited,failed,all providers returned nothing
+2026-07-20T15:53:28,HPAL,HP Adhesives Limited,failed,all providers returned nothing
+2026-07-20T15:53:59,HPIL,Hindprakash Industries Limited,generated,
+2026-07-20T15:54:03,HPL,HPL Electric & Power Limited,failed,all providers returned nothing
+2026-07-20T15:54:08,HSCL,Himadri Speciality Chemical Limited,failed,all providers returned nothing
+2026-07-20T15:54:12,HTMEDIA,HT Media Limited,failed,all providers returned nothing
+2026-07-20T15:54:44,HUBTOWN,Hubtown Limited,generated,
+2026-07-20T15:54:48,HUDCO,Housing and Urban Development Corporation Limited,failed,all providers returned nothing
+2026-07-20T15:54:52,HUHTAMAKI,Huhtamaki India Limited,failed,all providers returned nothing
+2026-07-20T15:54:57,HYUNDAI,HYUNDAI MOTOR INDIA LTD,failed,all providers returned nothing
+2026-07-20T15:55:28,ICDSLTD,ICDS Limited,generated,
+2026-07-20T15:55:32,ICEMAKE,Ice Make Refrigeration Limited,failed,all providers returned nothing
+2026-07-20T15:55:36,ICICIAMC,ICICI PRUDENTIAL AMC LTD,failed,all providers returned nothing
+2026-07-20T15:55:41,ICICIBANK,ICICI Bank Limited,failed,all providers returned nothing
+2026-07-20T15:56:13,ICICIGI,ICICI Lombard General Insurance Company Limited,generated,
+2026-07-20T15:57:08,ICICIPRULI,ICICI Prudential Life Insurance Company Limited,generated,
+2026-07-20T15:57:11,ICIL,Indo Count Industries Limited,generated,
+2026-07-20T15:57:14,ICRA,ICRA Limited,generated,
+2026-07-20T15:57:18,IDBI,IDBI Bank Limited,failed,all providers returned nothing
+2026-07-20T15:57:23,IDEA,Vodafone Idea Limited,failed,all providers returned nothing
+2026-07-20T15:57:27,IDFCFIRSTB,IDFC First Bank Limited,failed,all providers returned nothing
+2026-07-20T15:57:59,IEX,Indian Energy Exchange Limited,generated,
+2026-07-20T15:58:03,IFBIND,IFB Industries Limited,failed,all providers returned nothing
+2026-07-20T15:58:07,IFCI,IFCI Limited,failed,all providers returned nothing
+2026-07-20T15:58:11,IFGLEXPOR,IFGL Refractories Limited,failed,all providers returned nothing
+2026-07-20T15:58:43,IGARASHI,Igarashi Motors India Limited,generated,
+2026-07-20T15:58:47,IGCL,INDOGULF CROPSCIENCES LTD,failed,all providers returned nothing
+2026-07-20T15:58:52,IGIL,International Gemological Institute Limited,failed,all providers returned nothing
+2026-07-20T15:58:56,IGL,Indraprastha Gas Limited,failed,all providers returned nothing
+2026-07-20T15:59:28,IGPL,I G Petrochemicals Limited,generated,
+2026-07-20T15:59:32,IIFL,IIFL Finance Limited,failed,all providers returned nothing
+2026-07-20T15:59:36,IIFLCAPS,IIFL Capital Services Limited,failed,all providers returned nothing
+2026-07-20T15:59:41,IITL,Industrial Investment Trust Limited,failed,all providers returned nothing
+2026-07-20T16:00:12,IKIO,IKIO Technologies Limited,generated,
+2026-07-20T16:00:17,IKS,INVENTURUS KNOWLEDGE SO L,failed,all providers returned nothing
+2026-07-20T16:00:22,IMAGICAA,Imagicaaworld Entertainment Limited,failed,all providers returned nothing
+2026-07-20T16:00:26,IMFA,Indian Metals and Ferro Alloys Limited,failed,all providers returned nothing
+2026-07-20T16:01:51,IMPAL,India Motor Parts & Accessories Limited,generated,
+2026-07-20T16:01:53,INA,Insolation Energy Limited,generated,
+2026-07-20T16:01:57,INCREDIBLE,Incredible Industries Limited,generated,
+2026-07-20T16:02:00,INDBANK,Indbank Merchant Banking Services Limited,generated,
+2026-07-20T16:03:04,INDGN,INDEGENE LIMITED,generated,
+2026-07-20T16:03:07,INDHOTEL,The Indian Hotels Company Limited,generated,
+2026-07-20T16:03:10,INDIACEM,The India Cements Limited,generated,
+2026-07-20T16:03:12,INDIAGLYCO,India Glycols Limited,generated,
+2026-07-20T16:03:17,INDIAMART,IndiaMART InterMESH Limited,failed,all providers returned nothing
+2026-07-20T16:03:21,INDIANB,Indian Bank,failed,all providers returned nothing
+2026-07-20T16:03:26,INDIANCARD,The Indian Card Clothing Company Limited,failed,all providers returned nothing
+2026-07-20T16:03:57,INDIANHUME,The Indian Hume Pipe Company Limited,generated,
+2026-07-20T16:04:00,INDIASHLTR,India Shelter Finance Corporation Limited,generated,
+2026-07-20T16:04:04,INDIGO,InterGlobe Aviation Limited,failed,all providers returned nothing
+2026-07-20T16:04:09,INDIGOPNTS,Indigo Paints Limited,failed,all providers returned nothing
+2026-07-20T16:04:13,INDIQUBE,INDIQUBE SPACES LIMITED,failed,all providers returned nothing
+2026-07-20T16:04:45,INDNIPPON,India Nippon Electricals Limited,generated,
+2026-07-20T16:04:49,INDOBORAX,Indo Borax & Chemicals Limited,failed,all providers returned nothing
+2026-07-20T16:04:53,INDOCO,Indoco Remedies Limited,failed,all providers returned nothing
+2026-07-20T16:04:58,INDOFARM,INDO FARM EQUIPMENT LTD,failed,all providers returned nothing
+2026-07-20T16:05:30,INDORAMA,Indo Rama Synthetics (India) Limited,generated,
+2026-07-20T16:05:34,INDOSTAR,IndoStar Capital Finance Limited,failed,all providers returned nothing
+2026-07-20T16:06:17,INDOTHAI,Indo Thai Securities Limited,generated,
+2026-07-20T16:06:20,INDOUS,Indo Us Bio-Tech Limited,generated,
+2026-07-20T16:06:23,INDPRUD,Industrial And Prudential Investment Company Limited,generated,
+2026-07-20T16:06:27,INDRAMEDCO,Indraprastha Medical Corporation Limited,failed,all providers returned nothing
+2026-07-20T16:06:31,INDSWFTLAB,Ind-Swift Laboratories Limited,failed,all providers returned nothing
+2026-07-20T16:06:36,INDTERRAIN,Indian Terrain Fashions Limited,failed,all providers returned nothing
+2026-07-20T16:07:07,INDUSINDBK,IndusInd Bank Limited,generated,
+2026-07-20T16:07:10,INDUSTOWER,Indus Towers Limited,generated,
+2026-07-20T16:07:14,INFOBEAN,InfoBeans Technologies Limited,failed,all providers returned nothing
+2026-07-20T16:07:19,INFOMEDIA,Infomedia Press Limited,failed,all providers returned nothing
+2026-07-20T16:07:23,INGERRAND,Ingersoll-Rand (India) Limited,failed,all providers returned nothing
+2026-07-20T16:07:54,INNOVACAP,Innova Captab Limited,generated,
+2026-07-20T16:07:58,INNOVANA,INNOVANA THINKLABS LTD,failed,all providers returned nothing
+2026-07-20T16:08:03,INNOVISION,INNOVISION LIMITED,failed,all providers returned nothing
+2026-07-20T16:08:07,INOXGREEN,Inox Green Energy Services Limited,failed,all providers returned nothing
+2026-07-20T16:08:38,INOXINDIA,INOX India Limited,generated,
+2026-07-20T16:08:43,INOXWIND,Inox Wind Limited,failed,all providers returned nothing
+2026-07-20T16:08:47,INSECTICID,Insecticides (India) Limited,failed,all providers returned nothing
+2026-07-20T16:08:51,INTELLECT,Intellect Design Arena Limited,failed,all providers returned nothing
+2026-07-20T16:09:23,INTENTECH,Intense Technologies Limited,generated,
+2026-07-20T16:09:27,INTERARCH,Interarch Building Solutions Limited,failed,all providers returned nothing
+2026-07-20T16:09:31,INTLCONV,International Conveyors Limited,failed,all providers returned nothing
+2026-07-20T16:09:36,INVENTURE,Inventure Growth & Securities Limited,failed,all providers returned nothing
+2026-07-20T16:10:40,INVPRECQ,Investment & Precision Castings Limited,generated,
+2026-07-20T16:10:43,IOB,Indian Overseas Bank,generated,
+2026-07-20T16:10:46,IOC,Indian Oil Corporation Limited,generated,
+2026-07-20T16:11:49,IOLCP,IOL Chemicals and Pharmaceuticals Limited,generated,
+2026-07-20T16:11:52,IONEXCHANG,Ion Exchange (India) Limited,generated,
+2026-07-20T16:12:56,IPCALAB,Ipca Laboratories Limited,generated,
+2026-07-20T16:12:59,IPL,India Pesticides Limited,generated,
+2026-07-20T16:13:02,IRB,IRB Infrastructure Developers Limited,generated,
+2026-07-20T16:13:06,IRCON,Ircon International Limited,failed,all providers returned nothing
+2026-07-20T16:13:10,IRCTC,Indian Railway Catering & Tourism Corporation Limited,failed,all providers returned nothing
+2026-07-20T16:13:15,IREDA,Indian Renewable Energy Development Agency Limited,failed,all providers returned nothing
+2026-07-20T16:13:48,IRFC,Indian Railway Finance Corporation Limited,generated,
+2026-07-20T16:13:50,IRIS,IRIS RegTech Solutions Limited,failed,all providers returned nothing
+2026-07-20T16:13:55,IRISDOREME,Iris Clothings Limited,failed,all providers returned nothing
+2026-07-20T16:13:59,IRMENERGY,IRM Energy Limited,failed,all providers returned nothing
+2026-07-20T16:15:02,ISFT,IntraSoft Technologies Limited,generated,
+2026-07-20T16:15:05,ISGEC,Isgec Heavy Engineering Limited,generated,
+2026-07-20T16:15:08,ISHANCH,Ishan Dyes and Chemicals Limited,generated,
+2026-07-20T16:15:11,ITCHOTELS,ITC HOTELS LIMITED,generated,
+2026-07-20T16:15:15,ITDC,India Tourism Development Corporation Limited,failed,all providers returned nothing
+2026-07-20T16:15:20,ITI,ITI Limited,failed,all providers returned nothing
+2026-07-20T16:15:24,IVALUE,iValue Infosolutions Limited,failed,all providers returned nothing
+2026-07-20T16:15:55,IVC,IL&FS Investment Managers Limited,generated,
+2026-07-20T16:15:58,IWP,The Indian Wood Products Company Limited,generated,
+2026-07-20T16:16:03,IXIGO,LE TRAVENUES TECHNOLOGY L,failed,all providers returned nothing
+2026-07-20T16:16:07,IZMO,IZMO Limited,failed,all providers returned nothing
+2026-07-20T16:16:11,J&KBANK,Jammu and Kashmir Bank Limited,failed,all providers returned nothing
+2026-07-20T16:16:43,JAGRAN,Jagran Prakashan Limited,generated,
+2026-07-20T16:16:47,JAGSNPHARM,Jagsonpal Pharmaceuticals Limited,failed,all providers returned nothing
+2026-07-20T16:16:51,JAICORPLTD,Jai Corp Limited,failed,all providers returned nothing
+2026-07-20T16:16:56,JAINREC,JAIN RESOURCE RECYCLING L,failed,all providers returned nothing
+2026-07-20T16:17:27,JAIPURKURT,Nandani Creation Limited,generated,
+2026-07-20T16:17:31,JAMNAAUTO,Jamna Auto Industries Limited,failed,all providers returned nothing
+2026-07-20T16:17:36,JARO,JARO INS OF TEC MG N RE L,failed,all providers returned nothing
+2026-07-20T16:17:40,JASH,Jash Engineering Limited,failed,all providers returned nothing
+2026-07-20T16:18:11,JAYAGROGN,Jayant Agro-Organics Limited,generated,
+2026-07-20T16:18:16,JAYBARMARU,Jay Bharat Maruti Limited,failed,all providers returned nothing
+2026-07-20T16:18:20,JAYKAY,Jaykay Enterprises Limited,failed,all providers returned nothing
+2026-07-20T16:18:24,JAYNECOIND,Jayaswal Neco Industries Limited,failed,all providers returned nothing
+2026-07-20T16:18:56,JAYSREETEA,Jay Shree Tea & Industries Limited,generated,
+2026-07-20T16:19:00,JBCHEPHARM,J. B. Chemicals & Pharmaceuticals Limited,failed,all providers returned nothing
+2026-07-20T16:19:39,JBMA,JBM Auto Limited,generated,
+2026-07-20T16:19:42,JETFREIGHT,Jet Freight Logistics Limited,generated,
+2026-07-20T16:19:46,JGCHEM,J.G.CHEMICALS LIMITED,failed,all providers returned nothing
+2026-07-20T16:19:51,JHS,JHS Svendgaard Laboratories Limited,failed,all providers returned nothing
+2026-07-20T16:19:55,JINDALPHOT,Jindal Photo Limited,failed,all providers returned nothing
+2026-07-20T16:20:27,JINDALPOLY,Jindal Poly Films Limited,generated,
+2026-07-20T16:20:31,JINDALSAW,Jindal Saw Limited,failed,all providers returned nothing
+2026-07-20T16:20:36,JINDALSTEL,Jindal Steel Limited,failed,all providers returned nothing
+2026-07-20T16:20:40,JINDRILL,Jindal Drilling & Industries Limited,failed,all providers returned nothing
+2026-07-20T16:21:15,JINDWORLD,Jindal Worldwide Limited,generated,
+2026-07-20T16:21:19,JIOFIN,Jio Financial Services Limited,failed,all providers returned nothing
+2026-07-20T16:21:24,JISLDVREQS,Jain Irrigation Systems Limited,failed,all providers returned nothing
+2026-07-20T16:21:28,JISLJALEQS,Jain Irrigation Systems Limited,failed,all providers returned nothing
+2026-07-20T16:21:59,JITFINFRA,JITF Infralogistics Limited,generated,
+2026-07-20T16:22:02,JKCEMENT,J.K. Cement Limited,generated,
+2026-07-20T16:22:06,JKIL,J. Kumar Infraprojects Limited,failed,all providers returned nothing
+2026-07-20T16:22:11,JKPAPER,JK Paper Limited,failed,all providers returned nothing
+2026-07-20T16:22:15,JKTYRE,JK Tyre & Industries Limited,failed,all providers returned nothing
+2026-07-20T16:22:47,JLHL,Jupiter Life Line Hospitals Limited,generated,
+2026-07-20T16:22:51,JMA,Jullundur Motor Agency (Delhi) Limited,failed,all providers returned nothing
+2026-07-20T16:22:56,JMFINANCIL,JM Financial Limited,failed,all providers returned nothing
+2026-07-20T16:23:00,JNKINDIA,JNK India Limited,failed,all providers returned nothing
+2026-07-20T16:24:19,JPOLYINVST,Jindal Poly Investment and Finance Company Limited,generated,
+2026-07-20T16:24:23,JPPOWER,Jaiprakash Power Ventures Limited,generated,
+2026-07-20T16:24:25,JSFB,Jana Small Finance Bank Limited,generated,
+2026-07-20T16:24:28,JSL,Jindal Stainless Limited,generated,
+2026-07-20T16:24:31,JSLL,JEENA SIKHO LIFECARE LTD,generated,
+2026-07-20T16:24:35,JSWCEMENT,JSW CEMENT LIMITED,failed,all providers returned nothing
+2026-07-20T16:24:40,JSWDULUX,JSW Dulux Limited,failed,all providers returned nothing
+2026-07-20T16:24:44,JSWENERGY,JSW Energy Limited,failed,all providers returned nothing
+2026-07-20T16:25:16,JSWHL,JSW Holdings Limited,generated,
+2026-07-20T16:25:18,JSWINFRA,JSW Infrastructure Limited,generated,
+2026-07-20T16:25:23,JSWSTEEL,JSW Steel Limited,failed,all providers returned nothing
+2026-07-20T16:25:27,JTEKTINDIA,JTEKT India Limited,failed,all providers returned nothing
+2026-07-20T16:25:31,JTLIND,JTL Industries Limited,failed,all providers returned nothing
+2026-07-20T16:26:03,JUBLCPL,Jubilant Agri and Consumer Products Limited,generated,
+2026-07-20T16:26:07,JUBLINGREA,Jubilant Ingrevia Limited,failed,all providers returned nothing
+2026-07-20T16:26:11,JUBLPHARMA,Jubilant Pharmova Limited,failed,all providers returned nothing
+2026-07-20T16:26:16,JUNIPER,Juniper Hotels Limited,failed,all providers returned nothing
+2026-07-20T16:26:47,JUSTDIAL,Just Dial Limited,generated,
+2026-07-20T16:26:52,JWL,Jupiter Wagons Limited,failed,all providers returned nothing
+2026-07-20T16:26:56,JYOTHYLAB,Jyothy Labs Limited,failed,all providers returned nothing
+2026-07-20T16:27:00,JYOTICNC,Jyoti CNC Automation Limited,failed,all providers returned nothing
+2026-07-20T16:27:32,JYOTISTRUC,Jyoti Structures Limited,generated,
+2026-07-20T16:27:36,KABRAEXTRU,Kabra Extrusiontechnik Limited,failed,all providers returned nothing
+2026-07-20T16:27:41,KAJARIACER,Kajaria Ceramics Limited,failed,all providers returned nothing
+2026-07-20T16:27:45,KALAMANDIR,Sai Silks (Kalamandir) Limited,failed,all providers returned nothing
+2026-07-20T16:28:59,KALPATARU,KALPATARU LIMITED,generated,
+2026-07-20T16:29:02,KALYANIFRG,Kalyani Forge Limited,generated,
+2026-07-20T16:29:04,KALYANKJIL,Kalyan Jewellers India Limited,generated,
+2026-07-20T16:29:07,KAMAHOLD,KAMA Holdings Limited,generated,
+2026-07-20T16:29:12,KAMATHOTEL,Kamat Hotels (India) Limited,failed,all providers returned nothing
+2026-07-20T16:29:16,KAMOPAINTS,Kamdhenu Ventures Limited,failed,all providers returned nothing
+2026-07-20T16:29:20,KANANIIND,Kanani Industries Limited,failed,all providers returned nothing
+2026-07-20T16:29:51,KANPRPLA,Kanpur Plastipack Limited,generated,
+2026-07-20T16:29:54,KANSAINER,Kansai Nerolac Paints Limited,generated,
+2026-07-20T16:29:58,KAPSTON,Kapston Services Limited,failed,all providers returned nothing
+2026-07-20T16:30:03,KARMAENG,Karma Energy Limited,failed,all providers returned nothing
+2026-07-20T16:30:07,KARURVYSYA,The Karur Vysya Bank Limited,failed,all providers returned nothing
+2026-07-20T16:30:38,KAVDEFENCE,KAVVERI DFS & WIR TEC LTD,generated,
+2026-07-20T16:30:43,KAYA,Kaya Limited,failed,all providers returned nothing
+2026-07-20T16:30:47,KAYNES,Kaynes Technology India Limited,failed,all providers returned nothing
+2026-07-20T16:30:51,KCP,The KCP Limited,failed,all providers returned nothing
+2026-07-20T16:31:23,KCPSUGIND,K.C.P. Sugar and Industries Corporation Limited,generated,
+2026-07-20T16:31:27,KDDL,KDDL Limited,failed,all providers returned nothing
+2026-07-20T16:31:32,KEC,KEC International Limited,failed,all providers returned nothing
+2026-07-20T16:31:36,KEEPLEARN,DSJ Keep Learning Limited,failed,all providers returned nothing
+2026-07-20T16:32:08,KEI,KEI Industries Limited,generated,
+2026-07-20T16:32:12,KELLTONTEC,Kellton Tech Solutions Limited,failed,all providers returned nothing
+2026-07-20T16:32:16,KENNAMET,Kennametal India Limited,failed,all providers returned nothing
+2026-07-20T16:32:21,KERNEX,Kernex Microsystems (India) Limited,failed,all providers returned nothing
+2026-07-20T16:33:25,KEYFINSERV,Keynote Financial Services Limited,generated,
+2026-07-20T16:33:28,KFINTECH,KFin Technologies Limited,generated,
+2026-07-20T16:33:32,KHANDSE,Khandwala Securities Limited,generated,
+2026-07-20T16:33:34,KICL,Kalyani Investment Company Limited,generated,
+2026-07-20T16:33:39,KIMS,Krishna Institute of Medical Sciences Limited,failed,all providers returned nothing
+2026-07-20T16:33:43,KIOCL,KIOCL Limited,failed,all providers returned nothing
+2026-07-20T16:33:48,KIRANVYPAR,Kiran Vyapar Limited,failed,all providers returned nothing
+2026-07-20T16:34:19,KIRIINDUS,Kiri Industries Limited,generated,
+2026-07-20T16:34:22,KIRLFER,Kirloskar Ferrous Industries Limited,generated,
+2026-07-20T16:34:26,KIRLOSBROS,Kirloskar Brothers Limited,failed,all providers returned nothing
+2026-07-20T16:34:31,KIRLOSENG,Kirloskar Oil Engines Limited,failed,all providers returned nothing
+2026-07-20T16:34:35,KIRLOSIND,Kirloskar Industries Limited,failed,all providers returned nothing
+2026-07-20T16:35:06,KIRLPNU,Kirloskar Pneumatic Company Limited,generated,
+2026-07-20T16:35:11,KISSHT,ONEMI TECHNOLOGY SOL LTD,failed,all providers returned nothing
+2026-07-20T16:35:16,KITEX,Kitex Garments Limited,failed,all providers returned nothing
+2026-07-20T16:35:20,KKCL,Kewal Kiran Clothing Limited,failed,all providers returned nothing
+2026-07-20T16:35:51,KLBRENG-B,Kilburn Engineering Limited,generated,
+2026-07-20T16:35:56,KMEW,Knowledge Marine & Engineering Works Limited,failed,all providers returned nothing
+2026-07-20T16:36:00,KMSUGAR,K.M. Sugar Mills Limited,failed,all providers returned nothing
+2026-07-20T16:36:05,KNACK,KNACK,failed,all providers returned nothing
+2026-07-20T16:36:36,KNAGRI,KN AGRI RESOURCES LIMITED,generated,
+2026-07-20T16:36:41,KNRCON,KNR Constructions Limited,failed,all providers returned nothing
+2026-07-20T16:36:45,KOHINOOR,Kohinoor Foods Limited,failed,all providers returned nothing
+2026-07-20T16:36:49,KOKUYOCMLN,Kokuyo Camlin Limited,failed,all providers returned nothing
+2026-07-20T16:37:21,KOLTEPATIL,Kolte-Patil Developers Limited,generated,
+2026-07-20T16:38:07,KOTAKBANK,Kotak Mahindra Bank Limited,generated,
+2026-07-20T16:38:11,KOTARISUG,Kothari Sugars and Chemicals Limited,generated,
+2026-07-20T16:38:13,KOTHARIPET,Kothari Petrochemicals Limited,generated,
+2026-07-20T16:38:18,KOTHARIPRO,Kothari Products Limited,failed,all providers returned nothing
+2026-07-20T16:38:22,KOTIC,Kothari Industrial Corporation Limited,failed,all providers returned nothing
+2026-07-20T16:38:27,KOVAI,Kovai Medical Center and Hospital Limited,failed,all providers returned nothing
+2026-07-20T16:38:58,KPEL,K.P. Energy Limited,generated,
+2026-07-20T16:39:02,KPIGREEN,KPI Green Energy Limited,failed,all providers returned nothing
+2026-07-20T16:39:06,KPIL,Kalpataru Projects International Limited,failed,all providers returned nothing
+2026-07-20T16:39:11,KPITTECH,KPIT Technologies Limited,failed,all providers returned nothing
+2026-07-20T16:39:42,KPL,Kwality Pharmaceuticals Limited,generated,
+2026-07-20T16:39:47,KPRMILL,K.P.R. Mill Limited,failed,all providers returned nothing
+2026-07-20T16:39:51,KRBL,KRBL Limited,failed,all providers returned nothing
+2026-07-20T16:39:55,KREBSBIO,Krebs Biochemicals & Industries Limited,failed,all providers returned nothing
+2026-07-20T16:40:32,KRISHANA,Krishana Phoschem Limited,generated,
+2026-07-20T16:40:36,KRISHIVAL,KRISHIVAL FOODS LIMITED,failed,all providers returned nothing
+2026-07-20T16:40:40,KRISHNADEF,KRISHNA DEF AND ALD IND L,failed,all providers returned nothing
+2026-07-20T16:40:45,KRITIKA,Kritika Wires Limited,failed,all providers returned nothing
+2026-07-20T16:41:16,KRONOX,KRONOX LAB SCIENCES LTD,generated,
+2026-07-20T16:41:19,KROSS,KROSS LIMITED,generated,
+2026-07-20T16:41:23,KRSNAA,Krsnaa Diagnostics Limited,failed,all providers returned nothing
+2026-07-20T16:41:27,KRYSTAL,KRYSTAL INTEGRATED SER L,failed,all providers returned nothing
+2026-07-20T16:41:32,KSB,KSB Limited,failed,all providers returned nothing
+2026-07-20T16:42:04,KSCL,Kaveri Seed Company Limited,generated,
+2026-07-20T16:42:44,KSHINTL,KSH INTERNATIONAL LIMITED,generated,
+2026-07-20T16:42:48,KSL,Kalyani Steels Limited,generated,
+2026-07-20T16:42:52,KSOLVES,Ksolves India Limited,failed,all providers returned nothing
+2026-07-20T16:42:57,KSR,KSR Footwear Limited,failed,all providers returned nothing
+2026-07-20T16:43:01,KTKBANK,The Karnataka Bank Limited,failed,all providers returned nothing
+2026-07-20T16:43:33,KUANTUM,Kuantum Papers Limited,generated,
+2026-07-20T16:43:35,KWIL,KWALITY WALL'S (INDIA) L,generated,
+2026-07-20T16:43:40,LAGNAM,Lagnam Spintex Limited,failed,all providers returned nothing
+2026-07-20T16:43:44,LAHOTIOV,Lahoti Overseas Limited,failed,all providers returned nothing
+2026-07-20T16:43:49,LAL,Lorenzini Apparels Limited,failed,all providers returned nothing
+2026-07-20T16:44:20,LALPATHLAB,Dr. Lal PathLabs Limited,generated,
+2026-07-20T16:44:23,LAMBODHARA,Lambodhara Textiles Limited,generated,
+2026-07-20T16:44:27,LANCORHOL,Lancor Holdings Limited,failed,all providers returned nothing
+2026-07-20T16:44:32,LANDMARK,Landmark Cars Limited,failed,all providers returned nothing
+2026-07-20T16:44:36,LANDSMILL,Landsmill Green Limited,failed,all providers returned nothing
+2026-07-20T16:45:07,LAOPALA,La Opala RG Limited,generated,
+2026-07-20T16:45:12,LASA,Lasa Supergenerics Limited,failed,all providers returned nothing
+2026-07-20T16:45:16,LATENTVIEW,Latent View Analytics Limited,failed,all providers returned nothing
+2026-07-20T16:45:20,LAURUSLABS,Laurus Labs Limited,failed,all providers returned nothing
+2026-07-20T16:45:52,LAXMICOT,Laxmi Cotspin Limited,generated,
+2026-07-20T16:45:56,LAXMIDENTL,LAXMI DENTAL LIMITED,failed,all providers returned nothing
+2026-07-20T16:46:01,LCCINFOTEC,LCC Infotech Limited,failed,all providers returned nothing
+2026-07-20T16:46:05,LEMERITE,LE MERITE EXPORTS LIMITED,failed,all providers returned nothing
+2026-07-20T16:47:22,LEMONTREE,Lemon Tree Hotels Limited,generated,
+2026-07-20T16:47:25,LENSKART,LENSKART SOLUTIONS LTD,generated,
+2026-07-20T16:47:28,LEXUS,Lexus Granito (India) Limited,generated,
+2026-07-20T16:47:31,LFIC,Lakshmi Finance & Industrial Corporation Limited,generated,
+2026-07-20T16:47:35,LGBBROSLTD,L.G. Balakrishnan & Bros Limited,failed,all providers returned nothing
+2026-07-20T16:47:40,LGEINDIA,LG ELECTRONICS INDIA LTD,failed,all providers returned nothing
+2026-07-20T16:47:44,LGHL,LAXMI GOLDORNA HOUSE LTD,failed,all providers returned nothing
+2026-07-20T16:48:16,LIBAS,Libas Consumer Products Limited,generated,
+2026-07-20T16:48:19,LIBERTSHOE,Liberty Shoes Ltd.,generated,
+2026-07-20T16:48:23,LICHSGFIN,LIC Housing Finance Limited,failed,all providers returned nothing
+2026-07-20T16:48:28,LICI,Life Insurance Corporation of India,failed,all providers returned nothing
+2026-07-20T16:48:32,LINC,Linc Limited,failed,all providers returned nothing
+2026-07-20T16:49:03,LINCOLN,Lincoln Pharmaceuticals Limited,generated,
+2026-07-20T16:49:06,LINDEINDIA,Linde India Limited,generated,
+2026-07-20T16:49:11,LLOYDSENGG,Lloyds Engineering Works Limited,failed,all providers returned nothing
+2026-07-20T16:49:15,LLOYDSENT,Lloyds Enterprises Limited,failed,all providers returned nothing
+2026-07-20T16:49:19,LLOYDSME,Lloyds Metals and Energy Limited,failed,all providers returned nothing
+2026-07-20T16:49:53,LMW,LMW Limited,generated,
+2026-07-20T16:49:58,LODHA,Lodha Developers Limited,failed,all providers returned nothing
+2026-07-20T16:50:02,LORDSCHLO,Lords Chloro Alkali Limited,failed,all providers returned nothing
+2026-07-20T16:50:07,LOTUSDEV,SRI LOTUS DEVLPRS N RTY L,failed,all providers returned nothing
+2026-07-20T16:50:39,LOTUSEYE,Lotus Eye Hospital and Institute Limited,generated,
+2026-07-20T16:50:42,LOVABLE,Lovable Lingerie Limited,generated,
+2026-07-20T16:50:46,LOYALTEX,Loyal Textile Mills Limited,failed,all providers returned nothing
+2026-07-20T16:50:50,LPDC,Landmark Property Development Company Limited,failed,all providers returned nothing
+2026-07-20T16:50:55,LTF,L&T Finance Limited,failed,all providers returned nothing
+2026-07-20T16:51:26,LTFOODS,LT Foods Limited,generated,
+2026-07-20T16:52:01,LTM,LTM Limited,generated,
+2026-07-20T16:52:03,LTTS,L&T Technology Services Limited,generated,
+2026-07-20T16:52:06,LUMAXIND,Lumax Industries Limited,generated,
+2026-07-20T16:52:11,LUMAXTECH,Lumax Auto Technologies Limited,failed,all providers returned nothing
+2026-07-20T16:52:15,LUPIN,Lupin Limited,failed,all providers returned nothing
+2026-07-20T16:52:20,LUXIND,Lux Industries Limited,failed,all providers returned nothing
+2026-07-20T16:52:51,LXCHEM,Laxmi Organic Industries Limited,generated,
+2026-07-20T16:52:54,LYPSAGEMS,Aurus Gem Corporation Limited,generated,
+2026-07-20T16:52:58,M&M,Mahindra & Mahindra Limited,failed,all providers returned nothing
+2026-07-20T16:53:03,M&MFIN,Mahindra & Mahindra Financial Services Limited,failed,all providers returned nothing
+2026-07-20T16:53:07,MAANALU,Maan Aluminium Limited,failed,all providers returned nothing
+2026-07-20T16:53:38,MACPOWER,Macpower CNC Machines Limited,generated,
+2026-07-20T16:53:43,MADHAV,Madhav Marbles and Granites Limited,failed,all providers returned nothing
+2026-07-20T16:53:47,MADHAVIPL,Madhav Infra Projects Limited,failed,all providers returned nothing
+2026-07-20T16:53:52,MADRASFERT,Madras Fertilizers Limited,failed,all providers returned nothing
+2026-07-20T16:54:23,MAFATIND,Mafatlal Industries Limited,generated,
+2026-07-20T16:54:28,MAGADSUGAR,Magadh Sugar & Energy Limited,failed,all providers returned nothing
+2026-07-20T16:54:32,MAGNUM,Magnum Ventures Limited,failed,all providers returned nothing
+2026-07-20T16:54:36,MAHABANK,Bank of Maharashtra,failed,all providers returned nothing
+2026-07-20T16:55:08,MAHAPEXLTD,Maha Rashtra Apex Corporation Limited,generated,
+2026-07-20T16:55:12,MAHASTEEL,Mahamaya Steel Industries Limited,failed,all providers returned nothing
+2026-07-20T16:55:17,MAHEPC,Mahindra EPC Irrigation Limited,failed,all providers returned nothing
+2026-07-20T16:55:21,MAHLIFE,Mahindra Lifespace Developers Limited,failed,all providers returned nothing
+2026-07-20T16:55:53,MAHLOG,Mahindra Logistics Limited,generated,
+2026-07-20T16:56:35,MAHSCOOTER,Maharashtra Scooters Ltd.,generated,
+2026-07-20T16:56:37,MAHSEAMLES,Maharashtra Seamless Limited,generated,
+2026-07-20T16:56:42,MAITHANALL,Maithan Alloys Limited,failed,all providers returned nothing
+2026-07-20T16:56:46,MAJESAUT,Majestic Auto Limited,failed,all providers returned nothing
+2026-07-20T16:56:51,MALLCOM,Mallcom (India) Limited,failed,all providers returned nothing
+2026-07-20T16:57:22,MALUPAPER,Malu Paper Mills Limited,generated,
+2026-07-20T16:57:26,MAMATA,MAMATA MACHINERY LIMITED,failed,all providers returned nothing
+2026-07-20T16:57:31,MANAKALUCO,Manaksia Aluminium Company Limited,failed,all providers returned nothing
+2026-07-20T16:57:35,MANAKCOAT,Manaksia Coated Metals & Industries Limited,failed,all providers returned nothing
+2026-07-20T16:58:07,MANAKSIA,Manaksia Limited,generated,
+2026-07-20T16:58:11,MANALIPETC,Manali Petrochemicals Limited,failed,all providers returned nothing
+2026-07-20T16:58:16,MANAPPURAM,Manappuram Finance Limited,failed,all providers returned nothing
+2026-07-20T16:58:20,MANBA,MANBA FINANCE LIMITED,failed,all providers returned nothing
+2026-07-20T16:58:51,MANCREDIT,Mangal Credit and Fincorp Limited,generated,
+2026-07-20T16:58:56,MANGALAM,Mangalam Drugs & Organics Limited,failed,all providers returned nothing
+2026-07-20T16:59:00,MANGLMCEM,Mangalam Cement Limited,failed,all providers returned nothing
+2026-07-20T16:59:04,MANINDS,Man Industries (India) Limited,failed,all providers returned nothing
+2026-07-20T16:59:36,MANINFRA,Man Infraconstruction Limited,generated,
+2026-07-20T16:59:40,MANKIND,Mankind Pharma Limited,failed,all providers returned nothing
+2026-07-20T16:59:44,MANOMAY,Manomay Tex India Limited,failed,all providers returned nothing
+2026-07-20T16:59:49,MANORAMA,Manorama Industries Limited,failed,all providers returned nothing
+2026-07-20T17:01:10,MANYAVAR,Vedant Fashions Limited,generated,
+2026-07-20T17:01:13,MAPMYINDIA,C. E. Info Systems Limited,generated,
+2026-07-20T17:01:16,MARATHON,Marathon Nextgen Realty Limited,generated,
+2026-07-20T17:01:19,MARICO,Marico Limited,generated,
+2026-07-20T17:01:24,MARINE,Marine Electricals (India) Limited,failed,all providers returned nothing
+2026-07-20T17:01:28,MARKOLINES,MARKOLINES PAVEMENT TEC L,failed,all providers returned nothing
+2026-07-20T17:01:32,MARKSANS,Marksans Pharma Limited,failed,all providers returned nothing
+2026-07-20T17:02:04,MARSONS,Marsons Limited,generated,
+2026-07-20T17:02:07,MASFIN,MAS Financial Services Limited,generated,
+2026-07-20T17:02:11,MASTEK,Mastek Limited,failed,all providers returned nothing
+2026-07-20T17:02:16,MASTERTR,Master Trust Limited,failed,all providers returned nothing
+2026-07-20T17:02:20,MATRIMONY,Matrimony.com Limited,failed,all providers returned nothing
+2026-07-20T17:02:51,MAXESTATES,MAX ESTATES LIMITED,generated,
+2026-07-20T17:02:54,MAXHEALTH,Max Healthcare Institute Limited,generated,
+2026-07-20T17:02:59,MAXIND,Max India Limited,failed,all providers returned nothing
+2026-07-20T17:03:03,MAYURUNIQ,Mayur Uniquoters Limited,failed,all providers returned nothing
+2026-07-20T17:03:07,MAZDOCK,Mazagon Dock Shipbuilders Limited,failed,all providers returned nothing
+2026-07-20T17:03:39,MBAPL,Madhya Bharat Agro Products Limited,generated,
+2026-07-20T17:03:43,MBEL,M AND B ENGINEERING LTD,failed,all providers returned nothing
+2026-07-20T17:03:48,MCCHRLS-B,Mac Charles (India) Limited,failed,all providers returned nothing
+2026-07-20T17:03:52,MCL,M Tek Copper Limited,failed,all providers returned nothing
+2026-07-20T17:04:23,MCLOUD,Magellanic Cloud Limited,generated,
+2026-07-20T17:04:28,MCX,Multi Commodity Exchange of India Limited,failed,all providers returned nothing
+2026-07-20T17:04:32,MEDANTA,Global Health Limited,failed,all providers returned nothing
+2026-07-20T17:04:36,MEDIASSIST,MEDI ASSIST HEALTH SER L,failed,all providers returned nothing
+2026-07-20T17:05:39,MEDICAMEQ,Medicamen Biotech Limited,generated,
+2026-07-20T17:05:42,MEDICO,Medico Remedies Limited,generated,
+2026-07-20T17:05:44,MEDPLUS,MedPlus Health Services Limited,generated,
+2026-07-20T17:05:47,MEESHO,MEESHO LIMITED,generated,
+2026-07-20T17:05:51,MEGASTAR,Megastar Foods Limited,failed,all providers returned nothing
+2026-07-20T17:05:56,MENNPIS,Menon Pistons Limited,failed,all providers returned nothing
+2026-07-20T17:06:00,MERCANTILE,Mercantile Ventures Limited,failed,all providers returned nothing
+2026-07-20T17:06:31,METROBRAND,Metro Brands Limited,generated,
+2026-07-20T17:06:35,METROGLOBL,MetroGlobal Limited,generated,
+2026-07-20T17:06:39,METROPOLIS,Metropolis Healthcare Limited,failed,all providers returned nothing
+2026-07-20T17:06:44,MFML,Mahalaxmi Fabric Mills Limited,failed,all providers returned nothing
+2026-07-20T17:06:48,MFSL,Max Financial Services Limited,failed,all providers returned nothing
+2026-07-20T17:07:19,MGL,Mahanagar Gas Limited,generated,
+2026-07-20T17:07:22,MHLXMIRU,Mahalaxmi Rubtech Limited,generated,
+2026-07-20T17:07:26,MHRIL,Mahindra Holidays & Resorts India Limited,failed,all providers returned nothing
+2026-07-20T17:07:31,MIDHANI,Mishra Dhatu Nigam Limited,failed,all providers returned nothing
+2026-07-20T17:07:35,MIDWESTLTD,MIDWEST LIMITED,failed,all providers returned nothing
+2026-07-20T17:08:09,MINDACORP,Minda Corporation Limited,generated,
+2026-07-20T17:08:13,MINDTECK,Mindteck (India) Limited,failed,all providers returned nothing
+2026-07-20T17:08:17,MIRZAINT,Mirza International Limited,failed,all providers returned nothing
+2026-07-20T17:08:22,MITTAL,Mittal Life Style Limited,failed,all providers returned nothing
+2026-07-20T17:08:53,MKPL,M. K. Proteins Limited,generated,
+2026-07-20T17:08:58,MMFL,M M Forgings Limited,failed,all providers returned nothing
+2026-07-20T17:09:02,MMP,MMP Industries Limited,failed,all providers returned nothing
+2026-07-20T17:09:06,MMTC,MMTC Limited,failed,all providers returned nothing
+2026-07-20T17:09:38,MOBIKWIK,ONE MOBIKWIK SYSTEMS LTD,generated,
+2026-07-20T17:10:03,MODIRUBBER,Modi Rubber Limited,generated,
+2026-07-20T17:10:07,MODIS,Modi's Navnirman Limited,failed,all providers returned nothing
+2026-07-20T17:10:12,MODTHREAD,Modern Threads (India) Limited,failed,all providers returned nothing
+2026-07-20T17:10:14,MOHITIND,Mohit Industries Limited,generated,
+2026-07-20T17:10:19,MOIL,MOIL Limited,failed,all providers returned nothing
+2026-07-20T17:10:23,MOKSH,Moksh Ornaments Limited,failed,all providers returned nothing
+2026-07-20T17:10:27,MOL,Meghmani Organics Limited,generated,
+2026-07-20T17:10:31,MOLDTECH,Mold-Tek Technologies Limited,failed,all providers returned nothing
+2026-07-20T17:10:35,MOLDTKPAC,Mold-Tek Packaging Limited,failed,all providers returned nothing
+2026-07-20T17:10:40,MONARCH,Monarch Networth Capital Limited,failed,all providers returned nothing
+2026-07-20T17:11:11,MONEYBOXX,Moneyboxx Finance Limited,generated,
+2026-07-20T17:11:15,MONTECARLO,Monte Carlo Fashions Limited,failed,all providers returned nothing
+2026-07-20T17:11:20,MOREPENLAB,Morepen Laboratories Limited,failed,all providers returned nothing
+2026-07-20T17:11:24,MOSCHIP,MOSCHIP TECHNOLOGIES LTD,failed,all providers returned nothing
+2026-07-20T17:11:56,MOTHERSON,Samvardhana Motherson International Limited,generated,
+2026-07-20T17:12:00,MOTILALOFS,Motilal Oswal Financial Services Limited,failed,all providers returned nothing
+2026-07-20T17:12:04,MOTISONS,MOTISONS JEWELLERS LTD,failed,all providers returned nothing
+2026-07-20T17:12:09,MPHASIS,Mphasis Limited,failed,all providers returned nothing
+2026-07-20T17:12:40,MPSLTD,MPS Limited,generated,
+2026-07-20T17:12:45,MRF,MRF Limited,failed,all providers returned nothing
+2026-07-20T17:12:49,MRPL,Mangalore Refinery and Petrochemicals Limited,failed,all providers returned nothing
+2026-07-20T17:12:54,MSPL,MSP Steel & Power Limited,failed,all providers returned nothing
+2026-07-20T17:13:25,MSTCLTD,MSTC Limited,generated,
+2026-07-20T17:13:29,MSUMI,Motherson Sumi Wiring India Limited,failed,all providers returned nothing
+2026-07-20T17:13:34,MTNL,Mahanagar Telephone Nigam Limited,failed,all providers returned nothing
+2026-07-20T17:13:38,MUFIN,Mufin Green Finance Limited,failed,all providers returned nothing
+2026-07-20T17:14:45,MUFTI,CREDO BRANDS MARKETING L,generated,
+2026-07-20T17:14:49,MUKANDLTD,Mukand Limited,generated,
+2026-07-20T17:14:51,MUKKA,Mukka Proteins Limited,generated,
+2026-07-20T17:14:54,MUNJALAU,Munjal Auto Industries Limited,generated,
+2026-07-20T17:14:58,MUNJALSHOW,Munjal Showa Limited,failed,all providers returned nothing
+2026-07-20T17:15:02,MURUDCERA,Murudeshwar Ceramics Ltd.,failed,all providers returned nothing
+2026-07-20T17:15:07,MUTHOOTCAP,Muthoot Capital Services Limited,failed,all providers returned nothing
+2026-07-20T17:15:38,MUTHOOTFIN,Muthoot Finance Limited,generated,
+2026-07-20T17:15:41,MUTHOOTMF,MUTHOOT MICROFIN LIMITED,generated,
+2026-07-20T17:15:46,MVGJL,Manoj Vaibhav Gems 'N' Jewellers Limited,failed,all providers returned nothing
+2026-07-20T17:15:50,MWL,MANGALAM WORLDWIDE LTD,failed,all providers returned nothing
+2026-07-20T17:15:55,NACLIND,NACL Industries Limited,failed,all providers returned nothing
+2026-07-20T17:16:26,NAGREEKEXP,Nagreeka Exports Limited,generated,
+2026-07-20T17:16:29,NAHARCAP,Nahar Capital and Financial Services Limited,generated,
+2026-07-20T17:16:33,NAHARINDUS,Nahar Industrial Enterprises Limited,failed,all providers returned nothing
+2026-07-20T17:16:37,NAHARPOLY,Nahar Poly Films Limited,failed,all providers returned nothing
+2026-07-20T17:16:42,NAM-INDIA,Nippon Life India Asset Management Limited,failed,all providers returned nothing
+2026-07-20T17:17:13,NARMADA,Narmada Agrobase Limited,generated,
+2026-07-20T17:17:18,NATCAPSUQ,Natural Capsules Limited,failed,all providers returned nothing
+2026-07-20T17:17:22,NATCOPHARM,NATCO Pharma Limited,failed,all providers returned nothing
+2026-07-20T17:17:27,NATHBIOGEN,Nath Bio-Genes (India) Limited,failed,all providers returned nothing
+2026-07-20T17:17:58,NATIONALUM,National Aluminium Company Limited,generated,
+2026-07-20T17:18:02,NATIONSTD,National Standard (India) Limited,failed,all providers returned nothing
+2026-07-20T17:18:07,NAUKRI,Info Edge (India) Limited,failed,all providers returned nothing
+2026-07-20T17:18:11,NAVA,Nava Limited,failed,all providers returned nothing
+2026-07-20T17:18:42,NAVINFLUOR,Navin Fluorine International Limited,generated,
+2026-07-20T17:18:47,NAVKARCORP,Navkar Corporation Limited,failed,all providers returned nothing
+2026-07-20T17:18:51,NAVNETEDUL,Navneet Education Limited,failed,all providers returned nothing
+2026-07-20T17:19:23,NAZARA,Nazara Technologies Limited,generated,
+2026-07-20T17:19:31,NBCC,NBCC (India) Limited,failed,all providers returned nothing
+2026-07-20T17:19:35,NBIFIN,N.B.I. Industrial Finance Company Limited,failed,all providers returned nothing
+2026-07-20T17:19:38,NCC,NCC Limited,generated,
+2026-07-20T17:19:43,NCLIND,NCL Industries Limited,failed,all providers returned nothing
+2026-07-20T17:19:48,NDGL,Naga Dhunseri Group Limited,generated,
+2026-07-20T17:19:52,NDL,Nandan Denim Limited,failed,all providers returned nothing
+2026-07-20T17:19:57,NDLVENTURE,NDL Ventures Limited,failed,all providers returned nothing
+2026-07-20T17:20:01,NDRAUTO,NDR Auto Components Limited,failed,all providers returned nothing
+2026-07-20T17:20:32,NDTV,New Delhi Television Limited,generated,
+2026-07-20T17:20:37,NEAGI,Neelamalai Agro Industries Limited,failed,all providers returned nothing
+2026-07-20T17:20:41,NELCAST,Nelcast Limited,failed,all providers returned nothing
+2026-07-20T17:20:46,NELCO,Nelco Limited,failed,all providers returned nothing
+2026-07-20T17:21:17,NEOGEN,Neogen Chemicals Limited,generated,
+2026-07-20T17:21:22,NEPHROPLUS,NEPHROCARE HEALTH SERV L,failed,all providers returned nothing
+2026-07-20T17:21:26,NESCO,Nesco Limited,failed,all providers returned nothing
+2026-07-20T17:21:31,NESTLEIND,Nestlé India Limited,failed,all providers returned nothing
+2026-07-20T17:22:06,NETWEB,Netweb Technologies India Limited,generated,
+2026-07-20T17:22:10,NETWORK18,Network18 Media & Investments Limited,failed,all providers returned nothing
+2026-07-20T17:22:20,NEULANDLAB,Neuland Laboratories Limited,failed,all providers returned nothing
+2026-07-20T17:22:24,NEWGEN,Newgen Software Technologies Limited,failed,all providers returned nothing
+2026-07-20T17:22:56,NEXTMEDIA,Next Mediaworks Limited,generated,
+2026-07-20T17:22:58,NFL,National Fertilizers Limited,generated,
+2026-07-20T17:23:03,NGLFINE,NGL Fine-Chem Limited,failed,all providers returned nothing
+2026-07-20T17:23:07,NH,Narayana Hrudayalaya Limited,failed,all providers returned nothing
+2026-07-20T17:23:12,NHPC,NHPC Limited,failed,all providers returned nothing
+2026-07-20T17:24:19,NIACL,The New India Assurance Company Limited,generated,
+2026-07-20T17:24:22,NIBE,Nibe Limited,generated,
+2026-07-20T17:24:24,NIBL,NRB Industrial Bearings Limited,generated,
+2026-07-20T17:24:27,NIITLTD,NIIT Limited,generated,
+2026-07-20T17:24:32,NIITMTS,NIIT Learning Systems Limited,failed,all providers returned nothing
+2026-07-20T17:24:37,NILAINFRA,Nila Infrastructures Limited,failed,all providers returned nothing
+2026-07-20T17:24:41,NILASPACES,Nila Spaces Limited,failed,all providers returned nothing
+2026-07-20T17:25:13,NILE,Nile Limited,generated,
+2026-07-20T17:25:15,NILKAMAL,Nilkamal Limited,generated,
+2026-07-20T17:25:19,NIPPOBATRY,Indo National Limited,failed,all providers returned nothing
+2026-07-20T17:25:24,NIRAJISPAT,Niraj Ispat Industries Limited,failed,all providers returned nothing
+2026-07-20T17:25:28,NIRLON,Nirlon Limited,failed,all providers returned nothing
+2026-07-20T17:26:00,NITCO,NITCO Limited,generated,
+2026-07-20T17:26:04,NITINSPIN,Nitin Spinners Limited,failed,all providers returned nothing
+2026-07-20T17:26:09,NITIRAJ,Nitiraj Engineers Limited,failed,all providers returned nothing
+2026-07-20T17:26:13,NITTAGELA,Nitta Gelatin India Limited,failed,all providers returned nothing
+2026-07-20T17:26:44,NIVABUPA,Niva Bupa Health Insurance Company Limited,generated,
+2026-07-20T17:26:49,NKIND,N.K Industries Limited,failed,all providers returned nothing
+2026-07-20T17:26:53,NLCINDIA,NLC India Limited,failed,all providers returned nothing
+2026-07-20T17:26:57,NMDC,NMDC Limited,failed,all providers returned nothing
+2026-07-20T17:27:29,NOCIL,NOCIL Limited,generated,
+2026-07-20T17:27:33,NORBTEAEXP,Norben Tea & Exports Limited,failed,all providers returned nothing
+2026-07-20T17:27:38,NORTHARC,Northern Arc Capital Limited,failed,all providers returned nothing
+2026-07-20T17:27:42,NOVARTIND,Novartis India Limited,failed,all providers returned nothing
+2026-07-20T17:28:53,NPST,NETWORK PEOPLE SRV TECH L,generated,
+2026-07-20T17:28:59,NRAIL,N R Agarwal Industries Limited,generated,
+2026-07-20T17:29:02,NRBBEARING,NRB Bearings Limited,generated,
+2026-07-20T17:29:05,NSIL,Nalwa Sons Investments Limited,generated,
+2026-07-20T17:29:09,NSLNISP,NMDC Steel Limited,failed,all providers returned nothing
+2026-07-20T17:29:14,NTPC,NTPC Limited,failed,all providers returned nothing
+2026-07-20T17:29:16,NTPCGREEN,NTPC GREEN ENERGY LIMITED,generated,
+2026-07-20T17:29:20,NUCLEUS,Nucleus Software Exports Limited,failed,all providers returned nothing
+2026-07-20T17:29:25,NURECA,Nureca Limited,failed,all providers returned nothing
+2026-07-20T17:29:29,NUVAMA,Nuvama Wealth Management Limited,failed,all providers returned nothing
+2026-07-20T17:30:01,NUVOCO,Nuvoco Vistas Corporation Limited,generated,
+2026-07-20T17:30:05,NYKAA,FSN E-Commerce Ventures Limited,failed,all providers returned nothing
+2026-07-20T17:30:10,OAL,Oriental Aromatics Limited,failed,all providers returned nothing
+2026-07-20T17:30:14,OBCL,OBCL Limited,failed,all providers returned nothing
+2026-07-20T17:30:45,OBEROIRLTY,Oberoi Realty Limited,generated,
+2026-07-20T17:30:50,OFSS,Oracle Financial Services Software Limited,failed,all providers returned nothing
+2026-07-20T17:30:54,OIL,Oil India Limited,failed,all providers returned nothing
+2026-07-20T17:30:59,OLAELEC,OLA ELECTRIC MOBILITY LTD,failed,all providers returned nothing
+2026-07-20T17:31:30,OLECTRA,Olectra Greentech Limited,generated,
+2026-07-20T17:31:35,OMAXE,Omaxe Limited,failed,all providers returned nothing
+2026-07-20T17:31:39,OMINFRAL,Om Infra Limited,failed,all providers returned nothing
+2026-07-20T17:31:43,OMNI,OMNITECH ENGINEERING LTD,failed,all providers returned nothing
+2026-07-20T17:32:15,OMPOWER,OM POWER TRANSMISSION LTD,generated,
+2026-07-20T17:32:20,ONEPOINT,One Point One Solutions Limited,failed,all providers returned nothing
+2026-07-20T17:32:24,ONESOURCE,ONESOURCE SPECL PHARMA L,failed,all providers returned nothing
+2026-07-20T17:32:28,ONGC,Oil and Natural Gas Corporation Limited,failed,all providers returned nothing
+2026-07-20T17:33:26,ONWARDTEC,Onward Technologies Limited,generated,
+2026-07-20T17:33:28,OPTIEMUS,Optiemus Infracom Limited,generated,
+2026-07-20T17:33:33,ORCHASP,Orchasp Limited,failed,all providers returned nothing
+2026-07-20T17:33:35,ORCHPHARMA,Orchid Pharma Limited,generated,
+2026-07-20T17:33:40,ORICONENT,Oricon Enterprises Limited,failed,all providers returned nothing
+2026-07-20T17:33:44,ORIENTALTL,Oriental Trimex Limited,failed,all providers returned nothing
+2026-07-20T17:33:48,ORIENTBELL,Orient Bell Limited,failed,all providers returned nothing
+2026-07-20T17:34:20,ORIENTCEM,Orient Cement Limited,generated,
+2026-07-20T17:34:22,ORIENTCER,Orient Ceratech Limited,generated,
+2026-07-20T17:34:27,ORIENTELEC,Orient Electric Limited,failed,all providers returned nothing
+2026-07-20T17:34:31,ORIENTHOT,Oriental Hotels Limited,failed,all providers returned nothing
+2026-07-20T17:34:36,ORIENTLTD,Orient Press Limited,failed,all providers returned nothing
+2026-07-20T17:35:08,ORIENTPPR,Orient Paper & Industries Limited,generated,
+2026-07-20T17:35:11,ORIENTTECH,ORIENT TECHNOLOGIES LTD,generated,
+2026-07-20T17:35:16,ORISSAMINE,The Orissa Minerals Development Company Limited,failed,all providers returned nothing
+2026-07-20T17:35:20,ORKLAINDIA,ORKLA INDIA LIMITED,failed,all providers returned nothing
+2026-07-20T17:35:25,OSWALGREEN,Oswal Greentech Limited,failed,all providers returned nothing
+2026-07-20T17:35:56,OSWALPUMPS,OSWAL PUMPS LIMITED,generated,
+2026-07-20T17:35:59,OSWALSEEDS,ShreeOswal Seeds and Chemicals Limited,generated,
+2026-07-20T17:36:03,PACEDIGITK,Pace Digitek Limited,failed,all providers returned nothing
+2026-07-20T17:36:08,PAGEIND,Page Industries Limited,failed,all providers returned nothing
+2026-07-20T17:36:12,PAISALO,Paisalo Digital Limited,failed,all providers returned nothing
+2026-07-20T17:36:44,PAKKA,Pakka Limited,generated,
+2026-07-20T17:36:46,PALASHSECU,Palash Securities Limited,generated,
+2026-07-20T17:36:51,PANACEABIO,Panacea Biotec Limited,failed,all providers returned nothing
+2026-07-20T17:36:55,PANACHE,Panache Digilife Limited,failed,all providers returned nothing
+2026-07-20T17:36:59,PANAMAPET,Panama Petrochem Limited,failed,all providers returned nothing
+2026-07-20T17:37:31,PANSARI,Pansari Developers Limited,generated,
+2026-07-20T17:37:59,PAR,Par Drugs and Chemicals Limited,generated,
+2026-07-20T17:38:03,PARACABLES,Paramount Communications Limited,generated,
+2026-07-20T17:38:07,PARADEEP,Paradeep Phosphates Limited,failed,all providers returned nothing
+2026-07-20T17:38:12,PARAGMILK,Parag Milk Foods Limited,failed,all providers returned nothing
+2026-07-20T17:38:16,PARAS,Paras Defence and Space Technologies Limited,failed,all providers returned nothing
+2026-07-20T17:38:48,PARASPETRO,Paras Petrofils Limited,generated,
+2026-07-20T17:38:52,PARKHOSPS,PARK MEDI WORLD LIMITED,failed,all providers returned nothing
+2026-07-20T17:38:56,PARKHOTELS,PARKHOTELS,failed,all providers returned nothing
+2026-07-20T17:39:01,PASHUPATI,Pashupati Cotspin Limited,failed,all providers returned nothing
+2026-07-20T17:39:32,PATANJALI,Patanjali Foods Limited,generated,
+2026-07-20T17:39:36,PATELENG,Patel Engineering Limited,failed,all providers returned nothing
+2026-07-20T17:39:41,PATELRMART,PATEL RETAIL LIMITED,failed,all providers returned nothing
+2026-07-20T17:39:45,PAUSHAKLTD,Paushak Limited,failed,all providers returned nothing
+2026-07-20T17:40:16,PAYTM,One97 Communications Limited,generated,
+2026-07-20T17:40:21,PCBL,PCBL Chemical Limited,failed,all providers returned nothing
+2026-07-20T17:40:25,PCJEWELLER,PC Jeweller Limited,failed,all providers returned nothing
+2026-07-20T17:40:30,PDMJEPAPER,Pudumjee Paper Products Limited,failed,all providers returned nothing
+2026-07-20T17:41:01,PDSL,PDS Limited,generated,
+2026-07-20T17:41:06,PENIND,Pennar Industries Limited,failed,all providers returned nothing
+2026-07-20T17:41:10,PERSISTENT,Persistent Systems Limited,failed,all providers returned nothing
+2026-07-20T17:41:14,PETRONET,Petronet LNG Limited,failed,all providers returned nothing
+2026-07-20T17:42:37,PFC,Power Finance Corporation Limited,generated,
+2026-07-20T17:42:40,PFIZER,Pfizer Limited,generated,
+2026-07-20T17:42:44,PFS,PTC India Financial Services Limited,generated,
+2026-07-20T17:42:47,PGEL,PG Electroplast Limited,generated,
+2026-07-20T17:42:50,PGHH,Procter & Gamble Hygiene and Health Care Limited,generated,
+2026-07-20T17:42:54,PGHL,Procter & Gamble Health Limited,failed,all providers returned nothing
+2026-07-20T17:42:59,PGIL,Pearl Global Industries Limited,failed,all providers returned nothing
+2026-07-20T17:43:03,PHOENIXLTD,The Phoenix Mills Limited,failed,all providers returned nothing
+2026-07-20T17:43:34,PICCADIL,Piccadily Agro Industries Limited,generated,
+2026-07-20T17:43:37,PIDILITIND,Pidilite Industries Limited,generated,
+2026-07-20T17:43:41,PIGL,Power & Instrumental (Gujarat) Limited,failed,all providers returned nothing
+2026-07-20T17:43:46,PIIND,PI Industries Limited,failed,all providers returned nothing
+2026-07-20T17:43:51,PILANIINVS,Pilani Investment and Industries Corporation Limited,failed,all providers returned nothing
+2026-07-20T17:44:22,PINELABS,PINE LABS LIMITED,generated,
+2026-07-20T17:44:25,PIONEEREMB,Pioneer Embroideries Limited,generated,
+2026-07-20T17:44:29,PIONRINV,Pioneer Investcorp Limited,failed,all providers returned nothing
+2026-07-20T17:44:33,PIRAMALFIN,PIRAMAL FINANCE LIMITED,failed,all providers returned nothing
+2026-07-20T17:44:38,PITTIENG,Pitti Engineering Limited,failed,all providers returned nothing
+2026-07-20T17:45:09,PIXTRANS,PIX Transmissions Limited,generated,
+2026-07-20T17:45:13,PKTEA,The Peria Karamalai Tea and Produce Company Limited,failed,all providers returned nothing
+2026-07-20T17:45:18,PLASTIBLEN,Plastiblends India Limited,failed,all providers returned nothing
+2026-07-20T17:45:22,PLATIND,Platinum Industries Limited,failed,all providers returned nothing
+2026-07-20T17:45:53,PML,Paul Merchants Limited,generated,
+2026-07-20T17:45:58,PNB,Punjab National Bank,failed,all providers returned nothing
+2026-07-20T17:46:02,PNBGILTS,PNB Gilts Ltd.,failed,all providers returned nothing
+2026-07-20T17:46:06,PNBHOUSING,PNB Housing Finance Limited,failed,all providers returned nothing
+2026-07-20T17:46:59,PNC,Pritish Nandy Communications Ltd,generated,
+2026-07-20T17:47:03,PNCINFRA,PNC Infratech Limited,generated,
+2026-07-20T17:47:18,PNGJL,P N GADGIL JEWELLERS LTD,generated,
+2026-07-20T17:47:24,PNGSREVA,PNGS REVA DIAMOND JEWEL L,generated,
+2026-07-20T17:47:28,POCL,Pondy Oxides And Chemicals Limited,failed,all providers returned nothing
+2026-07-20T17:47:33,PODDARMENT,Poddar Pigments Limited,failed,all providers returned nothing
+2026-07-20T17:47:37,POKARNA,Pokarna Limited,failed,all providers returned nothing
+2026-07-20T17:48:09,POLICYBZR,PB Fintech Limited,generated,
+2026-07-20T17:48:13,POLYCAB,Polycab India Limited,failed,all providers returned nothing
+2026-07-20T17:48:18,POLYMED,Poly Medicure Limited,failed,all providers returned nothing
+2026-07-20T17:48:22,POLYPLEX,Polyplex Corporation Limited,failed,all providers returned nothing
+2026-07-20T17:48:53,PONNIERODE,Ponni Sugars (Erode) Limited,generated,
+2026-07-20T17:48:58,POONAWALLA,Poonawalla Fincorp Limited,failed,all providers returned nothing
+2026-07-20T17:49:02,POWERGRID,Power Grid Corporation of India Limited,failed,all providers returned nothing
+2026-07-20T17:49:06,POWERICA,POWERICA LIMITED,failed,all providers returned nothing
+2026-07-20T17:49:38,POWERINDIA,Hitachi Energy India Limited,generated,
+2026-07-20T17:49:42,POWERMECH,Power Mech Projects Limited,failed,all providers returned nothing
+2026-07-20T17:49:46,PPAP,PPAP Automotive Limited,failed,all providers returned nothing
+2026-07-20T17:49:51,PPLPHARMA,Piramal Pharma Limited,failed,all providers returned nothing
+2026-07-20T17:50:22,PRABHA,Prabha Energy Limited,generated,
+2026-07-20T17:50:27,PRAENG,Prajay Engineers Syndicate Limited,failed,all providers returned nothing
+2026-07-20T17:50:31,PRAJIND,Praj Industries Limited,failed,all providers returned nothing
+2026-07-20T17:50:36,PRAKASH,Prakash Industries Limited,failed,all providers returned nothing
+2026-07-20T17:51:08,PRAKASHSTL,Prakash Steelage Limited,generated,
+2026-07-20T17:51:13,PRAVEG,Praveg Limited,failed,all providers returned nothing
+2026-07-20T17:51:17,PRECAM,Precision Camshafts Limited,failed,all providers returned nothing
+2026-07-20T17:51:22,PRECOT,Precot Limited,failed,all providers returned nothing
+2026-07-20T17:51:53,PRECWIRE,Precision Wires India Limited,generated,
+2026-07-20T17:51:55,PREMCO,Premco Global Limited,generated,
+2026-07-20T17:51:59,PREMEXPLN,Premier Explosives Limited,generated,
+2026-07-20T17:52:04,PREMIERENE,PREMIER ENERGIES LIMITED,failed,all providers returned nothing
+2026-07-20T17:52:08,PREMIERPOL,Premier Polyfilm Ltd.,failed,all providers returned nothing
+2026-07-20T17:52:13,PRESTIGE,Prestige Estates Projects Limited,failed,all providers returned nothing
+2026-07-20T17:52:44,PRICOLLTD,Pricol Limited,generated,
+2026-07-20T17:52:47,PRIMESECU,Prime Securities Limited,generated,
+2026-07-20T17:52:51,PRIMO,Primo Chemicals Limited,failed,all providers returned nothing
+2026-07-20T17:52:56,PRINCEPIPE,Prince Pipes and Fittings Limited,failed,all providers returned nothing
+2026-07-20T17:53:00,PRIVISCL,Privi Speciality Chemicals Limited,failed,all providers returned nothing
+2026-07-20T17:53:32,PROSTARM,PROSTARM INFO SYSTEMS LTD,generated,
+2026-07-20T17:53:36,PROTEAN,Protean eGov Technologies Limited,failed,all providers returned nothing
+2026-07-20T17:53:40,PROZONER,Prozone Realty Limited,failed,all providers returned nothing
+2026-07-20T17:53:45,PRSMJOHNSN,Prism Johnson Limited,failed,all providers returned nothing
+2026-07-20T17:54:16,PRUDENT,Prudent Corporate Advisory Services Limited,generated,
+2026-07-20T17:54:20,PSB,Punjab & Sind Bank,failed,all providers returned nothing
+2026-07-20T17:54:25,PSPPROJECT,PSP Projects Limited,failed,all providers returned nothing
+2026-07-20T17:54:29,PTC,PTC India Limited,failed,all providers returned nothing
+2026-07-20T17:55:00,PTCIL,PTC Industries Limited,generated,
+2026-07-20T17:55:05,PTL,PTL Enterprises Limited,failed,all providers returned nothing
+2026-07-20T17:55:09,PUNJABCHEM,Punjab Chemicals and Crop Protection Limited,failed,all providers returned nothing
+2026-07-20T17:55:14,PURVA,Puravankara Limited,failed,all providers returned nothing
+2026-07-20T17:56:17,PVP,PVP Ventures Limited,generated,
+2026-07-20T17:56:30,PVRINOX,PVR INOX Limited,generated,
+2026-07-20T17:56:33,PVSL,Popular Vehicles and Services Limited,generated,
+2026-07-20T17:56:36,PWL,Physicswallah Limited,generated,
+2026-07-20T17:56:40,PYRAMID,Pyramid Technoplast Limited,failed,all providers returned nothing
+2026-07-20T17:56:43,QMSMEDI,QMS MEDICAL ALLIED S LTD,generated,
+2026-07-20T17:56:48,QUADFUTURE,QUADRANT FUTURE TEK LTD,failed,all providers returned nothing
+2026-07-20T17:56:52,QUESS,Quess Corp Limited,failed,all providers returned nothing
+2026-07-20T17:56:56,QUINT,Quint Digital Limited,failed,all providers returned nothing
+2026-07-20T17:57:27,RACLGEAR,RACL Geartech Limited,generated,
+2026-07-20T17:57:32,RADAAN,Radaan Mediaworks India Limited,failed,all providers returned nothing
+2026-07-20T17:57:36,RADHIKAJWE,Radhika Jeweltech Limited,failed,all providers returned nothing
+2026-07-20T17:57:41,RADIANTCMS,Radiant Cash Management Services Limited,failed,all providers returned nothing
+2026-07-20T17:58:12,RADICO,Radico Khaitan Limited,generated,
+2026-07-20T17:58:17,RADIOCITY,Music Broadcast Limited,failed,all providers returned nothing
+2026-07-20T17:58:21,RAILTEL,RailTel Corporation of India Limited,failed,all providers returned nothing
+2026-07-20T17:58:26,RAIN,Rain Industries Limited,failed,all providers returned nothing
+2026-07-20T17:58:57,RAINBOW,Rainbow Children's Medicare Limited,generated,
+2026-07-20T17:59:02,RAJMET,Rajnandini Metal Limited,failed,all providers returned nothing
+2026-07-20T17:59:06,RAJPALAYAM,Rajapalayam Mills Limited,failed,all providers returned nothing
+2026-07-20T17:59:10,RAJRATAN,Rajratan Global Wire Limited,failed,all providers returned nothing
+2026-07-20T17:59:42,RAJSREESUG,Rajshree Sugars & Chemicals Limited,generated,
+2026-07-20T17:59:46,RAJTV,Raj Television Network Limited,failed,all providers returned nothing
+2026-07-20T17:59:51,RALLIS,Rallis India Limited,failed,all providers returned nothing
+2026-07-20T17:59:55,RAMANEWS,Shree Rama Newsprint Limited,failed,all providers returned nothing
+2026-07-20T18:00:26,RAMAPHO,Rama Phosphates Limited,generated,
+2026-07-20T18:01:15,RAMCOCEM,The Ramco Cements Limited,generated,
+2026-07-20T18:01:18,RAMCOIND,Ramco Industries Limited,generated,
+2026-07-20T18:01:21,RAMCOSYS,Ramco Systems Limited,generated,
+2026-07-20T18:01:25,RAMKY,Ramky Infrastructure Limited,failed,all providers returned nothing
+2026-07-20T18:01:29,RAMRAT,Ram Ratna Wires Limited,failed,all providers returned nothing
+2026-07-20T18:01:34,RANASUG,Rana Sugars Limited,failed,all providers returned nothing
+2026-07-20T18:02:05,RANEHOLDIN,Rane Holdings Limited,generated,
+2026-07-20T18:02:08,RATEGAIN,RateGain Travel Technologies Limited,generated,
+2026-07-20T18:02:12,RATNAMANI,Ratnamani Metals & Tubes Limited,failed,all providers returned nothing
+2026-07-20T18:02:17,RATNAVEER,Ratnaveer Precision Engineering Limited,failed,all providers returned nothing
+2026-07-20T18:02:22,RAYMOND,Raymond Limited,failed,all providers returned nothing
+2026-07-20T18:02:53,RAYMONDLSL,Raymond Lifestyle Limited,generated,
+2026-07-20T18:02:57,RAYMONDREL,Raymond Realty Limited,failed,all providers returned nothing
+2026-07-20T18:03:02,RBA,Restaurant Brands Asia Limited,failed,all providers returned nothing
+2026-07-20T18:03:06,RBLBANK,RBL Bank Limited,failed,all providers returned nothing
+2026-07-20T18:03:39,RBZJEWEL,RBZ Jewellers Limited,generated,
+2026-07-20T18:03:43,RCF,Rashtriya Chemicals and Fertilizers Limited,failed,all providers returned nothing
+2026-07-20T18:03:48,RECLTD,REC Limited,failed,all providers returned nothing
+2026-07-20T18:03:53,REDINGTON,Redington Limited,failed,all providers returned nothing
+2026-07-20T18:04:24,REDTAPE,REDTAPE Limited,generated,
+2026-07-20T18:04:28,REFEX,Refex Industries Limited,failed,all providers returned nothing
+2026-07-20T18:04:33,REGENCERAM,Regency Ceramics Limited,failed,all providers returned nothing
+2026-07-20T18:04:37,RELAXO,Relaxo Footwears Limited,failed,all providers returned nothing
+2026-07-20T18:05:43,RELCHEMQ,Reliance Chemotex Industries Limited,generated,
+2026-07-20T18:05:46,RELIABLE,Reliable Data Services Limited,generated,
+2026-07-20T18:05:49,RELIGARE,Religare Enterprises Limited,generated,
+2026-07-20T18:05:52,RELTD,Ravindra Energy Limited,generated,
+2026-07-20T18:05:57,REMSONSIND,Remsons Industries Limited,failed,all providers returned nothing
+2026-07-20T18:06:01,RENUKA,Shree Renuka Sugars Limited,failed,all providers returned nothing
+2026-07-20T18:06:06,REPCOHOME,Repco Home Finance Limited,failed,all providers returned nothing
+2026-07-20T18:06:37,REPRO,Repro India Limited,generated,
+2026-07-20T18:06:40,RESPONIND,Responsive Industries Limited,generated,
+2026-07-20T18:06:45,RETAIL,JHS Svendgaard Retail Ventures Limited,failed,all providers returned nothing
+2026-07-20T18:06:49,RGL,Renaissance Global Limited,failed,all providers returned nothing
+2026-07-20T18:06:54,RHETAN,Rhetan TMT Limited,failed,all providers returned nothing
+2026-07-20T18:07:25,RHIM,RHI Magnesita India Limited,generated,
+2026-07-20T18:07:28,RHL,Robust Hotels Limited,generated,
+2026-07-20T18:07:32,RICOAUTO,Rico Auto Industries Limited,failed,all providers returned nothing
+2026-07-20T18:07:37,RIIL,Reliance Industrial Infrastructure Limited,failed,all providers returned nothing
+2026-07-20T18:07:41,RISHABH,Rishabh Instruments Limited,failed,all providers returned nothing
+2026-07-20T18:08:12,RITCO,Ritco Logistics Limited,generated,
+2026-07-20T18:08:17,RITES,RITES Limited,failed,all providers returned nothing
+2026-07-20T18:08:22,RKDL,Ravi Kumar Distilleries Limited,failed,all providers returned nothing
+2026-07-20T18:08:26,RKEC,RKEC Projects Limited,failed,all providers returned nothing
+2026-07-20T18:08:57,RKFORGE,Ramkrishna Forgings Limited,generated,
+2026-07-20T18:09:02,RKSWAMY,R K SWAMY LIMITED,failed,all providers returned nothing
+2026-07-20T18:09:06,RMC,RMC Switchgears Limited,failed,all providers returned nothing
+2026-07-20T18:09:11,RMDRIP,R M DRIP & SPRINK SYS LTD,failed,all providers returned nothing
+2026-07-20T18:10:21,RML,Rane (Madras) Limited,generated,
+2026-07-20T18:10:24,RNBDENIMS,R & B Denims Limited,generated,
+2026-07-20T18:10:26,ROHLTD,Royal Orchid Hotels Limited,generated,
+2026-07-20T18:10:29,ROLEXRINGS,Rolex Rings Limited,generated,
+2026-07-20T18:10:33,ROML,Raj Oil Mills Limited,failed,all providers returned nothing
+2026-07-20T18:10:38,ROSSARI,Rossari Biotech Limited,failed,all providers returned nothing
+2026-07-20T18:10:42,ROSSELLIND,Rossell India Limited,failed,all providers returned nothing
+2026-07-20T18:11:14,ROSSTECH,Rossell Techsys Limited,generated,
+2026-07-20T18:11:17,ROTO,Roto Pumps Limited,generated,
+2026-07-20T18:11:21,ROUTE,Route Mobile Limited,failed,all providers returned nothing
+2026-07-20T18:11:26,RPEL,Raghav Productivity Enhancers Limited,failed,all providers returned nothing
+2026-07-20T18:11:30,RPGLIFE,RPG Life Sciences Limited,failed,all providers returned nothing
+2026-07-20T18:12:01,RPOWER,Reliance Power Limited,generated,
+2026-07-20T18:12:04,RPPINFRA,R.P.P. Infra Projects Limited,generated,
+2026-07-20T18:12:09,RPPL,Rajshree Polypack Limited,failed,all providers returned nothing
+2026-07-20T18:12:13,RPSGVENT,RPSG Ventures Limited,failed,all providers returned nothing
+2026-07-20T18:12:18,RPTECH,Rashi Peripherals Limited,failed,all providers returned nothing
+2026-07-20T18:12:49,RRIL,RRIL Limited,generated,
+2026-07-20T18:12:52,RRKABEL,R R Kabel Limited,generated,
+2026-07-20T18:12:57,RSDFIN,RSD Finance Limited,failed,all providers returned nothing
+2026-07-20T18:13:02,RSL,RAJPUTANA STAINLESS LTD,failed,all providers returned nothing
+2026-07-20T18:13:06,RSYSTEMS,R Systems International Limited,failed,all providers returned nothing
+2026-07-20T18:13:37,RTNINDIA,RattanIndia Enterprises Limited,generated,
+2026-07-20T18:13:40,RTNPOWER,RattanIndia Power Limited,generated,
+2026-07-20T18:13:44,RUBFILA,Rubfila International Limited,failed,all providers returned nothing
+2026-07-20T18:13:49,RUBICON,RUBICON RESEARCH LIMITED,failed,all providers returned nothing
+2026-07-20T18:14:49,RUCHINFRA,Ruchi Infrastructure Limited,generated,
+2026-07-20T18:14:52,RUCHIRA,Ruchira Papers Limited,generated,
+2026-07-20T18:14:55,RUPA,Rupa & Company Limited,generated,
+2026-07-20T18:14:58,RUSHIL,Rushil Décor Limited,generated,
+2026-07-20T18:15:02,RUSTOMJEE,Keystone Realtors Limited,failed,all providers returned nothing
+2026-07-20T18:15:07,RVHL,Ravinder Heights Limited,failed,all providers returned nothing
+2026-07-20T18:15:11,RVNL,Rail Vikas Nigam Limited,failed,all providers returned nothing
+2026-07-20T18:15:42,RVTH,Revathi Equipment India Limited,generated,
+2026-07-20T18:15:45,S&SPOWER,S&S Power Switchgear Limited,generated,
+2026-07-20T18:15:50,SAATVIKGL,Saatvik Green Energy Limited,failed,all providers returned nothing
+2026-07-20T18:15:54,SADBHAV,Sadbhav Engineering Limited,failed,all providers returned nothing
+2026-07-20T18:15:59,SAFARI,Safari Industries (India) Limited,failed,all providers returned nothing
+2026-07-20T18:16:30,SAGARDEEP,Sagardeep Alloys Limited,generated,
+2026-07-20T18:16:33,SAGCEM,Sagar Cements Limited,generated,
+2026-07-20T18:16:38,SAGILITY,Sagility Limited,failed,all providers returned nothing
+2026-07-20T18:16:42,SAHLIBHFI,Shalibhadra Finance Limited,failed,all providers returned nothing
+2026-07-20T18:16:46,SAHYADRI,Sahyadri Industries Limited,failed,all providers returned nothing
+2026-07-20T18:17:20,SAIL,Steel Authority of India Limited,generated,
+2026-07-20T18:17:24,SAILIFE,SAI LIFE SCIENCES LIMITED,failed,all providers returned nothing
+2026-07-20T18:17:29,SAIPARENT,SAI PARENTERALS LIMITED,failed,all providers returned nothing
+2026-07-20T18:17:33,SAKAR,Sakar Healthcare Limited,failed,all providers returned nothing
+2026-07-20T18:18:05,SAKHTISUG,Sakthi Sugars Limited,generated,
+2026-07-20T18:18:09,SAKSOFT,Saksoft Limited,failed,all providers returned nothing
+2026-07-20T18:18:14,SALASAR,Salasar Techno Engineering Limited,failed,all providers returned nothing
+2026-07-20T18:19:15,SALONA,Salona Cotspin Limited,generated,
+2026-07-20T18:19:18,SALZERELEC,Salzer Electronics Limited,generated,
+2026-07-20T18:19:20,SAMBHAAV,Sambhaav Media Limited,generated,
+2026-07-20T18:19:25,SAMBHV,SAMBHV STEEL TUBES LTD,failed,all providers returned nothing
+2026-07-20T18:19:29,SAMHI,SAMHI Hotels Limited,failed,all providers returned nothing
+2026-07-20T18:19:34,SAMMAANCAP,Sammaan Capital Limited,failed,all providers returned nothing
+2026-07-20T18:20:05,SAMPANN,Sampann Utpadan India Limited,generated,
+2026-07-20T18:20:08,SANATHAN,SANATHAN TEXTILES LIMITED,generated,
+2026-07-20T18:20:12,SANDESH,The Sandesh Limited,failed,all providers returned nothing
+2026-07-20T18:20:17,SANDHAR,Sandhar Technologies Limited,failed,all providers returned nothing
+2026-07-20T18:20:21,SANDUMA,The Sandur Manganese & Iron Ores Limited,failed,all providers returned nothing
+2026-07-20T18:20:53,SANGAMIND,Sangam (India) Limited,generated,
+2026-07-20T18:20:57,SANGHVIMOV,Sanghvi Movers Limited,failed,all providers returned nothing
+2026-07-20T18:21:01,SANOFI,Sanofi India Limited,failed,all providers returned nothing
+2026-07-20T18:21:06,SANOFICONR,SANOFI CONS HEALTHC IND L,failed,all providers returned nothing
+2026-07-20T18:21:37,SANSERA,Sansera Engineering Limited,generated,
+2026-07-20T18:21:42,SANSTAR,SANSTAR LIMITED,failed,all providers returned nothing
+2026-07-20T18:21:46,SAPPHIRE,Sapphire Foods India Limited,failed,all providers returned nothing
+2026-07-20T18:21:51,SAPPL,Shree Ajit Pulp and Paper Limited,failed,all providers returned nothing
+2026-07-20T18:22:22,SARDAEN,Sarda Energy & Minerals Limited,generated,
+2026-07-20T18:22:27,SAREGAMA,Saregama India Limited,failed,all providers returned nothing
+2026-07-20T18:22:31,SARLAPOLY,Sarla Performance Fibers Limited,failed,all providers returned nothing
+2026-07-20T18:22:35,SASKEN,Sasken Technologies Limited,failed,all providers returned nothing
+2026-07-20T18:23:52,SATIA,Satia Industries Limited,generated,
+2026-07-20T18:23:55,SATIN,Satin Creditcare Network Limited,generated,
+2026-07-20T18:23:57,SAURASHCEM,Saurashtra Cement Limited,generated,
+2026-07-20T18:24:00,SAYAJIHOTL,Sayaji Hotels Limited,generated,
+2026-07-20T18:24:05,SBC,SBC Exports Limited,failed,all providers returned nothing
+2026-07-20T18:24:09,SBCL,Shivalik Bimetal Controls Limited,failed,all providers returned nothing
+2026-07-20T18:24:13,SBFC,SBFC Finance Limited,failed,all providers returned nothing
+2026-07-20T18:24:45,SBGLP,Suratwwala Business Group Limited,generated,
+2026-07-20T18:24:48,SBICARD,SBI Cards and Payment Services Limited,generated,
+2026-07-20T18:24:53,SBILIFE,SBI Life Insurance Company Limited,failed,all providers returned nothing
+2026-07-20T18:24:57,SBIN,State Bank of India,failed,all providers returned nothing
+2026-07-20T18:25:01,SCANSTL,Scan Steels Limited,failed,all providers returned nothing
+2026-07-20T18:25:33,SCHAEFFLER,Schaeffler India Limited,generated,
+2026-07-20T18:25:38,SCHAND,S Chand And Company Limited,failed,all providers returned nothing
+2026-07-20T18:25:42,SCHNEIDER,Schneider Electric Infrastructure Limited,failed,all providers returned nothing
+2026-07-20T18:25:47,SCI,The Shipping Corporation of India Limited,failed,all providers returned nothing
+2026-07-20T18:26:18,SCILAL,Shipping Corporation of India Land and Assets Limited,generated,
+2026-07-20T18:26:23,SCODATUBES,Scoda Tubes Limited,failed,all providers returned nothing
+2026-07-20T18:26:27,SCPL,Sheetal Cool Products Limited,failed,all providers returned nothing
+2026-07-20T18:26:32,SDBL,Som Distilleries & Breweries Limited,failed,all providers returned nothing
+2026-07-20T18:27:03,SEAMECLTD,Seamec Limited,generated,
+2026-07-20T18:27:08,SECMARK,SecMark Consultancy Limited,failed,all providers returned nothing
+2026-07-20T18:27:12,SECURKLOUD,SecureKloud Technologies Limited,failed,all providers returned nothing
+2026-07-20T18:27:17,SEDEMAC,SEDEMAC MECHATRONICS LTD,failed,all providers returned nothing
+2026-07-20T18:27:48,SEIL,Shanti Educational Initiatives Limited,generated,
+2026-07-20T18:28:15,SELMC,SEL Manufacturing Company Limited,generated,
+2026-07-20T18:28:18,SENCO,Senco Gold Limited,generated,
+2026-07-20T18:28:22,SENORES,SENORES PHARMACEUTICALS L,failed,all providers returned nothing
+2026-07-20T18:28:26,SEPC,SEPC Limited,failed,all providers returned nothing
+2026-07-20T18:28:31,SERVOTECH,Servotech Renewable Power System Limited,failed,all providers returned nothing
+2026-07-20T18:29:02,SESHAPAPER,Seshasayee Paper and Boards Limited,generated,
+2026-07-20T18:29:07,SETL,Standard Engineering Technology Limited,failed,all providers returned nothing
+2026-07-20T18:29:11,SFL,Sheela Foam Limited,failed,all providers returned nothing
+2026-07-20T18:29:16,SGFIN,SG Finserve Limited,failed,all providers returned nothing
+2026-07-20T18:29:47,SGIL,Synergy Green Industries Limited,generated,
+2026-07-20T18:29:52,SGL,STL Global Limited,failed,all providers returned nothing
+2026-07-20T18:29:56,SGMART,SG Mart Limited,failed,all providers returned nothing
+2026-07-20T18:30:00,SHADOWFAX,SHADOWFAX TECHNOLOGIES L,failed,all providers returned nothing
+2026-07-20T18:30:32,SHAH,Shah Metacorp Limited,generated,
+2026-07-20T18:30:37,SHAHALLOYS,Shah Alloys Limited,failed,all providers returned nothing
+2026-07-20T18:30:41,SHAILY,Shaily Engineering Plastics Limited,failed,all providers returned nothing
+2026-07-20T18:30:45,SHAKTIPUMP,Shakti Pumps (India) Limited,failed,all providers returned nothing
+2026-07-20T18:31:17,SHALBY,Shalby Limited,generated,
+2026-07-20T18:31:21,SHALPAINTS,Shalimar Paints Limited,failed,all providers returned nothing
+2026-07-20T18:31:26,SHANTI,Shanti Overseas (India) Limited,failed,all providers returned nothing
+2026-07-20T18:31:30,SHANTIGEAR,Shanthi Gears Limited,failed,all providers returned nothing
+2026-07-20T18:32:50,SHANTIGOLD,SHANTI GOLD INTERNATION L,generated,
+2026-07-20T18:32:53,SHARDACROP,Sharda Cropchem Limited,generated,
+2026-07-20T18:32:56,SHARDAMOTR,Sharda Motor Industries Limited,generated,
+2026-07-20T18:32:59,SHARDUL,Shardul Securities Limited,generated,
+2026-07-20T18:33:02,SHAREINDIA,Share India Securities Limited,generated,
+2026-07-20T18:33:07,SHBAJRG,Shri Bajrang Alliance Limited,failed,all providers returned nothing
+2026-07-20T18:33:11,SHILCTECH,Shilchar Technologies Limited,failed,all providers returned nothing
+2026-07-20T18:33:16,SHILPAMED,Shilpa Medicare Limited,failed,all providers returned nothing
+2026-07-20T18:33:47,SHINDL,Sharat Industries Limited,generated,
+2026-07-20T18:33:50,SHIVATEX,Shiva Texyarn Limited,generated,
+2026-07-20T18:33:55,SHIVAUM,SHIV AUM STEELS LIMITED,failed,all providers returned nothing
+2026-07-20T18:34:00,SHK,S H Kelkar and Company Limited,failed,all providers returned nothing
+2026-07-20T18:34:04,SHOPERSTOP,Shoppers Stop Limited,failed,all providers returned nothing
+2026-07-20T18:34:36,SHRADHA,Shradha Realty Limited,generated,
+2026-07-20T18:34:39,SHREDIGCEM,Shree Digvijay Cement Company Limited,generated,
+2026-07-20T18:34:43,SHREECEM,Shree Cement Limited,failed,all providers returned nothing
+2026-07-20T18:34:47,SHREEJISPG,SHREEJI SHIPPING GLOBAL L,failed,all providers returned nothing
+2026-07-20T18:34:51,SHREEPUSHK,Shree Pushkar Chemicals & Fertilisers Limited,failed,all providers returned nothing
+2026-07-20T18:35:23,SHREERAMA,Shree Rama Multi-Tech Limited,generated,
+2026-07-20T18:35:27,SHREYANIND,Shreyans Industries Limited,failed,all providers returned nothing
+2026-07-20T18:35:31,SHRIKRISH,Shri Krishna Devcon Limited,failed,all providers returned nothing
+2026-07-20T18:35:35,SHRINGARMS,Shringar House of Mangalsutra Limited,failed,all providers returned nothing
+2026-07-20T18:36:07,SHRIPISTON,SPR Auto Technologies Limited,generated,
+2026-07-20T18:36:11,SHRIRAMFIN,Shriram Finance Limited,failed,all providers returned nothing
+2026-07-20T18:36:16,SHRIRAMPPS,Shriram Properties Limited,failed,all providers returned nothing
+2026-07-20T18:36:21,SHYAMMETL,Shyam Metalics and Energy Limited,failed,all providers returned nothing
+2026-07-20T18:37:17,SICAGEN,Sicagen India Limited,generated,
+2026-07-20T18:37:20,SICALLOG,Sical Logistics Limited,generated,
+2026-07-20T18:37:26,SIEMENS,Siemens Limited,generated,
+2026-07-20T18:37:30,SIGIND,Signet Industries Limited,failed,all providers returned nothing
+2026-07-20T18:37:35,SIGMA,Sigma Solve Limited,failed,all providers returned nothing
+2026-07-20T18:37:39,SIGMAADV,Sigma Advanced Systems Limited,failed,all providers returned nothing
+2026-07-20T18:38:11,SIGNATURE,Signatureglobal (India) Limited,generated,
+2026-07-20T18:38:14,SIGNPOST,Signpost India Limited,generated,
+2026-07-20T18:38:18,SIKA,Sika Interplant Systems Limited,failed,all providers returned nothing
+2026-07-20T18:38:22,SIKKO,Sikko Industries Limited,failed,all providers returned nothing
+2026-07-20T18:38:27,SIL,Standard Industries Limited,failed,all providers returned nothing
+2026-07-20T18:38:58,SILGO,Silgo Retail Limited,generated,
+2026-07-20T18:39:05,SILINV,SIL Investments Limited,generated,
+2026-07-20T18:39:09,SILLYMONKS,Silly Monks Entertainment Limited,failed,all providers returned nothing
+2026-07-20T18:39:13,SILVERTUC,Silver Touch Technologies Limited,failed,all providers returned nothing
+2026-07-20T18:39:18,SIMPLEXINF,Simplex Infrastructures Limited,failed,all providers returned nothing
+2026-07-20T18:39:49,SINCLAIR,Sinclairs Hotels Limited,generated,
+2026-07-20T18:39:52,SINDHUTRAD,Sindhu Trade Links Limited,generated,
+2026-07-20T18:39:56,SINGERIND,Singer India Limited,failed,all providers returned nothing
+2026-07-20T18:40:01,SINTERCOM,Sintercom India Limited,failed,all providers returned nothing
+2026-07-20T18:40:05,SIRCA,Sirca Paints India Limited,failed,all providers returned nothing
+2026-07-20T18:40:37,SIS,SIS Limited,generated,
+2026-07-20T18:40:41,SIYSIL,Siyaram Silk Mills Limited,failed,all providers returned nothing
+2026-07-20T18:40:45,SJS,S.J.S. Enterprises Limited,failed,all providers returned nothing
+2026-07-20T18:40:50,SJVN,SJVN Limited,failed,all providers returned nothing
+2026-07-20T18:41:55,SKFINDIA,SKF India Limited,generated,
+2026-07-20T18:41:58,SKFINDUS,SKF IND (INDUSTRIAL) LTD,generated,
+2026-07-20T18:42:01,SKIPPER,Skipper Limited,generated,
+2026-07-20T18:42:03,SKMEGGPROD,SKM Egg Products Export (India) Limited,generated,
+2026-07-20T18:42:08,SKYGOLD,Sky Gold and Diamonds Limited,failed,all providers returned nothing
+2026-07-20T18:42:12,SMARTWORKS,SMARTWORKS COWORKING SP L,failed,all providers returned nothing
+2026-07-20T18:42:17,SMCGLOBAL,SMC Global Securities Limited,failed,all providers returned nothing
+2026-07-20T18:42:48,SMLMAH,SML MAHINDRA LIMITED,generated,
+2026-07-20T18:42:51,SMLT,Sarthak Metals Limited,generated,
+2026-07-20T18:42:56,SMSPHARMA,SMS Pharmaceuticals Limited,failed,all providers returned nothing
+2026-07-20T18:43:01,SNOWMAN,Snowman Logistics Limited,failed,all providers returned nothing
+2026-07-20T18:43:05,SOBHA,Sobha Limited,failed,all providers returned nothing
+2026-07-20T18:43:37,SOLARA,Solara Active Pharma Sciences Limited,generated,
+2026-07-20T18:44:40,SOLARINDS,Solar Industries India Limited,generated,
+2026-07-20T18:44:43,SOLARWORLD,SOLARWORLD ENERGY SOL LTD,generated,
+2026-07-20T18:44:46,SOLEX,SOLEX ENERGY LIMITED,generated,
+2026-07-20T18:44:50,SOMANYCERA,Somany Ceramics Limited,failed,all providers returned nothing
+2026-07-20T18:44:55,SOMATEX,Soma Textiles & Industries Limited,failed,all providers returned nothing
+2026-07-20T18:44:59,SOMICONVEY,Somi Conveyor Beltings Limited,failed,all providers returned nothing
+2026-07-20T18:45:31,SONACOMS,Sona BLW Precision Forgings Limited,generated,
+2026-07-20T18:45:34,SONAL,Sonal Mercantile Limited,generated,
+2026-07-20T18:46:16,SONAMLTD,Sonam Limited,generated,
+2026-07-20T18:46:19,SONATSOFTW,Sonata Software Limited,generated,
+2026-07-20T18:47:22,SOTL,Savita Oil Technologies Limited,generated,
+2026-07-20T18:47:25,SOUTHBANK,The South Indian Bank Limited,generated,
+2026-07-20T18:47:28,SOUTHWEST,South West Pinnacle Exploration Limited,generated,
+2026-07-20T18:47:33,SPAL,S.P. Apparels Limited,failed,all providers returned nothing
+2026-07-20T18:47:37,SPANDANA,Spandana Sphoorty Financial Limited,failed,all providers returned nothing
+2026-07-20T18:47:41,SPARC,Sun Pharma Advanced Research Company Limited,failed,all providers returned nothing
+2026-07-20T18:48:13,SPCENET,Spacenet Enterprises India Limited,generated,
+2026-07-20T18:48:15,SPECIALITY,Speciality Restaurants Limited,generated,
+2026-07-20T18:48:20,SPECTRUM,SPECTRUM ELECTRIC IND LTD,failed,all providers returned nothing
+2026-07-20T18:48:24,SPENCERS,Spencer's Retail Limited,failed,all providers returned nothing
+2026-07-20T18:48:29,SPIC,Southern Petrochemical Industries Corporation Limited,failed,all providers returned nothing
+2026-07-20T18:49:00,SPLIL,SPL Industries Limited,generated,
+2026-07-20T18:49:03,SPLPETRO,Supreme Petrochem Limited,generated,
+2026-07-20T18:49:08,SPMLINFRA,SPML Infra Limited,failed,all providers returned nothing
+2026-07-20T18:49:12,SPORTKING,Sportking India Limited,failed,all providers returned nothing
+2026-07-20T18:49:16,SRD,Shankar Lal Rampal Dye-Chem Limited,failed,all providers returned nothing
+2026-07-20T18:50:44,SREEL,Sreeleathers Limited,generated,
+2026-07-20T18:50:46,SRF,SRF Limited,generated,
+2026-07-20T18:51:54,SRGHFL,SRG Housing Finance Limited,generated,
+2026-07-20T18:51:57,SRHHYPOLTD,Sree Rayalaseema Hi-Strength Hypo Limited,generated,
+2026-07-20T18:52:00,SRM,SRM CONTRACTORS LIMITED,failed,all providers returned nothing
+2026-07-20T18:53:03,SRTL,SHREE RAM TWISTEX LIMITED,generated,
+2026-07-20T18:53:07,SSDL,SARASWATI SAREE DEPOT LTD,generated,
+2026-07-20T18:53:10,SSWL,Steel Strips Wheels Limited,generated,
+2026-07-20T18:54:15,STALLION,STALLION IND FLUOROCHEM L,generated,
+2026-07-20T18:54:20,STANLEY,STANLEY LIFESTYLES LTD,generated,
+2026-07-20T18:55:24,STAR,Strides Pharma Science Limited,generated,
+2026-07-20T18:55:26,STARCEMENT,Star Cement Limited,generated,
+2026-07-20T18:55:29,STARHEALTH,Star Health and Allied Insurance Company Limited,generated,
+2026-07-20T18:56:24,STARPAPER,Star Paper Mills Limited,generated,
+2026-07-20T18:56:27,STARTECK,Starteck Finance Limited,generated,
+2026-07-20T18:57:30,STCINDIA,The State Trading Corporation of India Limited,generated,
+2026-07-20T18:57:33,STEELCAS,Steelcast Limited,generated,
+2026-07-20T18:57:37,STEELCITY,Steel City Securities Limited,generated,
+2026-07-20T18:57:40,STEELXIND,Steel Exchange India Limited,generated,
+2026-07-20T18:57:44,STEL,STEL Holdings Limited,failed,all providers returned nothing
+2026-07-20T18:57:49,STOVEKRAFT,Stove Kraft Limited,failed,all providers returned nothing
+2026-07-20T18:57:53,STUDDS,STUDDS ACCESSORIES LTD,generated,
+2026-07-20T18:57:58,STYL,SESHAASAI TECHNOLOGIES L,failed,all providers returned nothing
+2026-07-20T18:58:02,STYLAMIND,Stylam Industries Limited,failed,all providers returned nothing
+2026-07-20T18:58:07,STYRENIX,Styrenix Performance Materials Limited,failed,all providers returned nothing
+2026-07-20T18:58:38,SUBROS,Subros Limited,generated,
+2026-07-20T18:58:42,SUDARCOLOR,Sudarshan Colorants India Limited,failed,all providers returned nothing
+2026-07-20T18:58:47,SUDARSCHEM,Sudarshan Chemical Industries Limited,failed,all providers returned nothing
+2026-07-20T18:58:51,SUDEEPPHRM,SUDEEP PHARMA LIMITED,failed,all providers returned nothing
+2026-07-20T18:59:23,SUKHJITS,The Sukhjit Starch & Chemicals Limited,generated,
+2026-07-20T18:59:27,SULA,Sula Vineyards Limited,failed,all providers returned nothing
+2026-07-20T18:59:32,SUMEETINDS,Sumeet Industries Limited,failed,all providers returned nothing
+2026-07-20T18:59:36,SUMICHEM,Sumitomo Chemical India Limited,failed,all providers returned nothing
+2026-07-20T19:00:59,SUMMITSEC,Summit Securities Limited,generated,
+2026-07-20T19:01:02,SUNCLAY,Sundaram-Clayton Limited,generated,
+2026-07-20T19:01:05,SUNDARAM,Sundaram Multi Pap Limited,generated,
+2026-07-20T19:02:08,SUNDARMFIN,Sundaram Finance Limited,generated,
+2026-07-20T19:02:11,SUNDRMFAST,Sundram Fasteners Limited,generated,
+2026-07-20T19:03:23,SUNDROP,Sundrop Brands Limited,generated,
+2026-07-20T19:03:27,SUNFLAG,Sunflag Iron and Steel Company Limited,failed,all providers returned nothing
+2026-07-20T19:04:30,SUNTECK,Sunteck Realty Limited,generated,
+2026-07-20T19:04:33,SUNTV,Sun TV Network Limited,generated,
+2026-07-20T19:05:22,SUPERHOUSE,Superhouse Limited,generated,
+2026-07-20T19:05:24,SUPRAJIT,Suprajit Engineering Limited,generated,
+2026-07-20T19:05:27,SUPREME,Supreme Holdings & Hospitality (India) Limited,generated,
+2026-07-20T19:05:31,SUPREMEIND,The Supreme Industries Limited,generated,
+2026-07-20T19:05:34,SUPREMEINF,Supreme Infrastructure India Limited,generated,
+2026-07-20T19:05:37,SUPRIYA,Supriya Lifescience Limited,generated,
+2026-07-20T19:05:41,SURAJEST,SURAJ ESTATE DEVELOPERS L,failed,all providers returned nothing
+2026-07-20T19:05:46,SURAJLTD,Suraj Limited,failed,all providers returned nothing
+2026-07-20T19:05:49,SURAKSHA,SURAKSHA DIAGNOSTIC LTD,generated,
+2026-07-20T19:05:53,SURANASOL,Surana Solar Limited,failed,all providers returned nothing
+2026-07-20T19:05:58,SURANAT&P,Surana Telecom and Power Limited,failed,all providers returned nothing
+2026-07-20T19:06:02,SURYALA,Suryalata Spinning Mills Limited,failed,all providers returned nothing
+2026-07-20T19:06:34,SURYALAXMI,Suryalakshmi Cotton Mills Limited,generated,
+2026-07-20T19:06:38,SURYAROSNI,Surya Roshni Limited,failed,all providers returned nothing
+2026-07-20T19:06:42,SURYODAY,Suryoday Small Finance Bank Limited,failed,all providers returned nothing
+2026-07-20T19:06:47,SUVEN,Suven Life Sciences Limited,failed,all providers returned nothing
+2026-07-20T19:07:18,SUVIDHAA,Suvidhaa Infoserve Limited,generated,
+2026-07-20T19:07:23,SUYOG,Suyog Telematics Limited,failed,all providers returned nothing
+2026-07-20T19:07:27,SUZLON,Suzlon Energy Limited,failed,all providers returned nothing
+2026-07-20T19:07:32,SWANCORP,Swan Corp Limited,failed,all providers returned nothing
+2026-07-20T19:08:05,SWARAJENG,Swaraj Engines Limited,generated,
+2026-07-20T19:08:09,SWELECTES,Swelect Energy Systems Limited,failed,all providers returned nothing
+2026-07-20T19:08:14,SWIGGY,SWIGGY LIMITED,failed,all providers returned nothing
+2026-07-20T19:08:19,SWSOLAR,Sterling and Wilson Renewable Energy Limited,failed,all providers returned nothing
+2026-07-20T19:09:49,SYMPHONY,Symphony Limited,generated,
+2026-07-20T19:09:52,SYNCOMF,Syncom Formulations (India) Limited,generated,
+2026-07-20T19:09:55,SYNGENE,Syngene International Limited,generated,
+2026-07-20T19:09:58,SYRMA,Syrma SGS Technology Limited,generated,
+2026-07-20T19:11:01,TAALTECH,TAAL Tech Limited,generated,
+2026-07-20T19:11:04,TAINWALCHM,Tainwala Chemicals and Plastics (India) Limited,generated,
+2026-07-20T19:12:09,TAJGVK,TAJGVK Hotels & Resorts Limited,generated,
+2026-07-20T19:12:12,TALBROAUTO,Talbros Automotive Components Limited,generated,
+2026-07-20T19:12:15,TANLA,Tanla Platforms Limited,generated,
+2026-07-20T19:12:19,TARACHAND,Tara Chand Infralogistic Solutions Limited,failed,all providers returned nothing
+2026-07-20T19:12:24,TARAPUR,Tarapur Transformers Limited,failed,all providers returned nothing
+2026-07-20T19:12:28,TARC,TARC Limited,failed,all providers returned nothing
+2026-07-20T19:12:59,TARIL,TRANS & RECTI. LTD,generated,
+2026-07-20T19:14:02,TARMAT,Tarmat Limited,generated,
+2026-07-20T19:14:18,TARSONS,Tarsons Products Limited,generated,
+2026-07-20T19:14:21,TASTYBITE,Tasty Bite Eatables Limited,generated,
+2026-07-20T19:14:24,TATACAP,TATA CAPITAL LIMITED,generated,
+2026-07-20T19:14:26,TATACHEM,Tata Chemicals Limited,generated,
+2026-07-20T19:14:31,TATACOMM,Tata Communications Limited,failed,all providers returned nothing
+2026-07-20T19:14:35,TATACONSUM,Tata Consumer Products Limited,failed,all providers returned nothing
+2026-07-20T19:14:40,TATAELXSI,Tata Elxsi Limited,failed,all providers returned nothing
+2026-07-20T19:15:11,TATAPOWER,The Tata Power Company Limited,generated,
+2026-07-20T19:15:16,TATATECH,Tata Technologies Limited,failed,all providers returned nothing
+2026-07-20T19:15:20,TATVA,Tatva Chintan Pharma Chem Limited,failed,all providers returned nothing
+2026-07-20T19:15:24,TBOTEK,TBO TEK LIMITED,failed,all providers returned nothing
+2026-07-20T19:15:56,TBZ,Tribhovandas Bhimji Zaveri Limited,generated,
+2026-07-20T19:16:00,TCC,TCC Concept Limited,failed,all providers returned nothing
+2026-07-20T19:16:05,TCI,Transport Corporation of India Limited,failed,all providers returned nothing
+2026-07-20T19:16:09,TCIEXP,TCI Express Limited,failed,all providers returned nothing
+2026-07-20T19:16:41,TCPLPACK,TCPL Packaging Limited,generated,
+2026-07-20T19:16:45,TDPOWERSYS,TD Power Systems Limited,failed,all providers returned nothing
+2026-07-20T19:16:50,TEAMGTY,Team India Guaranty Limited,failed,all providers returned nothing
+2026-07-20T19:16:54,TEAMLEASE,TeamLease Services Limited,failed,all providers returned nothing
+2026-07-20T19:17:26,TECHM,Tech Mahindra Limited,generated,
+2026-07-20T19:17:30,TECHNOE,Techno Electric & Engineering Company Limited,failed,all providers returned nothing
+2026-07-20T19:17:34,TECHNVISN,TechNVision Ventures Limited,failed,all providers returned nothing
+2026-07-20T19:17:39,TECILCHEM,Tecil Chemicals and Hydro Power Ltd.,failed,all providers returned nothing
+2026-07-20T19:18:54,TEGA,Tega Industries Limited,generated,
+2026-07-20T19:18:56,TEJASNET,Tejas Networks Limited,generated,
+2026-07-20T19:18:59,TEMBO,Tembo Global Industries Limited,generated,
+2026-07-20T19:20:02,TENNIND,TENNECO CLEAN AIR INDIA L,generated,
+2026-07-20T19:20:05,TERASOFT,Tera Software Limited,generated,
+2026-07-20T19:21:09,TEXINFRA,Texmaco Infrastructure & Holdings Limited,generated,
+2026-07-20T19:21:13,TEXMOPIPES,Texmo Pipes and Products Limited,generated,
+2026-07-20T19:21:16,TEXRAIL,Texmaco Rail & Engineering Limited,generated,
+2026-07-20T19:21:20,TFCILTD,Tourism Finance Corporation of India Limited,failed,all providers returned nothing
+2026-07-20T19:21:24,TFL,Transwarranty Finance Limited,failed,all providers returned nothing
+2026-07-20T19:21:29,TGBHOTELS,TGB Banquets and Hotels Limited,failed,all providers returned nothing
+2026-07-20T19:22:00,THAKDEV,Thakkers Developers Limited,generated,
+2026-07-20T19:22:05,THANGAMAYL,Thangamayil Jewellery Limited,generated,
+2026-07-20T19:22:09,THEINVEST,The Investment Trust of India Limited,failed,all providers returned nothing
+2026-07-20T19:22:14,THEJO,Thejo Engineering Limited,failed,all providers returned nothing
+2026-07-20T19:22:18,THELEELA,Leela Palaces Hotels & Resorts Limited,failed,all providers returned nothing
+2026-07-20T19:23:25,THEMISMED,Themis Medicare Limited,generated,
+2026-07-20T19:23:28,THERMAX,Thermax Limited,generated,
+2026-07-20T19:23:31,THOMASCOOK,Thomas Cook (India) Limited,generated,
+2026-07-20T19:23:33,THOMASCOTT,Thomas Scott (India) Limited,generated,
+2026-07-20T19:23:38,THYROCARE,Thyrocare Technologies Limited,failed,all providers returned nothing
+2026-07-20T19:23:42,TI,Tilaknagar Industries Ltd.,failed,all providers returned nothing
+2026-07-20T19:23:47,TICL,Twamev Construction and Infrastructure Limited,failed,all providers returned nothing
+2026-07-20T19:24:18,TIIL,Technocraft Industries (India) Limited,generated,
+2026-07-20T19:24:21,TIINDIA,Tube Investments of India Limited,generated,
+2026-07-20T19:24:26,TIJARIA,Tijaria Polypipes Limited,failed,all providers returned nothing
+2026-07-20T19:24:30,TIL,TIL Limited,failed,all providers returned nothing
+2026-07-20T19:24:35,TIMETECHNO,Time Technoplast Limited,failed,all providers returned nothing
+2026-07-20T19:25:06,TIMEX,Timex Group India Limited,generated,
+2026-07-20T19:25:11,TIMKEN,Timken India Limited,failed,all providers returned nothing
+2026-07-20T19:25:15,TINNARUBR,Tinna Rubber and Infrastructure Limited,failed,all providers returned nothing
+2026-07-20T19:25:19,TIPSFILMS,Tips Films Limited,failed,all providers returned nothing
+2026-07-20T19:25:50,TIPSMUSIC,Tips Music Limited,failed,all providers returned nothing
+2026-07-20T19:26:52,TIRUMALCHM,Thirumalai Chemicals Limited,generated,
+2026-07-20T19:27:53,TIRUPATIFL,Tirupati Forge Limited,generated,
+2026-07-20T19:27:56,TITAGARH,Titagarh Rail Systems Limited,generated,
+2026-07-20T19:29:00,TITAN,Titan Company Limited,generated,
+2026-07-20T19:29:03,TMB,Tamilnad Mercantile Bank Limited,generated,
+2026-07-20T19:29:07,TMCV,TATA MOTORS LIMITED,generated,
+2026-07-20T19:30:10,TMPV,Tata Motors Passenger Vehicles Limited,generated,
+2026-07-20T19:30:13,TNPETRO,Tamilnadu Petroproducts Limited,generated,
+2026-07-20T19:31:16,TNPL,Tamil Nadu Newsprint and Papers Limited,generated,
+2026-07-20T19:31:20,TNTELE,Tamilnadu Telecommunications Limited,generated,
+2026-07-20T19:31:23,TOLINS,TOLINS TYRES LIMITED,generated,
+2026-07-20T19:31:28,TORNTPHARM,Torrent Pharmaceuticals Limited,failed,all providers returned nothing
+2026-07-20T19:31:32,TORNTPOWER,Torrent Power Limited,failed,all providers returned nothing
+2026-07-20T19:32:17,TOTAL,Total Transport Systems Limited,generated,
+2026-07-20T19:32:20,TOUCHWOOD,Touchwood Entertainment Limited,generated,
+2026-07-20T19:32:23,TPHQ,Teamo Productions HQ Limited,generated,
+2026-07-20T19:32:27,TPLPLASTEH,TPL Plastech Limited,failed,all providers returned nothing
+2026-07-20T19:32:31,TRACXN,Tracxn Technologies Limited,failed,all providers returned nothing
+2026-07-20T19:32:36,TRANSPEK,Transpek Industry Limited,failed,all providers returned nothing
+2026-07-20T19:33:07,TRANSRAILL,TRANSRAIL LIGHTING LTD,generated,
+2026-07-20T19:33:10,TRAVELFOOD,TRAVEL FOOD SERVICES LTD,generated,
+2026-07-20T19:33:14,TREEHOUSE,Tree House Education & Accessories Limited,failed,all providers returned nothing
+2026-07-20T19:33:19,TREJHARA,Trejhara Solutions Limited,failed,all providers returned nothing
+2026-07-20T19:33:24,TREL,Transindia Real Estate Limited,failed,all providers returned nothing
+2026-07-20T19:33:55,TRENT,Trent Limited,generated,
+2026-07-20T19:34:00,TRF,TRF Limited,failed,all providers returned nothing
+2026-07-20T19:34:04,TRIDENT,Trident Limited,failed,all providers returned nothing
+2026-07-20T19:34:08,TRIGYN,Trigyn Technologies Limited,failed,all providers returned nothing
+2026-07-20T19:34:40,TRITURBINE,Triveni Turbine Limited,generated,
+2026-07-20T19:34:44,TRIVENI,Triveni Engineering & Industries Limited,failed,all providers returned nothing
+2026-07-20T19:34:49,TRU,TruCap Finance Limited,failed,all providers returned nothing
+2026-07-20T19:34:54,TRUALT,TRUALT BIOENERGY LIMITED,failed,all providers returned nothing
+2026-07-20T19:35:25,TSFINV,TSF Investments Limited,generated,
+2026-07-20T19:35:30,TTKHLTCARE,TTK Healthcare Limited,failed,all providers returned nothing
+2026-07-20T19:35:34,TTKPRESTIG,TTK Prestige Limited,failed,all providers returned nothing
+2026-07-20T19:35:39,TTL,T.T. Limited,failed,all providers returned nothing
+2026-07-20T19:36:55,TTML,Tata Teleservices (Maharashtra) Limited,generated,
+2026-07-20T19:36:58,TURTLEMINT,TURTLEMINT FINTECH SOLS L,generated,
+2026-07-20T19:37:01,TVSELECT,TVS Electronics Limited,generated,
+2026-07-20T19:38:05,TVSHLTD,TVS Holdings Limited,generated,
+2026-07-20T19:38:08,TVSMOTOR,TVS Motor Company Limited,generated,
+2026-07-20T19:39:11,TVSSCS,TVS Supply Chain Solutions Limited,generated,
+2026-07-20T19:39:14,TVSSRICHAK,TVS Srichakra Limited,generated,
+2026-07-20T19:39:17,TVTODAY,T.V. Today Network Limited,generated,
+2026-07-20T19:39:22,TVVISION,TV Vision Limited,failed,all providers returned nothing
+2026-07-20T19:39:26,UBL,United Breweries Limited,failed,all providers returned nothing
+2026-07-20T19:39:30,UCAL,UCAL Limited,failed,all providers returned nothing
+2026-07-20T19:40:02,UCOBANK,UCO Bank,generated,
+2026-07-20T19:40:05,UDS,Updater Services Limited,generated,
+2026-07-20T19:40:09,UEL,Ujaas Energy Limited,failed,all providers returned nothing
+2026-07-20T19:40:14,UFBL,UNITED FOODBRANDS LIMITED,failed,all providers returned nothing
+2026-07-20T19:40:18,UFLEX,Uflex Limited,failed,all providers returned nothing
+2026-07-20T19:41:24,UFO,UFO Moviez India Limited,generated,
+2026-07-20T19:41:26,UGARSUGAR,The Ugar Sugar Works Limited,generated,
+2026-07-20T19:41:29,UGROCAP,UGRO Capital Limited,generated,
+2026-07-20T19:41:32,UJJIVANSFB,Ujjivan Small Finance Bank Limited,generated,
+2026-07-20T19:41:36,ULTRACEMCO,UltraTech Cement Limited,failed,all providers returned nothing
+2026-07-20T19:41:40,ULTRAMAR,Ultramarine & Pigments Limited,failed,all providers returned nothing
+2026-07-20T19:41:45,UMESLTD,Usha Martin Education & Solutions Limited,failed,all providers returned nothing
+2026-07-20T19:42:16,UMIYA-MRO,Umiya Buildcon Limited,generated,
+2026-07-20T19:42:18,UNICHEMLAB,Unichem Laboratories Limited,failed,all providers returned nothing
+2026-07-20T19:42:23,UNIECOM,UNICOMMERCE ESOLUTIONS L,failed,all providers returned nothing
+2026-07-20T19:42:27,UNIENTER,Uniphos Enterprises Limited,failed,all providers returned nothing
+2026-07-20T19:42:58,UNIMECH,UNIMECH AEROSPACE N MFG L,generated,
+2026-07-20T19:43:03,UNIONBANK,Union Bank of India,failed,all providers returned nothing
+2026-07-20T19:43:07,UNIPARTS,Uniparts India Limited,failed,all providers returned nothing
+2026-07-20T19:43:11,UNITDSPR,UNITED SPIRITS LIMITED,failed,all providers returned nothing
+2026-07-20T19:43:43,UNITECH,Unitech Limited,generated,
+2026-07-20T19:43:47,UNITEDTEA,The United Nilgiri Tea Estates Company Limited,failed,all providers returned nothing
+2026-07-20T19:43:52,UNIVCABLES,Universal Cables Limited,failed,all providers returned nothing
+2026-07-20T19:43:56,UNOMINDA,Uno Minda Limited,failed,all providers returned nothing
+2026-07-20T19:44:27,UPL,UPL Limited,generated,
+2026-07-20T19:44:32,URBANCO,Urban Company Limited,failed,all providers returned nothing
+2026-07-20T19:44:36,URJA,Urja Global Limited,failed,all providers returned nothing
+2026-07-20T19:44:41,USHAMART,Usha Martin Limited,failed,all providers returned nothing
+2026-07-20T19:45:57,USK,Udayshivakumar Infra Limited,generated,
+2026-07-20T19:46:00,UTIAMC,UTI Asset Management Company Limited,generated,
+2026-07-20T19:46:03,UTKARSHBNK,Utkarsh Small Finance Bank Limited,generated,
+2026-07-20T19:47:07,UTLSOLAR,FUJIYAMA POWER SYSTEMS L,generated,
+2026-07-20T19:47:10,UTTAMSUGAR,Uttam Sugar Mills Limited,generated,
+2026-07-20T19:47:13,UYFINCORP,U. Y. Fincorp Limited,generated,
+2026-07-20T19:47:17,V2RETAIL,V2 Retail Limited,failed,all providers returned nothing
+2026-07-20T19:47:21,VADILALIND,Vadilal Industries Limited,failed,all providers returned nothing
+2026-07-20T19:47:26,VAIBHAVGBL,Vaibhav Global Limited,failed,all providers returned nothing
+2026-07-20T19:47:57,VAKRANGEE,Vakrangee Limited,failed,all providers returned nothing
+2026-07-20T19:48:58,VAML,Vedanta Aluminium Metal Limited,generated,
+2026-07-20T19:50:01,VARDMNPOLY,Vardhman Polytex Limited,generated,
+2026-07-20T19:50:31,VARROC,Varroc Engineering Limited,generated,
+2026-07-20T19:50:35,VASWANI,Vaswani Industries Limited,generated,
+2026-07-20T19:50:38,VBL,Varun Beverages Limited,generated,
+2026-07-20T19:50:41,VCL,Vaxtex Cotfab Limited,generated,
+2026-07-20T19:50:44,VEDL,Vedanta Limited,generated,
+2026-07-20T19:50:48,VEDPOWER,Vedanta Power Limited,failed,all providers returned nothing
+2026-07-20T19:50:53,VEEDOL,Veedol Corporation Limited,failed,all providers returned nothing
+2026-07-20T19:50:57,VENKEYS,Venky's (India) Limited,generated,
+2026-07-20T19:51:02,VENTIVE,VENTIVE HOSPITALITY LTD,failed,all providers returned nothing
+2026-07-20T19:51:07,VENUSPIPES,Venus Pipes and Tubes Limited,failed,all providers returned nothing
+2026-07-20T19:51:12,VERANDA,Veranda Learning Solutions Limited,failed,all providers returned nothing
+2026-07-20T19:51:43,VESUVIUS,Vesuvius India Limited,generated,
+2026-07-20T19:51:47,VGL,VARVEE GLOBAL LIMITED,failed,all providers returned nothing
+2026-07-20T19:51:52,VGUARD,V-Guard Industries Limited,failed,all providers returned nothing
+2026-07-20T19:51:56,VHL,Vardhman Holdings Limited,failed,all providers returned nothing
+2026-07-20T19:52:28,VIDHIING,Vidhi Specialty Food Ingredients Limited,generated,
+2026-07-20T19:52:32,VIDYAWIRES,VIDYA WIRES LIMITED,failed,all providers returned nothing
+2026-07-20T19:52:36,VIJAYA,Vijaya Diagnostic Centre Limited,failed,all providers returned nothing
+2026-07-20T19:52:41,VIKASECO,Vikas Ecotech Limited,failed,all providers returned nothing
+2026-07-20T19:53:12,VIKASLIFE,Vikas Lifecare Limited,generated,
+2026-07-20T19:53:17,VIKRAMSOLR,VIKRAM SOLAR LIMITED,failed,all providers returned nothing
+2026-07-20T19:53:22,VIKRAN,VIKRAN ENGINEERING LTD,failed,all providers returned nothing
+2026-07-20T19:53:26,VIMTALABS,Vimta Labs Limited,failed,all providers returned nothing
+2026-07-20T19:53:58,VINATIORGA,Vinati Organics Limited,generated,
+2026-07-20T19:54:03,VINCOFE,Vintage Coffee and Beverages Limited,failed,all providers returned nothing
+2026-07-20T19:54:07,VINDHYATEL,Vindhya Telelinks Limited,failed,all providers returned nothing
+2026-07-20T19:54:56,VINNY,Vinny Overseas Limited,generated,
+2026-07-20T19:54:59,VINYLINDIA,Vinyl Chemicals (India) Limited,generated,
+2026-07-20T19:55:02,VIPIND,V.I.P. Industries Limited,generated,
+2026-07-20T19:55:07,VIRINCHI,Virinchi Limited,failed,all providers returned nothing
+2026-07-20T19:55:11,VISAKAIND,Visaka Industries Limited,failed,all providers returned nothing
+2026-07-20T19:55:15,VISHNU,Vishnu Chemicals Limited,failed,all providers returned nothing
+2026-07-20T19:55:47,VISHWARAJ,Vishwaraj Sugar Industries Limited,generated,
+2026-07-20T19:55:49,VISL,VEDANTA IRON AND STEEL L,generated,
+2026-07-20T19:55:54,VIVIDHA,Visagar Polytex Limited,failed,all providers returned nothing
+2026-07-20T19:55:58,VIYASH,Viyash Scientific Limited,failed,all providers returned nothing
+2026-07-20T19:56:03,VLSFINANCE,VLS Finance Limited,failed,all providers returned nothing
+2026-07-20T19:56:34,VMART,V-Mart Retail Limited,generated,
+2026-07-20T19:56:39,VMM,VISHAL MEGA MART LIMITED,failed,all providers returned nothing
+2026-07-20T19:56:43,VOEPL,Virtuoso Optoelectronics Limited,failed,all providers returned nothing
+2026-07-20T19:56:48,VOGL,Vedanta Oil and Gas Limited,failed,all providers returned nothing
+2026-07-20T19:57:19,VOLTAMP,Voltamp Transformers Limited,generated,
+2026-07-20T19:57:24,VOLTAS,Voltas Limited,failed,all providers returned nothing
+2026-07-20T19:57:28,VRAJ,VRAJ IRON AND STEEL LTD,failed,all providers returned nothing
+2026-07-20T19:57:33,VRLLOG,VRL Logistics Limited,failed,all providers returned nothing
+2026-07-20T19:58:05,VSSL,Vardhman Special Steels Limited,generated,
+2026-07-20T19:58:09,VSTIND,VST Industries Limited,failed,all providers returned nothing
+2026-07-20T19:58:13,VSTL,Vibhor Steel Tubes Limited,failed,all providers returned nothing
+2026-07-20T19:58:18,VSTTILLERS,V.S.T. Tillers Tractors Limited,failed,all providers returned nothing
+2026-07-20T19:58:56,VTL,Vardhman Textiles Limited,generated,
+2026-07-20T19:59:42,WAAREEENER,WAAREE ENERGIES LIMITED,generated,
+2026-07-20T19:59:45,WAAREEINDO,Indosolar Limited,generated,
+2026-07-20T19:59:48,WAAREERTL,Waaree Renewable Technologies Limited,generated,
+2026-07-20T19:59:52,WABAG,VA Tech Wabag Limited,failed,all providers returned nothing
+2026-07-20T19:59:57,WAKEFIT,WAKEFIT INNOVATIONS LTD,failed,all providers returned nothing
+2026-07-20T20:00:02,WALCHANNAG,Walchandnagar Industries Limited,failed,all providers returned nothing
+2026-07-20T20:00:33,WANBURY,Wanbury Limited,generated,
+2026-07-20T20:00:38,WCIL,WESTERN CARRIERS (IND) L,generated,
+2026-07-20T20:00:42,WEALTH,Wealth First Portfolio Managers Limited,failed,all providers returned nothing
+2026-07-20T20:00:47,WEBELSOLAR,Websol Energy System Limited,failed,all providers returned nothing
+2026-07-20T20:00:51,WEIZMANIND,Weizmann Limited,failed,all providers returned nothing
+2026-07-20T20:01:22,WEL,Wonder Electricals Limited,failed,all providers returned nothing
+2026-07-20T20:02:24,WELCORP,Welspun Corp Limited,generated,
+2026-07-20T20:03:30,WELENT,Welspun Enterprises Limited,generated,
+2026-07-20T20:03:33,WELSPLSOL,Welspun Specialty Solutions Limited,generated,
+2026-07-20T20:04:36,WELSPUNLIV,Welspun Living Limited,generated,
+2026-07-20T20:05:40,WENDT,Wendt (India) Limited,generated,
+2026-07-20T20:05:43,WESTLIFE,Westlife Foodworld Limited,generated,
+2026-07-20T20:05:46,WEWORK,WEWORK INDIA MANAGEMENT L,generated,
+2026-07-20T20:05:48,WHEELS,Wheels India Limited,generated,
+2026-07-20T20:05:52,WHIRLPOOL,Whirlpool of India Limited,generated,
+2026-07-20T20:06:55,WILLAMAGOR,Williamson Magor & Co. Limited,generated,
+2026-07-20T20:06:58,WINDLAS,Windlas Biotech Limited,generated,
+2026-07-20T20:07:01,WINDMACHIN,Windsor Machines Limited,generated,
+2026-07-20T20:07:04,WIPL,The Western India Plywoods Limited,generated,
+2026-07-20T20:07:09,WOCKPHARMA,Wockhardt Limited,failed,all providers returned nothing
+2026-07-20T20:07:13,WONDERLA,Wonderla Holidays Limited,failed,all providers returned nothing
+2026-07-20T20:07:18,WORTHPERI,Worth Peripherals Limited,generated,
+2026-07-20T20:07:22,WPIL,WPIL Limited,failed,all providers returned nothing
+2026-07-20T20:07:27,WSI,W.S. Industries (India) Limited,failed,all providers returned nothing
+2026-07-20T20:07:31,WSTCSTPAPR,West Coast Paper Mills Limited,failed,all providers returned nothing
+2026-07-20T20:08:03,XCHANGING,Xchanging Solutions Limited,generated,
+2026-07-20T20:08:07,XELPMOC,Xelpmoc Design and Tech Limited,failed,all providers returned nothing
+2026-07-20T20:08:12,XPROINDIA,Xpro India Limited,failed,all providers returned nothing
+2026-07-20T20:08:16,XTGLOBAL,XTGlobal Infotech Limited,failed,all providers returned nothing
+2026-07-20T20:08:47,YASHO,Yasho Industries Limited,generated,
+2026-07-20T20:08:52,YATHARTH,Yatharth Hospital & Trauma Care Services Limited,failed,all providers returned nothing
+2026-07-20T20:08:56,YATRA,Yatra Online Limited,failed,all providers returned nothing
+2026-07-20T20:09:01,YESBANK,Yes Bank Limited,failed,all providers returned nothing
+2026-07-20T20:09:32,YUKEN,Yuken India Limited,generated,
+2026-07-20T20:10:18,ZAGGLE,Zaggle Prepaid Ocean Services Limited,generated,
+2026-07-20T20:10:21,ZEEL,Zee Entertainment Enterprises Limited,generated,
+2026-07-20T20:11:24,ZEEMEDIA,Zee Media Corporation Limited,failed,all providers returned nothing
+2026-07-20T20:11:29,ZENITHEXPO,Zenith Exports Limited,generated,
+2026-07-20T20:12:32,ZENITHSTL,Zenith Steel Pipes & Industries Limited,generated,
+2026-07-20T20:12:35,ZENSARTECH,Zensar Technologies Limited,generated,
+2026-07-20T20:13:39,ZENTEC,Zen Technologies Limited,generated,
+2026-07-20T20:13:42,ZFCVINDIA,ZF Commercial Vehicle Control Systems India Limited,generated,
+2026-07-20T20:14:45,ZFSTEERING,ZF Steering Gear (India) Limited,generated,
+2026-07-20T20:14:48,ZODIACLOTH,Zodiac Clothing Company Limited,generated,
+2026-07-20T20:14:51,ZOTA,Zota Health Care Limited,generated,
+2026-07-20T20:14:54,ZSARACOM,Saraswati Commercial (India) Limited,generated,
+2026-07-20T20:14:58,ZUARI,Zuari Agro Chemicals Limited,failed,all providers returned nothing
+2026-07-20T20:15:03,ZUARIIND,Zuari Industries Limited,failed,all providers returned nothing
+2026-07-20T20:15:07,ZYDUSLIFE,Zydus Lifesciences Limited,failed,all providers returned nothing
+2026-07-20T20:15:39,ZYDUSWELL,Zydus Wellness Limited,generated,
