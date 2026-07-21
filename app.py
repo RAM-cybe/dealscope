@@ -12,6 +12,7 @@ data/logic layer under src/ is unchanged; this file is presentation only.
 
 import html
 import json
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -348,7 +349,16 @@ def get_ai_rationale(company_row):
     cache_key = f"{company_row['symbol']}|{company_row['as_of_date']}|{TAXONOMY_VERSION}"
     cache = _load_rationale_cache()
     if cache_key in cache:
-        return cache[cache_key]
+        cached = cache[cache_key]
+        # get_ai_analysis() (below) stores a {about, why_this_score, ...} dict
+        # under the same cache_key/file. A plain string is still the only
+        # shape this function ever wrote itself; a dict means some other
+        # process already re-generated this company under the new schema, so
+        # prefer its why_this_score (the genuine rewrite) over a stale
+        # `rationale` string.
+        if isinstance(cached, dict):
+            return cached.get("why_this_score") or cached.get("rationale")
+        return cached
 
     prompt = _build_rationale_prompt(company_row)
     for _name, key_getter, call_fn in RATIONALE_PROVIDERS:
@@ -365,6 +375,137 @@ def get_ai_rationale(company_row):
         cache[cache_key] = text
         _save_rationale_cache(cache)
         return text
+
+    return None
+
+
+def _build_analysis_prompt(company_row):
+    """Like _build_rationale_prompt(), but asks for two fields in one call:
+    a plain factual "about" description and a "why_this_score" explanation
+    that has to actually use the factor percentiles below rather than
+    restating them. Same inputs, same N/A discipline -- only the instructions
+    and the requested output shape differ.
+    """
+    def val(field, formatter):
+        v = company_row.get(field)
+        return formatter(v) if pd.notna(v) else "N/A"
+
+    factor_lines = "\n".join(
+        f"- {FACTOR_LABELS[m]}: "
+        + (f"{company_row[f'pctl_{m}']:.0f}th percentile" if pd.notna(company_row.get(f"pctl_{m}")) else "N/A (excluded from score, reweighted)")
+        for m in METRICS
+    )
+
+    return f'''You are drafting two short, factual notes for a corporate development analyst screening acquisition targets. Respond with ONLY a valid JSON object -- no markdown code fences, no commentary before or after it -- in exactly this shape:
+{{"about": "...", "why_this_score": "..."}}
+
+"about": 2-4 sentences, plain and factual. What the company actually does -- sector, product or service, who it sells to. Not scored, not evaluative, no opinion on quality or prospects.
+
+"why_this_score": 3-5 sentences that actually explain the composite score using the real factor percentiles below. Name the 2-3 factors driving it up or down and say what that means in plain terms for the business -- do not just restate the percentile numbers back. Tone for both fields: neutral, analytical, factual -- not marketing copy, not speculation. Only reference figures explicitly given below; if a figure says N/A, do not guess, estimate, or invent a value for it -- either omit it or explicitly note it is undisclosed.
+
+Company: {company_row['name']} ({company_row['symbol']})
+Sector (peer group for all percentiles below): {sector_display_name(company_row['sector_v2'])}
+Composite score: {f"{company_row['score']:.0f}/100 (out of 100, sector-relative)" if pd.notna(company_row['score']) else "N/A (fewer than 2 of the 4 scoring metrics are available for this company)"}
+
+Factor percentiles vs. sector peers:
+{factor_lines}
+
+Key financials:
+- Revenue: {val('revenue', format_cr)}
+- EBITDA: {val('ebitda', format_cr)}
+- EBITDA Margin: {val('ebitda_margin_pct', format_pct)}
+- ROCE: {val('return_on_capital_employed_pct', format_pct)}
+- Total Debt: {val('total_debt', format_cr)}
+- Market Cap: {val('market_cap', format_cr)}
+- Promoter Pledge: {val('promoter_pledge_pct', format_pct)}
+
+Indicative valuation range:
+- EV/EBITDA implied: {val('ev_ebitda_low', format_cr)} - {val('ev_ebitda_high', format_cr)}
+- P/E implied: {val('pe_implied_low', format_cr)} - {val('pe_implied_high', format_cr)}'''
+
+
+def _parse_analysis_response(text):
+    """Best-effort parse of a provider's response into {about, why_this_score}.
+    Strips a markdown code fence if a model adds one despite being told not
+    to. Returns None (never a partial dict) if parsing fails or either field
+    is missing/empty, so a malformed response is treated as this provider
+    failing -- same as get_ai_rationale() treating empty text as failure --
+    and the caller falls through to the next provider in RATIONALE_PROVIDERS.
+    """
+    if not text:
+        return None
+    cleaned = text.strip()
+    if cleaned.startswith("```"):
+        cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)
+        cleaned = re.sub(r"\s*```$", "", cleaned)
+    try:
+        data = json.loads(cleaned)
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(data, dict):
+        return None
+    about = str(data.get("about") or "").strip()
+    why = str(data.get("why_this_score") or "").strip()
+    if not about or not why:
+        return None
+    return {"about": about, "why_this_score": why}
+
+
+def get_ai_analysis(company_row):
+    """Two-field version of get_ai_rationale(): "about" (factual company
+    description) + "why_this_score" (factor-based score explanation) from a
+    single call per provider, using the exact same RATIONALE_PROVIDERS
+    fallback chain, per-provider try/except-and-continue behavior, and cache
+    file -- only the prompt and the parsed response shape are new.
+
+    Returns the cached/generated {about, why_this_score} dict, or None if
+    every provider failed or returned something unparseable.
+    """
+    cache_key = f"{company_row['symbol']}|{company_row['as_of_date']}|{TAXONOMY_VERSION}"
+    cache = _load_rationale_cache()
+    existing = cache.get(cache_key)
+    if isinstance(existing, dict) and existing.get("about") and existing.get("why_this_score"):
+        return existing
+
+    # Pre-taxonomy-v2 entries were cached under the un-versioned "symbol|date"
+    # key (no TAXONOMY_VERSION segment) by the original get_ai_rationale(),
+    # before that key format existed. That old rationale is still worth
+    # keeping as a fallback/reference even though its peer-group percentiles
+    # may now be stale -- carried into the new entry below, never copied into
+    # why_this_score, which is always a fresh generation.
+    legacy_key = f"{company_row['symbol']}|{company_row['as_of_date']}"
+    legacy_rationale = cache.get(legacy_key) if isinstance(cache.get(legacy_key), str) else None
+
+    prompt = _build_analysis_prompt(company_row)
+    for _name, key_getter, call_fn in RATIONALE_PROVIDERS:
+        api_key = key_getter()
+        if not api_key:
+            continue
+        try:
+            text = call_fn(api_key, prompt)
+        except Exception:
+            continue
+        result = _parse_analysis_response(text)
+        if result is None:
+            continue
+
+        # Extend the existing entry rather than clobber it -- a legacy
+        # string-only rationale (pre-dating this change) is kept under
+        # "rationale" as a fallback/reference, not overwritten; why_this_score
+        # is always the fresh generation from this call, never copied from it.
+        if isinstance(existing, dict):
+            entry = dict(existing)
+        elif isinstance(existing, str):
+            entry = {"rationale": existing}
+        elif legacy_rationale:
+            entry = {"rationale": legacy_rationale}
+        else:
+            entry = {}
+        entry["about"] = result["about"]
+        entry["why_this_score"] = result["why_this_score"]
+        cache[cache_key] = entry
+        _save_rationale_cache(cache)
+        return entry
 
     return None
 
