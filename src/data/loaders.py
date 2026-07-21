@@ -33,7 +33,17 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 # data/quality_reports/targeted_backfill_2026-07-20.md for the full report,
 # per-field results, and the confirmed data-availability ceiling on the
 # remaining gap (ROCE/trailing_pe/promoter_pledge/market_cap/total_debt).
-DEFAULT_COMPANIES_PATH = _PROJECT_ROOT / "data" / "enriched" / "dealscope_base_2026-07-20.csv"
+# 2026-07-21: superseded by dealscope_base_2026-07-21.csv, 2,046 -> 2,381 rows
+# (+335), same 56 columns -- the original universe build accidentally kept
+# only NSE SERIES == "EQ" securities, silently dropping every BE/BZ security
+# (discovered via MTAR Technologies (MTARTECH) being absent despite being a
+# real, actively-traded company). See
+# data/quality_reports/universe_gap_be_bz_2026-07-21.csv for the full target
+# list and enrich_universe_gap.py for the pull (2 companies -- IL&FSENGG,
+# IL&FSTRANS -- excluded: tied to the 2018 IL&FS group insolvency, not
+# meaningfully operating). Byte-identical to the 07-20 file for all
+# pre-existing rows; only appended rows are new.
+DEFAULT_COMPANIES_PATH = _PROJECT_ROOT / "data" / "enriched" / "dealscope_base_2026-07-21.csv"
 DEFAULT_DEALS_PATH = _PROJECT_ROOT / "deals_full_v2.csv"
 
 
