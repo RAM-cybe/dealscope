@@ -44,15 +44,56 @@ def sector_display_name(bucket):
 
 
 def load_rationale_cache():
+    """Returns {symbol: {"about": str|None, "why_this_score": str|None,
+    "rationale": str|None}}, one entry per symbol, always all three keys
+    present (None, never omitted, for a symbol not yet processed at all).
+
+    .rationale_cache.json holds two shapes side by side, keyed differently:
+      - legacy: "symbol|as_of_date" -> a plain rationale string, written by
+        the original get_ai_rationale() before the about/why_this_score
+        split existed.
+      - current: "symbol|as_of_date|taxonomy_version" -> a
+        {"rationale": str (optional, carried forward), "about": str,
+        "why_this_score": str} dict, written by get_ai_analysis(). A
+        reprocessed symbol keeps BOTH its old legacy-keyed string entry and
+        its new taxonomy-versioned dict entry in the same cache file (the
+        old key is never deleted), so a symbol can have two entries at
+        once -- the versioned dict one always wins when both exist, since
+        it's the fresher generation.
+
+    Previously this returned the raw cache value untouched, keyed only by
+    symbol (whichever entry's key happened to iterate last) -- for a
+    reprocessed symbol that raw value was the WHOLE dict object, written
+    straight into company.json's single `rationale` key. The frontend then
+    tried to render that object directly as a React child, which crashed
+    the tear sheet (confirmed via the actual thrown error: "Objects are not
+    valid as a React child (found: object with keys {rationale, about,
+    why_this_score})"). This version reads the dict's real fields out
+    instead of passing the object through.
+    """
     cache_path = REPO_ROOT / ".rationale_cache.json"
     if not cache_path.exists():
         return {}
     with open(cache_path) as f:
         raw = json.load(f)
+
     out = {}
     for key, value in raw.items():
         symbol = key.split("|", 1)[0]
-        out[symbol] = value
+        entry = out.setdefault(symbol, {"about": None, "why_this_score": None, "rationale": None})
+
+        if isinstance(value, dict):
+            # The versioned dict entry always wins, whichever order the two
+            # keys happen to iterate in -- unconditional overwrite.
+            entry["about"] = value.get("about")
+            entry["why_this_score"] = value.get("why_this_score")
+            entry["rationale"] = value.get("rationale")
+        elif isinstance(value, str) and entry["about"] is None and entry["why_this_score"] is None:
+            # Legacy string entry -- only apply it if a dict entry for this
+            # symbol hasn't already supplied real about/why_this_score
+            # content (from either iteration order).
+            entry["rationale"] = value
+
     return out
 
 
@@ -83,6 +124,10 @@ def main():
 
     company_records = []
     for _, r in valued.iterrows():
+        # Empty dict, not None, for a symbol with zero cache entries at all
+        # (content generation hasn't reached it yet) -- so the three .get()
+        # calls below always resolve to None cleanly instead of raising.
+        content = rationale_cache.get(r["symbol"], {})
         company_records.append({
             "ticker": clean(r["symbol"]),
             "name": clean(r["name"]),
@@ -128,14 +173,19 @@ def main():
             "pe_implied_high": clean(r["pe_implied_high"]),
             "valuation_note": clean(r["valuation_note"]) or "",
             "as_of_date": clean(r["as_of_date"]),
-            "rationale": rationale_cache.get(r["symbol"]),
+            "rationale": content.get("rationale"),
+            "about": content.get("about"),
+            "why_this_score": content.get("why_this_score"),
         })
 
     companies_path = OUT_DIR / "companies.json"
     with open(companies_path, "w") as f:
         json.dump(company_records, f, ensure_ascii=False)
     print(f"Wrote {len(company_records)} companies -> {companies_path}")
-    print(f"  rationale available for {sum(1 for c in company_records if c['rationale'])} / {len(company_records)}")
+    print(f"  about available for {sum(1 for c in company_records if c['about'])} / {len(company_records)}")
+    print(f"  why_this_score available for {sum(1 for c in company_records if c['why_this_score'])} / {len(company_records)}")
+    print(f"  legacy rationale (no why_this_score yet) available for "
+          f"{sum(1 for c in company_records if c['rationale'] and not c['why_this_score'])} / {len(company_records)}")
 
     deals = load_deals()
     deal_records = []
