@@ -88,6 +88,11 @@ def main():
             "name": clean(r["name"]),
             "sector": clean(r["ey_bucket"]),
             "sector_display": sector_display_name(r["ey_bucket"]),
+            # Granular Yahoo-sourced fields, previously read only to feed
+            # classify_sector() and then discarded. clean() already turns
+            # NaN into None for the 74/2,046 companies missing both.
+            "industry": clean(r["industry"]),
+            "sector_raw": clean(r["sector"]),
             "revenue": clean(r["revenue"]),
             "ebitda": clean(r["ebitda"]),
             "ebitda_margin_pct": clean(r["ebitda_margin_pct"]),
