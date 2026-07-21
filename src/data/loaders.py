@@ -13,6 +13,7 @@ from .schema import (
     validate_required_columns,
 )
 from .sector_mapping import classify_sector
+from .sector_taxonomy_v2 import classify_sector_v2
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 # Phase 2 data-foundation file: same 2,046 companies/symbols as the original
@@ -62,6 +63,18 @@ def load_companies(path=DEFAULT_COMPANIES_PATH):
     df["ey_bucket"] = [
         classify_sector(sector, industry)
         for sector, industry in zip(df["sector"], df["industry"])
+    ]
+
+    # 13-sector v2 taxonomy (sector_taxonomy_v2.py) -- app.py's live peer
+    # grouping since the 2026-07-18 redesign. classify_sector_v2() existed but
+    # was never actually wired into load_companies(), so app.py's
+    # `df.groupby("sector_v2")` calls (load_universe(), get_ai_rationale(),
+    # the sector filter/UI) raised KeyError: 'sector_v2' on this checkout.
+    # ey_bucket is left untouched -- still the deals-comps peer key per
+    # sector_taxonomy_v2.py's own module docstring.
+    df["sector_v2"] = [
+        classify_sector_v2(symbol, industry)
+        for symbol, industry in zip(df["symbol"], df["industry"])
     ]
 
     return df.reset_index(drop=True)
