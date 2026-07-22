@@ -28,6 +28,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from src.data.loaders import load_companies, load_deals
 from src.logic.scoring import score_companies, METRICS
 from src.logic.valuation import valuation_range
+from compute_filter_bands import main as compute_filter_bands
 
 SECTOR_DISPLAY = {
     "Consumer Products and Retail": "Consumer Products",
@@ -109,6 +110,12 @@ def clean(value):
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+    # Recompute filter-bands.json from the current universe every time this
+    # export runs, so band edges never silently drift out of date the way the
+    # frontend's old hardcoded thresholds did -- not a separate manual step.
+    compute_filter_bands()
+    print()
+
     # Optional override, same DEALSCOPE_INPUT_FILE convention enrich_dataset.py
     # already uses -- lets quarterly_refresh.yml regenerate the frontend export
     # from a NEW candidate snapshot (still awaiting human review) rather than
@@ -176,6 +183,13 @@ def main():
             "rationale": content.get("rationale"),
             "about": content.get("about"),
             "why_this_score": content.get("why_this_score"),
+            # True for the 11 companies with real negative reported revenue
+            # (10 NBFCs/lenders where yfinance nets interest expense against
+            # interest income; 1 conglomerate with a genuine reporting-period
+            # anomaly) -- see reclassify_unclassified.py / CONTEXT.md. Not a
+            # data error, so never excluded from scoring; this flag lets the
+            # frontend show an explanatory note instead of looking broken.
+            "negative_revenue_flag": bool(r.get("negative_revenue_flag", False)),
         })
 
     companies_path = OUT_DIR / "companies.json"

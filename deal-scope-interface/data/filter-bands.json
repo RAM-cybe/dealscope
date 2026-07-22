@@ -1,0 +1,122 @@
+{
+  "generated_at": "2026-07-22",
+  "universe_size": 2381,
+  "winsorize_percentiles": [
+    1,
+    99
+  ],
+  "fields": {
+    "market_cap": {
+      "frontend_key": "marketCap",
+      "unit": "INR_Cr",
+      "tiers": [
+        "small",
+        "mid",
+        "large",
+        "mega"
+      ],
+      "p25": 409,
+      "p50": 2093,
+      "p75": 10211,
+      "sample_size": 2282
+    },
+    "trailing_pe": {
+      "frontend_key": "peRatio",
+      "unit": "x",
+      "tiers": [
+        "value",
+        "moderate",
+        "growth",
+        "premium"
+      ],
+      "p25": 15.7,
+      "p50": 28.2,
+      "p75": 51.0,
+      "sample_size": 1969
+    },
+    "revenue_growth_pct": {
+      "frontend_key": "revenueGrowth",
+      "unit": "%",
+      "tiers": [
+        "declining",
+        "flat",
+        "growing",
+        "highGrowth"
+      ],
+      "p25": -1.3,
+      "p50": 12.2,
+      "p75": 28.9,
+      "sample_size": 2276
+    },
+    "ebitda_margin_pct": {
+      "frontend_key": "ebitdaMargin",
+      "unit": "%",
+      "tiers": [
+        "thin",
+        "moderate",
+        "healthy",
+        "high"
+      ],
+      "p25": 4.4,
+      "p50": 10.7,
+      "p75": 18.7,
+      "sample_size": 2371
+    },
+    "return_on_capital_employed_pct": {
+      "frontend_key": "roce",
+      "unit": "%",
+      "tiers": [
+        "weak",
+        "average",
+        "strong",
+        "excellent"
+      ],
+      "p25": 5.8,
+      "p50": 12.1,
+      "p75": 18.9,
+      "sample_size": 2162
+    },
+    "return_on_equity_pct": {
+      "frontend_key": "roe",
+      "unit": "%",
+      "tiers": [
+        "weak",
+        "average",
+        "strong",
+        "excellent"
+      ],
+      "p25": 3.9,
+      "p50": 10.3,
+      "p75": 16.4,
+      "sample_size": 2136
+    },
+    "total_debt": {
+      "frontend_key": "debtLevel",
+      "unit": "INR_Cr",
+      "tiers": [
+        "low",
+        "moderate",
+        "elevated",
+        "high"
+      ],
+      "p25": 35,
+      "p50": 171,
+      "p75": 779,
+      "sample_size": 2310
+    },
+    "promoter_pledge_pct": {
+      "frontend_key": "promoterPledge",
+      "unit": "%",
+      "tiers": [
+        "none",
+        "low",
+        "elevated"
+      ],
+      "p25": 0.0,
+      "p50": 0.0,
+      "p75": 0.0,
+      "sample_size": 2260,
+      "note": "Current UI is 3-tier categorical (none=0%, low=0-10%, elevated>10%), not a 4-tier percentile split; distribution is zero-heavy. p25/p50/p75 computed for completeness -- see module docstring before wiring into the UI."
+    }
+  }
+}
