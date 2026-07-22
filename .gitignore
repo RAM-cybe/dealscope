@@ -87,3 +87,8 @@ SHIP_LIKE_A_PRO_CHECKLIST.md
 # It is also not cheaply "regenerable": at ~2,000 companies across three
 # rate-limited free tiers it costs hours of API calls, so it's expensive derived
 # data that belongs in version control, not a disposable cache.
+
+# concurrency-safety sentinels for .rationale_cache.json (2026-07-22) --
+# machine/run-local, never meant to be committed.
+.rationale_cache.json.lock
+.batch_generate_rationale.pid
