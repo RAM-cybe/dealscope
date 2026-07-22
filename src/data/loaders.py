@@ -43,7 +43,18 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 # IL&FSTRANS -- excluded: tied to the 2018 IL&FS group insolvency, not
 # meaningfully operating). Byte-identical to the 07-20 file for all
 # pre-existing rows; only appended rows are new.
-DEFAULT_COMPANIES_PATH = _PROJECT_ROOT / "data" / "enriched" / "dealscope_base_2026-07-21.csv"
+# 2026-07-22: superseded by dealscope_base_2026-07-22.csv, same 2,381 rows,
+# +1 column (negative_revenue_flag). reclassify_unclassified.py re-attempted
+# yfinance .info for all 89 null-industry companies (0 reclassified -- yfinance
+# genuinely returns empty-string sector/industry for all 89, confirmed a real
+# data-source gap, not a fetch failure; see data/unclassifiable_permanent.csv).
+# negative_revenue_flag (bool) added for the 11 companies with real negative
+# `revenue` (10 NBFCs/lenders where yfinance's totalRevenue nets interest
+# expense against interest income, 1 conglomerate/trading co. with a genuine
+# reporting-period anomaly -- STCINDIA) so the frontend can show an
+# explanatory note instead of these looking broken. Sector/industry and every
+# other field are otherwise byte-identical to the 07-21 file.
+DEFAULT_COMPANIES_PATH = _PROJECT_ROOT / "data" / "enriched" / "dealscope_base_2026-07-22.csv"
 DEFAULT_DEALS_PATH = _PROJECT_ROOT / "deals_full_v2.csv"
 
 
