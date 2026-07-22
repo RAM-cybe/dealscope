@@ -45,7 +45,9 @@ Writes:
 """
 
 import argparse
+import atexit
 import csv
+import os
 import sys
 import time
 from datetime import datetime
@@ -80,6 +82,53 @@ BACKOFF_AFTER_CONSECUTIVE_FAILURES = 3
 BACKOFF_SECONDS = [30, 60, 120, 300]
 STOP_AFTER_CONSECUTIVE_FAILURES = 40
 
+# Separate from app.py's RATIONALE_CACHE_LOCK_PATH (an flock held only for the
+# instant of a merge-write). This one is a PID sentinel held for the entire
+# run, so a second `python3 batch_generate_rationale.py` started by accident
+# in another terminal -- confirmed as the likely cause of ~94 companies
+# losing an already-successful generation to the old unlocked blind-overwrite
+# save -- refuses to start instead of racing the first instance.
+PID_LOCK_PATH = REPO_ROOT / ".batch_generate_rationale.pid"
+
+
+def _pid_is_running(pid):
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True  # exists, just owned by another user
+    return True
+
+
+def _release_run_lock():
+    try:
+        if PID_LOCK_PATH.exists() and PID_LOCK_PATH.read_text().strip() == str(os.getpid()):
+            PID_LOCK_PATH.unlink()
+    except OSError:
+        pass
+
+
+def _acquire_run_lock():
+    if PID_LOCK_PATH.exists():
+        try:
+            existing_pid = int(PID_LOCK_PATH.read_text().strip())
+        except (ValueError, OSError):
+            existing_pid = None
+        if existing_pid and _pid_is_running(existing_pid):
+            print(
+                f"Another batch_generate_rationale.py is already running (PID {existing_pid}).\n"
+                f"Refusing to start a second instance -- running two at once against the same "
+                f".rationale_cache.json is the confirmed likely cause of ~94 companies silently "
+                f"losing an already-successful generation earlier.\n"
+                f"Let the existing run finish, or if you're certain PID {existing_pid} is dead, "
+                f"remove {PID_LOCK_PATH} yourself and re-run."
+            )
+            sys.exit(1)
+        # Lock file's PID is no longer running -- stale, safe to reclaim.
+    PID_LOCK_PATH.write_text(str(os.getpid()))
+    atexit.register(_release_run_lock)
+
 
 def _cache_key(row):
     return f"{row['symbol']}|{row['as_of_date']}|{TAXONOMY_VERSION}"
@@ -100,7 +149,15 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--delay", type=float, default=2.0)
+    parser.add_argument(
+        "--tickers-file", type=str, default=None,
+        help="CSV with a 'symbol' column -- restrict this run to exactly these "
+             "tickers, skipping the rest of the universe regardless of their "
+             "current cache status.",
+    )
     args = parser.parse_args()
+
+    _acquire_run_lock()
 
     print("Loading universe ...")
     df = load_universe()
@@ -118,6 +175,18 @@ def main():
           f"(taxonomy {TAXONOMY_VERSION}).\n")
 
     pending = [row for _, row in df.iterrows() if not _is_done(cache, row)]
+
+    if args.tickers_file:
+        with open(args.tickers_file, newline="", encoding="utf-8") as f:
+            allowlist = {r["symbol"].strip() for r in csv.DictReader(f) if r.get("symbol", "").strip()}
+        pending = [row for row in pending if row["symbol"] in allowlist]
+        already_done_in_allowlist = len(allowlist) - len(pending)
+        print(
+            f"--tickers-file {args.tickers_file}: {len(allowlist)} tickers listed, "
+            f"{already_done_in_allowlist} of them already done, {len(pending)} pending -- "
+            f"skipping the rest of the universe."
+        )
+
     print(f"{len(pending)} companies still need generation.")
     if args.limit:
         print(f"--limit {args.limit}: will stop after {args.limit} successes this run.")

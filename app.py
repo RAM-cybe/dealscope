@@ -10,6 +10,7 @@ with an advanced-filters slide-over reachable from a top-bar button. The
 data/logic layer under src/ is unchanged; this file is presentation only.
 """
 
+import fcntl
 import html
 import json
 import re
@@ -237,6 +238,7 @@ def esc(value):
 # ----------------------------------------------------------------------------
 
 RATIONALE_CACHE_PATH = Path(__file__).resolve().parent / ".rationale_cache.json"
+RATIONALE_CACHE_LOCK_PATH = Path(__file__).resolve().parent / ".rationale_cache.json.lock"
 GEMINI_MODEL = "gemini-flash-latest"
 GROQ_MODEL = "llama-3.3-70b-versatile"
 CEREBRAS_MODEL = "gpt-oss-120b"
@@ -251,9 +253,28 @@ def _load_rationale_cache():
         return {}
 
 
-def _save_rationale_cache(cache):
+def _save_rationale_cache(updates):
+    """Persists `updates` (only the key(s) this call just generated) into the
+    on-disk cache -- never the full in-memory snapshot a caller loaded at the
+    start of its own turn. Confirmed root cause of ~94 companies (SIEMENS,
+    SBILIFE, SWIGGY, MUTHOOTFIN, ...) silently losing an already-successful
+    generation during the unattended overnight run: this used to
+    `write_text(json.dumps(cache))` with whatever full dict the caller had
+    loaded minutes earlier, so if a second process had written a new entry
+    in the meantime, this call's save clobbered it -- no exception, no log,
+    just a lost update. Now it re-reads the file fresh and merges `updates`
+    on top under an flock, so two processes racing on different companies
+    both survive: the last writer merges instead of overwriting.
+    """
     try:
-        RATIONALE_CACHE_PATH.write_text(json.dumps(cache))
+        with open(RATIONALE_CACHE_LOCK_PATH, "w") as lock_file:
+            fcntl.flock(lock_file, fcntl.LOCK_EX)
+            try:
+                on_disk = _load_rationale_cache()
+                on_disk.update(updates)
+                RATIONALE_CACHE_PATH.write_text(json.dumps(on_disk))
+            finally:
+                fcntl.flock(lock_file, fcntl.LOCK_UN)
     except OSError:
         pass
 
@@ -373,7 +394,7 @@ def get_ai_rationale(company_row):
             continue
 
         cache[cache_key] = text
-        _save_rationale_cache(cache)
+        _save_rationale_cache({cache_key: text})
         return text
 
     return None
@@ -504,7 +525,7 @@ def get_ai_analysis(company_row):
         entry["about"] = result["about"]
         entry["why_this_score"] = result["why_this_score"]
         cache[cache_key] = entry
-        _save_rationale_cache(cache)
+        _save_rationale_cache({cache_key: entry})
         return entry
 
     return None
