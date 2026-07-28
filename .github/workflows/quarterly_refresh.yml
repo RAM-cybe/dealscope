@@ -114,6 +114,13 @@ jobs:
         run: |
           cp deal-scope-interface/data/companies.json dealscope-frontend-pr/data/companies.json
           cp deal-scope-interface/data/deals.json dealscope-frontend-pr/data/deals.json
+          # See the same addition in daily_price_refresh.yml: the frontend reads
+          # filter-bands.json to build its numeric filter buckets, so it has to
+          # travel with the data it describes. A quarterly refresh moves
+          # fundamentals, which shifts every band edge -- omitting it here would
+          # leave the site filtering new data through the previous quarter's
+          # distribution.
+          cp deal-scope-interface/data/filter-bands.json dealscope-frontend-pr/data/filter-bands.json
 
       - name: Open pull request proposing this snapshot
         id: pr
@@ -144,6 +151,7 @@ jobs:
           add-paths: |
             data/companies.json
             data/deals.json
+            data/filter-bands.json
           draft: false
           # Same "never auto-merge, ever" discipline as the backend-repo PR
           # above -- RAM approves this PR by hand before Vercel deploys it.
