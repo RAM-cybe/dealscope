@@ -58,7 +58,18 @@ jobs:
         # create-pull-request step below finds nothing to diff and skips opening
         # a PR -- exactly the "prove it runs, touch nothing real" behavior a
         # manual smoke test should have.
-        run: python refresh_daily_prices.py ${{ github.event.inputs.limit }}
+        #
+        # The workflow_dispatch `limit` input is passed through an env var and
+        # referenced as a shell variable ("$LIMIT") rather than interpolated
+        # straight into this run: script with ${{ ... }}. That mirrors the safe
+        # handling of the same input in quarterly_refresh.yml (its DEALSCOPE_LIMIT
+        # env: entry) and closes off shell/script injection via a dispatched
+        # value like `20; <cmd>`: as an env var the value only ever reaches
+        # python as an argument, never as script source, and
+        # refresh_daily_prices.py already ignores any non-numeric argv[1].
+        env:
+          LIMIT: ${{ github.event.inputs.limit }}
+        run: python refresh_daily_prices.py "$LIMIT"
 
       - name: Regenerate frontend data from this refresh
         run: python export_for_frontend.py
