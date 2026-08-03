@@ -121,6 +121,10 @@ jobs:
           # leave the site filtering new data through the previous quarter's
           # distribution.
           cp deal-scope-interface/data/filter-bands.json dealscope-frontend-pr/data/filter-bands.json
+          # Same reasoning as filter-bands.json: a quarterly refresh moves
+          # fundamentals, which shifts every per-sector cutpoint the screener's
+          # qualitative words resolve against.
+          cp deal-scope-interface/data/sector-bands.json dealscope-frontend-pr/data/sector-bands.json
 
       - name: Open pull request proposing this snapshot
         id: pr
@@ -152,6 +156,7 @@ jobs:
             data/companies.json
             data/deals.json
             data/filter-bands.json
+            data/sector-bands.json
           draft: false
           # Same "never auto-merge, ever" discipline as the backend-repo PR
           # above -- RAM approves this PR by hand before Vercel deploys it.
