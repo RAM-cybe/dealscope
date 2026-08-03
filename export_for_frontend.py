@@ -29,6 +29,7 @@ from src.data.loaders import load_companies, load_deals
 from src.logic.scoring import score_companies, METRICS
 from src.logic.valuation import valuation_range
 from compute_filter_bands import main as compute_filter_bands
+from compute_sector_bands import main as compute_sector_bands
 
 SECTOR_DISPLAY = {
     "Consumer Products and Retail": "Consumer Products",
@@ -114,6 +115,13 @@ def main():
     # export runs, so band edges never silently drift out of date the way the
     # frontend's old hardcoded thresholds did -- not a separate manual step.
     compute_filter_bands()
+    print()
+
+    # Per-sector percentile bands, for the natural-language screener's
+    # qualitative words ("high margin", "low debt"). Regenerated alongside
+    # filter-bands.json for the same reason: an artifact the UI reads must
+    # never be allowed to drift behind the data it describes.
+    compute_sector_bands()
     print()
 
     # Optional override, same DEALSCOPE_INPUT_FILE convention enrich_dataset.py
