@@ -10,10 +10,11 @@ exactly.
 Run from the repo root:
     python3 export_for_frontend.py
 
-Writes:
-    deal-scope-interface/data/companies.json     -- full NSE universe
-    deal-scope-interface/data/deals.json         -- comparable deals, by sector
-    deal-scope-interface/data/dataset-meta.json  -- as-of dates the UI prints
+Writes into data/frontend/ (copied to dealscope-frontend by the data bot):
+    companies.json      -- screening universe (no long text)
+    narratives.json     -- about / why-this-score keyed by ticker
+    deals.json
+    dataset-meta.json
 """
 
 import json
@@ -27,6 +28,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from src.data.loaders import load_companies, load_deals
+from src.data.paths import FRONTEND_DATA_DIR
 from src.logic.scoring import score_companies, METRICS
 from src.logic.valuation import valuation_range
 from compute_filter_bands import main as compute_filter_bands
@@ -44,7 +46,7 @@ SECTOR_DISPLAY = {
 PRODUCTION_BUCKET_COL = "sector_v2"
 
 REPO_ROOT = Path(__file__).resolve().parent
-OUT_DIR = REPO_ROOT / "deal-scope-interface" / "data"
+OUT_DIR = FRONTEND_DATA_DIR
 
 
 def sector_display_name(bucket):
@@ -147,22 +149,15 @@ def main():
     rationale_cache = load_rationale_cache()
 
     company_records = []
+    narratives = {}
     for _, r in valued.iterrows():
-        # Empty dict, not None, for a symbol with zero cache entries at all
-        # (content generation hasn't reached it yet) -- so the three .get()
-        # calls below always resolve to None cleanly instead of raising.
         content = rationale_cache.get(r["symbol"], {})
+        ticker = clean(r["symbol"])
         company_records.append({
-            "ticker": clean(r["symbol"]),
+            "ticker": ticker,
             "name": clean(r["name"]),
             "sector": clean(r[PRODUCTION_BUCKET_COL]),
             "sector_display": sector_display_name(r[PRODUCTION_BUCKET_COL]),
-            # Legacy 6-bucket label, kept so older consumers can still join
-            # against deals.ey_bucket. Not used for scoring or valuation.
-            "ey_bucket": clean(r["ey_bucket"]),
-            # Granular Yahoo-sourced fields, previously read only to feed
-            # classify_sector() and then discarded. clean() already turns
-            # NaN into None for the 74/2,046 companies missing both.
             "industry": clean(r["industry"]),
             "sector_raw": clean(r["sector"]),
             "revenue": clean(r["revenue"]),
@@ -174,17 +169,9 @@ def main():
             "market_cap": clean(r["market_cap"]),
             "market_cap_as_of": clean(r.get("market_cap_as_of")),
             "net_income": clean(r["net_income"]),
-            # Full financial snapshot -- already computed in the enriched
-            # dataset (Phase 2 data-foundation fields), just not previously
-            # exported to the frontend. Added for the tear sheet's expanded
-            # "Key Financials" grid.
             "trailing_pe": clean(r.get("trailing_pe")),
             "price_to_book": clean(r.get("price_to_book")),
             "return_on_equity_pct": clean(r.get("return_on_equity_pct")),
-            # yfinance's debtToEquity is expressed as a percent (e.g. 36.65
-            # meaning 36.65%, i.e. a 0.37x ratio) -- divide by 100 here so
-            # the frontend's "x" ratio formatting (e.g. "0.37x") is
-            # actually correct instead of overstating leverage ~100x.
             "debt_to_equity": clean(r.get("debt_to_equity") / 100 if pd.notna(r.get("debt_to_equity")) else None),
             "current_ratio": clean(r.get("current_ratio")),
             "free_cash_flow": clean(r.get("free_cash_flow")),
@@ -200,26 +187,31 @@ def main():
             "pe_implied_high": clean(r["pe_implied_high"]),
             "valuation_note": clean(r["valuation_note"]) or "",
             "as_of_date": clean(r["as_of_date"]),
-            "rationale": content.get("rationale"),
-            "about": content.get("about"),
-            "why_this_score": content.get("why_this_score"),
-            # True for the 11 companies with real negative reported revenue
-            # (10 NBFCs/lenders where yfinance nets interest expense against
-            # interest income; 1 conglomerate with a genuine reporting-period
-            # anomaly) -- see reclassify_unclassified.py / CONTEXT.md. Not a
-            # data error, so never excluded from scoring; this flag lets the
-            # frontend show an explanatory note instead of looking broken.
             "negative_revenue_flag": bool(r.get("negative_revenue_flag", False)),
         })
+        narrative = {}
+        about = content.get("about")
+        why = content.get("why_this_score")
+        rationale = content.get("rationale")
+        if about:
+            narrative["about"] = about
+        if why:
+            narrative["why_this_score"] = why
+        elif rationale:
+            narrative["rationale"] = rationale
+        if narrative and ticker:
+            narratives[ticker] = narrative
 
     companies_path = OUT_DIR / "companies.json"
     with open(companies_path, "w") as f:
         json.dump(company_records, f, ensure_ascii=False)
+    narratives_path = OUT_DIR / "narratives.json"
+    with open(narratives_path, "w") as f:
+        json.dump(narratives, f, ensure_ascii=False)
     print(f"Wrote {len(company_records)} companies -> {companies_path}")
-    print(f"  about available for {sum(1 for c in company_records if c['about'])} / {len(company_records)}")
-    print(f"  why_this_score available for {sum(1 for c in company_records if c['why_this_score'])} / {len(company_records)}")
-    print(f"  legacy rationale (no why_this_score yet) available for "
-          f"{sum(1 for c in company_records if c['rationale'] and not c['why_this_score'])} / {len(company_records)}")
+    print(f"Wrote {len(narratives)} narratives -> {narratives_path}")
+    print(f"  about available for {sum(1 for n in narratives.values() if n.get('about'))} / {len(company_records)}")
+    print(f"  why_this_score available for {sum(1 for n in narratives.values() if n.get('why_this_score'))} / {len(company_records)}")
 
     deals = load_deals()
     deal_records = []
@@ -275,6 +267,7 @@ def write_dataset_meta(valued, company_records, deal_count):
         # 100 days is one quarter plus a short grace, so a missed Jan/Apr/
         # Jul/Oct pull becomes visible instead of silent.
         "stale_after_days": 100,
+        "payload": "split-v1",
     }
     meta_path = OUT_DIR / "dataset-meta.json"
     with open(meta_path, "w") as f:

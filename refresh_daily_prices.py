@@ -11,21 +11,9 @@ merged) -- every other field passes through untouched.
 Run from the repo root:
     python3 refresh_daily_prices.py
 
-Writes IN PLACE to DEFAULT_COMPANIES_PATH (src/data/loaders.py) -- the same
-file the quarterly job promotes by hand. This is deliberate, not an
-oversight: the quarterly job writes a NEW dated file under data/enriched/
-and leaves a human to review it and repoint DEFAULT_COMPANIES_PATH (that
-constant is never updated programmatically anywhere in this repo -- grep it).
-A daily job can't rely on that same human-promotion step 365 times a year
-without defeating its own "safe to auto-merge" design, and an earlier
-version of this script wrote a fresh dealscope_base_<today>.csv sibling file
-that nothing ever read -- export_for_frontend.py always loads
-DEFAULT_COMPANIES_PATH, so that file was a silent no-op every single day
-(the workflow "succeeded" while never actually refreshing anything shipped
-to the frontend). Overwriting the live file directly keeps every day's PR
-diff to the handful of changed market_cap/market_cap_as_of cells -- exactly
-the "single, low-risk, easily-reversible" diff the workflow's own comments
-describe, with git history as the reversibility/audit trail.
+Writes IN PLACE to the companies CSV named in data/live.json. The quarterly
+job writes a NEW dated file under data/snapshots/ and a human promotes it
+(which updates live.json). Daily refresh cannot wait on that step.
 
 Intended to run on a daily GitHub Actions schedule and open a small,
 low-risk auto-mergeable PR (unlike the quarterly fundamentals refresh, which
@@ -41,7 +29,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from src.data.loaders import DEFAULT_COMPANIES_PATH
+from src.data.paths import companies_csv_path
 
 # Deliberately conservative pacing -- this runs every day (365x/year vs. the
 # quarterly job's 4x/year), so being gentle with yfinance matters far more
@@ -87,7 +75,8 @@ def main():
     if len(sys.argv) > 1 and sys.argv[1].isdigit():
         limit = int(sys.argv[1])
 
-    df = pd.read_csv(DEFAULT_COMPANIES_PATH)
+    live_path = companies_csv_path()
+    df = pd.read_csv(live_path)
     symbols = df["symbol"].tolist()
     if limit:
         symbols = symbols[:limit]
@@ -133,14 +122,14 @@ def main():
         sys.exit(1)
 
     if limit:
-        print("TEST MODE: not writing to DEFAULT_COMPANIES_PATH (a limited run only "
+        print("TEST MODE: not writing the live companies CSV (a limited run only "
               "refreshed a subset — stamping market_cap_as_of over the full file "
               "would misrepresent untouched rows as freshly pulled). Re-run without "
               "a limit for a real refresh.")
         return
 
-    df.to_csv(DEFAULT_COMPANIES_PATH, index=False)
-    print(f"Wrote {DEFAULT_COMPANIES_PATH}")
+    df.to_csv(live_path, index=False)
+    print(f"Wrote {live_path}")
     print(f"market_cap_as_of stamped only on the {updated} rows actually refreshed today.")
 
 

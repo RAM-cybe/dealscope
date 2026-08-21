@@ -48,15 +48,15 @@ jobs:
           body: >-
             Promotes `${{ github.event.inputs.snapshot_path }}` to the live
             dataset: copies it under `data/enriched/`, repoints
-            `DEFAULT_COMPANIES_PATH`, and regenerates frontend JSON including
+            `data/live.json`, and regenerates frontend JSON including
             `dataset-meta.json` dates. Live market caps that are newer than
             the snapshot are kept. **Does not auto-merge.** Merge this PR,
             then the matching frontend PR, to publish.
           branch: "promote/${{ github.run_id }}"
           add-paths: |
             data/enriched/*
-            src/data/loaders.py
-            deal-scope-interface/data/*
+            data/live.json
+            data/frontend/*
           draft: false
 
       - name: Require frontend git credentials
