@@ -20,6 +20,11 @@ refreshes, in place on a copy of that full frame, fixes both: nothing gets
 silently dropped, and the fields genuinely not sourced from this pull are
 preserved exactly as they were before this run touched anything.
 
+Production quarterly refresh now lives at repo-root
+`refresh_quarterly_fundamentals.py` (revenue, EBITDA, margins, ROCE, debt).
+This archive script only refreshed a subset of ratio fields and is kept
+as history — do not point the GitHub Action at it.
+
 Run from the repo root:
     python3 archive/data_pipeline_scripts/enrich_dataset.py
 

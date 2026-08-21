@@ -9,5 +9,6 @@
   "universe_size": 2381,
   "deal_count": 727,
   "taxonomy": "sector_v2",
-  "unclassified_count": 87
+  "unclassified_count": 87,
+  "stale_after_days": 100
 }

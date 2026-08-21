@@ -49,6 +49,16 @@ from src.data.loaders import DEFAULT_COMPANIES_PATH
 # IP rate-limited and breaks the quarterly fundamentals pull too.
 REQUEST_DELAY_SECONDS = 0.6
 MAX_RETRIES = 2
+# If more than this share of companies that already had a market cap fail
+# to refresh, do not write anything — keep the last good file as-is.
+FAILURE_RATE_LIMIT = 0.10
+
+
+def circuit_breaker_tripped(failed, attempted):
+    """True when the pull is too broken to publish."""
+    if attempted <= 0:
+        return True
+    return (failed / attempted) > FAILURE_RATE_LIMIT
 
 
 def fetch_price_snapshot(symbol):
@@ -83,58 +93,55 @@ def main():
         symbols = symbols[:limit]
         print(f"TEST MODE: limiting to first {limit} symbols")
 
-    updated, failed = 0, 0
+    updated, failed, skipped = 0, 0, 0
     today_iso = date.today().isoformat()
+    if "market_cap_as_of" not in df.columns:
+        df["market_cap_as_of"] = pd.NA
 
     for i, symbol in enumerate(symbols, 1):
         market_cap, price = fetch_price_snapshot(symbol)
         row_mask = df["symbol"] == symbol
+        previous = df.loc[row_mask, "market_cap"].iloc[0]
 
         if market_cap is not None:
             df.loc[row_mask, "market_cap"] = market_cap
+            df.loc[row_mask, "market_cap_as_of"] = today_iso
             updated += 1
-        else:
+        elif pd.notna(previous):
+            # Had a real cap yesterday, didn't get one today — keep last good,
+            # do not stamp today's date on a number we did not refresh.
             failed += 1
-            # Leave the existing (last-known-good) market_cap in place --
-            # never blank a real prior value just because today's pull
-            # failed for one ticker.
+        else:
+            skipped += 1
 
         if i % 100 == 0:
-            print(f"  {i}/{len(symbols)} processed ({updated} updated, {failed} failed so far)")
+            print(f"  {i}/{len(symbols)} processed ({updated} updated, {failed} failed, {skipped} no-cap)")
 
         time.sleep(REQUEST_DELAY_SECONDS)
 
-    print(f"\nDone: {updated} updated, {failed} failed/unchanged out of {len(symbols)}")
+    attempted = updated + failed
+    print(f"\nDone: {updated} updated, {failed} failed, {skipped} already-uncapped "
+          f"out of {len(symbols)} (attempted={attempted})")
 
-    if failed > len(symbols) * 0.5:
-        print("WARNING: more than half of pulls failed -- possible rate-limiting. "
-              "Check before relying on this snapshot.")
+    if circuit_breaker_tripped(failed, attempted):
+        rate = (failed / attempted) if attempted else 1.0
+        print(
+            f"CIRCUIT BREAKER: {failed}/{attempted} previously-capped tickers failed "
+            f"({rate:.0%} > {FAILURE_RATE_LIMIT:.0%}). "
+            "Not writing. Last good dataset is unchanged."
+        )
         sys.exit(1)
 
     if limit:
-        # A limited run only ever touched the first `limit` symbols, so
-        # stamping market_cap_as_of=today across all 2,046 rows and writing
-        # that over the live file would falsely claim a fresh market cap for
-        # every company this run never actually looked at -- and since this
-        # workflow auto-merges, that false claim would go straight to
-        # production. A smoke test's job is just to prove yfinance
-        # connectivity/pacing/retry logic works; it has nothing useful to
-        # write, so it doesn't touch DEFAULT_COMPANIES_PATH at all.
         print("TEST MODE: not writing to DEFAULT_COMPANIES_PATH (a limited run only "
-              "refreshed a subset -- stamping market_cap_as_of over the full file "
+              "refreshed a subset — stamping market_cap_as_of over the full file "
               "would misrepresent untouched rows as freshly pulled). Re-run without "
               "a limit for a real refresh.")
         return
 
-    # price_as_of / data_pull_date so the frontend can show "market cap as of
-    # <today>" distinctly from "fundamentals as of <last quarterly refresh>".
-    df["market_cap_as_of"] = today_iso
-
-    # Overwrite DEFAULT_COMPANIES_PATH in place (see module docstring for why
-    # this deliberately isn't a new dated sibling file) -- every other column
-    # passes through byte-for-byte except market_cap and market_cap_as_of.
     df.to_csv(DEFAULT_COMPANIES_PATH, index=False)
     print(f"Wrote {DEFAULT_COMPANIES_PATH}")
+    print(f"market_cap_as_of stamped only on the {updated} rows actually refreshed today.")
 
 
 if __name__ == "__main__":
