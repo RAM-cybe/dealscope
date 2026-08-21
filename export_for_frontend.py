@@ -271,6 +271,10 @@ def write_dataset_meta(valued, company_records, deal_count):
         "unclassified_count": sum(
             1 for c in company_records if c.get("sector") == "Unclassified"
         ),
+        # Frontend stale banner: fundamentals older than this many days.
+        # 100 days is one quarter plus a short grace, so a missed Jan/Apr/
+        # Jul/Oct pull becomes visible instead of silent.
+        "stale_after_days": 100,
     }
     meta_path = OUT_DIR / "dataset-meta.json"
     with open(meta_path, "w") as f:
