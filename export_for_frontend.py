@@ -11,8 +11,9 @@ Run from the repo root:
     python3 export_for_frontend.py
 
 Writes:
-    deal-scope-interface/data/companies.json   -- 2,046 companies
-    deal-scope-interface/data/deals.json       -- comparable deals, by sector
+    deal-scope-interface/data/companies.json     -- full NSE universe
+    deal-scope-interface/data/deals.json         -- comparable deals, by sector
+    deal-scope-interface/data/dataset-meta.json  -- as-of dates the UI prints
 """
 
 import json
@@ -31,11 +32,16 @@ from src.logic.valuation import valuation_range
 from compute_filter_bands import main as compute_filter_bands
 from compute_sector_bands import main as compute_sector_bands
 
+# sector_v2 names are already display-ready. Keep a tiny alias map so any
+# leftover 6-bucket label that still flows through this helper (deals
+# ey_bucket, tests) does not render as the raw EY string.
 SECTOR_DISPLAY = {
     "Consumer Products and Retail": "Consumer Products",
     "Industrials and Auto": "Industrials & Auto",
     "Financial Services": "Financial Services",
 }
+
+PRODUCTION_BUCKET_COL = "sector_v2"
 
 REPO_ROOT = Path(__file__).resolve().parent
 OUT_DIR = REPO_ROOT / "deal-scope-interface" / "data"
@@ -133,8 +139,11 @@ def main():
     input_override = os.environ.get("DEALSCOPE_INPUT_FILE")
     companies = load_companies(input_override) if input_override else load_companies()
     equal_weights = {m: 5 for m in METRICS}
-    scored = score_companies(companies, equal_weights)
-    valued = valuation_range(scored)
+    # Production scoring and valuation use the 13-sector taxonomy, not the
+    # legacy 6-bucket ey_bucket. Unclassified names get no fake peer-group
+    # score (see scoring.py / valuation.py).
+    scored = score_companies(companies, equal_weights, bucket_col=PRODUCTION_BUCKET_COL)
+    valued = valuation_range(scored, bucket_col=PRODUCTION_BUCKET_COL)
     rationale_cache = load_rationale_cache()
 
     company_records = []
@@ -146,8 +155,11 @@ def main():
         company_records.append({
             "ticker": clean(r["symbol"]),
             "name": clean(r["name"]),
-            "sector": clean(r["ey_bucket"]),
-            "sector_display": sector_display_name(r["ey_bucket"]),
+            "sector": clean(r[PRODUCTION_BUCKET_COL]),
+            "sector_display": sector_display_name(r[PRODUCTION_BUCKET_COL]),
+            # Legacy 6-bucket label, kept so older consumers can still join
+            # against deals.ey_bucket. Not used for scoring or valuation.
+            "ey_bucket": clean(r["ey_bucket"]),
             # Granular Yahoo-sourced fields, previously read only to feed
             # classify_sector() and then discarded. clean() already turns
             # NaN into None for the 74/2,046 companies missing both.
@@ -217,6 +229,7 @@ def main():
             "acquirer": clean(d["acquirer"]),
             "sector_raw": clean(d["sector_raw"]),
             "ey_bucket": clean(d["ey_bucket"]),
+            "sector_v2": clean(d["sector_v2"]),
             "deal_type": clean(d["deal_type"]),
             "deal_value_usdm": clean(d["deal_value_usdm_numeric"]),
             "stake_pct": clean(d["stake_pct_numeric"]),
@@ -227,6 +240,43 @@ def main():
     with open(deals_path, "w") as f:
         json.dump(deal_records, f, ensure_ascii=False)
     print(f"Wrote {len(deal_records)} deals -> {deals_path}")
+
+    write_dataset_meta(valued, company_records, deal_count=len(deal_records))
+
+
+def write_dataset_meta(valued, company_records, deal_count):
+    """Tiny dates file so the frontend can show honest as-of stamps without
+    parsing the 6MB companies.json on every page (including About)."""
+    as_of = pd.to_datetime(valued["as_of_date"], errors="coerce")
+    mcap_as_of = pd.to_datetime(valued["market_cap_as_of"], errors="coerce")
+    as_of_counts = {}
+    if as_of.notna().any():
+        as_of_counts = {
+            str(k): int(v)
+            for k, v in as_of.dt.strftime("%Y-%m-%d").value_counts(dropna=True).items()
+        }
+    fundamentals_mode = max(as_of_counts, key=as_of_counts.get) if as_of_counts else None
+    meta = {
+        "prices_as_of": (
+            mcap_as_of.max().strftime("%Y-%m-%d") if mcap_as_of.notna().any() else None
+        ),
+        "fundamentals_as_of": fundamentals_mode,
+        "fundamentals_as_of_max": (
+            as_of.max().strftime("%Y-%m-%d") if as_of.notna().any() else None
+        ),
+        "fundamentals_as_of_counts": as_of_counts,
+        "universe_size": len(company_records),
+        "deal_count": deal_count,
+        "taxonomy": PRODUCTION_BUCKET_COL,
+        "unclassified_count": sum(
+            1 for c in company_records if c.get("sector") == "Unclassified"
+        ),
+    }
+    meta_path = OUT_DIR / "dataset-meta.json"
+    with open(meta_path, "w") as f:
+        json.dump(meta, f, indent=2)
+    print(f"Wrote dataset meta -> {meta_path}")
+    print(f"  prices_as_of={meta['prices_as_of']}  fundamentals_as_of={meta['fundamentals_as_of']}")
 
 
 if __name__ == "__main__":

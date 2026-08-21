@@ -125,6 +125,7 @@ jobs:
           # fundamentals, which shifts every per-sector cutpoint the screener's
           # qualitative words resolve against.
           cp deal-scope-interface/data/sector-bands.json dealscope-frontend-pr/data/sector-bands.json
+          cp deal-scope-interface/data/dataset-meta.json dealscope-frontend-pr/data/dataset-meta.json
 
       - name: Open pull request proposing this snapshot
         id: pr
@@ -157,6 +158,7 @@ jobs:
             data/deals.json
             data/filter-bands.json
             data/sector-bands.json
+            data/dataset-meta.json
           draft: false
           # Same "never auto-merge, ever"x discipline as the backend-repo PR
           # above -- RAM approves this PR by hand before Vercel deploys it.

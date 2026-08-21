@@ -9,9 +9,9 @@ resolve to the same absolute EBITDA-margin cutoff, because the two sectors'
 margin distributions genuinely differ. A 12% margin is unremarkable in
 Lifesciences and strong in Industrials & Auto.
 
-This produces the same three cutpoints PER SECTOR (the 6 EY buckets the
-frontend already groups by, via `ey_bucket`/`sector_display`), for the five
-fields a qualitative word can attach to:
+This produces the same three cutpoints PER SECTOR (the 13-sector v2 taxonomy
+the frontend groups by, via `sector_v2`/`sector_display`), for the fields a
+qualitative word can attach to:
 
     roce, ebitda_margin, revenue_growth, total_debt, trailing_pe
 
@@ -78,17 +78,10 @@ FIELD_SPECS = [
     ("market_cap", "marketCap", True, 0),
 ]
 
-SECTOR_DISPLAY = {
-    "Consumer Products and Retail": "Consumer Products",
-    "Industrials and Auto": "Industrials & Auto",
-    "Financial Services": "Financial Services",
-}
-
-
 def sector_display_name(bucket):
-    """Same mapping export_for_frontend.py applies, so the keys in this file
-    match `company.sector` on the frontend exactly."""
-    return SECTOR_DISPLAY.get(bucket, bucket)
+    """Keys in this file must match `company.sector` on the frontend exactly.
+    sector_v2 labels are already display-ready."""
+    return bucket if isinstance(bucket, str) else "Unclassified"
 
 
 def quartiles(series, decimals):
@@ -107,7 +100,7 @@ def quartiles(series, decimals):
 def main():
     companies = load_companies()
     companies = companies.copy()
-    companies["sector_display"] = [sector_display_name(b) for b in companies["ey_bucket"]]
+    companies["sector_display"] = [sector_display_name(b) for b in companies["sector_v2"]]
 
     out_sectors = {}
 

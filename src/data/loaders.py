@@ -12,6 +12,7 @@ from .schema import (
     UNCLASSIFIED_BUCKET,
     validate_required_columns,
 )
+from .deals_sector_v2 import classify_deal_sector_v2
 from .sector_mapping import classify_sector
 from .sector_taxonomy_v2 import classify_sector_v2
 
@@ -129,6 +130,10 @@ def load_deals(path=DEFAULT_DEALS_PATH):
     # Guard against any stray bucket label that isn't one of the 6 EY buckets
     # or "Unclassified" -- never invent a new bucket at load time.
     df["ey_bucket"] = df["ey_bucket"].where(df["ey_bucket"].isin(ALL_BUCKETS), UNCLASSIFIED_BUCKET)
+
+    # 13-sector v2 taxonomy for comps matching. Companies and deals have to
+    # speak the same sector vocabulary; ey_bucket stays as the legacy key.
+    df["sector_v2"] = df["sector_raw"].map(classify_deal_sector_v2)
 
     return df.reset_index(drop=True)
 

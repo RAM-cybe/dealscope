@@ -15,6 +15,7 @@ display. filter_companies() must never feed back into either of them.
 import pandas as pd
 
 MIN_PEERS = 3
+UNCLASSIFIED_LABEL = "Unclassified"
 
 
 def valuation_range(df, bucket_col="ey_bucket"):
@@ -59,6 +60,12 @@ def valuation_range(df, bucket_col="ey_bucket"):
     notes = pd.Series("", index=df.index, dtype="object")
 
     for bucket, group in df.groupby(bucket_col):
+        if pd.isna(bucket) or str(bucket).strip() == UNCLASSIFIED_LABEL:
+            notes.loc[group.index] = (
+                "No sector classification; listed-peer valuation is not computed."
+            )
+            continue
+
         ebitda_peers = group[group["ebitda"] > 0]
         ebitda_multiples = ebitda_peers["ev"] / ebitda_peers["ebitda"]
         ebitda_peer_count = len(ebitda_multiples)

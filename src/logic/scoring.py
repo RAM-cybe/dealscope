@@ -23,6 +23,7 @@ METRICS = [
 ]
 INVERTED_METRICS = {"total_debt"}  # lower debt -> higher percentile
 PERCENTILE_COLUMNS = {m: f"pctl_{m}" for m in METRICS}
+UNCLASSIFIED_LABEL = "Unclassified"
 
 # A score built from too few populated metrics is misleadingly precise -- a
 # single metric that happens to rank #1 in a small sector peer group can
@@ -85,6 +86,17 @@ def score_companies(df, weights, bucket_col="ey_bucket"):
 
     populated_count = sum(df[PERCENTILE_COLUMNS[m]].notna() for m in METRICS)
     df.loc[populated_count < MIN_POPULATED_METRICS, "score"] = float("nan")
+
+    # Unclassified is not a real peer group. Ranking 80+ unrelated names
+    # against each other produces fake 90–100 scores for companies that
+    # simply happen to be the least-bad row in a junk bucket. Drop the
+    # score and every factor percentile rather than publish that.
+    unclassified = df[bucket_col].isna() | (
+        df[bucket_col].astype(str).str.strip() == UNCLASSIFIED_LABEL
+    )
+    for metric in METRICS:
+        df.loc[unclassified, PERCENTILE_COLUMNS[metric]] = float("nan")
+    df.loc[unclassified, "score"] = float("nan")
 
     return df
 
