@@ -41,7 +41,7 @@ jobs:
         run: python promote_snapshot.py "$SNAPSHOT_PATH"
 
       - name: Open backend promotion PR
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
           commit-message: "Promote ${{ github.event.inputs.snapshot_path }} to live dataset"
           title: "Promote snapshot to live (${{ github.run_id }})"
@@ -59,40 +59,56 @@ jobs:
             deal-scope-interface/data/*
           draft: false
 
-      - name: Checkout dealscope-frontend
+      - name: Require frontend git credentials
+        env:
+          DEALSCOPE_APP_ID: ${{ vars.DEALSCOPE_APP_ID }}
+          DEALSCOPE_APP_PRIVATE_KEY: ${{ secrets.DEALSCOPE_APP_PRIVATE_KEY }}
+          FRONTEND_DEPLOY_KEY: ${{ secrets.FRONTEND_DEPLOY_KEY }}
+        run: bash .github/scripts/require_frontend_credentials.sh
+
+      - name: Mint short-lived GitHub App token
+        if: ${{ vars.DEALSCOPE_APP_ID != '' }}
+        id: app-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ vars.DEALSCOPE_APP_ID }}
+          private-key: ${{ secrets.DEALSCOPE_APP_PRIVATE_KEY }}
+          owner: RAM-cybe
+          repositories: dealscope-frontend
+
+      - name: Checkout dealscope-frontend (GitHub App)
+        if: ${{ vars.DEALSCOPE_APP_ID != '' }}
         uses: actions/checkout@v4
         with:
           repository: RAM-cybe/dealscope-frontend
-          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
-          path: dealscope-frontend-pr
+          path: dealscope-frontend
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: true
 
-      - name: Copy promoted data into the frontend checkout
-        run: |
-          cp deal-scope-interface/data/companies.json dealscope-frontend-pr/data/companies.json
-          cp deal-scope-interface/data/deals.json dealscope-frontend-pr/data/deals.json
-          cp deal-scope-interface/data/filter-bands.json dealscope-frontend-pr/data/filter-bands.json
-          cp deal-scope-interface/data/sector-bands.json dealscope-frontend-pr/data/sector-bands.json
-          cp deal-scope-interface/data/dataset-meta.json dealscope-frontend-pr/data/dataset-meta.json
-
-      - name: Open frontend promotion PR (never auto-merge)
-        uses: peter-evans/create-pull-request@v6
+      - name: Checkout dealscope-frontend (deploy key)
+        if: ${{ vars.DEALSCOPE_APP_ID == '' }}
+        uses: actions/checkout@v4
         with:
-          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
-          path: dealscope-frontend-pr
-          commit-message: "Promote snapshot: sync from dealscope backend (${{ github.run_id }})"
-          title: "Promote fundamentals snapshot (${{ github.run_id }})"
-          body: >-
-            Frontend half of a fundamentals promotion. Merging this is what
-            Vercel deploys. Do not merge until the matching backend promotion
-            PR is also ready. Not auto-merged.
-          branch: "promote/${{ github.run_id }}"
-          add-paths: |
-            data/companies.json
-            data/deals.json
-            data/filter-bands.json
-            data/sector-bands.json
-            data/dataset-meta.json
-          draft: false
+          repository: RAM-cybe/dealscope-frontend
+          path: dealscope-frontend
+          ssh-key: ${{ secrets.FRONTEND_DEPLOY_KEY }}
+          persist-credentials: true
+
+      - name: Push frontend promotion branch (never main, never auto-merge)
+        id: frontend_push
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+        run: |
+          bash .github/scripts/push_frontend_branch.sh \
+            dealscope-frontend \
+            "promote/${{ github.run_id }}" \
+            "Promote snapshot: sync from dealscope backend (${{ github.run_id }})"
+
+      - name: Wait until frontend apply-data-bot opens the promotion PR
+        if: steps.frontend_push.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash .github/scripts/wait_for_frontend_pr.sh "promote/${{ github.run_id }}" OPEN
 
       - name: Healthcheck success
         if: success()
