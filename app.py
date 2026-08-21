@@ -1,4 +1,7 @@
-"""DealScope — Streamlit app.
+"""DealScope — Streamlit lab app (not production).
+
+Production is RAM-cybe/dealscope-frontend. This file stays as the original
+local screening UI.
 
 Pipeline (composition-order contract from scoring.py / valuation.py):
 load_companies() -> score_companies() + valuation_range() on the FULL

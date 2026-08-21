@@ -37,7 +37,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent
+REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
 from src.data.loaders import load_companies  # noqa: E402
@@ -49,7 +49,7 @@ from src.data.filings import (  # noqa: E402
 )
 from src.data.news import fetch_company_news  # noqa: E402
 
-OUT_PATH = REPO_ROOT / "deal-scope-interface" / "data" / "news.json"
+OUT_PATH = REPO_ROOT / "data" / "frontend" / "news.json"
 
 # Per-company caps. The tear sheet shows these as short scannable columns, not
 # archives -- more than this is noise the user has to scroll past.

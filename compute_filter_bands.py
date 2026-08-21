@@ -52,8 +52,9 @@ REPO_ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from src.data.loaders import load_companies
+from src.data.paths import FRONTEND_DATA_DIR
 
-OUT_PATH = REPO_ROOT / "deal-scope-interface" / "data" / "filter-bands.json"
+OUT_PATH = FRONTEND_DATA_DIR / "filter-bands.json"
 
 WINSOR_LOW, WINSOR_HIGH = 1, 99
 

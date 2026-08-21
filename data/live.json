@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "companies": "data/enriched/dealscope_base_2026-07-22.csv",
+  "deals": "data/deals.csv"
+}

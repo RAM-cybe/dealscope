@@ -15,8 +15,8 @@ usage() {
 FRONTEND_DIR=$1
 BRANCH=$2
 COMMIT_MSG=$3
-SRC_DIR="${GITHUB_WORKSPACE:-.}/deal-scope-interface/data"
-FILES=(companies.json deals.json filter-bands.json sector-bands.json dataset-meta.json)
+SRC_DIR="${GITHUB_WORKSPACE:-.}/data/frontend"
+FILES=(companies.json narratives.json deals.json filter-bands.json sector-bands.json dataset-meta.json)
 
 if [[ "$BRANCH" == "main" || "$BRANCH" == "master" ]]; then
   echo "::error::Refusing to push directly to $BRANCH. Use a price-sync/* or promote/* branch."

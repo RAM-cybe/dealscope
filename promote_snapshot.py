@@ -9,7 +9,7 @@ What it does:
   2. Keep live market_cap / market_cap_as_of when they are newer than the
      snapshot, so promoting fundamentals never rolls prices backwards.
   3. Copy the merged frame to data/enriched/dealscope_base_<date>.csv.
-  4. Point DEFAULT_COMPANIES_PATH at that file.
+  4. Point data/live.json at that file.
   5. Regenerate frontend JSON (including dataset-meta.json dates).
 
 Run from the repo root:
@@ -18,7 +18,6 @@ Run from the repo root:
 
 from __future__ import annotations
 
-import re
 import sys
 from pathlib import Path
 
@@ -27,13 +26,12 @@ import pandas as pd
 REPO_ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from src.data.loaders import DEFAULT_COMPANIES_PATH, load_companies  # noqa: E402
-
-LIVE_POINTER = REPO_ROOT / "src" / "data" / "loaders.py"
-ENRICHED_DIR = REPO_ROOT / "data" / "enriched"
-POINTER_RE = re.compile(
-    r'(DEFAULT_COMPANIES_PATH = _PROJECT_ROOT / "data" / "enriched" / ")'
-    r'dealscope_base_\d{4}-\d{2}-\d{2}\.csv(")'
+from src.data.loaders import load_companies  # noqa: E402
+from src.data.paths import (  # noqa: E402
+    ENRICHED_DIR,
+    SNAPSHOTS_DIR,
+    companies_csv_path,
+    write_live_manifest,
 )
 
 
@@ -64,15 +62,8 @@ def merge_live_prices(snapshot: pd.DataFrame, live: pd.DataFrame) -> pd.DataFram
     return out
 
 
-def repoint_live_dataset(new_name: str) -> None:
-    text = LIVE_POINTER.read_text()
-    replaced, n = POINTER_RE.subn(rf"\1{new_name}\2", text, count=1)
-    if n != 1:
-        raise RuntimeError(
-            f"Could not update DEFAULT_COMPANIES_PATH in {LIVE_POINTER} "
-            f"(expected exactly one match, got {n})"
-        )
-    LIVE_POINTER.write_text(replaced)
+def repoint_live_dataset(rel_path: str) -> None:
+    write_live_manifest(companies=rel_path)
 
 
 def main():
@@ -84,7 +75,7 @@ def main():
     if not snapshot_path.is_absolute():
         snapshot_path = REPO_ROOT / snapshot_path
     snapshot_path = snapshot_path.resolve()
-    snapshots_root = (REPO_ROOT / "data" / "snapshots").resolve()
+    snapshots_root = SNAPSHOTS_DIR.resolve()
     if snapshots_root not in snapshot_path.parents and snapshot_path.parent != snapshots_root:
         print(f"Refusing to promote a file outside data/snapshots/: {snapshot_path}")
         sys.exit(2)
@@ -99,7 +90,7 @@ def main():
     load_companies(snapshot_path)
 
     snapshot = pd.read_csv(snapshot_path)
-    live = pd.read_csv(DEFAULT_COMPANIES_PATH)
+    live = pd.read_csv(companies_csv_path())
     merged = merge_live_prices(snapshot, live)
 
     stamp = snapshot_path.stem.replace("dealscope_", "")
@@ -109,8 +100,9 @@ def main():
     merged.to_csv(dest, index=False)
     print(f"Wrote live candidate: {dest}")
 
-    repoint_live_dataset(dest_name)
-    print(f"DEFAULT_COMPANIES_PATH -> data/enriched/{dest_name}")
+    rel_path = f"data/enriched/{dest_name}"
+    repoint_live_dataset(rel_path)
+    print(f"data/live.json companies -> {rel_path}")
 
     from export_for_frontend import main as export_main
 

@@ -37,9 +37,9 @@ sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(REPO_ROOT / "archive" / "data_pipeline_scripts"))
 
 from enrich_v2 import fetch_roce  # noqa: E402 — established ROCE formula, not reimplemented
-from src.data.loaders import DEFAULT_COMPANIES_PATH  # noqa: E402
+from src.data.paths import companies_csv_path  # noqa: E402
 
-INPUT_FILE = os.environ.get("DEALSCOPE_INPUT_FILE", str(DEFAULT_COMPANIES_PATH))
+INPUT_FILE = os.environ.get("DEALSCOPE_INPUT_FILE", str(companies_csv_path()))
 OUTPUT_DIR = Path(os.environ.get("DEALSCOPE_OUTPUT_DIR", REPO_ROOT / "data" / "snapshots"))
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 _STAMP = datetime.now().strftime("%Y-%m-%d")
