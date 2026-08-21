@@ -6,6 +6,12 @@ name: Daily price refresh
 #
 # Circuit breaker: if too many previously-capped tickers fail, the Python
 # job exits without writing. Last good data stays in git and on the site.
+#
+# Frontend publish: push a price-sync/* branch with a short-lived GitHub App
+# token or a repo-scoped SSH deploy key (never a PAT, never a token in a
+# clone URL). dealscope-frontend's apply-data-bot workflow opens a PR and
+# squash-merges it. This job waits for that merge so a green run means the
+# site actually got the data.
 
 on:
   schedule:
@@ -23,6 +29,10 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+
+concurrency:
+  group: daily-price-refresh
+  cancel-in-progress: false
 
 jobs:
   refresh:
@@ -48,32 +58,60 @@ jobs:
       - name: Regenerate frontend data from this refresh
         run: python export_for_frontend.py
 
-      - name: Sync fresh data to dealscope-frontend (direct push, no PR)
+      - name: Require frontend git credentials
         env:
-          FRONTEND_REPO_TOKEN: ${{ secrets.FRONTEND_REPO_TOKEN }}
+          DEALSCOPE_APP_ID: ${{ vars.DEALSCOPE_APP_ID }}
+          DEALSCOPE_APP_PRIVATE_KEY: ${{ secrets.DEALSCOPE_APP_PRIVATE_KEY }}
+          FRONTEND_DEPLOY_KEY: ${{ secrets.FRONTEND_DEPLOY_KEY }}
+        run: bash .github/scripts/require_frontend_credentials.sh
+
+      - name: Mint short-lived GitHub App token
+        if: ${{ vars.DEALSCOPE_APP_ID != '' }}
+        id: app-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ vars.DEALSCOPE_APP_ID }}
+          private-key: ${{ secrets.DEALSCOPE_APP_PRIVATE_KEY }}
+          owner: RAM-cybe
+          repositories: dealscope-frontend
+
+      - name: Checkout dealscope-frontend (GitHub App)
+        if: ${{ vars.DEALSCOPE_APP_ID != '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: RAM-cybe/dealscope-frontend
+          path: dealscope-frontend
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: true
+
+      - name: Checkout dealscope-frontend (deploy key)
+        if: ${{ vars.DEALSCOPE_APP_ID == '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: RAM-cybe/dealscope-frontend
+          path: dealscope-frontend
+          ssh-key: ${{ secrets.FRONTEND_DEPLOY_KEY }}
+          persist-credentials: true
+
+      - name: Push price-sync branch (never main, never force)
+        id: frontend_push
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
         run: |
-          set -euo pipefail
-          git clone --depth 1 \
-            "https://x-access-token:${FRONTEND_REPO_TOKEN}@github.com/RAM-cybe/dealscope-frontend.git" \
-            /tmp/dealscope-frontend
-          cp deal-scope-interface/data/companies.json /tmp/dealscope-frontend/data/companies.json
-          cp deal-scope-interface/data/deals.json /tmp/dealscope-frontend/data/deals.json
-          cp deal-scope-interface/data/filter-bands.json /tmp/dealscope-frontend/data/filter-bands.json
-          cp deal-scope-interface/data/sector-bands.json /tmp/dealscope-frontend/data/sector-bands.json
-          cp deal-scope-interface/data/dataset-meta.json /tmp/dealscope-frontend/data/dataset-meta.json
-          cd /tmp/dealscope-frontend
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data/companies.json data/deals.json data/filter-bands.json data/sector-bands.json data/dataset-meta.json; then
-            echo "No change vs dealscope-frontend's current data -- nothing to push."
-            exit 0
-          fi
-          git add data/companies.json data/deals.json data/filter-bands.json data/sector-bands.json data/dataset-meta.json
-          git commit -m "Daily price refresh: sync from dealscope backend (${{ github.run_id }})"
-          git push origin main
+          bash .github/scripts/push_frontend_branch.sh \
+            dealscope-frontend \
+            "price-sync/${{ github.run_id }}" \
+            "Daily price refresh: sync from dealscope backend (${{ github.run_id }})"
+
+      - name: Wait until frontend apply-data-bot merges the price-sync PR
+        if: steps.frontend_push.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash .github/scripts/wait_for_frontend_pr.sh "price-sync/${{ github.run_id }}" MERGED
 
       - name: Open pull request with updated market caps
-        uses: peter-evans/create-pull-request@v6
+        id: cpr
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
           commit-message: "Daily price refresh (${{ github.run_id }})"
           title: "Daily price refresh (${{ github.run_id }})"
@@ -88,17 +126,10 @@ jobs:
           draft: false
 
       - name: Auto-merge (low risk, price data only)
-        if: success()
+        if: steps.cpr.outputs.pull-request-number != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          BRANCH="price-refresh/${{ github.run_id }}"
-          if gh pr view "$BRANCH" --json number --jq .number >/dev/null 2>&1; then
-            gh pr merge --auto --squash "$BRANCH"
-          else
-            echo "No price-refresh PR opened (no data change) — nothing to merge."
-          fi
+        run: bash .github/scripts/merge_pr_retry.sh "${{ steps.cpr.outputs.pull-request-number }}"
 
       - name: Healthcheck success
         if: success()

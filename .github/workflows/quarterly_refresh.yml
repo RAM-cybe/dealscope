@@ -58,7 +58,12 @@ jobs:
       - name: Identify the snapshot file just written
         id: snapshot
         run: |
+          set -euo pipefail
           FILE=$(ls -t data/snapshots/dealscope_*.csv | head -1)
+          if [[ ! -f "$FILE" ]]; then
+            echo "::error::Quarterly pull did not write a snapshot under data/snapshots/"
+            exit 1
+          fi
           echo "Found: $FILE"
           echo "path=$FILE" >> "$GITHUB_OUTPUT"
 
@@ -91,7 +96,7 @@ jobs:
 
       - name: Open review pull request (snapshot only, never auto-merge)
         id: pr
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
           commit-message: "Quarterly snapshot: ${{ steps.snapshot.outputs.path }}"
           title: >-
