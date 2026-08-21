@@ -303,9 +303,10 @@ def run_all_checks(df, as_of=None):
 
 if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-    from src.data.loaders import DEFAULT_COMPANIES_PATH, load_companies
+    from src.data.loaders import load_companies
+    from src.data.paths import companies_csv_path
 
-    path = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_COMPANIES_PATH
+    path = Path(sys.argv[1]) if len(sys.argv) > 1 else companies_csv_path()
     print(f"Loading {path} ...")
     companies = load_companies(path)
     print(f"{len(companies)} rows loaded.\n")

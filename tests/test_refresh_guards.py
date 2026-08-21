@@ -13,6 +13,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from refresh_daily_prices import FAILURE_RATE_LIMIT, circuit_breaker_tripped
 from promote_snapshot import merge_live_prices
+from src.data.paths import LIVE_MANIFEST_PATH, companies_csv_path, deals_csv_path, load_live_manifest
 
 failures = 0
 checks = 0
@@ -55,6 +56,14 @@ check("AAA keeps live cap", aaa["market_cap"] == 150)
 check("AAA keeps live as-of", str(aaa["market_cap_as_of"]) == "2026-08-21")
 check("BBB snapshot cap unchanged when dates tie/older", bbb["market_cap"] == 200)
 check("fundamentals column survives", aaa["revenue"] == 1)
+
+print("\n=== Live dataset pointer ===")
+manifest = load_live_manifest()
+check("live.json is readable", LIVE_MANIFEST_PATH.is_file())
+check("live.json names companies", "companies" in manifest and "deals" in manifest)
+check("companies CSV exists", companies_csv_path().is_file())
+check("deals CSV exists", deals_csv_path().is_file())
+check("companies path is under data/", str(manifest["companies"]).startswith("data/"))
 
 print(f"\n{checks - failures}/{checks} checks passed")
 if failures:

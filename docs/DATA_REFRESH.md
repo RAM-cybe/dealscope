@@ -26,7 +26,7 @@ the job exits without writing. Last good data stays on the site.
 `refresh_quarterly_fundamentals.py` writes `data/snapshots/dealscope_YYYY-MM-DD.csv`.
 The workflow opens a PR that contains the snapshot and a quality report.
 
-Merging that PR does **not** change `DEFAULT_COMPANIES_PATH`, the frontend,
+Merging that PR does **not** change `data/live.json`, the frontend,
 or the dates on the live site.
 
 ## Promotion (the only publish step)
