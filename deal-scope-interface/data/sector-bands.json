@@ -57,62 +57,262 @@
         "sample_size": 2287
       }
     },
-    "Consumer Products": {
+    "Automotive & Mobility": {
       "roce": {
-        "p25": 4.8,
-        "p50": 11.9,
-        "p75": 19.2,
-        "sample_size": 336
+        "p25": 10.8,
+        "p50": 16.7,
+        "p75": 22.5,
+        "sample_size": 113
       },
       "roe": {
-        "p25": 2.9,
-        "p50": 8.7,
-        "p75": 16.7,
-        "sample_size": 313
+        "p25": 9.3,
+        "p50": 14.1,
+        "p75": 21.0,
+        "sample_size": 99
       },
       "ebitdaMargin": {
-        "p25": 5.9,
-        "p50": 10.2,
-        "p75": 17.4,
-        "sample_size": 342
+        "p25": 8.7,
+        "p50": 11.7,
+        "p75": 15.5,
+        "sample_size": 113
       },
       "revenueGrowth": {
-        "p25": -4.6,
-        "p50": 8.5,
-        "p75": 23.6,
-        "sample_size": 336
+        "p25": 12.4,
+        "p50": 18.9,
+        "p75": 29.0,
+        "sample_size": 109
       },
       "totalDebt": {
-        "p25": 44,
-        "p50": 249,
-        "p75": 850,
-        "sample_size": 337
+        "p25": 72,
+        "p50": 313,
+        "p75": 1098,
+        "sample_size": 105
       },
       "peRatio": {
-        "p25": 16.3,
-        "p50": 32.6,
-        "p75": 53.1,
-        "sample_size": 279
+        "p25": 21.7,
+        "p50": 30.5,
+        "p75": 46.3,
+        "sample_size": 105
       },
       "revenue": {
-        "p25": 377,
-        "p50": 1259,
-        "p75": 3434,
-        "sample_size": 339
+        "p25": 821,
+        "p50": 2729,
+        "p75": 6446,
+        "sample_size": 112
       },
       "marketCap": {
-        "p25": 339,
-        "p50": 1930,
-        "p75": 7678,
-        "sample_size": 340
+        "p25": 1347,
+        "p50": 4726,
+        "p75": 24026,
+        "sample_size": 113
+      }
+    },
+    "Chemicals": {
+      "roce": {
+        "p25": 7.3,
+        "p50": 12.1,
+        "p75": 18.5,
+        "sample_size": 206
+      },
+      "roe": {
+        "p25": 4.9,
+        "p50": 10.3,
+        "p75": 15.6,
+        "sample_size": 192
+      },
+      "ebitdaMargin": {
+        "p25": 6.7,
+        "p50": 10.8,
+        "p75": 16.7,
+        "sample_size": 207
+      },
+      "revenueGrowth": {
+        "p25": -1.0,
+        "p50": 11.4,
+        "p75": 22.8,
+        "sample_size": 203
+      },
+      "totalDebt": {
+        "p25": 23,
+        "p50": 123,
+        "p75": 463,
+        "sample_size": 202
+      },
+      "peRatio": {
+        "p25": 15.1,
+        "p50": 25.1,
+        "p75": 42.2,
+        "sample_size": 184
+      },
+      "revenue": {
+        "p25": 448,
+        "p50": 1044,
+        "p75": 2418,
+        "sample_size": 205
+      },
+      "marketCap": {
+        "p25": 648,
+        "p50": 1714,
+        "p75": 6231,
+        "sample_size": 208
+      }
+    },
+    "Consumer Discretionary & Retail": {
+      "roce": {
+        "p25": 4.6,
+        "p50": 10.4,
+        "p75": 16.6,
+        "sample_size": 346
+      },
+      "roe": {
+        "p25": 1.2,
+        "p50": 7.2,
+        "p75": 14.9,
+        "sample_size": 319
+      },
+      "ebitdaMargin": {
+        "p25": 5.2,
+        "p50": 9.5,
+        "p75": 15.8,
+        "sample_size": 351
+      },
+      "revenueGrowth": {
+        "p25": -5.5,
+        "p50": 8.8,
+        "p75": 23.2,
+        "sample_size": 339
+      },
+      "totalDebt": {
+        "p25": 34,
+        "p50": 170,
+        "p75": 641,
+        "sample_size": 344
+      },
+      "peRatio": {
+        "p25": 14.8,
+        "p50": 28.8,
+        "p75": 49.9,
+        "sample_size": 278
+      },
+      "revenue": {
+        "p25": 191,
+        "p50": 688,
+        "p75": 2573,
+        "sample_size": 348
+      },
+      "marketCap": {
+        "p25": 160,
+        "p50": 860,
+        "p75": 4241,
+        "sample_size": 350
+      }
+    },
+    "Consumer Staples & Agri": {
+      "roce": {
+        "p25": 7.5,
+        "p50": 14.5,
+        "p75": 20.8,
+        "sample_size": 140
+      },
+      "roe": {
+        "p25": 5.0,
+        "p50": 11.0,
+        "p75": 16.9,
+        "sample_size": 125
+      },
+      "ebitdaMargin": {
+        "p25": 4.7,
+        "p50": 8.7,
+        "p75": 14.8,
+        "sample_size": 145
+      },
+      "revenueGrowth": {
+        "p25": -5.1,
+        "p50": 7.7,
+        "p75": 23.1,
+        "sample_size": 142
+      },
+      "totalDebt": {
+        "p25": 48,
+        "p50": 251,
+        "p75": 685,
+        "sample_size": 142
+      },
+      "peRatio": {
+        "p25": 14.3,
+        "p50": 25.0,
+        "p75": 47.0,
+        "sample_size": 126
+      },
+      "revenue": {
+        "p25": 451,
+        "p50": 1465,
+        "p75": 4041,
+        "sample_size": 143
+      },
+      "marketCap": {
+        "p25": 289,
+        "p50": 1241,
+        "p75": 8734,
+        "sample_size": 143
+      }
+    },
+    "Energy & Utilities": {
+      "roce": {
+        "p25": 7.0,
+        "p50": 10.8,
+        "p75": 19.0,
+        "sample_size": 95
+      },
+      "roe": {
+        "p25": 5.8,
+        "p50": 11.7,
+        "p75": 18.4,
+        "sample_size": 90
+      },
+      "ebitdaMargin": {
+        "p25": 10.6,
+        "p50": 19.1,
+        "p75": 36.0,
+        "sample_size": 95
+      },
+      "revenueGrowth": {
+        "p25": -0.8,
+        "p50": 13.7,
+        "p75": 39.8,
+        "sample_size": 93
+      },
+      "totalDebt": {
+        "p25": 134,
+        "p50": 701,
+        "p75": 13327,
+        "sample_size": 95
+      },
+      "peRatio": {
+        "p25": 13.5,
+        "p50": 21.0,
+        "p75": 43.0,
+        "sample_size": 87
+      },
+      "revenue": {
+        "p25": 668,
+        "p50": 2792,
+        "p75": 16469,
+        "sample_size": 95
+      },
+      "marketCap": {
+        "p25": 1952,
+        "p50": 6257,
+        "p75": 45817,
+        "sample_size": 95
       }
     },
     "Financial Services": {
       "roce": {
         "p25": 1.6,
         "p50": 5.5,
-        "p75": 14.2,
-        "sample_size": 161
+        "p75": 13.9,
+        "sample_size": 162
       },
       "roe": {
         "p25": 4.7,
@@ -123,14 +323,14 @@
       "ebitdaMargin": {
         "p25": 0.0,
         "p50": 0.0,
-        "p75": 3.3,
-        "sample_size": 240
+        "p75": 4.4,
+        "sample_size": 241
       },
       "revenueGrowth": {
-        "p25": -1.6,
-        "p50": 17.2,
-        "p75": 44.0,
-        "sample_size": 210
+        "p25": -1.8,
+        "p50": 16.9,
+        "p75": 43.6,
+        "sample_size": 211
       },
       "totalDebt": {
         "p25": 20,
@@ -140,124 +340,24 @@
       },
       "peRatio": {
         "p25": 11.8,
-        "p50": 21.1,
-        "p75": 35.1,
-        "sample_size": 214
+        "p50": 21.4,
+        "p75": 35.2,
+        "sample_size": 215
       },
       "revenue": {
-        "p25": 118,
-        "p50": 1024,
-        "p75": 5100,
-        "sample_size": 238
-      },
-      "marketCap": {
-        "p25": 704,
-        "p50": 5184,
-        "p75": 33687,
+        "p25": 111,
+        "p50": 1011,
+        "p75": 5077,
         "sample_size": 239
-      }
-    },
-    "Industrials & Auto": {
-      "roce": {
-        "p25": 7.1,
-        "p50": 12.8,
-        "p75": 19.3,
-        "sample_size": 1096
-      },
-      "roe": {
-        "p25": 4.6,
-        "p50": 10.4,
-        "p75": 16.5,
-        "sample_size": 1003
-      },
-      "ebitdaMargin": {
-        "p25": 6.0,
-        "p50": 10.6,
-        "p75": 16.2,
-        "sample_size": 1123
-      },
-      "revenueGrowth": {
-        "p25": -0.4,
-        "p50": 12.2,
-        "p75": 26.8,
-        "sample_size": 1088
-      },
-      "totalDebt": {
-        "p25": 41,
-        "p50": 161,
-        "p75": 572,
-        "sample_size": 1090
-      },
-      "peRatio": {
-        "p25": 16.2,
-        "p50": 27.3,
-        "p75": 47.2,
-        "sample_size": 985
-      },
-      "revenue": {
-        "p25": 387,
-        "p50": 1032,
-        "p75": 3397,
-        "sample_size": 1113
       },
       "marketCap": {
-        "p25": 385,
-        "p50": 1697,
-        "p75": 7682,
-        "sample_size": 1116
+        "p25": 706,
+        "p50": 5214,
+        "p75": 33620,
+        "sample_size": 240
       }
     },
-    "Infrastructure": {
-      "roce": {
-        "p25": 5.3,
-        "p50": 10.0,
-        "p75": 17.8,
-        "sample_size": 179
-      },
-      "roe": {
-        "p25": 3.0,
-        "p50": 9.8,
-        "p75": 15.4,
-        "sample_size": 163
-      },
-      "ebitdaMargin": {
-        "p25": 6.5,
-        "p50": 18.6,
-        "p75": 36.6,
-        "sample_size": 185
-      },
-      "revenueGrowth": {
-        "p25": -5.4,
-        "p50": 12.2,
-        "p75": 52.1,
-        "sample_size": 176
-      },
-      "totalDebt": {
-        "p25": 87,
-        "p50": 459,
-        "p75": 3493,
-        "sample_size": 183
-      },
-      "peRatio": {
-        "p25": 13.3,
-        "p50": 23.5,
-        "p75": 48.3,
-        "sample_size": 155
-      },
-      "revenue": {
-        "p25": 117,
-        "p50": 776,
-        "p75": 4587,
-        "sample_size": 184
-      },
-      "marketCap": {
-        "p25": 382,
-        "p50": 2513,
-        "p75": 14285,
-        "sample_size": 185
-      }
-    },
-    "Lifesciences": {
+    "Healthcare & Lifesciences": {
       "roce": {
         "p25": 7.9,
         "p50": 13.8,
@@ -307,54 +407,304 @@
         "sample_size": 166
       }
     },
-    "Technology": {
+    "Industrials & Capital Goods": {
       "roce": {
-        "p25": 4.4,
-        "p50": 12.0,
-        "p75": 20.1,
-        "sample_size": 217
+        "p25": 7.7,
+        "p50": 14.2,
+        "p75": 19.9,
+        "sample_size": 347
       },
       "roe": {
-        "p25": 2.1,
-        "p50": 10.3,
-        "p75": 18.3,
-        "sample_size": 207
+        "p25": 5.7,
+        "p50": 10.9,
+        "p75": 17.9,
+        "sample_size": 323
       },
       "ebitdaMargin": {
-        "p25": 5.0,
-        "p50": 12.7,
-        "p75": 20.9,
-        "sample_size": 235
+        "p25": 6.5,
+        "p50": 11.2,
+        "p75": 17.3,
+        "sample_size": 355
       },
       "revenueGrowth": {
-        "p25": -1.9,
-        "p50": 11.9,
-        "p75": 29.2,
-        "sample_size": 228
+        "p25": 2.7,
+        "p50": 14.1,
+        "p75": 28.5,
+        "sample_size": 342
       },
       "totalDebt": {
-        "p25": 18,
-        "p50": 81,
-        "p75": 314,
-        "sample_size": 231
+        "p25": 32,
+        "p50": 133,
+        "p75": 410,
+        "sample_size": 348
       },
       "peRatio": {
-        "p25": 16.7,
-        "p50": 27.5,
-        "p75": 60.0,
-        "sample_size": 183
+        "p25": 19.9,
+        "p50": 36.7,
+        "p75": 63.0,
+        "sample_size": 316
       },
       "revenue": {
-        "p25": 185,
-        "p50": 693,
-        "p75": 2091,
-        "sample_size": 229
+        "p25": 377,
+        "p50": 947,
+        "p75": 3073,
+        "sample_size": 353
       },
       "marketCap": {
-        "p25": 253,
-        "p50": 1368,
-        "p75": 8439,
-        "sample_size": 234
+        "p25": 602,
+        "p50": 2213,
+        "p75": 10218,
+        "sample_size": 354
+      }
+    },
+    "Infrastructure & Construction": {
+      "roce": {
+        "p25": 7.5,
+        "p50": 13.8,
+        "p75": 21.0,
+        "sample_size": 112
+      },
+      "roe": {
+        "p25": 4.8,
+        "p50": 10.8,
+        "p75": 17.0,
+        "sample_size": 97
+      },
+      "ebitdaMargin": {
+        "p25": 6.6,
+        "p50": 11.8,
+        "p75": 19.6,
+        "sample_size": 115
+      },
+      "revenueGrowth": {
+        "p25": -7.0,
+        "p50": 8.8,
+        "p75": 29.9,
+        "sample_size": 113
+      },
+      "totalDebt": {
+        "p25": 73,
+        "p50": 300,
+        "p75": 1087,
+        "sample_size": 113
+      },
+      "peRatio": {
+        "p25": 13.4,
+        "p50": 22.0,
+        "p75": 34.5,
+        "sample_size": 100
+      },
+      "revenue": {
+        "p25": 278,
+        "p50": 949,
+        "p75": 3604,
+        "sample_size": 115
+      },
+      "marketCap": {
+        "p25": 320,
+        "p50": 1604,
+        "p75": 6066,
+        "sample_size": 114
+      }
+    },
+    "Metals, Mining & Materials": {
+      "roce": {
+        "p25": 5.1,
+        "p50": 11.1,
+        "p75": 17.0,
+        "sample_size": 164
+      },
+      "roe": {
+        "p25": 3.8,
+        "p50": 9.3,
+        "p75": 13.6,
+        "sample_size": 153
+      },
+      "ebitdaMargin": {
+        "p25": 4.1,
+        "p50": 9.6,
+        "p75": 15.2,
+        "sample_size": 174
+      },
+      "revenueGrowth": {
+        "p25": -1.4,
+        "p50": 9.9,
+        "p75": 24.1,
+        "sample_size": 171
+      },
+      "totalDebt": {
+        "p25": 69,
+        "p50": 268,
+        "p75": 999,
+        "sample_size": 169
+      },
+      "peRatio": {
+        "p25": 15.7,
+        "p50": 24.2,
+        "p75": 41.6,
+        "sample_size": 150
+      },
+      "revenue": {
+        "p25": 570,
+        "p50": 1452,
+        "p75": 4660,
+        "sample_size": 171
+      },
+      "marketCap": {
+        "p25": 354,
+        "p50": 1625,
+        "p75": 9163,
+        "sample_size": 171
+      }
+    },
+    "Real Estate": {
+      "roce": {
+        "p25": 3.3,
+        "p50": 8.9,
+        "p75": 15.1,
+        "sample_size": 84
+      },
+      "roe": {
+        "p25": 1.6,
+        "p50": 7.3,
+        "p75": 14.4,
+        "sample_size": 75
+      },
+      "ebitdaMargin": {
+        "p25": 0.0,
+        "p50": 18.6,
+        "p75": 37.4,
+        "sample_size": 87
+      },
+      "revenueGrowth": {
+        "p25": -19.7,
+        "p50": 19.1,
+        "p75": 63.9,
+        "sample_size": 80
+      },
+      "totalDebt": {
+        "p25": 73,
+        "p50": 323,
+        "p75": 1466,
+        "sample_size": 85
+      },
+      "peRatio": {
+        "p25": 12.9,
+        "p50": 27.9,
+        "p75": 61.7,
+        "sample_size": 71
+      },
+      "revenue": {
+        "p25": 73,
+        "p50": 341,
+        "p75": 1170,
+        "sample_size": 86
+      },
+      "marketCap": {
+        "p25": 273,
+        "p50": 1355,
+        "p75": 5277,
+        "sample_size": 88
+      }
+    },
+    "Technology & IT Services": {
+      "roce": {
+        "p25": 7.1,
+        "p50": 13.1,
+        "p75": 22.2,
+        "sample_size": 157
+      },
+      "roe": {
+        "p25": 4.3,
+        "p50": 12.6,
+        "p75": 19.0,
+        "sample_size": 152
+      },
+      "ebitdaMargin": {
+        "p25": 5.6,
+        "p50": 12.4,
+        "p75": 18.6,
+        "sample_size": 163
+      },
+      "revenueGrowth": {
+        "p25": 3.0,
+        "p50": 13.7,
+        "p75": 36.8,
+        "sample_size": 159
+      },
+      "totalDebt": {
+        "p25": 22,
+        "p50": 76,
+        "p75": 352,
+        "sample_size": 160
+      },
+      "peRatio": {
+        "p25": 17.7,
+        "p50": 31.6,
+        "p75": 65.0,
+        "sample_size": 135
+      },
+      "revenue": {
+        "p25": 193,
+        "p50": 701,
+        "p75": 2249,
+        "sample_size": 159
+      },
+      "marketCap": {
+        "p25": 381,
+        "p50": 1843,
+        "p75": 10354,
+        "sample_size": 163
+      }
+    },
+    "Telecom, Media & Entertainment": {
+      "roce": {
+        "p25": 1.9,
+        "p50": 8.7,
+        "p75": 15.3,
+        "sample_size": 66
+      },
+      "roe": {
+        "p25": 0.6,
+        "p50": 4.6,
+        "p75": 13.1,
+        "sample_size": 61
+      },
+      "ebitdaMargin": {
+        "p25": 1.8,
+        "p50": 12.1,
+        "p75": 28.5,
+        "sample_size": 78
+      },
+      "revenueGrowth": {
+        "p25": -11.8,
+        "p50": 4.7,
+        "p75": 15.8,
+        "sample_size": 75
+      },
+      "totalDebt": {
+        "p25": 19,
+        "p50": 94,
+        "p75": 303,
+        "sample_size": 77
+      },
+      "peRatio": {
+        "p25": 11.3,
+        "p50": 24.3,
+        "p75": 47.4,
+        "sample_size": 52
+      },
+      "revenue": {
+        "p25": 156,
+        "p50": 579,
+        "p75": 1841,
+        "sample_size": 76
+      },
+      "marketCap": {
+        "p25": 119,
+        "p50": 641,
+        "p75": 4703,
+        "sample_size": 77
       }
     },
     "Unclassified": {
@@ -362,7 +712,7 @@
         "p25": 5.8,
         "p50": 12.1,
         "p75": 18.9,
-        "sample_size": 6,
+        "sample_size": 3,
         "fallback": true
       },
       "roe": {
@@ -373,40 +723,40 @@
       },
       "ebitdaMargin": {
         "p25": 2.2,
-        "p50": 8.5,
-        "p75": 19.5,
-        "sample_size": 79
+        "p50": 9.3,
+        "p75": 20.0,
+        "sample_size": 80
       },
       "revenueGrowth": {
-        "p25": -10.8,
-        "p50": 20.2,
-        "p75": 40.9,
-        "sample_size": 75
+        "p25": -11.5,
+        "p50": 19.7,
+        "p75": 38.8,
+        "sample_size": 76
       },
       "totalDebt": {
         "p25": 5,
-        "p50": 55,
-        "p75": 164,
-        "sample_size": 78
+        "p50": 57,
+        "p75": 168,
+        "sample_size": 79
       },
       "peRatio": {
         "p25": 15.7,
         "p50": 28.2,
         "p75": 51.0,
-        "sample_size": 7,
+        "sample_size": 4,
         "fallback": true
       },
       "revenue": {
-        "p25": 105,
-        "p50": 247,
+        "p25": 106,
+        "p50": 256,
         "p75": 525,
-        "sample_size": 79
+        "sample_size": 80
       },
       "marketCap": {
         "p25": 411,
         "p50": 2050,
         "p75": 10393,
-        "sample_size": 7,
+        "sample_size": 5,
         "fallback": true
       }
     }

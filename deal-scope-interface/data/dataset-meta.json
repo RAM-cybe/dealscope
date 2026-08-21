@@ -1,0 +1,13 @@
+{
+  "prices_as_of": "2026-08-21",
+  "fundamentals_as_of": "2026-07-11",
+  "fundamentals_as_of_max": "2026-07-21",
+  "fundamentals_as_of_counts": {
+    "2026-07-11": 2046,
+    "2026-07-21": 335
+  },
+  "universe_size": 2381,
+  "deal_count": 727,
+  "taxonomy": "sector_v2",
+  "unclassified_count": 87
+}
