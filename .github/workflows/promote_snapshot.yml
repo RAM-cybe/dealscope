@@ -1,0 +1,111 @@
+name: Promote snapshot
+
+# The only job that turns a reviewed quarterly snapshot into production data.
+# Never scheduled. Never auto-merges. After this runs, a human still merges
+# the two PRs it opens (backend live pointer, then frontend data / Vercel).
+
+on:
+  workflow_dispatch:
+    inputs:
+      snapshot_path:
+        description: >-
+          Path to the reviewed snapshot on this repo, e.g.
+          data/snapshots/dealscope_2026-10-01.csv
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install pandas==2.2.2
+
+      - name: Promote snapshot locally
+        env:
+          SNAPSHOT_PATH: ${{ github.event.inputs.snapshot_path }}
+        run: python promote_snapshot.py "$SNAPSHOT_PATH"
+
+      - name: Open backend promotion PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Promote ${{ github.event.inputs.snapshot_path }} to live dataset"
+          title: "Promote snapshot to live (${{ github.run_id }})"
+          body: >-
+            Promotes `${{ github.event.inputs.snapshot_path }}` to the live
+            dataset: copies it under `data/enriched/`, repoints
+            `DEFAULT_COMPANIES_PATH`, and regenerates frontend JSON including
+            `dataset-meta.json` dates. Live market caps that are newer than
+            the snapshot are kept. **Does not auto-merge.** Merge this PR,
+            then the matching frontend PR, to publish.
+          branch: "promote/${{ github.run_id }}"
+          add-paths: |
+            data/enriched/*
+            src/data/loaders.py
+            deal-scope-interface/data/*
+          draft: false
+
+      - name: Checkout dealscope-frontend
+        uses: actions/checkout@v4
+        with:
+          repository: RAM-cybe/dealscope-frontend
+          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
+          path: dealscope-frontend-pr
+
+      - name: Copy promoted data into the frontend checkout
+        run: |
+          cp deal-scope-interface/data/companies.json dealscope-frontend-pr/data/companies.json
+          cp deal-scope-interface/data/deals.json dealscope-frontend-pr/data/deals.json
+          cp deal-scope-interface/data/filter-bands.json dealscope-frontend-pr/data/filter-bands.json
+          cp deal-scope-interface/data/sector-bands.json dealscope-frontend-pr/data/sector-bands.json
+          cp deal-scope-interface/data/dataset-meta.json dealscope-frontend-pr/data/dataset-meta.json
+
+      - name: Open frontend promotion PR (never auto-merge)
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
+          path: dealscope-frontend-pr
+          commit-message: "Promote snapshot: sync from dealscope backend (${{ github.run_id }})"
+          title: "Promote fundamentals snapshot (${{ github.run_id }})"
+          body: >-
+            Frontend half of a fundamentals promotion. Merging this is what
+            Vercel deploys. Do not merge until the matching backend promotion
+            PR is also ready. Not auto-merged.
+          branch: "promote/${{ github.run_id }}"
+          add-paths: |
+            data/companies.json
+            data/deals.json
+            data/filter-bands.json
+            data/sector-bands.json
+            data/dataset-meta.json
+          draft: false
+
+      - name: Healthcheck success
+        if: success()
+        env:
+          HEALTHCHECKS_URL: ${{ secrets.HEALTHCHECKS_QUARTERLY_URL }}
+          HEALTHCHECK_KIND: promote
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python .github/scripts/healthcheck_ping.py success
+
+      - name: Healthcheck failure
+        if: failure()
+        env:
+          HEALTHCHECKS_URL: ${{ secrets.HEALTHCHECKS_QUARTERLY_URL }}
+          HEALTHCHECK_KIND: promote
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python .github/scripts/healthcheck_ping.py failure

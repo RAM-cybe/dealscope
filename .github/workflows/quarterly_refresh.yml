@@ -1,23 +1,19 @@
 name: Quarterly data refresh
 
-# Quarterly cadence matches the roadmap's stated refresh cycle (fundamentals
-# don't move week to week). Runs 1st of Jan/Apr/Jul/Oct at 03:00 UTC, plus
-# workflow_dispatch for on-demand/manual runs and testing.
-#
-# KNOWN GOTCHA (not fixable in workflow code): GitHub auto-disables
-# scheduled workflows on a repo after 60 days with zero commits. If this
-# silently stops firing, that's the most likely cause -- either commit
-# something periodically (even a changelog line) or manually re-enable it
-# under the repo's Actions tab. See CONTEXT.md for the same note.
+# Real fundamentals pull — revenue, EBITDA, margins, ROCE, debt — on the
+# first of January, April, July and October. Writes a dated snapshot and
+# opens a REVIEW PR. Merging that PR does not go live. After review, run
+# the "Promote snapshot" workflow.
+
 on:
   schedule:
-    - cron: '0 3 * * 0'   # every Sunday 03:00 UTC
+    - cron: '0 3 1 1,4,7,10 *'  # 03:00 UTC, 1st of Jan / Apr / Jul / Oct
   workflow_dispatch:
     inputs:
       limit:
         description: >-
           Test-only: limit the pull to the first N companies (e.g. 20) for a
-          fast smoke-test run. Leave blank for a real full run -- never set
+          fast smoke-test run. Leave blank for a real full run — never set
           this for a scheduled/production refresh.
         required: false
         default: ''
@@ -25,13 +21,12 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    # A full ~2,046-company pull at ~1.2s/company plus real API latency can
-    # run well past an hour; this is a generous ceiling, not an expectation.
-    timeout-minutes: 180
+    timeout-minutes: 300
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,8 +37,6 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        # yfinance/pyarrow are only needed for this one-time-per-quarter
-        # pull -- deliberately not added to the app's own requirements.txt.
         run: pip install pandas==2.2.2 pyarrow yfinance
 
       - name: Resolve current live dataset path
@@ -55,12 +48,12 @@ jobs:
           print(DEFAULT_COMPANIES_PATH)
           ")" >> "$GITHUB_OUTPUT"
 
-      - name: Run enrichment pull
+      - name: Run fundamentals pull
         env:
           DEALSCOPE_INPUT_FILE: ${{ steps.resolve.outputs.path }}
           DEALSCOPE_OUTPUT_DIR: data/snapshots
           DEALSCOPE_LIMIT: ${{ github.event.inputs.limit }}
-        run: python archive/data_pipeline_scripts/enrich_dataset.py
+        run: python refresh_quarterly_fundamentals.py
 
       - name: Identify the snapshot file just written
         id: snapshot
@@ -73,100 +66,55 @@ jobs:
         id: quality
         run: python .github/scripts/check_snapshot_quality.py "${{ steps.snapshot.outputs.path }}"
 
-      # The live site (dealscope-screener.vercel.app) deploys from the
-      # separate RAM-cybe/dealscope-frontend repo, not this one, so a PR
-      # against this repo alone never reaches production. Unlike
-      # daily_price_refresh.yml (which pushes straight to dealscope-frontend's
-      # main -- low-risk price data, safe to auto-deploy), quarterly
-      # fundamentals get the same "a human always approves before anything
-      # goes live" discipline as the backend PR below: this proposes the
-      # corresponding companies.json/deals.json update as its OWN PR against
-      # dealscope-frontend, from the same not-yet-approved candidate
-      # snapshot -- RAM reviews and merges each PR by hand, on whatever
-      # timeline he chooses; nothing here auto-merges either one.
-      #
-      # These 3 steps run BEFORE the backend-repo PR below deliberately, not
-      # just cosmetically: peter-evans/create-pull-request commits the new
-      # snapshot onto its own side branch, pushes it, then resets this job's
-      # LOCAL checkout back to the base ref -- which deletes
-      # data/snapshots/dealscope_<date>.csv from disk here, since that file
-      # never existed on the base ref to begin with (confirmed by a real
-      # failed run: 2026-07-20, run 29723963496, "FileNotFoundError" on this
-      # exact file when the frontend-export step ran AFTER the backend PR
-      # step). Reading the snapshot and copying its export into the
-      # completely separate dealscope-frontend-pr/ checkout BEFORE that
-      # reset happens sidesteps the problem entirely -- once the file is
-      # copied into that other repo's working directory, nothing that
-      # happens to THIS repo's checkout afterward can touch it.
-      - name: Regenerate frontend data from the candidate snapshot
-        env:
-          DEALSCOPE_INPUT_FILE: ${{ steps.snapshot.outputs.path }}
-        run: python export_for_frontend.py
-
-      - name: Checkout dealscope-frontend
-        uses: actions/checkout@v4
-        with:
-          repository: RAM-cybe/dealscope-frontend
-          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
-          path: dealscope-frontend-pr
-
-      - name: Copy candidate data into the dealscope-frontend checkout
+      - name: Write promotion instructions into the PR body
         run: |
-          cp deal-scope-interface/data/companies.json dealscope-frontend-pr/data/companies.json
-          cp deal-scope-interface/data/deals.json dealscope-frontend-pr/data/deals.json
-          # See the same addition in daily_price_refresh.yml: the frontend reads
-          # filter-bands.json to build its numeric filter buckets, so it has to
-          # travel with the data it describes. A quarterly refresh moves
-          # fundamentals, which shifts every band edge -- omitting it here would
-          # leave the site filtering new data through the previous quarter's
-          # distribution.
-          cp deal-scope-interface/data/filter-bands.json dealscope-frontend-pr/data/filter-bands.json
-          # Same reasoning as filter-bands.json: a quarterly refresh moves
-          # fundamentals, which shifts every per-sector cutpoint the screener's
-          # qualitative words resolve against.
-          cp deal-scope-interface/data/sector-bands.json dealscope-frontend-pr/data/sector-bands.json
-          cp deal-scope-interface/data/dataset-meta.json dealscope-frontend-pr/data/dataset-meta.json
+          {
+            echo ""
+            echo "---"
+            echo ""
+            echo "## This PR does not go live"
+            echo ""
+            echo "Merging this PR only stores the candidate snapshot and the quality report."
+            echo "It does **not** change \`DEFAULT_COMPANIES_PATH\`, does **not** update"
+            echo "the frontend, and does **not** change the dates on the live site."
+            echo ""
+            echo "### After you have reviewed the snapshot"
+            echo ""
+            echo "1. Merge this PR (so the snapshot is on \`main\`)."
+            echo "2. Run **Actions → Promote snapshot → Run workflow**."
+            echo "3. Set \`snapshot_path\` to \`${{ steps.snapshot.outputs.path }}\`."
+            echo "4. That workflow opens two further PRs (backend live pointer + frontend data)."
+            echo "5. Merge those only if the numbers look right. That is what Vercel deploys."
+            echo ""
+            echo "A limited/smoke-test run must not be promoted."
+          } >> .github/scripts/pr_body_fragment.md
 
-      - name: Open pull request proposing this snapshot
+      - name: Open review pull request (snapshot only, never auto-merge)
         id: pr
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: "Quarterly data refresh: add ${{ steps.snapshot.outputs.path }}"
+          commit-message: "Quarterly snapshot: ${{ steps.snapshot.outputs.path }}"
           title: >-
-            Quarterly data refresh (${{ github.run_id }})${{ steps.quality.outputs.needs_review == 'true' && ' -- NEEDS MANUAL REVIEW' || '' }}
+            Quarterly snapshot for review (${{ github.run_id }})${{ steps.quality.outputs.needs_review == 'true' && ' -- NEEDS MANUAL REVIEW' || '' }}
           body-path: .github/scripts/pr_body_fragment.md
           branch: "data-refresh/${{ github.run_id }}"
           add-paths: |
             data/snapshots/*
             data/quality_reports/*
           draft: false
-          # Never auto-merge, ever -- a human always approves before new
-          # data goes live. This action only opens the PR; nothing merges it.
 
-      - name: Propose this data on dealscope-frontend (PR, never auto-merge)
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.FRONTEND_REPO_TOKEN }}
-          path: dealscope-frontend-pr
-          commit-message: "Quarterly data refresh: sync from dealscope backend (${{ github.run_id }})"
-          title: >-
-            Quarterly data refresh (${{ github.run_id }})${{ steps.quality.outputs.needs_review == 'true' && ' -- NEEDS MANUAL REVIEW' || '' }}
-          body-path: .github/scripts/pr_body_fragment.md
-          branch: "data-refresh/${{ github.run_id }}"
-          add-paths: |
-            data/companies.json
-            data/deals.json
-            data/filter-bands.json
-            data/sector-bands.json
-            data/dataset-meta.json
-          draft: false
-          # Same "never auto-merge, ever"x discipline as the backend-repo PR
-          # above -- RAM approves this PR by hand before Vercel deploys it.
-
-      - name: Heartbeat ping
-        # Last step, only on a fully successful run -- lets a free service
-        # like healthchecks.io/cron-job.org alert if this workflow silently
-        # stops completing. Placeholder URL -- replace with a real
-        # healthchecks.io check URL before relying on this.
+      - name: Healthcheck success
         if: success()
-        run: curl -fsS -m 10 --retry 3 https://hc-ping.com/REPLACE-WITH-REAL-CHECK-UUID || true
+        env:
+          HEALTHCHECKS_URL: ${{ secrets.HEALTHCHECKS_QUARTERLY_URL }}
+          HEALTHCHECK_KIND: quarterly
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python .github/scripts/healthcheck_ping.py success
+
+      - name: Healthcheck failure
+        if: failure()
+        env:
+          HEALTHCHECKS_URL: ${{ secrets.HEALTHCHECKS_QUARTERLY_URL }}
+          HEALTHCHECK_KIND: quarterly
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python .github/scripts/healthcheck_ping.py failure
