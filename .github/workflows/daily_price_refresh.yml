@@ -111,14 +111,15 @@ jobs:
           # to travel with the data it describes, or the site silently screens
           # against a stale distribution.
           cp deal-scope-interface/data/sector-bands.json /tmp/dealscope-frontend/data/sector-bands.json
+          cp deal-scope-interface/data/dataset-meta.json /tmp/dealscope-frontend/data/dataset-meta.json
           cd /tmp/dealscope-frontend
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data/companies.json data/deals.json data/filter-bands.json data/sector-bands.json; then
+          if git diff --quiet -- data/companies.json data/deals.json data/filter-bands.json data/sector-bands.json data/dataset-meta.json; then
             echo "No change vs dealscope-frontend's current data -- nothing to push."
             exit 0
           fi
-          git add data/companies.json data/deals.json data/filter-bands.json data/sector-bands.json
+          git add data/companies.json data/deals.json data/filter-bands.json data/sector-bands.json data/dataset-meta.json
           git commit -m "Daily price refresh: sync from dealscope backend (${{ github.run_id }})"
           git push origin main
 
