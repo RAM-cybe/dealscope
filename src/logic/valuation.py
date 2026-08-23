@@ -97,8 +97,20 @@ def valuation_range(df, bucket_col="ey_bucket"):
                 )
             else:
                 own_debt = row["total_debt"] if pd.notna(row["total_debt"]) else 0
-                ev_ebitda_low[idx] = own_ebitda * ebitda_q25 - own_debt
-                ev_ebitda_high[idx] = own_ebitda * ebitda_q75 - own_debt
+                raw_low = own_ebitda * ebitda_q25 - own_debt
+                raw_high = own_ebitda * ebitda_q75 - own_debt
+                # Implied equity cannot be negative. A negative number here
+                # means listed-peer EV is fully absorbed by this company's
+                # debt (debt overhang), not that the equity is worth less
+                # than nothing. Floor at 0 and say so.
+                if raw_low < 0 or raw_high < 0:
+                    row_notes.append(
+                        "Implied equity floored at 0. Listed-peer EV/EBITDA "
+                        "value is fully absorbed by this company's debt "
+                        "(debt overhang)"
+                    )
+                ev_ebitda_low[idx] = max(raw_low, 0)
+                ev_ebitda_high[idx] = max(raw_high, 0)
 
             own_ni = row["net_income"]
             if pd.isna(own_ni) or own_ni <= 0:
