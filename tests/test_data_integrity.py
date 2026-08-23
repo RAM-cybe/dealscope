@@ -90,6 +90,52 @@ if json_mcap:
     check("JSON max market_cap_as_of matches prices_as_of", max(json_mcap) == meta.get("prices_as_of"),
           f"json={max(json_mcap)} meta={meta.get('prices_as_of')}")
 
+print("\n=== promoter_holding_pct is insider_holding_pct, missing stays missing ===")
+check("companies.json rows include promoter_holding_pct",
+      all("promoter_holding_pct" in row for row in payload))
+by_ticker = {row["ticker"]: row for row in payload if row.get("ticker")}
+holding_mismatch = 0
+fabricated_zero = 0
+populated = 0
+missing = 0
+for _, csv_row in companies.iterrows():
+    ticker = csv_row["symbol"]
+    json_row = by_ticker.get(ticker)
+    if json_row is None:
+        continue
+    csv_val = csv_row["insider_holding_pct"]
+    json_val = json_row.get("promoter_holding_pct")
+    csv_missing = pd.isna(csv_val)
+    if csv_missing:
+        missing += 1
+        if json_val is not None:
+            holding_mismatch += 1
+        # A missing CSV value must not be written as 0.0.
+        if json_val == 0 or json_val == 0.0:
+            fabricated_zero += 1
+    else:
+        populated += 1
+        if json_val is None or not math.isclose(float(json_val), float(csv_val), rel_tol=0, abs_tol=1e-9):
+            holding_mismatch += 1
+check("JSON promoter_holding_pct matches CSV insider_holding_pct",
+      holding_mismatch == 0, f"mismatches={holding_mismatch}")
+check("missing insider_holding_pct is JSON null, never a fabricated 0",
+      fabricated_zero == 0, f"fabricated_zeros={fabricated_zero}")
+check("ownership coverage is populated-or-null, not dropped",
+      populated + missing == len(payload),
+      f"populated={populated} missing={missing} json={len(payload)}")
+
+print("\n=== deals.json uses rescued sector_v2 ===")
+deals_json_path = FRONTEND_DATA_DIR / "deals.json"
+check("deals.json exists", deals_json_path.is_file())
+deal_payload = json.loads(deals_json_path.read_text())
+check("deals.json row count matches meta", len(deal_payload) == meta.get("deal_count"),
+      f"json={len(deal_payload)} meta={meta.get('deal_count')}")
+unclassified_deals = [d for d in deal_payload if d.get("sector_v2") == "Unclassified"]
+check("deals.json has no unclassified landmark leftovers",
+      len(unclassified_deals) == 0,
+      f"n={len(unclassified_deals)}")
+
 print("\n=== Factor percentiles are real numbers or blank, never inf ===")
 factor_keys = ("factor_revenue_growth", "factor_ebitda_margin", "factor_roce", "factor_debt_level")
 bad_inf = 0

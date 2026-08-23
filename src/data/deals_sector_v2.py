@@ -11,6 +11,9 @@ explicit lookup — no substring/keyword scoring, so no ordering traps. Every
 observed label normalizes to exactly one entry below; unmapped labels fall to
 Unclassified and are surfaced by the __main__ audit, which fails loudly if
 coverage drops (e.g. a future deals refresh introduces new labels).
+
+Blank sector_raw (and one 'Others' landmark) is rescued by an explicit
+(target, acquirer, year) map — identity only, never a guessed label.
 """
 
 import re
@@ -245,14 +248,100 @@ NORMALIZED_DEAL_SECTOR_TO_V2 = {
 }
 
 
-def classify_deal_sector_v2(sector_raw):
-    """Map a raw deal-sector label to a v2 bucket; Unclassified when unknown."""
-    if sector_raw is None:
+def _is_blank(value):
+    if value is None:
+        return True
+    # NaN is the only float that is not equal to itself.
+    if isinstance(value, float) and value != value:
+        return True
+    text = str(value).strip()
+    return (not text) or text.upper() in ("NA", "NAN", "NONE")
+
+
+def landmark_deal_key(target, acquirer, report_year):
+    """Identity key for a landmark rescue: exact CSV target + acquirer + year."""
+    if _is_blank(target) or _is_blank(acquirer) or _is_blank(report_year):
+        return None
+    try:
+        year = int(float(report_year))
+    except (TypeError, ValueError):
+        return None
+    return (str(target).strip(), str(acquirer).strip(), year)
+
+
+# 48 landmark deals whose sector_raw is blank (or the one labelled "Others")
+# and therefore fell to Unclassified. Keys are the live CSV identity
+# (target, acquirer, report_year) — not the shorter names in the lock
+# document — so Flipkart 2015/2023, the labelled Credila 2023 row, and
+# the labelled Manipal 2023 row stay on their existing sector_raw map.
+# Source: GROUP6_DECISION_LOCK.md. Do not invent rows; if a CSV identity
+# drifts, leave the deal Unclassified and fail the rescue test.
+LANDMARK_DEAL_SECTOR_V2 = {
+    ("Sanmar Engineering Services Ltd.", "Fairfax India Holdings Corporation", 2016): _IND,
+    ("Air India", "Talace (Tata Group)", 2021): _IND,
+    ("BillDesk", "PayU", 2021): _FS,
+    ("Byju's", "Footpath Ventures, GSV Ventures, ADQ, Owl Ventures, B Capital Group, Prosus Ventures, Silver Lake, Blackstone and others", 2021): _TECH,
+    ("Dewan Housing Finance Corporation", "Piramal Capital and Housing Finance", 2021): _FS,
+    ("Encora", "Advent International", 2021): _TECH,
+    ("Flipkart", "Antara Capital, Tencent, Qatar Investment Authority, CPPIB, SoftBank Corp, Franklin Templeton PE, Tiger Global, GIC, Others", 2021): _DISC,
+    ("Fullerton India", "Sumitomo Mitsui Financial Group", 2021): _FS,
+    ("Hexaware", "Carlyle", 2021): _TECH,
+    ("Mphasis", "Blackstone", 2021): _TECH,
+    ("SB Energy", "Adani Green", 2021): _ENERGY,
+    ("Adani Group, three portfolio companies", "International Holding Company", 2022): _ENERGY,
+    ("Ambuja Cements Ltd", "Adani Enterprises Ltd", 2022): _IND,
+    ("Citibank N.A., Indian consumer banking business", "Axis Bank Ltd", 2022): _FS,
+    ("Essar Group, infrastructure assets", "ArcelorMittal Nippon Steel India Ltd", 2022): _INFRA,
+    ("Housing Development Finance Corporation Ltd", "HDFC Bank Ltd", 2022): _FS,
+    ("MindTree Ltd", "Larsen and Toubro Infotech Ltd", 2022): _TECH,
+    ("Neelachal Ispat Nigam Ltd", "Tata Steel Long Products Pvt Ltd", 2022): _METALS,
+    ("Sembcorp Energy India Ltd", "Tanweer Infrastructure Pte Ltd", 2022): _ENERGY,
+    ("SolEnergi Power Pvt Ltd", "Shell Plc", 2022): _ENERGY,
+    ("Viatris Inc., biosimilars assets", "Biocon Biologics Ltd", 2022): _HC,
+    ("AMG Ammonia (Greenko Group)", "Gentari Sdn Bhd (Petronas), GIC", 2023): _ENERGY,
+    ("AdPushup", "Geniee", 2023): _TECH,
+    ("Aster DM Healthcare FZC", "Fajr Capital, Moopen Family and consortium", 2023): _HC,
+    ("GMR Airports Ltd", "GMR Airports Infrastructure Ltd", 2023): _INFRA,
+    ("HDFC Credila Financial Services Ltd", "BPEA EQT Ltd, ChrysCapital Investment Advisors Pvt Ltd", 2023): _FS,
+    ("Manipal Health Enterprises Pvt Ltd", "Temasek Holdings Pte Ltd", 2023): _HC,
+    ("ONGC Petro additions Ltd", "Oil and Natural Gas Corporation Ltd", 2023): _CHEM,
+    ("SREI Infrastructure Finance Ltd", "National Asset Reconstruction Company Ltd, India Debt Resolution Company Ltd", 2023): _FS,
+    ("TV18 Broadcast Ltd", "Network18 Media & Investments Ltd", 2023): _TMT,
+    ("Zinc International assets of Vedanta Ltd", "Hindustan Zinc Ltd", 2023): _METALS,
+    ("ATC Telecom Infrastructure Pvt Ltd", "Data Infrastructure Trust", 2024): _TMT,
+    ("BT Group plc", "Bharti Enterprises (BhartiTeleventures UK)", 2024): _TMT,
+    ("Bharat Serums & Vaccines Ltd", "Mankind Pharma Ltd", 2024): _HC,
+    ("Hindustan Coca Cola Holdings Pvt Ltd", "Jubilant Bhartia Group", 2024): _STAPLES,
+    ("Nidar Infrastructure Ltd", "Cartica Acquisition Corp", 2024): _TECH,
+    ("Quality Care India Ltd", "Aster DM Healthcare Ltd", 2024): _HC,
+    ("Seven Toll Road projects concession", "NHIT Eastern Projects Pvt Ltd", 2024): _INFRA,
+    ("TS Global Holdings Pte Ltd", "Tata Steel Ltd", 2024): _METALS,
+    ("Abbot Point Port Holdings Pte Ltd", "Adani Ports and Special Economic Zone Ltd", 2025): _INFRA,
+    ("Encora Digital LLC", "Coforge Ltd", 2025): _TECH,
+    ("Hypervault AI Data Center Ltd", "Tata Consultancy Services Ltd, TPG Terabyte Bidco", 2025): _TECH,
+    ("Iveco Group N.V.", "Tata Motors Ltd", 2025): _AUTO,
+    ("RBL Bank Ltd", "Emirates NBD PJSC", 2025): _FS,
+    ("Sapient Finserv Pvt Ltd", "Equirus Capital Pvt Ltd", 2025): _FS,
+    ("Schneider Electric India Pvt Ltd", "Schneider Electric SE", 2025): _IND,
+    ("Shriram Finance Ltd", "MUFG Bank Ltd", 2025): _FS,
+    ("WNS Holdings Ltd", "Capgemini SE", 2025): _TECH,
+}
+
+
+def classify_deal_sector_v2(sector_raw, target=None, acquirer=None, report_year=None):
+    """Map a deal to a v2 bucket.
+
+    Landmark identity (target + acquirer + year) wins when present, so the
+    48 blank-sector_raw deals can be rescued without inventing a sector_raw
+    label and without remapping every 'Others' row. Otherwise this is the
+    existing normalized sector_raw lookup; unknown stays Unclassified.
+    """
+    key = landmark_deal_key(target, acquirer, report_year)
+    if key in LANDMARK_DEAL_SECTOR_V2:
+        return LANDMARK_DEAL_SECTOR_V2[key]
+    if _is_blank(sector_raw):
         return UNCLASSIFIED_V2
-    label = str(sector_raw).strip()
-    if not label or label.upper() in ("NA", "NAN"):
-        return UNCLASSIFIED_V2
-    return NORMALIZED_DEAL_SECTOR_TO_V2.get(_norm(label), UNCLASSIFIED_V2)
+    return NORMALIZED_DEAL_SECTOR_TO_V2.get(_norm(sector_raw), UNCLASSIFIED_V2)
 
 
 if __name__ == "__main__":
@@ -263,19 +352,22 @@ if __name__ == "__main__":
     from src.data.loaders import load_deals
 
     deals = load_deals()
-    deals["sector_v2"] = deals["sector_raw"].map(classify_deal_sector_v2)
 
     has_label = deals["sector_raw"].notna()
     unmapped = deals[has_label & (deals["sector_v2"] == UNCLASSIFIED_V2)]
     genuinely_other = unmapped["sector_raw"].str.strip().str.lower().eq("others")
     gaps = unmapped[~genuinely_other]["sector_raw"].unique()
+    leftover = deals[deals["sector_v2"] == UNCLASSIFIED_V2]
 
     print(f"deals: {len(deals)} | labelled: {has_label.sum()} | "
-          f"mapped: {(has_label & (deals['sector_v2'] != UNCLASSIFIED_V2)).sum()}")
+          f"mapped: {(deals['sector_v2'] != UNCLASSIFIED_V2).sum()}")
     print(deals["sector_v2"].value_counts().to_string())
+    print(f"landmark rescues: {len(LANDMARK_DEAL_SECTOR_V2)} | "
+          f"unclassified leftover: {len(leftover)}")
     if len(gaps):
         print(f"\nMAPPING GAPS ({len(gaps)}):")
         for g in gaps:
             print(f"  {g!r}")
         sys.exit(1)
-    print("\ncoverage OK: every labelled deal maps (only 'Others' is Unclassified)")
+    print("\ncoverage OK: every labelled deal maps; leftover Unclassified "
+          "is only unmatched blank/'Others' rows")
