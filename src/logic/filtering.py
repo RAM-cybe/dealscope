@@ -91,12 +91,10 @@ if __name__ == "__main__":
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
     from src.data.loaders import load_companies
-    from src.logic.scoring import score_companies
+    from src.logic.scoring import score_companies, METRICS
 
     companies = load_companies()
-    scored = score_companies(companies, {m: 5 for m in
-                                          ["revenue_growth_pct", "ebitda_margin_pct",
-                                           "return_on_capital_employed_pct", "total_debt"]})
+    scored = score_companies(companies, {m: 5 for m in METRICS})
 
     print("=== filter_companies manual-verification ===")
     print(f"full universe: {len(scored)} rows")

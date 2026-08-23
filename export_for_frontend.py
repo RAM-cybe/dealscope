@@ -29,7 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from src.data.loaders import load_companies, load_deals
 from src.data.paths import FRONTEND_DATA_DIR
-from src.logic.scoring import score_companies, METRICS
+from src.logic.scoring import score_companies, METRICS, PERCENTILE_COLUMNS, LEVERAGE_METRIC
 from src.logic.valuation import valuation_range
 from compute_filter_bands import main as compute_filter_bands
 from compute_sector_bands import main as compute_sector_bands
@@ -180,7 +180,7 @@ def main():
             "factor_revenue_growth": clean(r["pctl_revenue_growth_pct"]),
             "factor_ebitda_margin": clean(r["pctl_ebitda_margin_pct"]),
             "factor_roce": clean(r["pctl_return_on_capital_employed_pct"]),
-            "factor_debt_level": clean(r["pctl_total_debt"]),
+            "factor_debt_level": clean(r[PERCENTILE_COLUMNS[LEVERAGE_METRIC]]),
             "ev_ebitda_low": clean(r["ev_ebitda_low"]),
             "ev_ebitda_high": clean(r["ev_ebitda_high"]),
             "pe_implied_low": clean(r["pe_implied_low"]),
