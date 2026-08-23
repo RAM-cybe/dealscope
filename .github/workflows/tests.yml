@@ -26,8 +26,10 @@ jobs:
       - name: Install test dependencies
         run: pip install pandas==2.2.2
 
-      - name: Scoring
-        run: python3 tests/test_scoring.py
-
-      - name: Refresh guards
-        run: python3 tests/test_refresh_guards.py
+      - name: Tests
+        run: |
+          set -e
+          for f in tests/test_*.py; do
+            echo "########## $f ##########"
+            python3 "$f"
+          done
