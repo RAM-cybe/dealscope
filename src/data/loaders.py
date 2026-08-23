@@ -98,7 +98,14 @@ def load_deals(path=None):
 
     # 13-sector v2 taxonomy for comps matching. Companies and deals have to
     # speak the same sector vocabulary; ey_bucket stays as the legacy key.
-    df["sector_v2"] = df["sector_raw"].map(classify_deal_sector_v2)
+    # Pass target/acquirer/year so the 48 landmark rescues apply when
+    # sector_raw is blank; labelled deals still use the sector_raw lookup.
+    df["sector_v2"] = [
+        classify_deal_sector_v2(raw, target=target, acquirer=acquirer, report_year=year)
+        for raw, target, acquirer, year in zip(
+            df["sector_raw"], df["target"], df["acquirer"], df["report_year"]
+        )
+    ]
 
     return df.reset_index(drop=True)
 

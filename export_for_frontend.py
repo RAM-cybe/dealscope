@@ -176,6 +176,9 @@ def main():
             "current_ratio": clean(r.get("current_ratio")),
             "free_cash_flow": clean(r.get("free_cash_flow")),
             "promoter_pledge_pct": clean(r.get("promoter_pledge_pct")),
+            # Yahoo heldPercentInsiders, already stored as insider_holding_pct.
+            # Missing stays missing — clean() turns NaN into JSON null, never 0.
+            "promoter_holding_pct": clean(r.get("insider_holding_pct")),
             "beta": clean(r.get("beta")),
             "factor_revenue_growth": clean(r["pctl_revenue_growth_pct"]),
             "factor_ebitda_margin": clean(r["pctl_ebitda_margin_pct"]),
