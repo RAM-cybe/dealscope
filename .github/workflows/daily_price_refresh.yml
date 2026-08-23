@@ -4,8 +4,9 @@ name: Daily price refresh
 # (revenue, EBITDA, margins, ROCE, debt) only change when a company reports —
 # that is quarterly_refresh.yml, which never auto-publishes.
 #
-# Circuit breaker: if too many previously-capped tickers fail, the Python
-# job exits without writing. Last good data stays in git and on the site.
+# Circuit breaker: if too many previously-capped tickers fail — including
+# zero/negative caps and >20x one-day moves — the Python job exits without
+# writing. Last good data stays in git and on the site.
 #
 # Frontend publish: push a price-sync/* branch with a short-lived GitHub App
 # token or a repo-scoped SSH deploy key (never a PAT, never a token in a
@@ -15,7 +16,10 @@ name: Daily price refresh
 
 on:
   schedule:
-    - cron: '0 4 * * *'  # 04:00 UTC daily, after NSE close
+    # NSE cash market closes 15:30 IST = 10:00 UTC. 11:00 UTC is 16:30 IST —
+    # after the close, not at the 09:30 IST open. Weekdays only so a weekend
+    # run cannot stamp Saturday/Sunday onto Friday's last price.
+    - cron: '0 11 * * 1-5'
   workflow_dispatch:
     inputs:
       limit:
