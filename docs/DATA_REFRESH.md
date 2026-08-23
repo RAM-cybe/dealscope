@@ -5,7 +5,7 @@ without a long-lived token that can rewrite production.
 
 | Job | What it refreshes | Cadence | Goes live? |
 |---|---|---|---|
-| Daily price refresh | Market cap | 04:00 UTC every day | Yes, auto-merged (circuit breaker can stop it) |
+| Daily price refresh | Market cap | 11:00 UTC weekdays (16:30 IST, after NSE close) | Yes, auto-merged (circuit breaker can stop it) |
 | Quarterly fundamentals | Revenue, EBITDA, margins, ROCE, debt | 1st of Jan / Apr / Jul / Oct | **No.** Snapshot + review PR only |
 | Promote snapshot | Turns a reviewed snapshot into production | Manual | Opens PRs. A human merges them |
 
@@ -18,8 +18,12 @@ without a long-lived token that can rewrite production.
 a PR and squash-merges it (required reviews = 0). Vercel deploys from
 `main`. The backend job waits for that merge before it reports success.
 
-If more than 10% of companies that already had a market cap fail to refresh,
-the job exits without writing. Last good data stays on the site.
+If more than 10% of companies that already had a market cap fail to refresh
+(including rows rejected as zero/negative, or as a >20x one-day move that
+looks like a feed error), the job exits without writing. Last good data
+stays on the site. A row that fails keeps yesterday's cap and yesterday's
+`market_cap_as_of` — today's date is never stamped on a number we did not
+actually refresh.
 
 ## Quarterly (review only)
 
