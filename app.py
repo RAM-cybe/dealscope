@@ -73,7 +73,7 @@ FACTOR_LABELS = {
     "revenue_growth_pct": "Revenue Growth",
     "ebitda_margin_pct": "EBITDA Margin",
     "return_on_capital_employed_pct": "ROCE",
-    "total_debt": "Debt Level",
+    "leverage_ratio": "Debt Level",
 }
 
 # Filters are preset BUCKETS chosen from dropdowns, not free-drag range
