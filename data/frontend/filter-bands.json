@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23",
+  "generated_at": "2026-08-24",
   "universe_size": 2381,
   "winsorize_percentiles": [
     1,
@@ -15,9 +15,9 @@
         "large",
         "mega"
       ],
-      "p25": 406,
-      "p50": 2044,
-      "p75": 10341,
+      "p25": 409,
+      "p50": 2037,
+      "p75": 10248,
       "sample_size": 2293
     },
     "trailing_pe": {
