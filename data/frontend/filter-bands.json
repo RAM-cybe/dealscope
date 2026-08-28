@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27",
+  "generated_at": "2026-08-28",
   "universe_size": 2381,
   "winsorize_percentiles": [
     1,
@@ -15,10 +15,10 @@
         "large",
         "mega"
       ],
-      "p25": 407,
-      "p50": 2037,
-      "p75": 10417,
-      "sample_size": 2299
+      "p25": 403,
+      "p50": 2039,
+      "p75": 10377,
+      "sample_size": 2302
     },
     "trailing_pe": {
       "frontend_key": "peRatio",
