@@ -101,14 +101,14 @@ jobs:
         run: |
           bash .github/scripts/push_frontend_branch.sh \
             dealscope-frontend \
-            "promote/${{ github.run_id }}" \
+            "promote/${{ github.run_id }}-${{ github.run_attempt }}" \
             "Promote snapshot: sync from dealscope backend (${{ github.run_id }})"
 
       - name: Wait until frontend apply-data-bot opens the promotion PR
         if: steps.frontend_push.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bash .github/scripts/wait_for_frontend_pr.sh "promote/${{ github.run_id }}" OPEN
+        run: bash .github/scripts/wait_for_frontend_pr.sh "promote/${{ github.run_id }}-${{ github.run_attempt }}" OPEN
 
       - name: Healthcheck success
         if: success()
