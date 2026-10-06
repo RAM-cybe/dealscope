@@ -1,10 +1,11 @@
 {
   "prices_as_of": "2026-10-06",
-  "fundamentals_as_of": "2026-07-11",
-  "fundamentals_as_of_max": "2026-07-21",
+  "fundamentals_as_of": "2026-10-01",
+  "fundamentals_as_of_max": "2026-10-01",
   "fundamentals_as_of_counts": {
-    "2026-07-11": 2046,
-    "2026-07-21": 335
+    "2026-10-01": 2376,
+    "2026-07-11": 3,
+    "2026-07-21": 2
   },
   "universe_size": 2381,
   "deal_count": 727,
