@@ -37,6 +37,21 @@ done
 
 git -C "$FRONTEND_DIR" checkout -B "$BRANCH"
 
+# Release guard: the site must never move backwards. Compare what we are about
+# to publish with what the frontend serves right now, BEFORE overwriting it.
+# (A 20-company smoke test once published an older committed export over fresh
+# data and rolled live prices back three days.)
+CURRENT_META=""
+if [[ -f "$FRONTEND_DIR/data/dataset-meta.json" ]]; then
+  CURRENT_META=$(mktemp)
+  cp "$FRONTEND_DIR/data/dataset-meta.json" "$CURRENT_META"
+fi
+REPO_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+if ! (cd "$REPO_ROOT_DIR" && python3 -m src.data.release_guard "$SRC_DIR/dataset-meta.json" "${CURRENT_META:-/nonexistent}"); then
+  echo "::error::Release guard blocked this publish; the live site keeps its current data."
+  exit 1
+fi
+
 for f in "${FILES[@]}"; do
   cp "$SRC_DIR/$f" "$FRONTEND_DIR/data/$f"
 done

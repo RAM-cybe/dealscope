@@ -88,6 +88,21 @@ MARKET_CAP_REVENUE_RATIO_HIGH = 500.0
 MARKET_CAP_REVENUE_RATIO_LOW = 0.01
 
 
+# Only these are genuinely impossible-for-a-real-company range violations,
+# zero-tolerance by construction. extreme_ebitda_margin/extreme_roce are
+# deliberately excluded -- they can be mathematically real, so they never
+# block a snapshot on their own. Shared by the quality reporter and the
+# publish gate so the two can never disagree about what "critical" means.
+CRITICAL_CHECKS = {
+    "negative_revenue",
+    "negative_total_debt",
+    "negative_market_cap",
+    "negative_current_ratio",
+    "negative_quick_ratio",
+    "zero_margin_nonzero_ebitda",
+}
+
+
 def _flag(flags, row, check, detail):
     flags.append({
         "symbol": row.get("symbol"),

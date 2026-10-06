@@ -1,16 +1,25 @@
-"""Promote a reviewed quarterly snapshot to the live dataset.
+"""Promote a quarterly snapshot to the live dataset -- automatically.
 
 This is the only path that turns a candidate snapshot into production data.
-It does not push, merge, or talk to the frontend repo — the Promote snapshot
-workflow opens review PRs from the files this script writes.
+It does not push, merge, or talk to the frontend repo; the workflow does that
+from the files this script writes.
+
+There is no human approval step. Two machine checks replace it:
+  * src/data/sanitize.py repairs values that are impossible for a real
+    company (last-good value, else null -- never an invented number).
+  * src/data/publish_gate.py blocks the whole promotion if the result looks
+    wrong (lost tickers, coverage collapse, drifted medians, too many
+    repairs, any critical flag left). A blocked run writes only reports.
 
 What it does:
   1. Load the snapshot and the current live CSV.
   2. Keep live market_cap / market_cap_as_of when they are newer than the
      snapshot, so promoting fundamentals never rolls prices backwards.
-  3. Copy the merged frame to data/enriched/dealscope_base_<date>.csv.
-  4. Point data/live.json at that file.
-  5. Regenerate frontend JSON (including dataset-meta.json dates).
+  3. Sanitize, then run the publish gate. Always write the repair report and
+     gate summary to data/quality_reports/. Exit 3 if blocked.
+  4. Copy the merged frame to data/enriched/dealscope_base_<date>.csv.
+  5. Point data/live.json at that file.
+  6. Regenerate frontend JSON (including dataset-meta.json dates).
 
 Run from the repo root:
     python3 promote_snapshot.py data/snapshots/dealscope_2026-10-01.csv
@@ -33,6 +42,10 @@ from src.data.paths import (  # noqa: E402
     companies_csv_path,
     write_live_manifest,
 )
+from src.data.publish_gate import evaluate_gate  # noqa: E402
+from src.data.sanitize import sanitize  # noqa: E402
+
+EXIT_BLOCKED = 3
 
 
 def merge_live_prices(snapshot: pd.DataFrame, live: pd.DataFrame) -> pd.DataFrame:
@@ -60,6 +73,14 @@ def merge_live_prices(snapshot: pd.DataFrame, live: pd.DataFrame) -> pd.DataFram
             if "market_cap_as_of" in out.columns:
                 out.at[i, "market_cap_as_of"] = live_as_of
     return out
+
+
+def prepare_candidate(snapshot: pd.DataFrame, live: pd.DataFrame):
+    """Pure decision step: returns (cleaned_frame, repairs, gate_result)."""
+    merged = merge_live_prices(snapshot, live)
+    cleaned, repairs = sanitize(merged, live=live)
+    gate = evaluate_gate(cleaned, live, repairs)
+    return cleaned, repairs, gate
 
 
 def repoint_live_dataset(rel_path: str) -> None:
@@ -91,9 +112,21 @@ def main():
 
     snapshot = pd.read_csv(snapshot_path)
     live = pd.read_csv(companies_csv_path())
-    merged = merge_live_prices(snapshot, live)
-
     stamp = snapshot_path.stem.replace("dealscope_", "")
+    merged, repairs, gate = prepare_candidate(snapshot, live)
+
+    reports = REPO_ROOT / "data" / "quality_reports"
+    reports.mkdir(parents=True, exist_ok=True)
+    repairs.to_csv(reports / f"repairs_{stamp}.csv", index=False)
+    (reports / f"gate_{stamp}.md").write_text(gate.markdown())
+    print(gate.markdown())
+    print(f"Repairs: {len(repairs)} cell(s) across {repairs['symbol'].nunique()} row(s) "
+          f"-> data/quality_reports/repairs_{stamp}.csv")
+    if not gate.passed:
+        print("PROMOTION BLOCKED by the publish gate. Nothing was written to the live dataset; "
+              "the site keeps serving the last good data.")
+        sys.exit(EXIT_BLOCKED)
+
     dest_name = f"dealscope_base_{stamp}.csv"
     dest = ENRICHED_DIR / dest_name
     ENRICHED_DIR.mkdir(parents=True, exist_ok=True)
@@ -108,7 +141,7 @@ def main():
 
     export_main()
     print("Frontend JSON regenerated (including dataset-meta.json dates).")
-    print("Next: open review PRs. Merging those PRs is what goes live.")
+    print("Next: the workflow commits, merges and verifies the deploy.")
 
 
 if __name__ == "__main__":

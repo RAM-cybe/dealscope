@@ -38,6 +38,11 @@ concurrency:
   group: daily-price-refresh
   cancel-in-progress: false
 
+# A run with `limit` set is a smoke test: it pulls a few prices to prove the
+# job runs, and publishes NOTHING (every publish step below is skipped).
+# Without that, the backend's older committed export overwrote fresh live data
+# on 2026-10-06 and rolled prices back three days.
+
 jobs:
   refresh:
     runs-on: ubuntu-24.04
@@ -63,6 +68,7 @@ jobs:
         run: python export_for_frontend.py
 
       - name: Require frontend git credentials
+        if: ${{ github.event.inputs.limit == '' }}
         env:
           DEALSCOPE_APP_ID: ${{ vars.DEALSCOPE_APP_ID }}
           DEALSCOPE_APP_PRIVATE_KEY: ${{ secrets.DEALSCOPE_APP_PRIVATE_KEY }}
@@ -70,7 +76,7 @@ jobs:
         run: bash .github/scripts/require_frontend_credentials.sh
 
       - name: Mint short-lived GitHub App token
-        if: ${{ vars.DEALSCOPE_APP_ID != '' }}
+        if: ${{ github.event.inputs.limit == '' && (vars.DEALSCOPE_APP_ID != '') }}
         id: app-token
         uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
         with:
@@ -80,7 +86,7 @@ jobs:
           repositories: dealscope-frontend
 
       - name: Checkout dealscope-frontend (GitHub App)
-        if: ${{ vars.DEALSCOPE_APP_ID != '' }}
+        if: ${{ github.event.inputs.limit == '' && (vars.DEALSCOPE_APP_ID != '') }}
         uses: actions/checkout@v4
         with:
           repository: RAM-cybe/dealscope-frontend
@@ -89,7 +95,7 @@ jobs:
           persist-credentials: true
 
       - name: Checkout dealscope-frontend (deploy key)
-        if: ${{ vars.DEALSCOPE_APP_ID == '' }}
+        if: ${{ github.event.inputs.limit == '' && (vars.DEALSCOPE_APP_ID == '') }}
         uses: actions/checkout@v4
         with:
           repository: RAM-cybe/dealscope-frontend
@@ -98,6 +104,7 @@ jobs:
           persist-credentials: true
 
       - name: Push price-sync branch (never main, never force)
+        if: ${{ github.event.inputs.limit == '' }}
         id: frontend_push
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
@@ -108,12 +115,13 @@ jobs:
             "Daily price refresh: sync from dealscope backend (${{ github.run_id }})"
 
       - name: Wait until frontend apply-data-bot merges the price-sync PR
-        if: steps.frontend_push.outputs.changed == 'true'
+        if: ${{ github.event.inputs.limit == '' && (steps.frontend_push.outputs.changed == 'true') }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash .github/scripts/wait_for_frontend_pr.sh "price-sync/${{ github.run_id }}-${{ github.run_attempt }}" MERGED 90
 
       - name: Open pull request with updated market caps
+        if: ${{ github.event.inputs.limit == '' }}
         id: cpr
         uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
@@ -130,7 +138,7 @@ jobs:
           draft: false
 
       - name: Auto-merge (low risk, price data only)
-        if: steps.cpr.outputs.pull-request-number != ''
+        if: ${{ github.event.inputs.limit == '' && (steps.cpr.outputs.pull-request-number != '') }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash .github/scripts/merge_pr_retry.sh "${{ steps.cpr.outputs.pull-request-number }}"

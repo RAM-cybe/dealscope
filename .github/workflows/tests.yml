@@ -26,6 +26,12 @@ jobs:
       - name: Install test dependencies
         run: pip install pandas==2.2.2
 
+      - name: Lint workflows and shell scripts
+        run: |
+          pip install actionlint-py shellcheck-py
+          actionlint .github/workflows/*.yml
+          shellcheck .github/scripts/*.sh
+
       - name: Tests
         run: |
           set -e
