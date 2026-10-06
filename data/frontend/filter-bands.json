@@ -15,10 +15,10 @@
         "large",
         "mega"
       ],
-      "p25": 373,
-      "p50": 1898,
-      "p75": 9418,
-      "sample_size": 2329
+      "p25": 374,
+      "p50": 1864,
+      "p75": 9315,
+      "sample_size": 2373
     },
     "trailing_pe": {
       "frontend_key": "peRatio",
