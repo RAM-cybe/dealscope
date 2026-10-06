@@ -40,7 +40,7 @@ concurrency:
 
 jobs:
   refresh:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
       - name: Checkout
@@ -104,14 +104,14 @@ jobs:
         run: |
           bash .github/scripts/push_frontend_branch.sh \
             dealscope-frontend \
-            "price-sync/${{ github.run_id }}" \
+            "price-sync/${{ github.run_id }}-${{ github.run_attempt }}" \
             "Daily price refresh: sync from dealscope backend (${{ github.run_id }})"
 
       - name: Wait until frontend apply-data-bot merges the price-sync PR
         if: steps.frontend_push.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bash .github/scripts/wait_for_frontend_pr.sh "price-sync/${{ github.run_id }}" MERGED
+        run: bash .github/scripts/wait_for_frontend_pr.sh "price-sync/${{ github.run_id }}-${{ github.run_attempt }}" MERGED 90
 
       - name: Open pull request with updated market caps
         id: cpr

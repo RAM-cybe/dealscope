@@ -147,10 +147,9 @@ def main():
             "- HEALTHCHECKS_URL secret is not set. Add a free healthchecks.io "
             "check URL as HEALTHCHECKS_DAILY_URL / HEALTHCHECKS_QUARTERLY_URL."
         )
-        if action == "success":
-            print(f"::warning::{extra}")
-        else:
-            print(f"::error::{extra}")
+        # Optional extra channel: the tracking GitHub issue below is the
+        # primary failure signal, so a missing ping URL is never an error.
+        print(f"::warning::{extra}")
 
     title = ISSUE_TITLE.get(kind, ISSUE_TITLE["daily"])
     if token and repo:

@@ -54,7 +54,33 @@ fi
 git -C "$FRONTEND_DIR" config user.name "github-actions[bot]"
 git -C "$FRONTEND_DIR" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git -C "$FRONTEND_DIR" commit -m "$COMMIT_MSG"
-git -C "$FRONTEND_DIR" push -u origin "HEAD:refs/heads/$BRANCH"
+
+# Idempotent push. A workflow re-run, or a retried step, can find BRANCH already
+# on the remote from an earlier attempt. Never force-push: if the remote branch
+# carries exactly the data we are about to publish, treat it as already pushed;
+# if it carries different data, fail loudly rather than overwrite it.
+if git -C "$FRONTEND_DIR" ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+  git -C "$FRONTEND_DIR" fetch --quiet origin "$BRANCH"
+  if git -C "$FRONTEND_DIR" diff --quiet FETCH_HEAD HEAD -- data; then
+    echo "Remote branch $BRANCH already has identical data -- nothing to push."
+  else
+    echo "::error::Remote branch $BRANCH already exists with different data; refusing to overwrite."
+    exit 1
+  fi
+else
+  # Transient network/auth blips: retry a few times (still no force).
+  for attempt in 1 2 3; do
+    if git -C "$FRONTEND_DIR" push -u origin "HEAD:refs/heads/$BRANCH"; then
+      break
+    fi
+    if [[ "$attempt" -eq 3 ]]; then
+      echo "::error::Failed to push $BRANCH after 3 attempts"
+      exit 1
+    fi
+    echo "Push failed (attempt $attempt/3); retrying in $((attempt * 10))s"
+    sleep $((attempt * 10))
+  done
+fi
 
 if [[ -n "${GITHUB_OUTPUT:-}" ]]; then
   echo "changed=true" >> "$GITHUB_OUTPUT"
