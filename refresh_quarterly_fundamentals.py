@@ -3,7 +3,8 @@
 Re-pulls the numbers that actually change when companies report — revenue,
 EBITDA, margins, ROCE, debt, and the related income-statement / ratio fields —
 and merges them into a NEW dated snapshot. Never overwrites the live dataset.
-A human reviews the snapshot, then runs the Promote snapshot workflow.
+promote_snapshot.py then sanitizes it and runs the publish gate; the workflow
+publishes automatically if the gate passes. No human review step.
 
 Column-safe: only the fields this script actually fetched are written, and
 only when the new value is real. A missing yfinance field never blanks a
