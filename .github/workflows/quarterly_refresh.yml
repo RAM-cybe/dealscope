@@ -1,9 +1,19 @@
 name: Quarterly data refresh
 
-# Real fundamentals pull — revenue, EBITDA, margins, ROCE, debt — on the
-# first of January, April, July and October. Writes a dated snapshot and
-# opens a REVIEW PR. Merging that PR does not go live. After review, run
-# the "Promote snapshot" workflow.
+# Fully automatic. No human approval anywhere in this chain.
+#
+#   pull fundamentals -> sanitize impossible values -> publish gate
+#     -> push promote/* branch to the frontend -> frontend validates, merges,
+#        deploys and runs its own canary (rolls back if the site is wrong)
+#     -> open + auto-merge the backend PR (snapshot, live pointer, reports)
+#
+# If the publish gate blocks the data, NOTHING is published: the site keeps
+# serving the last good data, the run fails, a tracking issue opens, and the
+# watchdog retries. Repairs and gate results are stored in
+# data/quality_reports/ as the audit trail.
+#
+# Recovery without a 40-minute re-pull: dispatch this workflow with
+# `snapshot_path` set to a snapshot already stored under data/snapshots/.
 
 on:
   schedule:
@@ -12,9 +22,14 @@ on:
     inputs:
       limit:
         description: >-
-          Test-only: limit the pull to the first N companies (e.g. 20) for a
-          fast smoke-test run. Leave blank for a real full run — never set
-          this for a scheduled/production refresh.
+          Test-only: limit the pull to the first N companies (e.g. 20). A
+          limited run never publishes anything.
+        required: false
+        default: ''
+      snapshot_path:
+        description: >-
+          Skip the pull and promote this stored snapshot instead, e.g.
+          data/snapshots/dealscope_2026-10-01.csv
         required: false
         default: ''
 
@@ -23,10 +38,17 @@ permissions:
   pull-requests: write
   issues: write
 
+concurrency:
+  group: quarterly-refresh
+  cancel-in-progress: false
+
 jobs:
   refresh:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 300
+    env:
+      LIMIT: ${{ github.event.inputs.limit }}
+      GIVEN_SNAPSHOT: ${{ github.event.inputs.snapshot_path }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,6 +63,7 @@ jobs:
 
       - name: Resolve current live dataset path
         id: resolve
+        if: ${{ env.GIVEN_SNAPSHOT == '' }}
         run: |
           echo "path=$(python -c "
           import sys; sys.path.insert(0, '.')
@@ -49,64 +72,155 @@ jobs:
           ")" >> "$GITHUB_OUTPUT"
 
       - name: Run fundamentals pull
+        if: ${{ env.GIVEN_SNAPSHOT == '' }}
         env:
           DEALSCOPE_INPUT_FILE: ${{ steps.resolve.outputs.path }}
           DEALSCOPE_OUTPUT_DIR: data/snapshots
-          DEALSCOPE_LIMIT: ${{ github.event.inputs.limit }}
+          DEALSCOPE_LIMIT: ${{ env.LIMIT }}
         run: python refresh_quarterly_fundamentals.py
 
-      - name: Identify the snapshot file just written
+      - name: Identify the snapshot to promote
         id: snapshot
         run: |
           set -euo pipefail
-          FILE=$(ls -t data/snapshots/dealscope_*.csv | head -1)
-          if [[ ! -f "$FILE" ]]; then
-            echo "::error::Quarterly pull did not write a snapshot under data/snapshots/"
+          if [[ -n "$GIVEN_SNAPSHOT" ]]; then
+            FILE="$GIVEN_SNAPSHOT"
+          else
+            FILE=$(find data/snapshots -maxdepth 1 -name 'dealscope_*.csv' -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
+          fi
+          if [[ ! "$FILE" =~ ^data/snapshots/dealscope_[0-9A-Za-z_-]+\.csv$ || ! -f "$FILE" ]]; then
+            echo "::error::Snapshot not found or badly named: $FILE"
             exit 1
           fi
           echo "Found: $FILE"
           echo "path=$FILE" >> "$GITHUB_OUTPUT"
 
-      - name: Run automated data-quality checker against the new snapshot
-        id: quality
+      - name: Data-quality report (informational)
         run: python .github/scripts/check_snapshot_quality.py "${{ steps.snapshot.outputs.path }}"
 
-      - name: Write promotion instructions into the PR body
+      - name: Sanitize, gate and promote locally
+        id: promote
+        env:
+          SNAPSHOT_PATH: ${{ steps.snapshot.outputs.path }}
         run: |
-          {
-            echo ""
-            echo "---"
-            echo ""
-            echo "## This PR does not go live"
-            echo ""
-            echo "Merging this PR only stores the candidate snapshot and the quality report."
-            echo "It does **not** change \`DEFAULT_COMPANIES_PATH\`, does **not** update"
-            echo "the frontend, and does **not** change the dates on the live site."
-            echo ""
-            echo "### After you have reviewed the snapshot"
-            echo ""
-            echo "1. Merge this PR (so the snapshot is on \`main\`)."
-            echo "2. Run **Actions → Promote snapshot → Run workflow**."
-            echo "3. Set \`snapshot_path\` to \`${{ steps.snapshot.outputs.path }}\`."
-            echo "4. That workflow opens two further PRs (backend live pointer + frontend data)."
-            echo "5. Merge those only if the numbers look right. That is what Vercel deploys."
-            echo ""
-            echo "A limited/smoke-test run must not be promoted."
-          } >> .github/scripts/pr_body_fragment.md
+          set +e
+          python promote_snapshot.py "$SNAPSHOT_PATH"
+          rc=$?
+          set -e
+          if [[ $rc -eq 3 ]]; then
+            echo "blocked=true" >> "$GITHUB_OUTPUT"
+            echo "::error::Publish gate blocked this snapshot. The site keeps its last good data."
+            exit 0
+          fi
+          if [[ $rc -ne 0 ]]; then exit "$rc"; fi
+          echo "blocked=false" >> "$GITHUB_OUTPUT"
 
-      - name: Open review pull request (snapshot only, never auto-merge)
-        id: pr
+      - name: Keep reports and snapshot as a run artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quarterly-reports
+          path: |
+            data/snapshots/dealscope_*.csv
+            data/quality_reports/
+          retention-days: 60
+          if-no-files-found: ignore
+
+      - name: Decide whether to publish
+        id: decide
+        run: |
+          if [[ "${{ steps.promote.outputs.blocked }}" == "true" || -n "$LIMIT" ]]; then
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Require frontend git credentials
+        if: steps.decide.outputs.publish == 'true'
+        env:
+          DEALSCOPE_APP_ID: ${{ vars.DEALSCOPE_APP_ID }}
+          DEALSCOPE_APP_PRIVATE_KEY: ${{ secrets.DEALSCOPE_APP_PRIVATE_KEY }}
+          FRONTEND_DEPLOY_KEY: ${{ secrets.FRONTEND_DEPLOY_KEY }}
+        run: bash .github/scripts/require_frontend_credentials.sh
+
+      - name: Mint short-lived GitHub App token
+        if: ${{ steps.decide.outputs.publish == 'true' && vars.DEALSCOPE_APP_ID != '' }}
+        id: app-token
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ vars.DEALSCOPE_APP_ID }}
+          private-key: ${{ secrets.DEALSCOPE_APP_PRIVATE_KEY }}
+          owner: RAM-cybe
+          repositories: dealscope-frontend
+
+      - name: Checkout dealscope-frontend (GitHub App)
+        if: ${{ steps.decide.outputs.publish == 'true' && vars.DEALSCOPE_APP_ID != '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: RAM-cybe/dealscope-frontend
+          path: dealscope-frontend
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: true
+
+      - name: Checkout dealscope-frontend (deploy key)
+        if: ${{ steps.decide.outputs.publish == 'true' && vars.DEALSCOPE_APP_ID == '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: RAM-cybe/dealscope-frontend
+          path: dealscope-frontend
+          ssh-key: ${{ secrets.FRONTEND_DEPLOY_KEY }}
+          persist-credentials: true
+
+      - name: Push promote branch to the frontend (never main, never force)
+        id: frontend_push
+        if: steps.decide.outputs.publish == 'true'
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+        run: |
+          bash .github/scripts/push_frontend_branch.sh \
+            dealscope-frontend \
+            "promote/${{ github.run_id }}-${{ github.run_attempt }}" \
+            "Quarterly fundamentals: sync from dealscope backend (${{ github.run_id }})"
+
+      - name: Wait until the frontend validates, merges and deploys
+        if: ${{ steps.decide.outputs.publish == 'true' && steps.frontend_push.outputs.changed == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash .github/scripts/wait_for_frontend_pr.sh "promote/${{ github.run_id }}-${{ github.run_attempt }}" MERGED 120
+
+      - name: Open backend pull request (snapshot, live pointer, reports)
+        id: cpr
+        if: steps.decide.outputs.publish == 'true'
         uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
-          commit-message: "Quarterly snapshot: ${{ steps.snapshot.outputs.path }}"
-          title: >-
-            Quarterly snapshot for review (${{ github.run_id }})${{ steps.quality.outputs.needs_review == 'true' && ' -- NEEDS MANUAL REVIEW' || '' }}
-          body-path: .github/scripts/pr_body_fragment.md
-          branch: "data-refresh/${{ github.run_id }}"
+          commit-message: "Quarterly fundamentals promoted: ${{ steps.snapshot.outputs.path }}"
+          title: "Quarterly fundamentals promoted (${{ github.run_id }})"
+          body: >-
+            Automatic promotion of `${{ steps.snapshot.outputs.path }}`.
+            Impossible values were repaired by the sanitizer and the publish
+            gate passed; see `data/quality_reports/repairs_*.csv` and
+            `gate_*.md` in this PR. The frontend already merged and deployed
+            the matching data. Auto-merged.
+          branch: "promote/${{ github.run_id }}"
           add-paths: |
             data/snapshots/*
+            data/enriched/*
+            data/live.json
+            data/frontend/*
             data/quality_reports/*
           draft: false
+
+      - name: Auto-merge the backend pull request
+        if: ${{ steps.decide.outputs.publish == 'true' && steps.cpr.outputs.pull-request-number != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash .github/scripts/merge_pr_retry.sh "${{ steps.cpr.outputs.pull-request-number }}"
+
+      - name: Fail the run if the gate blocked publication
+        if: steps.promote.outputs.blocked == 'true'
+        run: |
+          echo "::error::Quarterly data was NOT published (publish gate blocked it). See the quarterly-reports artifact."
+          exit 1
 
       - name: Healthcheck success
         if: success()

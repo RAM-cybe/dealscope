@@ -31,6 +31,7 @@ from src.data.loaders import load_companies, load_deals
 from src.data.paths import FRONTEND_DATA_DIR
 from src.logic.scoring import score_companies, METRICS, PERCENTILE_COLUMNS, LEVERAGE_METRIC
 from src.logic.valuation import valuation_range
+from src.data.sanitize import sanitize
 from compute_filter_bands import main as compute_filter_bands
 from compute_sector_bands import main as compute_sector_bands
 
@@ -107,6 +108,18 @@ def load_rationale_cache():
     return out
 
 
+def clean_companies_for_export(companies):
+    """Repair impossible values before anything is scored or published.
+
+    Runs on every export (daily and quarterly), so a bad value from the data
+    feed can never reach the site, whichever workflow produced the CSV.
+    """
+    cleaned, repairs = sanitize(companies)
+    if len(repairs):
+        print(f"Sanitizer repaired {len(repairs)} cell(s) in {repairs['symbol'].nunique()} row(s) before export")
+    return cleaned
+
+
 def clean(value):
     """NaN/inf aren't valid JSON -- convert to None so JSON.parse never chokes."""
     if isinstance(value, float) and (math.isnan(value) or math.isinf(value)):
@@ -140,6 +153,7 @@ def main():
     # unset and gets DEFAULT_COMPANIES_PATH as before.
     input_override = os.environ.get("DEALSCOPE_INPUT_FILE")
     companies = load_companies(input_override) if input_override else load_companies()
+    companies = clean_companies_for_export(companies)
     equal_weights = {m: 5 for m in METRICS}
     # Production scoring and valuation use the 13-sector taxonomy, not the
     # legacy 6-bucket ey_bucket. Unclassified names get no fake peer-group

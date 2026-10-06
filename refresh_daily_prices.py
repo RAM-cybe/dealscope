@@ -102,29 +102,41 @@ def circuit_breaker_tripped(failed, attempted, updated=None):
     return (failed / attempted) > FAILURE_RATE_LIMIT
 
 
-def fetch_price_snapshot(symbol):
-    """Return (market_cap, price) for one NSE symbol via yfinance, or
+def fetch_price_snapshot(symbol, ticker_factory=None, sleep=time.sleep):
+    """Return (market_cap, price) for one symbol via yfinance, or
     (None, None) on any failure -- a single bad ticker must never abort the
     whole run.
+
+    Tries the NSE listing first; when Yahoo has no market cap for it, falls
+    back to the BSE listing of the same company (44 of the 52 companies stuck
+    on 2026-08-21 had a perfectly good .BO market cap and an empty .NS one).
 
     Zero/negative caps are returned as-is so classify_price_update can
     reject them. `if market_cap or price` used to treat 0 as missing and
     skip the classifier.
     """
-    import yfinance as yf
+    if ticker_factory is None:
+        import yfinance as yf
 
-    for attempt in range(MAX_RETRIES):
-        try:
-            ticker = yf.Ticker(f"{symbol}.NS")
-            fast_info = ticker.fast_info
-            market_cap = getattr(fast_info, "market_cap", None)
-            price = getattr(fast_info, "last_price", None)
-            if market_cap is not None or price is not None:
-                return market_cap, price
-        except Exception:
-            if attempt < MAX_RETRIES - 1:
-                time.sleep(REQUEST_DELAY_SECONDS * 2)
-                continue
+        ticker_factory = yf.Ticker
+
+    nse_price = None
+    for suffix in (".NS", ".BO"):
+        for attempt in range(MAX_RETRIES):
+            try:
+                fast_info = ticker_factory(f"{symbol}{suffix}").fast_info
+                market_cap = getattr(fast_info, "market_cap", None)
+                price = getattr(fast_info, "last_price", None)
+                if market_cap is not None:
+                    return market_cap, (nse_price if nse_price is not None else price)
+                if price is not None and nse_price is None:
+                    nse_price = price
+                break  # answered, just without a market cap: try the next exchange
+            except Exception:
+                if attempt < MAX_RETRIES - 1:
+                    sleep(REQUEST_DELAY_SECONDS * 2)
+    if nse_price is not None:
+        return None, nse_price
     return None, None
 
 

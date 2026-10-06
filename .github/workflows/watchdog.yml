@@ -1,0 +1,43 @@
+name: Pipeline watchdog
+
+# The dead-man's switch for the whole automated pipeline. Every 6 hours it
+# looks at what the LIVE SITE is serving and at the recent workflow runs, then
+# repairs what it can (see .github/scripts/watchdog.py for the rules):
+#   - stale prices        -> dispatch the daily refresh
+#   - stale fundamentals  -> dispatch the quarterly refresh
+#   - a failed run        -> re-run it once
+#   - disabled workflow   -> enable it again
+# and keeps a single "[DealScope] Pipeline health" issue open while anything
+# is still wrong, closing it automatically when everything is healthy.
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+  issues: write
+
+concurrency:
+  group: pipeline-watchdog
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run watchdog
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python .github/scripts/watchdog.py
