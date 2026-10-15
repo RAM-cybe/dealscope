@@ -13,7 +13,8 @@ fi
 BRANCH=$1
 EXPECT=$2
 ATTEMPTS=${3:-30}
-REPO=${FRONTEND_REPO:-RAM-cybe/dealscope-frontend}
+OWNER="${GITHUB_REPOSITORY_OWNER:-${GITHUB_REPOSITORY%%/*}}"
+REPO=${FRONTEND_REPO:-${OWNER}/dealscope-frontend}
 
 if [[ "$EXPECT" != "OPEN" && "$EXPECT" != "MERGED" ]]; then
   echo "::error::Expected state must be OPEN or MERGED, got $EXPECT"

@@ -82,14 +82,14 @@ jobs:
         with:
           app-id: ${{ vars.DEALSCOPE_APP_ID }}
           private-key: ${{ secrets.DEALSCOPE_APP_PRIVATE_KEY }}
-          owner: RAM-cybe
+          owner: ${{ github.repository_owner }}
           repositories: dealscope-frontend
 
       - name: Checkout dealscope-frontend (GitHub App)
         if: ${{ github.event.inputs.limit == '' && (vars.DEALSCOPE_APP_ID != '') }}
         uses: actions/checkout@v4
         with:
-          repository: RAM-cybe/dealscope-frontend
+          repository: ${{ github.repository_owner }}/dealscope-frontend
           path: dealscope-frontend
           token: ${{ steps.app-token.outputs.token }}
           persist-credentials: true
@@ -98,7 +98,7 @@ jobs:
         if: ${{ github.event.inputs.limit == '' && (vars.DEALSCOPE_APP_ID == '') }}
         uses: actions/checkout@v4
         with:
-          repository: RAM-cybe/dealscope-frontend
+          repository: ${{ github.repository_owner }}/dealscope-frontend
           path: dealscope-frontend
           ssh-key: ${{ secrets.FRONTEND_DEPLOY_KEY }}
           persist-credentials: true
@@ -120,6 +120,17 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash .github/scripts/wait_for_frontend_pr.sh "price-sync/${{ github.run_id }}-${{ github.run_attempt }}" MERGED 90
 
+      # After a username rename, Actions checkout can still leave origin on the
+      # old URL (e.g. the pre-rename owner). create-pull-request then builds an invalid
+      # head (old-owner:branch) and fails with Validation Failed / head invalid.
+      - name: Point origin at current repository
+        if: ${{ github.event.inputs.limit == '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
+          git remote -v
+
       - name: Open pull request with updated market caps
         if: ${{ github.event.inputs.limit == '' }}
         id: cpr
@@ -132,6 +143,8 @@ jobs:
             (revenue, EBITDA, ROCE, debt, etc.) are unchanged -- those only
             update via the quarterly refresh. Safe to auto-merge.
           branch: "price-refresh/${{ github.run_id }}"
+          author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
           add-paths: |
             data/enriched/*
             data/frontend/*

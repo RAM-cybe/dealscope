@@ -25,7 +25,13 @@ ISSUE_TITLE = {
     "quarterly": "[DealScope] Quarterly fundamentals refresh failed",
     "promote": "[DealScope] Snapshot promotion failed",
 }
-def request(method, url, token, body=None):
+def request(method, url, token, body=None, _redirects=0):
+    """GitHub API call. Follow 301/302/307/308 even for POST/PATCH.
+
+    After a username rename, /repos/OLD-OWNER/... returns 307 to the new
+    owner. urllib does not follow that for non-GET, which made the daily
+    failure monitor itself fail with HTTP 307.
+    """
     data = None if body is None else json.dumps(body).encode("utf-8")
     req = urllib.request.Request(url, data=data, method=method)
     req.add_header("Accept", "application/vnd.github+json")
@@ -33,9 +39,16 @@ def request(method, url, token, body=None):
     req.add_header("X-GitHub-Api-Version", "2022-11-28")
     if data is not None:
         req.add_header("Content-Type", "application/json")
-    with urllib.request.urlopen(req, timeout=20) as resp:
-        raw = resp.read()
-        return json.loads(raw) if raw else {}
+    try:
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            raw = resp.read()
+            return json.loads(raw) if raw else {}
+    except urllib.error.HTTPError as exc:
+        if exc.code in (301, 302, 307, 308) and _redirects < 5:
+            loc = exc.headers.get("Location")
+            if loc:
+                return request(method, loc, token, body, _redirects + 1)
+        raise
 
 
 def write_summary(action, kind, ping_url, extra):

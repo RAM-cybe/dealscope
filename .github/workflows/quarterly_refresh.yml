@@ -150,14 +150,14 @@ jobs:
         with:
           app-id: ${{ vars.DEALSCOPE_APP_ID }}
           private-key: ${{ secrets.DEALSCOPE_APP_PRIVATE_KEY }}
-          owner: RAM-cybe
+          owner: ${{ github.repository_owner }}
           repositories: dealscope-frontend
 
       - name: Checkout dealscope-frontend (GitHub App)
         if: ${{ steps.decide.outputs.publish == 'true' && vars.DEALSCOPE_APP_ID != '' }}
         uses: actions/checkout@v4
         with:
-          repository: RAM-cybe/dealscope-frontend
+          repository: ${{ github.repository_owner }}/dealscope-frontend
           path: dealscope-frontend
           token: ${{ steps.app-token.outputs.token }}
           persist-credentials: true
@@ -166,7 +166,7 @@ jobs:
         if: ${{ steps.decide.outputs.publish == 'true' && vars.DEALSCOPE_APP_ID == '' }}
         uses: actions/checkout@v4
         with:
-          repository: RAM-cybe/dealscope-frontend
+          repository: ${{ github.repository_owner }}/dealscope-frontend
           path: dealscope-frontend
           ssh-key: ${{ secrets.FRONTEND_DEPLOY_KEY }}
           persist-credentials: true
@@ -188,6 +188,14 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash .github/scripts/wait_for_frontend_pr.sh "promote/${{ github.run_id }}-${{ github.run_attempt }}" MERGED 120
 
+      - name: Point origin at current repository
+        if: steps.decide.outputs.publish == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
+          git remote -v
+
       - name: Open backend pull request (snapshot, live pointer, reports)
         id: cpr
         if: steps.decide.outputs.publish == 'true'
@@ -202,6 +210,8 @@ jobs:
             `gate_*.md` in this PR. The frontend already merged and deployed
             the matching data. Auto-merged.
           branch: "promote/${{ github.run_id }}"
+          author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
           add-paths: |
             data/snapshots/*
             data/enriched/*
