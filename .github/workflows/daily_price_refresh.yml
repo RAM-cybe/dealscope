@@ -143,8 +143,8 @@ jobs:
             (revenue, EBITDA, ROCE, debt, etc.) are unchanged -- those only
             update via the quarterly refresh. Safe to auto-merge.
           branch: "price-refresh/${{ github.run_id }}"
-          author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
-          committer: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          author: "Ram VP <225523561+ram-vp@users.noreply.github.com>"
+          committer: "Ram VP <225523561+ram-vp@users.noreply.github.com>"
           add-paths: |
             data/enriched/*
             data/frontend/*
