@@ -26,8 +26,9 @@ import time
 import urllib.request
 from datetime import date, datetime, timedelta, timezone
 
-BACKEND = os.environ.get("GITHUB_REPOSITORY", "RAM-cybe/dealscope")
-FRONTEND = "RAM-cybe/dealscope-frontend"
+BACKEND = os.environ.get("GITHUB_REPOSITORY", "ram-vp/dealscope")
+_OWNER = BACKEND.split("/", 1)[0]
+FRONTEND = os.environ.get("FRONTEND_REPO", f"{_OWNER}/dealscope-frontend")
 SITE_URL = "https://dealscope-screener.vercel.app/"
 WORKFLOWS = {"daily": "daily_price_refresh.yml", "quarterly": "quarterly_refresh.yml"}
 ISSUE_TITLE = "[DealScope] Pipeline health"
