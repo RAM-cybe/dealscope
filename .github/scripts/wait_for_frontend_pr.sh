@@ -21,6 +21,8 @@ if [[ "$EXPECT" != "OPEN" && "$EXPECT" != "MERGED" ]]; then
   exit 2
 fi
 
+CLOSED_RETRIES=0
+
 for i in $(seq 1 "$ATTEMPTS"); do
   STATE=""
   if STATE=$(gh pr list --repo "$REPO" --head "$BRANCH" --state all --json state --jq '.[0].state // empty'); then
@@ -29,9 +31,22 @@ for i in $(seq 1 "$ATTEMPTS"); do
       if [[ "$STATE" == "$EXPECT" ]]; then
         exit 0
       fi
+      if [[ "$STATE" == "OPEN" ]]; then
+        CLOSED_RETRIES=0
+      fi
       if [[ "$EXPECT" == "MERGED" && "$STATE" == "CLOSED" ]]; then
-        echo "::error::Frontend PR for $BRANCH was closed without merging"
-        exit 1
+        COMMENT=$(gh pr list --repo "$REPO" --head "$BRANCH" --state all --json state,comments --jq '[ .[0].comments[]?.body? | select(type == "string" and (startswith("Squash-merged onto main as Ram VP") or startswith("Already on main."))) ] | first // empty' 2>/dev/null || true)
+        if [[ -n "$COMMENT" ]]; then
+          echo "Frontend PR $BRANCH was merged: ${COMMENT%%$'\n'*}"
+          exit 0
+        fi
+        CLOSED_RETRIES=$((CLOSED_RETRIES + 1))
+        if [[ "$CLOSED_RETRIES" -le 3 ]]; then
+          echo "Frontend PR $BRANCH is CLOSED without merge comment yet (retry $CLOSED_RETRIES/3)"
+        else
+          echo "::error::Frontend PR for $BRANCH was closed without merging"
+          exit 1
+        fi
       fi
     else
       echo "Frontend PR $BRANCH not visible yet (attempt $i/${ATTEMPTS})"
