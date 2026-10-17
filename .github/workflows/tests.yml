@@ -3,6 +3,9 @@ name: Tests
 # Scoring, refresh guards, and live-pointer checks. No data is published.
 on:
   pull_request:
+    branches-ignore:
+      - 'price-refresh/**'
+      - 'price-sync/**'
   push:
     branches: [main]
   workflow_dispatch:
