@@ -3,9 +3,6 @@ name: Tests
 # Scoring, refresh guards, and live-pointer checks. No data is published.
 on:
   pull_request:
-    branches-ignore:
-      - 'price-refresh/**'
-      - 'price-sync/**'
   push:
     branches: [main]
   workflow_dispatch:
@@ -15,6 +12,7 @@ permissions:
 
 jobs:
   backend:
+    if: ${{ github.event_name != 'pull_request' || (!startsWith(github.head_ref, 'price-refresh/') && !startsWith(github.head_ref, 'price-sync/')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
